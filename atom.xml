@@ -3,11 +3,11 @@
   <title>幻境</title>
   
   <subtitle>yub_s blog</subtitle>
-  <link href="https://yub.github.io/atom.xml" rel="self"/>
+  <link href="https://yubut.github.io/atom.xml" rel="self"/>
   
-  <link href="https://yub.github.io/"/>
+  <link href="https://yubut.github.io/"/>
   <updated>2023-08-27T15:07:12.415Z</updated>
-  <id>https://yub.github.io/</id>
+  <id>https://yubut.github.io/</id>
   
   <author>
     <name>yub</name>
@@ -18,8 +18,8 @@
   
   <entry>
     <title>荒诞</title>
-    <link href="https://yub.github.io/2023/08/27/%E8%8D%92%E8%AF%9E/"/>
-    <id>https://yub.github.io/2023/08/27/%E8%8D%92%E8%AF%9E/</id>
+    <link href="https://yubut.github.io/2023/08/27/%E8%8D%92%E8%AF%9E/"/>
+    <id>https://yubut.github.io/2023/08/27/%E8%8D%92%E8%AF%9E/</id>
     <published>2023-08-27T14:40:16.000Z</published>
     <updated>2023-08-27T15:07:12.415Z</updated>
     
@@ -34,17 +34,17 @@
     
     
     
-    <category term="碎片" scheme="https://yub.github.io/categories/%E7%A2%8E%E7%89%87/"/>
+    <category term="碎片" scheme="https://yubut.github.io/categories/%E7%A2%8E%E7%89%87/"/>
     
     
-    <category term="随笔" scheme="https://yub.github.io/tags/%E9%9A%8F%E7%AC%94/"/>
+    <category term="随笔" scheme="https://yubut.github.io/tags/%E9%9A%8F%E7%AC%94/"/>
     
   </entry>
   
   <entry>
     <title>Hello World</title>
-    <link href="https://yub.github.io/2023/08/27/hello-world/"/>
-    <id>https://yub.github.io/2023/08/27/hello-world/</id>
+    <link href="https://yubut.github.io/2023/08/27/hello-world/"/>
+    <id>https://yubut.github.io/2023/08/27/hello-world/</id>
     <published>2023-08-27T13:53:50.207Z</published>
     <updated>2023-08-27T13:53:50.207Z</updated>
     
