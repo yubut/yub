@@ -1,463 +1,347 @@
-<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>幻境 - yub_s blog</title><meta name="author" content="yub"><meta name="copyright" content="yub"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="路迟青">
+<!DOCTYPE html>
+<html lang=zh>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
+    <meta name="description" content="路迟青">
 <meta property="og:type" content="website">
 <meta property="og:title" content="幻境">
 <meta property="og:url" content="https://yubut.github.io/index.html">
 <meta property="og:site_name" content="幻境">
 <meta property="og:description" content="路迟青">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://yubut.github.io/img/avatar.jpg">
 <meta property="article:author" content="yub">
 <meta property="article:tag" content="study!">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://yubut.github.io/img/avatar.jpg"><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="https://yubut.github.io/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = {
-  root: '/',
-  algolia: undefined,
-  localSearch: {"path":"/search.xml","languages":{"hits_empty":"找不到您查询的内容：${query}","hits_stats":"共找到 ${hits} 篇文章"}},
-  translate: undefined,
-  noticeOutdate: undefined,
-  highlight: undefined,
-  copy: {
-    success: '复制成功',
-    error: '复制错误',
-    noSupport: '浏览器不支持'
-  },
-  relativeDate: {
-    homepage: false,
-    post: false
-  },
-  runtime: '',
-  dateSuffix: {
-    just: '刚刚',
-    min: '分钟前',
-    hour: '小时前',
-    day: '天前',
-    month: '个月前'
-  },
-  copyright: undefined,
-  lightbox: 'fancybox',
-  Snackbar: undefined,
-  source: {
-    justifiedGallery: {
-      js: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.js',
-      css: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.css'
-    }
-  },
-  isPhotoFigcaption: false,
-  islazyload: false,
-  isAnchor: false,
-  percent: {
-    toc: true,
-    rightside: false,
-  },
-  autoDarkmode: false
-}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
-  title: '幻境',
-  isPost: false,
-  isHome: true,
-  isHighlightShrink: false,
-  isToc: false,
-  postUpdate: '2024-09-19 20:36:26'
-}</script><noscript><style type="text/css">
-  #nav {
-    opacity: 1
-  }
-  .justified-gallery img {
-    opacity: 1
-  }
-
-  #recent-posts time,
-  #post-meta time {
-    display: inline !important
-  }
-</style></noscript><script>(win=>{
-    win.saveToLocal = {
-      set: function setWithExpiry(key, value, ttl) {
-        if (ttl === 0) return
-        const now = new Date()
-        const expiryDay = ttl * 86400000
-        const item = {
-          value: value,
-          expiry: now.getTime() + expiryDay,
-        }
-        localStorage.setItem(key, JSON.stringify(item))
-      },
-
-      get: function getWithExpiry(key) {
-        const itemStr = localStorage.getItem(key)
-
-        if (!itemStr) {
-          return undefined
-        }
-        const item = JSON.parse(itemStr)
-        const now = new Date()
-
-        if (now.getTime() > item.expiry) {
-          localStorage.removeItem(key)
-          return undefined
-        }
-        return item.value
-      }
-    }
-  
-    win.getScript = url => new Promise((resolve, reject) => {
-      const script = document.createElement('script')
-      script.src = url
-      script.async = true
-      script.onerror = reject
-      script.onload = script.onreadystatechange = function() {
-        const loadState = this.readyState
-        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
-        script.onload = script.onreadystatechange = null
-        resolve()
-      }
-      document.head.appendChild(script)
-    })
-  
-    win.getCSS = (url,id = false) => new Promise((resolve, reject) => {
-      const link = document.createElement('link')
-      link.rel = 'stylesheet'
-      link.href = url
-      if (id) link.id = id
-      link.onerror = reject
-      link.onload = link.onreadystatechange = function() {
-        const loadState = this.readyState
-        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
-        link.onload = link.onreadystatechange = null
-        resolve()
-      }
-      document.head.appendChild(link)
-    })
-  
-      win.activateDarkMode = function () {
-        document.documentElement.setAttribute('data-theme', 'dark')
-        if (document.querySelector('meta[name="theme-color"]') !== null) {
-          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
-        }
-      }
-      win.activateLightMode = function () {
-        document.documentElement.setAttribute('data-theme', 'light')
-        if (document.querySelector('meta[name="theme-color"]') !== null) {
-          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
-        }
-      }
-      const t = saveToLocal.get('theme')
     
-          if (t === 'dark') activateDarkMode()
-          else if (t === 'light') activateLightMode()
+    
+      
         
-      const asideStatus = saveToLocal.get('aside-status')
-      if (asideStatus !== undefined) {
-        if (asideStatus === 'hide') {
-          document.documentElement.classList.add('hide-aside')
-        } else {
-          document.documentElement.classList.remove('hide-aside')
-        }
-      }
+          <link rel="shortcut icon" href="/images/favicon.ico">
+        
+      
+      
+        
+          <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
+        
+      
+      
+        
+          <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+        
+      
     
-    const detectApple = () => {
-      if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
-        document.documentElement.classList.add('apple')
-      }
-    }
-    detectApple()
-    })(window)</script><meta name="generator" content="Hexo 6.3.0"><link rel="alternate" href="/atom.xml" title="幻境" type="application/atom+xml">
-</head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="/img/avatar.jpg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">12</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">7</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">5</div></a></div><hr class="custom-hr"/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 主页</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fa fa-graduation-cap"></i><span> 博文</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/categories/"><i class="fa-fw fa fa-archive"></i><span> 分类</span></a></li><li><a class="site-page child" href="/tags/"><i class="fa-fw fa fa-tags"></i><span> 标签</span></a></li><li><a class="site-page child" href="/archives/"><i class="fa-fw fa fa-folder-open"></i><span> 归档</span></a></li></ul></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> 生活</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/shuoshuo/"><i class="fa-fw fa fa-comments-o"></i><span> 分享</span></a></li><li><a class="site-page child" href="/photos/"><i class="fa-fw fa fa-camera-retro"></i><span> 相册</span></a></li><li><a class="site-page child" href="/music/"><i class="fa-fw fa fa-music"></i><span> 音乐</span></a></li><li><a class="site-page child" href="/movies/"><i class="fa-fw fas fa-video"></i><span> 影视</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/links/"><i class="fa-fw fa fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/comment/"><i class="fa-fw fa fa-paper-plane"></i><span> 留言板</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于笔者</span></a></div></div></div></div><div class="page" id="body-wrap"><header class="full_page" id="page-header" style="background-image: url('/img/background.jpg')"><nav id="nav"><span id="blog-info"><a href="/" title="幻境"><span class="site-name">幻境</span></a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search" href="javascript:void(0);"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 主页</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fa fa-graduation-cap"></i><span> 博文</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/categories/"><i class="fa-fw fa fa-archive"></i><span> 分类</span></a></li><li><a class="site-page child" href="/tags/"><i class="fa-fw fa fa-tags"></i><span> 标签</span></a></li><li><a class="site-page child" href="/archives/"><i class="fa-fw fa fa-folder-open"></i><span> 归档</span></a></li></ul></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> 生活</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/shuoshuo/"><i class="fa-fw fa fa-comments-o"></i><span> 分享</span></a></li><li><a class="site-page child" href="/photos/"><i class="fa-fw fa fa-camera-retro"></i><span> 相册</span></a></li><li><a class="site-page child" href="/music/"><i class="fa-fw fa fa-music"></i><span> 音乐</span></a></li><li><a class="site-page child" href="/movies/"><i class="fa-fw fas fa-video"></i><span> 影视</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/links/"><i class="fa-fw fa fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/comment/"><i class="fa-fw fa fa-paper-plane"></i><span> 留言板</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于笔者</span></a></div></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="site-info"><h1 id="site-title">幻境</h1><div id="site-subtitle"><span id="subtitle"></span></div><div id="site_social_icons"><a class="social-icon" href="https://github.com/yubut" target="_blank" title="Github"><i class="fab fa-github"></i></a><a class="social-icon" href="https://qm.qq.com/q/Le1ZeB0K40" target="_blank" title=""><i class="fab fa-qq"></i></a><a class="social-icon" href="mailto:3023536144@qq.com" target="_blank" title="Email"><i class="fas fa-envelope-open-text"></i></a></div></div><div id="scroll-down"><i class="fas fa-angle-down scroll-down-effects"></i></div></header><main class="layout" id="content-inner"><div class="recent-posts" id="recent-posts"><div class="recent-post-item"><div class="post_cover left"><a href="/2024/06/22/Java%E6%9D%82%E8%AE%B0/" title="Java基础知识杂记"><img class="post-bg" src="https://tse4-mm.cn.bing.net/th/id/OIP-C.ZCGnC5HDT4Rwr8DPTY6UiQHaEf?w=300&amp;h=182&amp;c=7&amp;r=0&amp;o=5&amp;dpr=1.3&amp;pid=1.7" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Java基础知识杂记"></a></div><div class="recent-post-info"><a class="article-title" href="/2024/06/22/Java%E6%9D%82%E8%AE%B0/" title="Java基础知识杂记">Java基础知识杂记</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2024-06-21T16:00:00.000Z" title="发表于 2024-06-22 00:00:00">2024-06-22</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/Java/">Java</a></span></div><div class="content">Java杂记
-
-静态方法无法继承 无实例化对象
-
-
-
-
-
-异常数组索引异常空指针异常算数异常丢失资源找不到类编译时异常
-oop 面向对象的语言对象的成员属性在未赋值前引用类型的默认值是NULL见到那类型为对应的0
-通过this可以访问当前对象的成员属性&#x2F;成员变量（静态的成员变量不支持）
-默认int - 0float - 0.0fchar - ‘\u0000’boolean - flase
-构造方法非特殊的一个方法：1.方法名必须和类名相同2.没有返回值3.创建对象时由编译器自动调用
-当一个类中没有任何一个构造方法时 java会自动提供一个无参的构造方法
-构造方法之间可以形成方法的重载1.方法名相同2.参数列表不同
-构造方法只对对象中的成员进行初始化 不进行空间分配
-完成一个对象的构造1.分配内存2.调用合适的构造方法
-this（）；调用当前类当中其他构造方法只能在当前的构造方法内部进行使用只能放在第一行
-this.data访问当前对象的属性this.func（）调用当前对象的方法this本身代表当前对象的引用
-就地初始化声明成员变量的同时进行初始化即在class内进行初始化
- ...</div></div></div><div class="recent-post-item"><div class="post_cover right"><a href="/2024/01/09/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E7%A2%8E%E7%89%87/" title="数据结构"><img class="post-bg" src="https://gd-hbimg.huaban.com/860d15845530de80118005269b1d96b4d9aa44756a834-Abxbe0_fw240webp" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="数据结构"></a></div><div class="recent-post-info"><a class="article-title" href="/2024/01/09/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E7%A2%8E%E7%89%87/" title="数据结构">数据结构</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2024-01-09T09:51:16.000Z" title="发表于 2024-01-09 17:51:16">2024-01-09</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/%E7%A2%8E%E7%89%87/">碎片</a></span></div><div class="content">数据结构碎片一元多项式简单数组表示 存储系数和指数，一一对应，运算即分类操作既可
-稀疏多项式 记录系数不为零的项 每一项的系数和指数也构成线性表（先系数再指数）
-稀疏多项式的运算
-新开设新数组C（第三个数组相当于中间存储） 
-从头开始遍历比较a和b的每一项指数相同 对应系数相加，和不为0，C中新增加新项;和为0，去掉 即可
-指数不相同，将指数较小的项复制到C中
-一个多项式已遍历完毕时，将另一个剩余项依次复制到C中即可 
-顺序存储存在的问题
-1.存储空间分配不灵活2.运算的空间复杂度高
-链式存储解决稀疏多项式
-线性表中的数据元素的类型可以是简单&#x2F;复杂类型线性表的定义类型基本操作InitList(&amp;L)操作结果：构造一个空链表
-DestroyList(&amp;L)初始条件：线性表L已经存在操作结果：销毁线性表L
-ClearList(&amp;L)初始条件：线性表L已经存在操作结果：将线性表L重置为空表
-ListEmpty(L)初始条件：线性表已经存在操作结果：若L为空返回TRUE,否则返回FALSE
-ListLength(L)初始条件：线性表已经存在操作结果：返回L中数 ...</div></div></div><div class="recent-post-item"><div class="post_cover left"><a href="/2023/12/24/The%20Missing%20Semester%20of%20Your%20CS%20Education/" title="The Missing Semester of Your CS Education"><img class="post-bg" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRmIfKRi79SHnbd-ASFJ0LTSWOujJAXK7q1H9atswuEUz8CeJQasQ3CloNQlEgjKX1pTP4&amp;usqp=CAU" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="The Missing Semester of Your CS Education"></a></div><div class="recent-post-info"><a class="article-title" href="/2023/12/24/The%20Missing%20Semester%20of%20Your%20CS%20Education/" title="The Missing Semester of Your CS Education">The Missing Semester of Your CS Education</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2023-12-24T03:36:16.000Z" title="发表于 2023-12-24 11:36:16">2023-12-24</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/%E7%A2%8E%E7%89%87/">碎片</a></span></div><div class="content">The Missing Semester of Your CS EducationFirst   Course Overview The Shell命令行语句
-
-
-
-
-
-
-
-pwd(process[print] working directory)
-输出当前位置
-
-
-cd .
-到当前目录
-
-
-cd ..
-上一级目录
-
-
-cd &#x2F;cd ~
-回到根目录
-
-
-cd -
-回到跳转前的目录（可在两个目录之间切换）
-
-
-ls -l
-列出当前目录下子文件的详细信息
-
-
-ls -a
-列出所有文件包含隐藏文件
-
-
-* ?
-代替一个字符串 一个字符
-
-
-mv A B
-重命名并可以移动文件
-
-
-cp A B
-复制并可以移动文件
-
-
-control L
-清除终端
-
-
-cat
-打印文件内容到终端上
-
-
-touch
-建立新文件
-
-
-&gt;&gt;
-不覆盖而是叠加
-
-
-A | B
-A的输出作为B的输入
-
-
-grep A B
-在A里查找B
-
-
-man,rm,mkdir,rmdir
-
-
-
-&gt; &#x2F;
-覆盖
-
-
-rm用于无递归删除 -r 递归删除  rmdir仅允许删除空目录
-mkdir 创建目录 ...</div></div></div><div class="recent-post-item"><div class="post_cover right"><a href="/2023/11/27/NepCTF%202023/" title="Nep摸鱼记"><img class="post-bg" src="https://ts2.cn.mm.bing.net/th?id=OIP-C.lXXyg9_hRePKHUIpWoiMUwHaFP&amp;w=297&amp;h=210&amp;c=8&amp;rs=1&amp;qlt=90&amp;o=6&amp;dpr=1.3&amp;pid=3.1&amp;rm=2" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Nep摸鱼记"></a></div><div class="recent-post-info"><a class="article-title" href="/2023/11/27/NepCTF%202023/" title="Nep摸鱼记">Nep摸鱼记</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2023-11-26T16:00:00.000Z" title="发表于 2023-11-27 00:00:00">2023-11-27</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/%E9%A2%98%E7%9B%AE%E8%AE%B0%E5%BD%95/">题目记录</a></span></div><div class="content">NepCTF 2023为什么开赛两分钟选择不打了？答案很简单：签到题格式打错了…运营姐姐没回我…48h…炮灰pwn不会做！！！（其实可以做misc）
-Msiccode题目提示flag在环境变量中 开始STFWhttps://blog.csdn.net/aspnet_lyc/article/details/20548767
-#include &lt;stdio.h&gt;
- 
-int main(int argc, char** argv, char** arge)
-&#123;
-    while(*arge)
-    &#123;
-        printf(&quot;%s\n&quot;, *arge++);
-    &#125;
-    return 0;
-&#125;
-
-
-与AI共舞的哈夫曼求助chat因为不会用copilot
-ConnectedFive
-五子棋 不会写脚本干下吧hh（求助chat也不是不行）
-from pwn import *
-import random
-r = remote(&#39;nepctf.1cepeak.cn&#39;, 31762)
-def g ...</div></div></div><div class="recent-post-item"><div class="post_cover left"><a href="/2023/09/01/Canary%E8%A7%A3%E5%86%B3%E5%A7%BF%E5%8A%BF/" title="Canary解决姿势"><img class="post-bg" src="https://www.bizhizj.com/pc-img/2023-04/2146.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Canary解决姿势"></a></div><div class="recent-post-info"><a class="article-title" href="/2023/09/01/Canary%E8%A7%A3%E5%86%B3%E5%A7%BF%E5%8A%BF/" title="Canary解决姿势">Canary解决姿势</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2023-08-31T16:00:00.000Z" title="发表于 2023-09-01 00:00:00">2023-09-01</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/%E4%BA%8C%E8%BF%9B%E5%88%B6%E5%AE%89%E5%85%A8/">二进制安全</a></span></div><div class="content">Canary解决姿势被折磨的有点难受 找个时间来斩杀（bushi）又是被虐的一天~
-
-有问题请指正~❀获取例题请在评论区留言或私信我⭐
-一、canary爆破标志提示就算fork函数吧 多线程开攻
-【funcannary】*
-（1）先运行一下 peda配套checksec                                              根据题目提示’have fun’和’welcome’在爆破的exp中会用作于覆盖节点
-​                              ​ 
-​         发现Canary和PIE都开 准备好爆破（如果有可以利用的字符串canary也可以绕过）​         对应随机化 后续在IDA中只能利用其地址计算偏移
-（2）进IDA 
-
-fork接口 &#x3D;&#x3D; canary爆破（多线程）
-
-发现函数入口为0x122D 并且发现”&#x2F;bin&#x2F;cat flag” 接下来找溢出位置爆破cannary
-
-明显溢出 定位该函数sub_128A（爆破canary的位置）爆破成功后爆返回地址 （爆c ...</div></div></div><div class="recent-post-item"><div class="post_cover right"><a href="/2023/09/01/C%E6%8E%A2%E7%B4%A2%E7%A2%8E%E7%89%87%E2%80%94%E2%80%94static%E7%9A%84%E4%BD%9C%E7%94%A8/" title="C探索碎片——关键字static作用"><img class="post-bg" src="https://png.pngtree.com/thumb_back/fh260/back_our/20190622/ourmid/pngtree-blue-sky-free-illustration-image_221359.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="C探索碎片——关键字static作用"></a></div><div class="recent-post-info"><a class="article-title" href="/2023/09/01/C%E6%8E%A2%E7%B4%A2%E7%A2%8E%E7%89%87%E2%80%94%E2%80%94static%E7%9A%84%E4%BD%9C%E7%94%A8/" title="C探索碎片——关键字static作用">C探索碎片——关键字static作用</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2023-08-31T16:00:00.000Z" title="发表于 2023-09-01 00:00:00">2023-09-01</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/C%E8%AF%AD%E8%A8%80/">C语言</a></span></div><div class="content">一、简述static意译是静态的，而作为C语言中常见的关键字之一，它的用法也贴切“静态”这一含义。
-二、用法
-
-修饰局部变量
-
-
-
-下为static是否修饰局部变量对程序运行结果影响的对比。
-#include&lt;stdio.h&gt;
-void play()
-&#123;
-    int a = 6;
-    a++;
-    printf(&quot;%d &quot;, a);
-&#125;
-int main()
-&#123;
-    int i = 0;
-    while (i &lt; 5)
-    &#123;
-        play();
-        i++;
-    &#125;
-    return 0;
-&#125;
-
-
-编辑
-此为上图static未修饰局部变量的运行结果
-#include&lt;stdio.h&gt;
-void play()
-&#123;
-    static int a = 6;
-    a++;
-    printf(&quot;%d &quot;, a);
-&#125;
-int main()
-&#123;
-    int i = 0 ...</div></div></div><div class="recent-post-item"><div class="post_cover left"><a href="/2023/09/01/C%E6%8E%A2%E7%B4%A2%E7%A2%8E%E7%AF%87%E2%80%94%E2%80%94%E6%93%8D%E4%BD%9C%E7%AC%A6/" title="C探索碎片——操作符"><img class="post-bg" src="https://img.tukuppt.com/bg_grid/00/04/53/G7edt37350.jpg!/fh/350" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="C探索碎片——操作符"></a></div><div class="recent-post-info"><a class="article-title" href="/2023/09/01/C%E6%8E%A2%E7%B4%A2%E7%A2%8E%E7%AF%87%E2%80%94%E2%80%94%E6%93%8D%E4%BD%9C%E7%AC%A6/" title="C探索碎片——操作符">C探索碎片——操作符</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2023-08-31T16:00:00.000Z" title="发表于 2023-09-01 00:00:00">2023-09-01</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/C%E8%AF%AD%E8%A8%80/">C语言</a></span></div><div class="content">C的探索碎片——操作符
- 
-
-分类
-
-算术操作符
-移位操作符
-位操作符
-赋值操作符
-单目操作符
-关系操作符
-逻辑操作符
-条件操作符
-逗号表达式
-下标引用、函数调用和结构成员
-一.算数操作符+  -  *  /  % 
-
-
-+、-、*此类数学中常见的算数符号我们再熟悉不过，需要注意的是&#x2F;（除），%（取余）之间的区别。
-例：
-#include&lt;stdio,h&gt;
-int main()
-&#123;
-    int a = 10;
-    printf(&quot;%d&quot;,a/3);//结果为3
-    printf(&quot;%d&quot;,a%3);//结果为1
-    return 0;
-&#125;
-
-
-注意：1.除%操作符之外。其他几个操作符可以作用于整数和浮点数。
-2.&#x2F;操作符运算时若两个操作数中含浮点数则执行浮点数除法（%lf打印结果）；若两操作数都为整数则执行整数除法。
-3.%操作符的两个操作数必须为整数。
-二、移位操作符&lt;&lt;  左移操作符
-&gt;&gt;  右移操作符
-注：移位操作符的操作数只能是整数。
-
-
-移位操作 ...</div></div></div><div class="recent-post-item"><div class="post_cover right"><a href="/2023/09/01/Pwn%E9%A2%98%E7%9B%AE%E8%AE%B0%E5%BD%95/" title="部分PWN题目记录"><img class="post-bg" src="https://img-baofun.zhhainiao.com/pcwallpaper_ugc/static/e4f95a48e6c9c74312ac5ed6fcdc8a14.jpg?x-oss-process=image%2Fresize%2Cm_lfit%2Cw_960%2Ch_540" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="部分PWN题目记录"></a></div><div class="recent-post-info"><a class="article-title" href="/2023/09/01/Pwn%E9%A2%98%E7%9B%AE%E8%AE%B0%E5%BD%95/" title="部分PWN题目记录">部分PWN题目记录</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2023-08-31T16:00:00.000Z" title="发表于 2023-09-01 00:00:00">2023-09-01</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/%E4%BA%8C%E8%BF%9B%E5%88%B6%E5%AE%89%E5%85%A8/">二进制安全</a></span></div><div class="content">Pwn题目记录【NKCTF】弱小可怜无助的唯一。（1）checkesec 发现为64位 只有NX保护
-（2）进IDA分析 
-  F5查看main函数
-  查看偏移为0x74（buf[108]+8[ebp大小]） buf2大小随机  无后门函数 此时联想到使用pwntools生成可利用的shellcode   v6随机执行但未设置随机数种子【注释打漏了😜】
-exp：
-from pwn import *
-context.arch = &#39;amd64&#39;
-context.os = &#39;linux&#39;
-context.log_level = &#39;debug&#39;
-p = process(&#39;./pwn&#39;)
-#p = remote(&#39;127.0.0.1&#39;, 1337)
-buf = b&#39;\x90&#39; * 108
-shellcode = asm(shellcraft.amd64.sh())
-payload = buf + b&#39;\x90&#39;*(104-len(shellcode)) +shellcode
-lo ...</div></div></div><div class="recent-post-item"><div class="post_cover left"><a href="/2023/09/01/ret2csu/" title="ret2csu"><img class="post-bg" src="https://images.alphacoders.com/131/1311951.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="ret2csu"></a></div><div class="recent-post-info"><a class="article-title" href="/2023/09/01/ret2csu/" title="ret2csu">ret2csu</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2023-08-31T16:00:00.000Z" title="发表于 2023-09-01 00:00:00">2023-09-01</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/%E4%BA%8C%E8%BF%9B%E5%88%B6%E5%AE%89%E5%85%A8/">二进制安全</a></span></div><div class="content">ret2csu原理利用x64下__libc_csu_init函数中的gadgets.（64位传参机制导致，但我们不会每次都精准找到每个寄存器对应的gadgets）
-此函数对libc进行初始化，而一般的程序都会调用libc函数，则此函数一定存在.
-什么是gadgets？gadgets是一段对寄存器进行操作的汇编指令，比如pop ebp；pop eax；每一条指令对应着一段地址将这些gadgets部署到栈中，__ sp指针指向某gadget时发现对应地址中是一条指令而不是一条数据后就会将该地址弹给 __ ip指针， __ip指针会执行该地址中存放的汇编指令，完成对寄存器的操作.（某一gadget-0x1a得到上一gadget） 
-实例（蒸米ROP）源码
-#include &lt;stdio.h&gt;
-#include &lt;stdlib.h&gt;
-#include &lt;unistd.h&gt;
-void vulnerable_function() &#123;
-    char buf[128];
-    read(STDIN_FILENO, buf, 512);
-&#125;
- ...</div></div></div><div class="recent-post-item"><div class="post_cover right"><a href="/2023/09/01/%E3%80%90%E8%A7%A3%E5%AF%86%E7%B3%BB%E5%88%97%E3%80%91pwn%E5%9F%BA%E7%A1%80/" title="pwn探索--大杂烩"><img class="post-bg" src="https://thumbs.dreamstime.com/b/%E5%8A%A8%E6%BC%AB%E8%83%8C%E6%99%AF%E5%A5%87%E5%B9%BB%E6%8F%92%E5%9B%BE%E6%B8%B8%E6%88%8F%E7%8E%AF%E5%A2%83%E7%AB%A5%E4%B9%A6%E4%BB%99%E5%A2%83%E6%99%AF%E8%A7%82%E6%8F%92%E5%9B%BE-270943592.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="pwn探索--大杂烩"></a></div><div class="recent-post-info"><a class="article-title" href="/2023/09/01/%E3%80%90%E8%A7%A3%E5%AF%86%E7%B3%BB%E5%88%97%E3%80%91pwn%E5%9F%BA%E7%A1%80/" title="pwn探索--大杂烩">pwn探索--大杂烩</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2023-08-31T16:00:00.000Z" title="发表于 2023-09-01 00:00:00">2023-09-01</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/%E4%BA%8C%E8%BF%9B%E5%88%B6%E5%AE%89%E5%85%A8/">二进制安全</a></span></div><div class="content">pwn的核心：二进制漏洞的利用和挖掘研究层次：编译成机器码的二进制程序的漏洞二进制程序实际为可执行文件linux系统下ELF&#x3D;windows系统下EXE文件一次简单的hack
-
-CTF中pwn攻击脚本思路：
-1.pwn程序&#x2F;服务器（必不可少滴）开端——&gt;from pwn import*2.使用python中pwn tools用remote函数打开远端需要攻击的服务器端口3.进行链接4.构造恶意数据5.发送恶意数据6.使用交互函数（io.interactive（））获取flag
-程序的编译与链接
-linux借助文件头进行识别!（用vim打开可查看源码–&gt;%!xxd可查看十六进制表示）
-编译过程ls指list file即列出文件；可用ll查看文件详细内容。gcc兼具编译器和汇编器的功能。ctrl+alt+t 启动shell
-
-
-Linux环境下执行可执行文件!xdd%-r 还原文件rm a.out 删除.&#x2F;a.out 是linux&#x2F;unix环境下gcc编译源代码(c&#x2F;c++)并连来接产生的默认执行文件名。.&#x2F;a.out ...</div></div></div><nav id="pagination"><div class="pagination"><span class="page-number current">1</span><a class="page-number" href="/page/2/#content-inner">2</a><a class="extend next" rel="next" href="/page/2/#content-inner"><i class="fas fa-chevron-right fa-fw"></i></a></div></nav></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="/img/avatar.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">yub</div><div class="author-info__description">路迟青</div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">12</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">7</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">5</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/xxxxxx"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons is-center"><a class="social-icon" href="https://github.com/yubut" target="_blank" title="Github"><i class="fab fa-github"></i></a><a class="social-icon" href="https://qm.qq.com/q/Le1ZeB0K40" target="_blank" title=""><i class="fab fa-qq"></i></a><a class="social-icon" href="mailto:3023536144@qq.com" target="_blank" title="Email"><i class="fas fa-envelope-open-text"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">This is my Blog</div></div><div class="sticky_layout"><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/2024/06/22/Java%E6%9D%82%E8%AE%B0/" title="Java基础知识杂记"><img src="https://tse4-mm.cn.bing.net/th/id/OIP-C.ZCGnC5HDT4Rwr8DPTY6UiQHaEf?w=300&amp;h=182&amp;c=7&amp;r=0&amp;o=5&amp;dpr=1.3&amp;pid=1.7" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Java基础知识杂记"/></a><div class="content"><a class="title" href="/2024/06/22/Java%E6%9D%82%E8%AE%B0/" title="Java基础知识杂记">Java基础知识杂记</a><time datetime="2024-06-21T16:00:00.000Z" title="发表于 2024-06-22 00:00:00">2024-06-22</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2024/01/09/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E7%A2%8E%E7%89%87/" title="数据结构"><img src="https://gd-hbimg.huaban.com/860d15845530de80118005269b1d96b4d9aa44756a834-Abxbe0_fw240webp" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="数据结构"/></a><div class="content"><a class="title" href="/2024/01/09/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E7%A2%8E%E7%89%87/" title="数据结构">数据结构</a><time datetime="2024-01-09T09:51:16.000Z" title="发表于 2024-01-09 17:51:16">2024-01-09</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2023/12/24/The%20Missing%20Semester%20of%20Your%20CS%20Education/" title="The Missing Semester of Your CS Education"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRmIfKRi79SHnbd-ASFJ0LTSWOujJAXK7q1H9atswuEUz8CeJQasQ3CloNQlEgjKX1pTP4&amp;usqp=CAU" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="The Missing Semester of Your CS Education"/></a><div class="content"><a class="title" href="/2023/12/24/The%20Missing%20Semester%20of%20Your%20CS%20Education/" title="The Missing Semester of Your CS Education">The Missing Semester of Your CS Education</a><time datetime="2023-12-24T03:36:16.000Z" title="发表于 2023-12-24 11:36:16">2023-12-24</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2023/11/27/NepCTF%202023/" title="Nep摸鱼记"><img src="https://ts2.cn.mm.bing.net/th?id=OIP-C.lXXyg9_hRePKHUIpWoiMUwHaFP&amp;w=297&amp;h=210&amp;c=8&amp;rs=1&amp;qlt=90&amp;o=6&amp;dpr=1.3&amp;pid=3.1&amp;rm=2" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Nep摸鱼记"/></a><div class="content"><a class="title" href="/2023/11/27/NepCTF%202023/" title="Nep摸鱼记">Nep摸鱼记</a><time datetime="2023-11-26T16:00:00.000Z" title="发表于 2023-11-27 00:00:00">2023-11-27</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2023/09/01/Canary%E8%A7%A3%E5%86%B3%E5%A7%BF%E5%8A%BF/" title="Canary解决姿势"><img src="https://www.bizhizj.com/pc-img/2023-04/2146.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Canary解决姿势"/></a><div class="content"><a class="title" href="/2023/09/01/Canary%E8%A7%A3%E5%86%B3%E5%A7%BF%E5%8A%BF/" title="Canary解决姿势">Canary解决姿势</a><time datetime="2023-08-31T16:00:00.000Z" title="发表于 2023-09-01 00:00:00">2023-09-01</time></div></div></div></div><div class="card-widget card-categories"><div class="item-headline">
-            <i class="fas fa-folder-open"></i>
-            <span>分类</span>
-            
-            </div>
-            <ul class="card-category-list" id="aside-cat-list">
-            <li class="card-category-list-item "><a class="card-category-list-link" href="/categories/C%E8%AF%AD%E8%A8%80/"><span class="card-category-list-name">C语言</span><span class="card-category-list-count">2</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/Java/"><span class="card-category-list-name">Java</span><span class="card-category-list-count">1</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/%E4%BA%8C%E8%BF%9B%E5%88%B6%E5%AE%89%E5%85%A8/"><span class="card-category-list-name">二进制安全</span><span class="card-category-list-count">5</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/%E7%A2%8E%E7%89%87/"><span class="card-category-list-name">碎片</span><span class="card-category-list-count">3</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/%E9%A2%98%E7%9B%AE%E8%AE%B0%E5%BD%95/"><span class="card-category-list-name">题目记录</span><span class="card-category-list-count">1</span></a></li>
-            </ul></div><div class="card-widget card-tags"><div class="item-headline"><i class="fas fa-tags"></i><span>标签</span></div><div class="card-tag-cloud"><a href="/tags/Linux/" style="font-size: 1.1em; color: #999">Linux</a> <a href="/tags/%E9%9A%8F%E7%AC%94/" style="font-size: 1.1em; color: #999">随笔</a> <a href="/tags/C%E8%AF%AD%E8%A8%80-%E7%9F%A5%E8%AF%86%E7%A2%8E%E7%89%87/" style="font-size: 1.1em; color: #999">C语言,知识碎片</a> <a href="/tags/Java-%E7%9F%A5%E8%AF%86%E7%A2%8E%E7%89%87/" style="font-size: 1.1em; color: #999">Java,知识碎片</a> <a href="/tags/pwn-%E7%9F%A5%E8%AF%86%E7%A2%8E%E7%89%87/" style="font-size: 1.5em; color: #99a9bf">pwn,知识碎片</a> <a href="/tags/C%E8%AF%AD%E8%A8%80/" style="font-size: 1.1em; color: #999">C语言</a> <a href="/tags/%E7%9F%A5%E8%AF%86%E7%A2%8E%E7%89%87/" style="font-size: 1.3em; color: #99a1ac">知识碎片</a></div></div><div class="card-widget card-archives"><div class="item-headline"><i class="fas fa-archive"></i><span>归档</span></div><ul class="card-archive-list"><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2024/06/"><span class="card-archive-list-date">六月 2024</span><span class="card-archive-list-count">1</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2024/01/"><span class="card-archive-list-date">一月 2024</span><span class="card-archive-list-count">1</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2023/12/"><span class="card-archive-list-date">十二月 2023</span><span class="card-archive-list-count">1</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2023/11/"><span class="card-archive-list-date">十一月 2023</span><span class="card-archive-list-count">1</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2023/09/"><span class="card-archive-list-date">九月 2023</span><span class="card-archive-list-count">7</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2023/08/"><span class="card-archive-list-date">八月 2023</span><span class="card-archive-list-count">1</span></a></li></ul></div><div class="card-widget card-webinfo"><div class="item-headline"><i class="fas fa-chart-line"></i><span>网站资讯</span></div><div class="webinfo"><div class="webinfo-item"><div class="item-name">文章数目 :</div><div class="item-count">12</div></div><div class="webinfo-item"><div class="item-name">本站访客数 :</div><div class="item-count" id="busuanzi_value_site_uv"><i class="fa-solid fa-spinner fa-spin"></i></div></div><div class="webinfo-item"><div class="item-name">本站总访问量 :</div><div class="item-count" id="busuanzi_value_site_pv"><i class="fa-solid fa-spinner fa-spin"></i></div></div><div class="webinfo-item"><div class="item-name">最后更新时间 :</div><div class="item-count" id="last-push-date" data-lastPushDate="2024-09-19T12:36:26.490Z"><i class="fa-solid fa-spinner fa-spin"></i></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2024 By yub</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.umd.min.js"></script><div class="js-pjax"><script>window.typedJSFn = {
-  init: (str) => {
-    window.typed = new Typed('#subtitle', Object.assign({
-      strings: str,
-      startDelay: 300,
-      typeSpeed: 150,
-      loop: true,
-      backSpeed: 50,
-    }, ))
-  },
-  run: (subtitleType) => {
-    if (true) {
-      if (typeof Typed === 'function') {
-        subtitleType()
-      } else {
-        getScript('https://cdn.jsdelivr.net/npm/typed.js/dist/typed.umd.min.js').then(subtitleType)
-      }
-    } else {
-      subtitleType()
-    }
-  }
-}
-</script><script>function subtitleType () {
-  if (true) {
-    typedJSFn.init(["背着荒谬前进，决无终章","我且卧听潇潇，得失自晓","风和酒一样","在路上"])
-  } else {
-    document.getElementById("subtitle").textContent = "背着荒谬前进，决无终章"
-  }
-}
-typedJSFn.run(subtitleType)</script></div><script id="canvas_nest" defer="defer" color="0,0,255" opacity="0.7" zIndex="-1" count="99" mobile="false" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/dist/canvas-nest.min.js"></script><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/dist/activate-power-mode.min.js"></script><script>POWERMODE.colorful = true;
-POWERMODE.shake = true;
-POWERMODE.mobile = true;
-document.body.addEventListener('input', POWERMODE);
-</script><script id="click-show-text" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/dist/click-show-text.min.js" data-mobile="true" data-text="I,LOVE,YOU" data-fontsize="15px" data-random="true" async="async"></script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><span id="loading-status"></span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="is-center" id="loading-database"><i class="fas fa-spinner fa-pulse"></i><span>  数据库加载中</span></div><div class="search-wrap"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div><hr/><div class="no-result" id="local-search-results"></div><div id="local-search-stats-wrap"></div></div></div><div id="search-mask"></div><script src="/js/search/local-search.js"></script></div></div></body></html>
+    <!-- title -->
+    <title>幻境</title>
+    <!-- async scripts -->
+    <!-- Google Analytics -->
+
+
+    <!-- Umami Analytics -->
+
+
+    <!-- styles -->
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <!-- persian styles -->
+    
+    <!-- rss -->
+    
+    
+	<!-- mathjax -->
+	
+<meta name="generator" content="Hexo 6.3.0"><link rel="alternate" href="/atom.xml" title="幻境" type="application/atom+xml">
+</head>
+
+<body class="max-width mx-auto px3 ltr">
+    
+    <div class="content index py4 h-card">
+        
+          <header id="header">
+  <a class="u-url u-uid" href="/">
+  
+    
+      <img id="logo" alt class="u-logo" src="/images/logo.png" />
+    
+  
+    <div id="title">
+      <h1 class="p-name">幻境</h1>
+    </div>
+  </a>
+  <div id="nav">
+    <ul>
+      <li class="icon">
+        <a href="#" aria-label="目录"><i class="fa-solid fa-bars fa-2x"></i></a>
+      </li>
+      <!--
+     --><li><a href="/">Home</a></li><!--
+   --><!--
+     --><li><a href="/about/">About</a></li><!--
+   --><!--
+     --><li><a href="/archives/">Articles</a></li><!--
+   --><!--
+     --><li><a href="/categories/">Categories</a></li><!--
+   --><!--
+     --><li><a href="/links/">Links</a></li><!--
+   --><!--
+     --><li><a href="/tags/">Tags</a></li><!--
+   --><!--
+     --><li><a href="/search/">Search</a></li><!--
+   -->
+    </ul>
+  </div>
+</header>
+
+        
+        <section id="about" class="p-note">
+  
+    <p>路迟青</p>
+
+  
+  
+    <p>
+      在这里找到我：
+      
+      
+      
+        
+        
+          <a class="icon u-url" target="_blank" rel="noopener me" href="http://github.com/probberechts/cactus-dark" aria-label="github" title="github">
+            <i class="fa-brands fa-github"></i><!--
+      ---></a><!--
+    ---><!--
+    --->， 
+        
+      
+        
+        
+          <a class="icon u-url" target="_blank" rel="noopener me" href="/" aria-label="twitter" title="twitter">
+            <i class="fa-brands fa-twitter"></i><!--
+      ---></a><!--
+    ---><!--
+    --->， 
+        
+      
+        
+        
+          <a class="icon u-url" target="_blank" rel="noopener me" href="/" aria-label="facebook" title="facebook">
+            <i class="fa-brands fa-facebook"></i><!--
+      ---></a><!--
+    ---><!--
+    --->， 
+        
+      
+        
+        
+          <a class="icon u-email" target="_blank" rel="noopener" href="mailto:name@email.com" aria-label="mail" title="mail">
+            <i class="fa-solid fa-envelope"></i><!--
+      ---></a>
+        <!--
+    --->， 
+        
+      
+        
+        
+          <a class="icon u-url" target="_blank" rel="noopener me" href="https://mastodon.social/@alice" aria-label="mastodon.social" title="mastodon.social">
+            <i class="fa-brands fa-mastodon"></i><!--
+      ---></a><!--
+    ---><!--
+    ---> 和 
+        
+      
+        
+        
+          <a class="icon u-url" target="_blank" rel="noopener me" href="https://fosstodon.org/@alice" aria-label="fosstodon.org" title="fosstodon.org">
+            <i class="fa-brands fa-mastodon"></i><!--
+      ---></a><!--
+    ---><!--
+    --->.
+        
+      
+    </p>
+  
+</section>
+
+<section id="writing">
+  <span class="h1"><a href="/">文章</a></span>
+  
+  <ul class="post-list">
+    
+    
+      
+    
+    
+      <li class="post-item">
+        
+    <div class="meta">
+      
+        
+          <time datetime="2024-06-21T16:00:00.000Z" class="dt-published" itemprop="datePublished">2024-06-22</time>
+        
+      
+    </div>
+
+
+        <span>
+    
+        <a class="" href="/2024/06/22/Java%E6%9D%82%E8%AE%B0/">Java基础知识杂记</a>
+    
+
+
+</span>
+      </li>
+    
+      <li class="post-item">
+        
+    <div class="meta">
+      
+        
+          <time datetime="2024-01-09T09:51:16.000Z" class="dt-published" itemprop="datePublished">2024-01-09</time>
+        
+      
+    </div>
+
+
+        <span>
+    
+        <a class="" href="/2024/01/09/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E7%A2%8E%E7%89%87/">数据结构</a>
+    
+
+
+</span>
+      </li>
+    
+      <li class="post-item">
+        
+    <div class="meta">
+      
+        
+          <time datetime="2023-12-24T03:36:16.000Z" class="dt-published" itemprop="datePublished">2023-12-24</time>
+        
+      
+    </div>
+
+
+        <span>
+    
+        <a class="" href="/2023/12/24/The%20Missing%20Semester%20of%20Your%20CS%20Education/">The Missing Semester of Your CS Education</a>
+    
+
+
+</span>
+      </li>
+    
+      <li class="post-item">
+        
+    <div class="meta">
+      
+        
+          <time datetime="2023-11-26T16:00:00.000Z" class="dt-published" itemprop="datePublished">2023-11-27</time>
+        
+      
+    </div>
+
+
+        <span>
+    
+        <a class="" href="/2023/11/27/NepCTF%202023/">Nep摸鱼记</a>
+    
+
+
+</span>
+      </li>
+    
+      <li class="post-item">
+        
+    <div class="meta">
+      
+        
+          <time datetime="2023-08-31T16:00:00.000Z" class="dt-published" itemprop="datePublished">2023-09-01</time>
+        
+      
+    </div>
+
+
+        <span>
+    
+        <a class="" href="/2023/09/01/Canary%E8%A7%A3%E5%86%B3%E5%A7%BF%E5%8A%BF/">Canary解决姿势</a>
+    
+
+
+</span>
+      </li>
+    
+  </ul>
+  
+</section>
+
+
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy;
+    
+    
+    2023-2024
+    yub
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+        <!--
+       --><li><a href="/">Home</a></li><!--
+     --><!--
+       --><li><a href="/about/">About</a></li><!--
+     --><!--
+       --><li><a href="/archives/">Articles</a></li><!--
+     --><!--
+       --><li><a href="/categories/">Categories</a></li><!--
+     --><!--
+       --><li><a href="/links/">Links</a></li><!--
+     --><!--
+       --><li><a href="/tags/">Tags</a></li><!--
+     --><!--
+       --><li><a href="/search/">Search</a></li><!--
+     -->
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+    </div>
+    <!-- styles -->
+
+
+
+  <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" crossorigin="anonymous" onload="this.onload=null;this.rel='stylesheet'"/>
+
+
+    <!-- jquery -->
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" crossorigin="anonymous"></script>
+
+
+
+
+<!-- clipboard -->
+
+
+<script src="/js/main.js"></script>
+
+<!-- search -->
+
+<!-- Baidu Analytics -->
+
+<!-- Cloudflare Analytics -->
+
+<!-- Disqus Comments -->
+
+<!-- utterances Comments -->
+
+</body>
+</html>
