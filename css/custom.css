@@ -1,12 +1,15 @@
-/* 默认的亮色模式下的页脚背景颜色 */
+/* 默认的深色模式下的页脚背景颜色 */
 #footer-wrap {
-    background-color: #ffffff; /* 可以设置为浅色 */
+  background-color: #151515; /* 默认深色 */
+}
+
+/* 浅色模式下的页脚背景颜色 */
+@media (prefers-color-scheme: light) {
+  #footer-wrap {
+      background-color: #666464; /* 可以设置为浅色 */
   }
-  
-  /* 暗色模式下的页脚背景颜色 */
-  @media (prefers-color-scheme: dark) {
-    #footer-wrap {
-      background-color: #333333; /* 可以设置为深色 */
-    }
-  }
+}
+
+
+
   
