@@ -6,7 +6,7 @@
   <link href="https://yubut.github.io/atom.xml" rel="self"/>
   
   <link href="https://yubut.github.io/"/>
-  <updated>2024-11-08T06:20:32.184Z</updated>
+  <updated>2024-11-08T06:32:02.197Z</updated>
   <id>https://yubut.github.io/</id>
   
   <author>
@@ -17,11 +17,28 @@
   <generator uri="https://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>page</title>
+    <link href="https://yubut.github.io/2024/11/08/yub%E3%81%AEAlgorithm.0x10/"/>
+    <id>https://yubut.github.io/2024/11/08/yub%E3%81%AEAlgorithm.0x10/</id>
+    <published>2024-11-08T06:28:43.000Z</published>
+    <updated>2024-11-08T06:32:02.197Z</updated>
+    
+    
+    
+    
+    <category term="Algorithm" scheme="https://yubut.github.io/categories/Algorithm/"/>
+    
+    
+    <category term="碎片，Algorithm" scheme="https://yubut.github.io/tags/%E7%A2%8E%E7%89%87%EF%BC%8CAlgorithm/"/>
+    
+  </entry>
+  
+  <entry>
     <title>yubのAlgorithm0.0</title>
     <link href="https://yubut.github.io/2024/11/08/yub%E3%81%AEAlgorithm0.0/"/>
     <id>https://yubut.github.io/2024/11/08/yub%E3%81%AEAlgorithm0.0/</id>
     <published>2024-11-08T05:54:19.000Z</published>
-    <updated>2024-11-08T06:20:32.184Z</updated>
+    <updated>2024-11-08T06:31:09.150Z</updated>
     
     <content type="html"><![CDATA[<h3 id="闲言碎语"><a href="#闲言碎语" class="headerlink" title="闲言碎语"></a>闲言碎语</h3><p>​思来想去还是想把之前打卡的内容搬过来（毕竟博客修修补补还是勉强可以凑合看 笑）还是作为自己的点滴记录吧.<br>​wi师傅说毕设手搓一个自己的博客系统GitHub上能有几千star那包过的，倒是有这么个想法，说不定自己哪天也可以实现呢.<br>​之后搬运过来的内容也算是复习了，希望自己能在薄弱的方面越来越好.【这个时候在Harmony开发课上插着耳机一个人passion hh】</p><p>希望自己这次能真正坚持下来.<br>(在学习的学弟学妹们也继续加油哦 期待你们成为自己理想中的pwn✌)</p><p>共勉.</p>]]></content>
     
@@ -36,7 +53,7 @@
     <category term="Algorithm" scheme="https://yubut.github.io/categories/Algorithm/"/>
     
     
-    <category term="碎片，" scheme="https://yubut.github.io/tags/%E7%A2%8E%E7%89%87%EF%BC%8C/"/>
+    <category term="碎片" scheme="https://yubut.github.io/tags/%E7%A2%8E%E7%89%87/"/>
     
   </entry>
   
