@@ -13,14 +13,14 @@
       
       <categories>
           
-          <category> 题目记录 </category>
+          <category> 二进制安全 </category>
           
       </categories>
       
       
         <tags>
             
-            <tag> pwn，题解 </tag>
+            <tag> pwn </tag>
             
         </tags>
       
@@ -34,25 +34,6 @@
       <url>/2024/11/08/yub%E3%81%AEAlgorithm.0x1/</url>
       
         <content type="html"><![CDATA[<h4 id="二分查找"><a href="#二分查找" class="headerlink" title="二分查找"></a>二分查找</h4><p>link：<a href="https://leetcode.cn/problems/binary-search/description/">704. 二分查找 - 力扣（LeetCode）</a><br><img src="https://cdn.jsdelivr.net/gh/yubut/First@main/image-20240923152617533.png" alt="image-20240923152617533"></p><h5 id="思路分析"><a href="#思路分析" class="headerlink" title="思路分析"></a>思路分析</h5><p>题目给出数组升序 ，想到二分查找（好吧其实题目也给出来了w）<br>找到mid，根据逻辑大小缩小范围比较.</p><h6 id="全包围-lefg-right"><a href="#全包围-lefg-right" class="headerlink" title="全包围[lefg,right]"></a>全包围[lefg,right]</h6><p>假如数组大小为6，取值范围就是[0,5].闭区间使得定义left &#x3D; 0，right &#x3D; nums.length-1（防止越界指针无效，也是根据此处可以反推没有左开右闭情况）<br>left指针是0.right是5，这个时候left &#x3D;&#x3D; right是有效的，结束条件也就是left&lt;&#x3D;right，再根据mid位置进行判断，target是再mid左边还是右边或者是幸运的查找到目标位置.</p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="type">int</span> <span class="title function_">search</span><span class="params">(<span class="type">int</span>[] nums, <span class="type">int</span> target)</span> &#123;</span><br><span class="line">       </span><br><span class="line">        <span class="comment">//看到数组习惯性反应越界问题</span></span><br><span class="line">        <span class="comment">//闭区间</span></span><br><span class="line">       </span><br><span class="line">        <span class="type">int</span> <span class="variable">right</span> <span class="operator">=</span> nums.length - <span class="number">1</span>;</span><br><span class="line">        <span class="type">int</span> <span class="variable">left</span> <span class="operator">=</span> <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">while</span>(left &lt;= right) &#123;</span><br><span class="line">            <span class="type">int</span> <span class="variable">mid</span> <span class="operator">=</span> left + (right - left) / <span class="number">2</span>;</span><br><span class="line">            <span class="keyword">if</span>(nums[mid] &lt; target) &#123;</span><br><span class="line">                left = mid + <span class="number">1</span>;</span><br><span class="line">            &#125;<span class="keyword">else</span> <span class="keyword">if</span>(nums[mid] &gt; target) &#123;</span><br><span class="line">                right = mid -<span class="number">1</span>;</span><br><span class="line">            &#125;<span class="keyword">else</span> &#123;</span><br><span class="line">                <span class="keyword">return</span> mid;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> -<span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><h6 id="左闭右开-left-rigjht"><a href="#左闭右开-left-rigjht" class="headerlink" title="左闭右开[left,rigjht)"></a>左闭右开[left,rigjht)</h6><p>同样的条件但是right指针指向nums.length，对应的left &#x3D;&#x3D; right没有意义.所以判断条件是left &lt; right.如果target在nums[mid]左边的话，把left赋值为mid+1，但是反过来<strong>target在nums[mid]右边的话，就要赋值left为mid</strong>【右边开mid指的指针不参加下一次循环判读】</p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="type">int</span> <span class="title function_">search</span><span class="params">(<span class="type">int</span>[] nums, <span class="type">int</span> target)</span> &#123; </span><br><span class="line">        <span class="type">int</span> <span class="variable">right</span> <span class="operator">=</span> nums.length;</span><br><span class="line">        <span class="type">int</span> <span class="variable">left</span> <span class="operator">=</span> <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">while</span>(left &lt; right) &#123;</span><br><span class="line">            <span class="type">int</span> <span class="variable">mid</span> <span class="operator">=</span> left + (right - left) / <span class="number">2</span>;</span><br><span class="line">            <span class="keyword">if</span>(nums[mid] &lt; target) &#123;</span><br><span class="line">                left = mid + <span class="number">1</span>;</span><br><span class="line">            &#125;<span class="keyword">else</span> <span class="keyword">if</span>(nums[mid] &gt; target) &#123;</span><br><span class="line">                right = mid;</span><br><span class="line">            &#125;<span class="keyword">else</span> &#123;</span><br><span class="line">                <span class="keyword">return</span> mid;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> -<span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><h6 id="全开-left-right"><a href="#全开-left-right" class="headerlink" title="全开(left,right)"></a>全开(left,right)</h6><p>分析同上述 只不过全开两种情况都赋值为mid.</p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="type">int</span> <span class="title function_">search</span><span class="params">(<span class="type">int</span>[] nums, <span class="type">int</span> target)</span> &#123; </span><br><span class="line">        <span class="type">int</span> <span class="variable">right</span> <span class="operator">=</span> nums.length;</span><br><span class="line">        <span class="type">int</span> <span class="variable">left</span> <span class="operator">=</span> -<span class="number">1</span>;</span><br><span class="line">        <span class="keyword">while</span>(left + <span class="number">1</span> &lt; right) &#123;</span><br><span class="line">            <span class="type">int</span> <span class="variable">mid</span> <span class="operator">=</span> left + (right - left) / <span class="number">2</span>;</span><br><span class="line">            <span class="keyword">if</span>(nums[mid] &lt; target) &#123;</span><br><span class="line">                left = mid;</span><br><span class="line">            &#125;<span class="keyword">else</span> <span class="keyword">if</span>(nums[mid] &gt; target) &#123;</span><br><span class="line">                right = mid;</span><br><span class="line">            &#125;<span class="keyword">else</span> &#123;</span><br><span class="line">                <span class="keyword">return</span> mid;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> -<span class="number">1</span>;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;  </span><br></pre></td></tr></table></figure><h5 id="Tips"><a href="#Tips" class="headerlink" title="Tips"></a>Tips</h5><p><strong>1.区间问题，判断条件是否能遍历所有下标.</strong><br><strong>2.其实将mid取值方法改成left+((right-left)&gt;&gt;1)【和 &#x2F; 2一样】是最好的，直接用（left+right）&#x2F; 2和（left+right）&#x2F;&#x2F; 2 【向下取整】 只适用于少数据全包围情况，此情况left和right都是int范围，取值范围是-2147483648-2147483647，当两个数值很接近边界值的时候相加很容易出现负值</strong><br><strong>3.（right-left ）&#x2F; 2 只是表示了left和right指针之间距离的一半，不能表示mid所在的位置，用left加上距离的一半刚好能进行表示.</strong></p>]]></content>
-      
-      
-      <categories>
-          
-          <category> Algorithm </category>
-          
-      </categories>
-      
-      
-    </entry>
-    
-    
-    
-    <entry>
-      <title>yubのAlgorithm.0x2</title>
-      <link href="/2024/11/08/yub%E3%81%AEAlgorithm.0x2/"/>
-      <url>/2024/11/08/yub%E3%81%AEAlgorithm.0x2/</url>
-      
-        <content type="html"><![CDATA[<h4 id="移除元素"><a href="#移除元素" class="headerlink" title="移除元素"></a>移除元素</h4><p>link：<a href="https://leetcode.cn/problems/remove-element/solutions/1689028/by-carlsun-2-fdc4/">27. 移除元素 - 力扣（LeetCode）</a></p><p><img src="https://cdn.jsdelivr.net/gh/yubut/First@main/image-20240925141403675.png" alt="image-20240925141403675"></p><h5 id="思路分析"><a href="#思路分析" class="headerlink" title="思路分析"></a>思路分析</h5><p>1.常规遍历数组，比较vaule值是否相等，若不相等往前拷贝覆盖即可，相等跳过，更新下标（可以理解为数组长度减少）.【时间复杂度O(n) 空间复杂度O(1)】<br>2.快慢指针.快指针遍历进行筛选，慢指针对应常见存储的数组.找到目标vaule后fast和slow指针拉开距离开始遍历维护更新.【时间复杂度O(n) 空间复杂度O(1)】</p><h6 id="拷贝覆盖"><a href="#拷贝覆盖" class="headerlink" title="拷贝覆盖"></a>拷贝覆盖</h6><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="type">int</span> <span class="title function_">removeElement</span><span class="params">(<span class="type">int</span>[] nums, <span class="type">int</span> val)</span> &#123;</span><br><span class="line">          <span class="type">int</span> <span class="variable">k</span> <span class="operator">=</span> <span class="number">0</span>;</span><br><span class="line">          <span class="keyword">for</span>(<span class="type">int</span> num:nums)&#123;</span><br><span class="line">            <span class="keyword">if</span>(num != val)&#123;</span><br><span class="line">                nums[k] = num;</span><br><span class="line">                k++; </span><br><span class="line">            &#125;</span><br><span class="line">          &#125;</span><br><span class="line">          <span class="keyword">return</span> k;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><h6 id="双指针"><a href="#双指针" class="headerlink" title="双指针"></a>双指针</h6><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="type">int</span> <span class="title function_">removeElement</span><span class="params">(<span class="type">int</span>[] nums, <span class="type">int</span> val)</span> &#123;</span><br><span class="line">        <span class="type">int</span> <span class="variable">fast</span> <span class="operator">=</span> <span class="number">0</span>;</span><br><span class="line">        <span class="type">int</span> <span class="variable">slow</span> <span class="operator">=</span> <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span>(slow = <span class="number">0</span>; fast &lt; nums.length; fast++) &#123;</span><br><span class="line">            <span class="keyword">if</span>(nums[fast] != val)&#123;</span><br><span class="line">                nums[slow] = nums[fast];</span><br><span class="line">                slow++;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> slow;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><h5 id="Tips"><a href="#Tips" class="headerlink" title="Tips"></a>Tips</h5><p>注意多种思路辨析.</p>]]></content>
       
       
       <categories>
@@ -83,9 +64,28 @@
       
         <tags>
             
-            <tag> 碎片，Algorithm </tag>
+            <tag> Algorithm </tag>
             
         </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>yubのAlgorithm.0x2</title>
+      <link href="/2024/11/08/yub%E3%81%AEAlgorithm.0x2/"/>
+      <url>/2024/11/08/yub%E3%81%AEAlgorithm.0x2/</url>
+      
+        <content type="html"><![CDATA[<h4 id="移除元素"><a href="#移除元素" class="headerlink" title="移除元素"></a>移除元素</h4><p>link：<a href="https://leetcode.cn/problems/remove-element/solutions/1689028/by-carlsun-2-fdc4/">27. 移除元素 - 力扣（LeetCode）</a></p><p><img src="https://cdn.jsdelivr.net/gh/yubut/First@main/image-20240925141403675.png" alt="image-20240925141403675"></p><h5 id="思路分析"><a href="#思路分析" class="headerlink" title="思路分析"></a>思路分析</h5><p>1.常规遍历数组，比较vaule值是否相等，若不相等往前拷贝覆盖即可，相等跳过，更新下标（可以理解为数组长度减少）.【时间复杂度O(n) 空间复杂度O(1)】<br>2.快慢指针.快指针遍历进行筛选，慢指针对应常见存储的数组.找到目标vaule后fast和slow指针拉开距离开始遍历维护更新.【时间复杂度O(n) 空间复杂度O(1)】</p><h6 id="拷贝覆盖"><a href="#拷贝覆盖" class="headerlink" title="拷贝覆盖"></a>拷贝覆盖</h6><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="type">int</span> <span class="title function_">removeElement</span><span class="params">(<span class="type">int</span>[] nums, <span class="type">int</span> val)</span> &#123;</span><br><span class="line">          <span class="type">int</span> <span class="variable">k</span> <span class="operator">=</span> <span class="number">0</span>;</span><br><span class="line">          <span class="keyword">for</span>(<span class="type">int</span> num:nums)&#123;</span><br><span class="line">            <span class="keyword">if</span>(num != val)&#123;</span><br><span class="line">                nums[k] = num;</span><br><span class="line">                k++; </span><br><span class="line">            &#125;</span><br><span class="line">          &#125;</span><br><span class="line">          <span class="keyword">return</span> k;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><h6 id="双指针"><a href="#双指针" class="headerlink" title="双指针"></a>双指针</h6><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="type">int</span> <span class="title function_">removeElement</span><span class="params">(<span class="type">int</span>[] nums, <span class="type">int</span> val)</span> &#123;</span><br><span class="line">        <span class="type">int</span> <span class="variable">fast</span> <span class="operator">=</span> <span class="number">0</span>;</span><br><span class="line">        <span class="type">int</span> <span class="variable">slow</span> <span class="operator">=</span> <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span>(slow = <span class="number">0</span>; fast &lt; nums.length; fast++) &#123;</span><br><span class="line">            <span class="keyword">if</span>(nums[fast] != val)&#123;</span><br><span class="line">                nums[slow] = nums[fast];</span><br><span class="line">                slow++;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> slow;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><h5 id="Tips"><a href="#Tips" class="headerlink" title="Tips"></a>Tips</h5><p>注意多种思路辨析.</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> Algorithm </category>
+          
+      </categories>
+      
       
     </entry>
     
@@ -127,7 +127,7 @@
       
         <tags>
             
-            <tag> 碎片,Algorithm, Java </tag>
+            <tag> Algorithm </tag>
             
         </tags>
       
@@ -169,12 +169,6 @@
       </categories>
       
       
-        <tags>
-            
-            <tag> 碎片,Algorithm, Java </tag>
-            
-        </tags>
-      
     </entry>
     
     
@@ -196,7 +190,7 @@
       
         <tags>
             
-            <tag> 碎片,Algorithm, Java </tag>
+            <tag> Algorithm </tag>
             
         </tags>
       
@@ -256,12 +250,6 @@
           
       </categories>
       
-      
-        <tags>
-            
-            <tag> 碎片,Algorithm, Java </tag>
-            
-        </tags>
       
     </entry>
     
@@ -334,7 +322,7 @@
       
       <categories>
           
-          <category> Algorithm </category>
+          <category> 碎片 </category>
           
       </categories>
       
@@ -410,16 +398,6 @@
       </categories>
       
       
-        <tags>
-            
-            <tag> 知识碎片 </tag>
-            
-            <tag> Java </tag>
-            
-            <tag> 多线程 </tag>
-            
-        </tags>
-      
     </entry>
     
     
@@ -439,16 +417,6 @@
       </categories>
       
       
-        <tags>
-            
-            <tag> 知识碎片 </tag>
-            
-            <tag> Java </tag>
-            
-            <tag> 多线程 </tag>
-            
-        </tags>
-      
     </entry>
     
     
@@ -467,16 +435,6 @@
           
       </categories>
       
-      
-        <tags>
-            
-            <tag> 知识碎片 </tag>
-            
-            <tag> Java </tag>
-            
-            <tag> 多线程 </tag>
-            
-        </tags>
       
     </entry>
     
@@ -516,16 +474,6 @@
       </categories>
       
       
-        <tags>
-            
-            <tag> 知识碎片 </tag>
-            
-            <tag> Java </tag>
-            
-            <tag> 多线程 </tag>
-            
-        </tags>
-      
     </entry>
     
     
@@ -563,16 +511,6 @@
           
       </categories>
       
-      
-        <tags>
-            
-            <tag> 知识碎片 </tag>
-            
-            <tag> Java </tag>
-            
-            <tag> 多线程 </tag>
-            
-        </tags>
       
     </entry>
     
@@ -614,7 +552,7 @@
       
         <tags>
             
-            <tag> Java,知识碎片 </tag>
+            <tag> Java 知识碎片 </tag>
             
         </tags>
       
@@ -682,14 +620,14 @@
       
       <categories>
           
-          <category> 题目记录 </category>
+          <category> 二进制安全 </category>
           
       </categories>
       
       
         <tags>
             
-            <tag> pwn,知识碎片 </tag>
+            <tag> pwn </tag>
             
         </tags>
       
@@ -713,8 +651,6 @@
       
       
         <tags>
-            
-            <tag> 知识碎片 </tag>
             
             <tag> OS </tag>
             
@@ -741,9 +677,7 @@
       
         <tags>
             
-            <tag> pwn </tag>
-            
-            <tag> 知识碎片 </tag>
+            <tag> pwn 知识碎片 </tag>
             
         </tags>
       
@@ -793,7 +727,7 @@
       
         <tags>
             
-            <tag> C语言,知识碎片 </tag>
+            <tag> C语言 </tag>
             
         </tags>
       
@@ -818,7 +752,7 @@
       
         <tags>
             
-            <tag> pwn,知识碎片 </tag>
+            <tag> pwn 知识碎片 </tag>
             
         </tags>
       
@@ -843,7 +777,7 @@
       
         <tags>
             
-            <tag> pwn,知识碎片 </tag>
+            <tag> pwn 知识碎片 </tag>
             
         </tags>
       
@@ -865,12 +799,6 @@
           
       </categories>
       
-      
-        <tags>
-            
-            <tag> pwn,知识碎片 </tag>
-            
-        </tags>
       
     </entry>
     
@@ -936,16 +864,10 @@
       
       <categories>
           
-          <category> 碎片 </category>
+          <category> 二进制安全 </category>
           
       </categories>
       
-      
-        <tags>
-            
-            <tag> Linux，知识碎片，pwn </tag>
-            
-        </tags>
       
     </entry>
     
@@ -968,7 +890,7 @@
       
         <tags>
             
-            <tag> Linux，知识碎片 </tag>
+            <tag> Linux </tag>
             
         </tags>
       
