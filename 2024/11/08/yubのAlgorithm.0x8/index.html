@@ -1,0 +1,214 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="dark"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>yubのAlgorithm.0x8 | 幻境</title><meta name="author" content="yub"><meta name="copyright" content="yub"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#0d0d0d"><meta name="description" content="两个数组的交集link：349. 两个数组的交集 - 力扣（LeetCode） 思路分析首先想到合并两个数组，遍历找重复项存储到新的数组中但其实用HashSet是更加方便的,【HashSet不存在重复数据】 **注意：使用数组做哈希表的题目都限制了大小 例如只有小写字母或者数值大小在【0-1000】内 ** HashSet12345678910111213141516171819202122232">
+<meta property="og:type" content="article">
+<meta property="og:title" content="yubのAlgorithm.0x8">
+<meta property="og:url" content="https://yubut.github.io/2024/11/08/yub%E3%81%AEAlgorithm.0x8/index.html">
+<meta property="og:site_name" content="幻境">
+<meta property="og:description" content="两个数组的交集link：349. 两个数组的交集 - 力扣（LeetCode） 思路分析首先想到合并两个数组，遍历找重复项存储到新的数组中但其实用HashSet是更加方便的,【HashSet不存在重复数据】 **注意：使用数组做哈希表的题目都限制了大小 例如只有小写字母或者数值大小在【0-1000】内 ** HashSet12345678910111213141516171819202122232">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://yubut.github.io/imgs/logo/14.jpg">
+<meta property="article:published_time" content="2024-11-08T06:28:43.000Z">
+<meta property="article:modified_time" content="2024-11-09T03:50:00.601Z">
+<meta property="article:author" content="yub">
+<meta property="article:tag" content="碎片,Algorithm, Java">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://yubut.github.io/imgs/logo/14.jpg"><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="https://yubut.github.io/2024/11/08/yub%E3%81%AEAlgorithm.0x8/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//fonts.googleapis.com" crossorigin=""/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600&amp;display=swap" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"/search.xml","languages":{"hits_empty":"找不到您查询的内容：${query}","hits_stats":"共找到 ${hits} 篇文章"}},
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":false,"highlightHeightLimit":false},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  dateSuffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  source: {
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'yubのAlgorithm.0x8',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2024-11-09 11:50:00'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+    win.getCSS = (url,id = false) => new Promise((resolve, reject) => {
+      const link = document.createElement('link')
+      link.rel = 'stylesheet'
+      link.href = url
+      if (id) link.id = id
+      link.onerror = reject
+      link.onload = link.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        link.onload = link.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(link)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+    const detectApple = () => {
+      if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+    })(window)</script><link rel="stylesheet" href="/css/transpancy.css"><meta name="generator" content="Hexo 6.3.0"><link rel="alternate" href="/atom.xml" title="幻境" type="application/atom+xml">
+</head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="/imgs/avatar.jpg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">40</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">17</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">6</div></a></div><hr class="custom-hr"/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 主页</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fa fa-graduation-cap"></i><span> 博文</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/categories/"><i class="fa-fw fa fa-archive"></i><span> 分类</span></a></li><li><a class="site-page child" href="/tags/"><i class="fa-fw fa fa-tags"></i><span> 标签</span></a></li><li><a class="site-page child" href="/archives/"><i class="fa-fw fa fa-folder-open"></i><span> 归档</span></a></li></ul></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> 生活</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/shuoshuo/"><i class="fa-fw fa fa-comments-o"></i><span> 分享</span></a></li><li><a class="site-page child" href="/photos/"><i class="fa-fw fa fa-camera-retro"></i><span> 相册</span></a></li><li><a class="site-page child" href="/music/"><i class="fa-fw fa fa-music"></i><span> 音乐</span></a></li><li><a class="site-page child" href="/movies/"><i class="fa-fw fas fa-video"></i><span> 影视</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fa fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/comment/"><i class="fa-fw fa fa-paper-plane"></i><span> 留言板</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于笔者</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="not-home-page" id="page-header" style="background-image: url('/../imgs/logo/14.jpg')"><nav id="nav"><span id="blog-info"><a href="/" title="幻境"><span class="site-name">幻境</span></a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search" href="javascript:void(0);"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 主页</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fa fa-graduation-cap"></i><span> 博文</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/categories/"><i class="fa-fw fa fa-archive"></i><span> 分类</span></a></li><li><a class="site-page child" href="/tags/"><i class="fa-fw fa fa-tags"></i><span> 标签</span></a></li><li><a class="site-page child" href="/archives/"><i class="fa-fw fa fa-folder-open"></i><span> 归档</span></a></li></ul></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> 生活</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/shuoshuo/"><i class="fa-fw fa fa-comments-o"></i><span> 分享</span></a></li><li><a class="site-page child" href="/photos/"><i class="fa-fw fa fa-camera-retro"></i><span> 相册</span></a></li><li><a class="site-page child" href="/music/"><i class="fa-fw fa fa-music"></i><span> 音乐</span></a></li><li><a class="site-page child" href="/movies/"><i class="fa-fw fas fa-video"></i><span> 影视</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fa fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/comment/"><i class="fa-fw fa fa-paper-plane"></i><span> 留言板</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于笔者</span></a></div></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">yubのAlgorithm.0x8</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2024-11-08T06:28:43.000Z" title="发表于 2024-11-08 14:28:43">2024-11-08</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2024-11-09T03:50:00.601Z" title="更新于 2024-11-09 11:50:00">2024-11-09</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/Algorithm/">Algorithm</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="leancloud_visitors" id="/2024/11/08/yub%E3%81%AEAlgorithm.0x8/" data-flag-title="yubのAlgorithm.0x8"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span class="leancloud-visitors-count"><i class="fa-solid fa-spinner fa-spin"></i></span></span><span class="post-meta-separator">|</span><span class="post-meta-commentcount"><i class="far fa-comments fa-fw post-meta-icon"></i><span class="post-meta-label">评论数:</span><a href="/2024/11/08/yub%E3%81%AEAlgorithm.0x8/#post-comment" itemprop="discussionUrl"><span class="valine-comment-count" data-xid="/2024/11/08/yub%E3%81%AEAlgorithm.0x8/" itemprop="commentCount"><i class="fa-solid fa-spinner fa-spin"></i></span></a></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h3 id="两个数组的交集"><a href="#两个数组的交集" class="headerlink" title="两个数组的交集"></a>两个数组的交集</h3><p>link：<a target="_blank" rel="noopener" href="https://leetcode.cn/problems/intersection-of-two-arrays/">349. 两个数组的交集 - 力扣（LeetCode）</a></p>
+<h4 id="思路分析"><a href="#思路分析" class="headerlink" title="思路分析"></a>思路分析</h4><p>首先想到合并两个数组，遍历找重复项存储到新的数组中但其实用HashSet是更加方便的,【HashSet不存在重复数据】</p>
+<p><img src="https://cdn.jsdelivr.net/gh/yubut/First@main/image-20241012004357257.png" alt="image-20241012004357257"><br>**注意：使用数组做哈希表的题目都限制了大小 例如只有小写字母或者数值大小在【0-1000】内 **</p>
+<h5 id="HashSet"><a href="#HashSet" class="headerlink" title="HashSet"></a>HashSet</h5><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> java.util.HashSet;</span><br><span class="line"><span class="keyword">import</span> java.util.Set;</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="type">int</span>[] intersection(<span class="type">int</span>[] nums1, <span class="type">int</span>[] nums2) &#123;</span><br><span class="line">        <span class="keyword">if</span>(nums1 == <span class="literal">null</span> || nums1.length == <span class="number">0</span> || nums2 == <span class="literal">null</span> || nums2.length == <span class="number">0</span> ) &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">int</span>[<span class="number">0</span>];</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">//创建需要的set表 set2用于返回结果</span></span><br><span class="line">        Set&lt;Integer&gt; set1 = <span class="keyword">new</span> <span class="title class_">HashSet</span>&lt;&gt;();</span><br><span class="line">        Set&lt;Integer&gt; set2 = <span class="keyword">new</span> <span class="title class_">HashSet</span>&lt;&gt;();</span><br><span class="line"></span><br><span class="line">        <span class="comment">//遍历数组1</span></span><br><span class="line">        <span class="keyword">for</span>(<span class="type">int</span> i : nums1)  &#123;</span><br><span class="line">            set1.add(i);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">//遍历ser1映射的元素判断哈希表中是否存在对应元素</span></span><br><span class="line">        <span class="keyword">for</span>(<span class="type">int</span> i : nums2) &#123;</span><br><span class="line">            <span class="keyword">if</span>(set1.contains(i)) &#123;</span><br><span class="line">                set2.add(i);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">//将结果集合转换为数组</span></span><br><span class="line">        <span class="type">int</span>[] result = <span class="keyword">new</span> <span class="title class_">int</span>[set2.size()];</span><br><span class="line">        <span class="type">int</span> <span class="variable">k</span> <span class="operator">=</span> <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="type">int</span> i : set2) &#123;</span><br><span class="line">            result[k++] = i;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> result;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h6 id="Tips"><a href="#Tips" class="headerlink" title="Tips"></a><strong>Tips</strong></h6><p>更高级的写法 Java8引入的流式API（Stream API）</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">    <span class="comment">//将结果集合转换为数组</span></span><br><span class="line"><span class="keyword">return</span> set2.stream().mapToInt(x -&gt; x).toArray();</span><br></pre></td></tr></table></figure>
+
+<p>**<code>stream()</code>**：将集合转换为流对象，便于对集合进行链式操作.<br>**<code>mapToInt(x -&gt; x)</code>**：将流中的每个 <code>Integer</code> 元素转换为 <code>int</code> 类型（自动拆箱).<br>**<code>toArray()</code>**：将流中的元素收集为一个 <code>int[]</code> 数组.</p>
+<h5 id="Hash数组"><a href="#Hash数组" class="headerlink" title="Hash数组"></a>Hash数组</h5><p>思路相同 只不过加了大小限制之后可以用Hash数组解决</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> java.util.HashSet;</span><br><span class="line"><span class="keyword">import</span> java.util.Set;</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="type">int</span>[] intersection(<span class="type">int</span>[] nums1, <span class="type">int</span>[] nums2) &#123;</span><br><span class="line">        <span class="comment">//创建需要的两个数组  </span></span><br><span class="line">        <span class="type">int</span>[] hash1 = <span class="keyword">new</span> <span class="title class_">int</span>[<span class="number">1002</span>];</span><br><span class="line">        <span class="type">int</span>[] hash2 = <span class="keyword">new</span> <span class="title class_">int</span>[<span class="number">1002</span>];</span><br><span class="line">        <span class="comment">//分别遍历两个数组 对相同元素出现次数计数</span></span><br><span class="line">        <span class="keyword">for</span>(<span class="type">int</span> i : nums1) &#123;</span><br><span class="line">            hash1[i]++;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">for</span>(<span class="type">int</span> i : nums2) &#123;</span><br><span class="line">            hash2[i]++;</span><br><span class="line">        &#125;</span><br><span class="line">        List&lt;Integer&gt; result = <span class="keyword">new</span> <span class="title class_">ArrayList</span>&lt;&gt;();</span><br><span class="line">        <span class="comment">//相同的下标位置都大于0 满足</span></span><br><span class="line">        <span class="keyword">for</span>(<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; i &lt; <span class="number">1002</span>; i++) &#123;</span><br><span class="line">          <span class="keyword">if</span>(hash1[i] &gt; <span class="number">0</span> &amp;&amp; hash2[i] &gt; <span class="number">0</span>)</span><br><span class="line">            result.add(i);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">//转换成数组</span></span><br><span class="line">        <span class="type">int</span>[] finalArray = <span class="keyword">new</span> <span class="title class_">int</span>[result.size()];</span><br><span class="line">        <span class="type">int</span> <span class="variable">index</span> <span class="operator">=</span> <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="type">int</span> i : result) &#123;</span><br><span class="line">            finalArray[index++] = i;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> finalArray;</span><br><span class="line"> &#125;</span><br><span class="line">&#125;   </span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="快乐数"><a href="#快乐数" class="headerlink" title="快乐数"></a>快乐数</h3><p>link：<a target="_blank" rel="noopener" href="https://leetcode.cn/problems/happy-number/description/">202. 快乐数 - 力扣（LeetCode）</a></p>
+<h5 id="思路分析-1"><a href="#思路分析-1" class="headerlink" title="思路分析"></a>思路分析</h5><p>起初分析的时候被卡在了循环条件处【😓】，首先得不是1然后不满足快乐数条件最后不被包含在Hashset中.【是的没错是高贵的Hashset（bushi）】</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="type">boolean</span> <span class="title function_">isHappy</span><span class="params">(<span class="type">int</span> n)</span> &#123;</span><br><span class="line">        <span class="comment">//创建所需的set表</span></span><br><span class="line">        Set&lt;Integer&gt; result = <span class="keyword">new</span> <span class="title class_">HashSet</span>&lt;&gt;();</span><br><span class="line">        <span class="comment">//循环判断 按除每一位判断</span></span><br><span class="line">        <span class="keyword">while</span>(n != <span class="number">1</span> &amp;&amp; !result.contains(n)) &#123;</span><br><span class="line">            result.add(n);</span><br><span class="line">            <span class="comment">//getNumber函数单独模拟实现</span></span><br><span class="line">            n = getNumber(n);</span><br><span class="line">        &#125;</span><br><span class="line">            <span class="keyword">return</span> n == <span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">            <span class="keyword">private</span> <span class="type">int</span> <span class="title function_">getNumber</span><span class="params">(<span class="type">int</span> n)</span> &#123;</span><br><span class="line">            <span class="type">int</span> <span class="variable">res</span> <span class="operator">=</span> <span class="number">0</span>;</span><br><span class="line">            <span class="comment">//逐位进行平方求和判断</span></span><br><span class="line">            <span class="keyword">while</span>(n &gt; <span class="number">0</span>) &#123;</span><br><span class="line">                <span class="type">int</span> <span class="variable">tmp</span> <span class="operator">=</span> n % <span class="number">10</span>;</span><br><span class="line">                res += tmp * tmp;</span><br><span class="line">                n = n / <span class="number">10</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">return</span> res;</span><br><span class="line">        &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h6 id="Tip"><a href="#Tip" class="headerlink" title="Tip"></a>Tip</h6><p> <strong>所有由此观之，所有判断元素是否出现过的题目都可以用哈希法解决.</strong><br><strong>一般哈希表都是用来快速判断一个元素是否出现集合里.</strong></p>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="https://yubut.github.io">yub</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="https://yubut.github.io/2024/11/08/yub%E3%81%AEAlgorithm.0x8/">https://yubut.github.io/2024/11/08/yubのAlgorithm.0x8/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="https://yubut.github.io" target="_blank">幻境</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/%E7%A2%8E%E7%89%87-Algorithm-Java/">碎片,Algorithm, Java</a></div><div class="post_share"><div class="social-share" data-image="/../imgs/logo/14.jpg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/2024/11/08/yub%E3%81%AEAlgorithm.0x9/" title="yubのAlgorithm.0x9"><img class="cover" src="/../imgs/logo/14.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">yubのAlgorithm.0x9</div></div></a></div><div class="next-post pull-right"><a href="/2024/11/08/yub%E3%81%AEAlgorithm.0xa/" title="yubのAlgorithm.0xa"><img class="cover" src="/../imgs/logo/14.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">yubのAlgorithm.0xa</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>相关推荐</span></div><div class="relatedPosts-list"><div><a href="/2024/11/08/yub%E3%81%AEAlgorithm.0x1/" title="yubのAlgorithm.0x1"><img class="cover" src="/../imgs/logo/14.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2024-11-08</div><div class="title">yubのAlgorithm.0x1</div></div></a></div><div><a href="/2024/11/08/yub%E3%81%AEAlgorithm.0x4/" title="yubのAlgorithm.0x4"><img class="cover" src="/../imgs/logo/14.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2024-11-08</div><div class="title">yubのAlgorithm.0x4</div></div></a></div><div><a href="/2024/11/08/yub%E3%81%AEAlgorithm.0x5/" title="yubのAlgorithm.0x5"><img class="cover" src="/../imgs/logo/14.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2024-11-08</div><div class="title">yubのAlgorithm.0x5</div></div></a></div><div><a href="/2024/11/08/yub%E3%81%AEAlgorithm.0x9/" title="yubのAlgorithm.0x9"><img class="cover" src="/../imgs/logo/14.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2024-11-08</div><div class="title">yubのAlgorithm.0x9</div></div></a></div><div><a href="/2024/11/08/yub%E3%81%AEAlgorithm.0xa/" title="yubのAlgorithm.0xa"><img class="cover" src="/../imgs/logo/14.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2024-11-08</div><div class="title">yubのAlgorithm.0xa</div></div></a></div><div><a href="/2024/11/08/yub%E3%81%AEAlgorithm.0xc/" title="yubのAlgorithm.0xc"><img class="cover" src="/../imgs/logo/14.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2024-11-08</div><div class="title">yubのAlgorithm.0xc</div></div></a></div></div></div><hr class="custom-hr"/><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="fas fa-comments fa-fw"></i><span> 评论</span></div></div><div class="comment-wrap"><div><div class="vcomment" id="vcomment"></div></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="/imgs/avatar.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">yub</div><div class="author-info__description">路迟青</div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">40</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">17</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">6</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/xxxxxx"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons is-center"><a class="social-icon" href="https://github.com/yubut" target="_blank" title="Github"><i class="fab fa-github"></i></a><a class="social-icon" href="https://qm.qq.com/q/Le1ZeB0K40" target="_blank" title=""><i class="fab fa-qq"></i></a><a class="social-icon" href="mailto:3023536144@qq.com" target="_blank" title="Email"><i class="fas fa-envelope-open-text"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">This is my Blog</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%A4%E4%B8%AA%E6%95%B0%E7%BB%84%E7%9A%84%E4%BA%A4%E9%9B%86"><span class="toc-number">1.</span> <span class="toc-text">两个数组的交集</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%80%9D%E8%B7%AF%E5%88%86%E6%9E%90"><span class="toc-number">1.1.</span> <span class="toc-text">思路分析</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#HashSet"><span class="toc-number">1.1.1.</span> <span class="toc-text">HashSet</span></a><ol class="toc-child"><li class="toc-item toc-level-6"><a class="toc-link" href="#Tips"><span class="toc-number">1.1.1.1.</span> <span class="toc-text">Tips</span></a></li></ol></li><li class="toc-item toc-level-5"><a class="toc-link" href="#Hash%E6%95%B0%E7%BB%84"><span class="toc-number">1.1.2.</span> <span class="toc-text">Hash数组</span></a></li></ol></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%BF%AB%E4%B9%90%E6%95%B0"><span class="toc-number">2.</span> <span class="toc-text">快乐数</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E6%80%9D%E8%B7%AF%E5%88%86%E6%9E%90-1"><span class="toc-number">2.0.1.</span> <span class="toc-text">思路分析</span></a><ol class="toc-child"><li class="toc-item toc-level-6"><a class="toc-link" href="#Tip"><span class="toc-number">2.0.1.1.</span> <span class="toc-text">Tip</span></a></li></ol></li></ol></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/2024/11/08/yub%E3%81%AEAlgorithm.0x1/" title="yubのAlgorithm.0x1"><img src="/../imgs/logo/14.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="yubのAlgorithm.0x1"/></a><div class="content"><a class="title" href="/2024/11/08/yub%E3%81%AEAlgorithm.0x1/" title="yubのAlgorithm.0x1">yubのAlgorithm.0x1</a><time datetime="2024-11-08T06:28:43.000Z" title="发表于 2024-11-08 14:28:43">2024-11-08</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2024/11/08/yub%E3%81%AEAlgorithm.0x2/" title="yubのAlgorithm.0x2"><img src="/../imgs/logo/14.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="yubのAlgorithm.0x2"/></a><div class="content"><a class="title" href="/2024/11/08/yub%E3%81%AEAlgorithm.0x2/" title="yubのAlgorithm.0x2">yubのAlgorithm.0x2</a><time datetime="2024-11-08T06:28:43.000Z" title="发表于 2024-11-08 14:28:43">2024-11-08</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2024/11/08/yub%E3%81%AEAlgorithm.0x3/" title="yubのAlgorithm.0x3"><img src="/../imgs/logo/14.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="yubのAlgorithm.0x3"/></a><div class="content"><a class="title" href="/2024/11/08/yub%E3%81%AEAlgorithm.0x3/" title="yubのAlgorithm.0x3">yubのAlgorithm.0x3</a><time datetime="2024-11-08T06:28:43.000Z" title="发表于 2024-11-08 14:28:43">2024-11-08</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2024/11/08/yub%E3%81%AEAlgorithm.0x10/" title="yubのAlgorithm.0x10"><img src="/../imgs/logo/14.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="yubのAlgorithm.0x10"/></a><div class="content"><a class="title" href="/2024/11/08/yub%E3%81%AEAlgorithm.0x10/" title="yubのAlgorithm.0x10">yubのAlgorithm.0x10</a><time datetime="2024-11-08T06:28:43.000Z" title="发表于 2024-11-08 14:28:43">2024-11-08</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2024/11/08/yub%E3%81%AEAlgorithm.0x4/" title="yubのAlgorithm.0x4"><img src="/../imgs/logo/14.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="yubのAlgorithm.0x4"/></a><div class="content"><a class="title" href="/2024/11/08/yub%E3%81%AEAlgorithm.0x4/" title="yubのAlgorithm.0x4">yubのAlgorithm.0x4</a><time datetime="2024-11-08T06:28:43.000Z" title="发表于 2024-11-08 14:28:43">2024-11-08</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2022 - 2024 By yub</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><a id="to_comment" href="#post-comment" title="直达评论"><i class="fas fa-comments"></i></a><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.umd.min.js"></script><div class="js-pjax"><script>function loadValine () {
+  function initValine () {
+    const valine = new Valine(Object.assign({
+      el: '#vcomment',
+      appId: 'WwVGEcmjEUSp1C3qQTlW8CcS-gzGzoHsz',
+      appKey: 'tqbDrZC8pSB03urdpjIK5oC9',
+      avatar: 'monsterid',
+      serverURLs: 'https://avoscloud.com',
+      emojiMaps: "",
+      path: window.location.pathname,
+      visitor: true
+    }, ))
+  }
+
+  if (typeof Valine === 'function') initValine() 
+  else getScript('https://cdn.jsdelivr.net/npm/valine/dist/Valine.min.js').then(initValine)
+}
+
+if ('Valine' === 'Valine' || !false) {
+  if (false) btf.loadComment(document.getElementById('vcomment'),loadValine)
+  else setTimeout(loadValine, 0)
+} else {
+  function loadOtherComment () {
+    loadValine()
+  }
+}</script></div><script id="canvas_nest" defer="defer" color="0,0,255" opacity="0.7" zIndex="-1" count="99" mobile="false" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/dist/canvas-nest.min.js"></script><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/dist/activate-power-mode.min.js"></script><script>POWERMODE.colorful = true;
+POWERMODE.shake = true;
+POWERMODE.mobile = true;
+document.body.addEventListener('input', POWERMODE);
+</script><script id="click-show-text" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/dist/click-show-text.min.js" data-mobile="true" data-text="I,LOVE,YOU" data-fontsize="15px" data-random="true" async="async"></script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><span id="loading-status"></span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="is-center" id="loading-database"><i class="fas fa-spinner fa-pulse"></i><span>  数据库加载中</span></div><div class="search-wrap"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div><hr/><div class="no-result" id="local-search-results"></div><div id="local-search-stats-wrap"></div></div></div><div id="search-mask"></div><script src="/js/search/local-search.js"></script></div></div></body></html>

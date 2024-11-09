@@ -1,0 +1,240 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="dark"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>Java多线程_0x9_ | 幻境</title><meta name="author" content="yub"><meta name="copyright" content="yub"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#0d0d0d"><meta name="description" content="多线程篇九常见的锁策略虽然我们开发者一般只关注如何使用锁，但设计锁我们也需要有一定的了解. 乐观锁和悲观锁顾名思义，两个锁一个是考虑的最优情况一个考虑最坏情况. 乐观锁在加锁之前，假设数据一般情况下不会产生冲突，只在数据进行返回更新的时候进行检查校验，如果发生并行冲突就返回错误信息，让用户重新进行决策.（就是加锁之前预估出现所冲突的概率不大所以在加锁前不会进行太多的工作【加锁过程做的事少加锁的速度">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Java多线程_0x9_">
+<meta property="og:url" content="https://yubut.github.io/2024/09/11/%E5%A4%9A%E7%BA%BF%E7%A8%8B%E7%AF%87%E4%B9%9D/index.html">
+<meta property="og:site_name" content="幻境">
+<meta property="og:description" content="多线程篇九常见的锁策略虽然我们开发者一般只关注如何使用锁，但设计锁我们也需要有一定的了解. 乐观锁和悲观锁顾名思义，两个锁一个是考虑的最优情况一个考虑最坏情况. 乐观锁在加锁之前，假设数据一般情况下不会产生冲突，只在数据进行返回更新的时候进行检查校验，如果发生并行冲突就返回错误信息，让用户重新进行决策.（就是加锁之前预估出现所冲突的概率不大所以在加锁前不会进行太多的工作【加锁过程做的事少加锁的速度">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://yubut.github.io/imgs/logo/8.jpg">
+<meta property="article:published_time" content="2024-09-11T13:41:00.000Z">
+<meta property="article:modified_time" content="2024-11-09T03:38:44.132Z">
+<meta property="article:author" content="yub">
+<meta property="article:tag" content="知识碎片">
+<meta property="article:tag" content="Java">
+<meta property="article:tag" content="多线程">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://yubut.github.io/imgs/logo/8.jpg"><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="https://yubut.github.io/2024/09/11/%E5%A4%9A%E7%BA%BF%E7%A8%8B%E7%AF%87%E4%B9%9D/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//fonts.googleapis.com" crossorigin=""/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600&amp;display=swap" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"/search.xml","languages":{"hits_empty":"找不到您查询的内容：${query}","hits_stats":"共找到 ${hits} 篇文章"}},
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":false,"highlightHeightLimit":false},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  dateSuffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  source: {
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'Java多线程_0x9_',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2024-11-09 11:38:44'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+    win.getCSS = (url,id = false) => new Promise((resolve, reject) => {
+      const link = document.createElement('link')
+      link.rel = 'stylesheet'
+      link.href = url
+      if (id) link.id = id
+      link.onerror = reject
+      link.onload = link.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        link.onload = link.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(link)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+    const detectApple = () => {
+      if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+    })(window)</script><link rel="stylesheet" href="/css/transpancy.css"><meta name="generator" content="Hexo 6.3.0"><link rel="alternate" href="/atom.xml" title="幻境" type="application/atom+xml">
+</head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="/imgs/avatar.jpg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">40</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">17</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">6</div></a></div><hr class="custom-hr"/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 主页</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fa fa-graduation-cap"></i><span> 博文</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/categories/"><i class="fa-fw fa fa-archive"></i><span> 分类</span></a></li><li><a class="site-page child" href="/tags/"><i class="fa-fw fa fa-tags"></i><span> 标签</span></a></li><li><a class="site-page child" href="/archives/"><i class="fa-fw fa fa-folder-open"></i><span> 归档</span></a></li></ul></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> 生活</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/shuoshuo/"><i class="fa-fw fa fa-comments-o"></i><span> 分享</span></a></li><li><a class="site-page child" href="/photos/"><i class="fa-fw fa fa-camera-retro"></i><span> 相册</span></a></li><li><a class="site-page child" href="/music/"><i class="fa-fw fa fa-music"></i><span> 音乐</span></a></li><li><a class="site-page child" href="/movies/"><i class="fa-fw fas fa-video"></i><span> 影视</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fa fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/comment/"><i class="fa-fw fa fa-paper-plane"></i><span> 留言板</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于笔者</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="not-home-page" id="page-header" style="background-image: url('/../imgs/logo/8.jpg')"><nav id="nav"><span id="blog-info"><a href="/" title="幻境"><span class="site-name">幻境</span></a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search" href="javascript:void(0);"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 主页</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fa fa-graduation-cap"></i><span> 博文</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/categories/"><i class="fa-fw fa fa-archive"></i><span> 分类</span></a></li><li><a class="site-page child" href="/tags/"><i class="fa-fw fa fa-tags"></i><span> 标签</span></a></li><li><a class="site-page child" href="/archives/"><i class="fa-fw fa fa-folder-open"></i><span> 归档</span></a></li></ul></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> 生活</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/shuoshuo/"><i class="fa-fw fa fa-comments-o"></i><span> 分享</span></a></li><li><a class="site-page child" href="/photos/"><i class="fa-fw fa fa-camera-retro"></i><span> 相册</span></a></li><li><a class="site-page child" href="/music/"><i class="fa-fw fa fa-music"></i><span> 音乐</span></a></li><li><a class="site-page child" href="/movies/"><i class="fa-fw fas fa-video"></i><span> 影视</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fa fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/comment/"><i class="fa-fw fa fa-paper-plane"></i><span> 留言板</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于笔者</span></a></div></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">Java多线程_0x9_</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2024-09-11T13:41:00.000Z" title="发表于 2024-09-11 21:41:00">2024-09-11</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2024-11-09T03:38:44.132Z" title="更新于 2024-11-09 11:38:44">2024-11-09</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/Java/">Java</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="leancloud_visitors" id="/2024/09/11/%E5%A4%9A%E7%BA%BF%E7%A8%8B%E7%AF%87%E4%B9%9D/" data-flag-title="Java多线程_0x9_"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span class="leancloud-visitors-count"><i class="fa-solid fa-spinner fa-spin"></i></span></span><span class="post-meta-separator">|</span><span class="post-meta-commentcount"><i class="far fa-comments fa-fw post-meta-icon"></i><span class="post-meta-label">评论数:</span><a href="/2024/09/11/%E5%A4%9A%E7%BA%BF%E7%A8%8B%E7%AF%87%E4%B9%9D/#post-comment" itemprop="discussionUrl"><span class="valine-comment-count" data-xid="/2024/09/11/%E5%A4%9A%E7%BA%BF%E7%A8%8B%E7%AF%87%E4%B9%9D/" itemprop="commentCount"><i class="fa-solid fa-spinner fa-spin"></i></span></a></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h3 id="多线程篇九"><a href="#多线程篇九" class="headerlink" title="多线程篇九"></a>多线程篇九</h3><h4 id="常见的锁策略"><a href="#常见的锁策略" class="headerlink" title="常见的锁策略"></a>常见的锁策略</h4><p>虽然我们开发者一般只关注如何使用锁，但设计锁我们也需要有一定的了解.</p>
+<h5 id="乐观锁和悲观锁"><a href="#乐观锁和悲观锁" class="headerlink" title="乐观锁和悲观锁"></a>乐观锁和悲观锁</h5><p>顾名思义，两个锁一个是考虑的最优情况一个考虑最坏情况.</p>
+<h6 id="乐观锁"><a href="#乐观锁" class="headerlink" title="乐观锁"></a>乐观锁</h6><p>在加锁之前，假设数据一般情况下不会产生冲突，只在数据进行返回更新的时候进行检查校验，如果发生并行冲突就返回错误信息，让用户重新进行决策.（就是加锁之前预估出现所冲突的概率不大所以在加锁前不会进行太多的工作【加锁过程做的事少加锁的速度更快但是更容易引入一些其他问题消耗CPU资源】）<br>比如你想吃饭，但是食堂这个时候被军爷占领了，你觉得你去的过够早军爷抢不过你，直接冲去食堂，结果排上了长长的队伍.【没加锁但能识别数据冲突】</p>
+<h6 id="悲观锁"><a href="#悲观锁" class="headerlink" title="悲观锁"></a>悲观锁</h6><p>在加锁之前，总假设数据从一开始就容易被修改，每次拿数据的时候就会加锁.想拿到这个数据只能等待阻塞拿到锁.（在加锁之前预估出现锁冲突的概率很大，加锁的时候会做更多的工作防止意外，此时加锁的速度可能更慢，但是整个过程中更不容易出现其他问题）<br>和上述同样的情况，为了防止空跑一趟你给可预定窗口发消息询问能否预定（相当于加锁）得到肯定答复之后会来取餐如果生意太火爆没回或者说不够预定的就下次再去这个窗口.</p>
+<p><strong>Synchronized初始使用乐观锁策略.当发现锁竞争比较频繁的时候就会自动切换成悲观锁策略.</strong><br>当然这种相互结合的模式在实际应用中更具高效性.</p>
+<h5 id="重量级锁和轻量级锁"><a href="#重量级锁和轻量级锁" class="headerlink" title="重量级锁和轻量级锁"></a>重量级锁和轻量级锁</h5><p>锁的核心特性——  “原子性”这样的机制追溯根源是CPU这样的硬件设备提供的.<br>CPU提供了”原子操作指令”<br>操作系统基于CPU原子指令，实现了mutex互斥锁.<br>JVM基于OS提供的互斥锁，实现了synchronized和ReentrankLock等关键字和类.<br>1</p>
+<h6 id="重量级锁"><a href="#重量级锁" class="headerlink" title="重量级锁"></a>重量级锁</h6><p>适用于锁高竞争的场景.【开销较高】<br>加锁开销更大，加锁速度更慢.</p>
+<p>加锁机制重度依赖了OS提供的mutex.<br>大量的内核态用户态切换.<br>很容易引发线程的调度.<br><strong>涉及用户态和内核态的切换成本高高高高</strong></p>
+<h6 id="轻量级锁"><a href="#轻量级锁" class="headerlink" title="轻量级锁"></a>轻量级锁</h6><p>基于CAS操作的锁实现，适用于低竞争场景；可以避免阻塞，但在竞争激烈时会膨胀为重量级锁.</p>
+<p>加锁机制尽可能不使用mutex尽量在用户态代码完成.搞不赢再用mutex.</p>
+<p>少量的内核态用户态切换.<br>不态容易引发线程调度.<br><strong>synchronized开始时是一个轻量级锁，如果锁冲突比较严重就会变成重量级锁.</strong><br>加锁开销更小，加锁速度更快.</p>
+<h6 id="挂起等待锁"><a href="#挂起等待锁" class="headerlink" title="挂起等待锁"></a><strong>挂起等待锁</strong></h6><p> 一种重量级锁的典型例子同时也是一种悲观锁.<br>进行挂起等待的时候需要内核调度器接入【此时需要的操作变多】真正获取到锁耗费的时间自然增长.<br><strong>适用锁竞争激烈的情况.</strong></p>
+<h6 id="自旋锁"><a href="#自旋锁" class="headerlink" title="自旋锁"></a><strong>自旋锁</strong></h6><p>一种轻量级锁的实现同时也是一种乐观锁.<br>进行加锁的时候搭配while循环，如果加锁成功，结束循环.反之再次进行循环不放弃，再次尝试获取到锁.（坚强励志!）<br>这个反复执行的过程就称为”自旋”.一旦其他线程释放了锁就能立马拿到锁（舔的漂亮!bushi）<br><strong>使用前提是预期锁冲突不大，其他线程释放了锁不然死死循环太耗费CPU</strong><br><strong>synchronized 中的轻量级锁策略⼤概率就是通过⾃旋锁的⽅式实现.</strong></p>
+<p><strong>悲观乐观是加锁之前对未发生的事情进行的评估.</strong><br><strong>轻重量级是加锁之后对结果的评价.</strong><br><u>synchronized是能自适应的锁，根据锁冲突的概率高还是低实现锁模式的切换</u></p>
+<h5 id="公平锁非公平锁"><a href="#公平锁非公平锁" class="headerlink" title="公平锁非公平锁"></a>公平锁非公平锁</h5><p>和”线程饿死”有关，公平指的是先来后放到.<br>有A、B、C三个线程.A先尝试获取锁然后获取成功，B此时开始尝试获取锁，获取失败阻塞等待，然后C也尝试获取锁，仍然阻塞等待.<br><strong>两者没有好坏之分，关键看使用场景</strong></p>
+<h6 id="公平锁"><a href="#公平锁" class="headerlink" title="公平锁"></a>公平锁</h6><p>遵守”先来后到”.A释放锁之后B先得到锁，把C晾在一边.</p>
+<h6 id="非公平锁"><a href="#非公平锁" class="headerlink" title="非公平锁"></a>非公平锁</h6><p>不遵守”先来后到”.B和C公平竞争,两者都有可能获取到锁.<br><strong>synchronized是非公平锁.</strong></p>
+<p><strong>站在系统原生锁的角度锁是非公平的【操纵系统内部的线程调度就是可以视为是随机的 想实现公平锁需要引入额外的数据结构(引入队列记录每个线程先后顺序)】</strong></p>
+<h5 id="可重入锁和不可重入锁"><a href="#可重入锁和不可重入锁" class="headerlink" title="可重入锁和不可重入锁"></a>可重入锁和不可重入锁</h5><h6 id="可重入锁"><a href="#可重入锁" class="headerlink" title="可重入锁"></a>可重入锁</h6><p>顾名思义，”可以重新进入的锁”，允许同一个线程多次获取同一把锁.<br>一个线程针对一把锁可以连续加锁两次不会死锁即是可重入锁.</p>
+<h6 id="不可重入锁"><a href="#不可重入锁" class="headerlink" title="不可重入锁"></a>不可重入锁</h6><p>跟上述情况相反.第二次加锁的时候会阻塞等待直到第一个锁释放，才会获取到第二个锁.但是该线程摆了什么也不想干，此时就会死锁.</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 第⼀次加锁, 加锁成功</span></span><br><span class="line">lock();</span><br><span class="line"><span class="comment">// 第⼆次加锁, 锁已经被占⽤, 阻塞等待. </span></span><br><span class="line">lock();</span><br></pre></td></tr></table></figure>
+
+<p><strong>Linux提供的mutex是不可重入锁</strong><br><strong>synchronized是可重入锁.</strong></p>
+<p><strong>Java⾥只要以Reentrant开头命名的锁都是可重⼊锁，</strong>⽽且JDK提供的所有现成的Lock实现类.</p>
+<h5 id="普通互斥锁读写锁"><a href="#普通互斥锁读写锁" class="headerlink" title="普通互斥锁读写锁"></a>普通互斥锁读写锁</h5><h6 id="普通互斥锁"><a href="#普通互斥锁" class="headerlink" title="普通互斥锁"></a>普通互斥锁</h6><p>类似synchronized操作涉及到的加锁和解锁.</p>
+<h6 id="读写锁"><a href="#读写锁" class="headerlink" title="读写锁"></a>读写锁</h6><p>多线程之间，数据的读取⽅之间不会产⽣线程安全问题，但数据的写⼊⽅互相之间以及和读者之间都 需要进⾏互斥。如果两种场景下都⽤同⼀个锁，就会产⽣极⼤的性能损耗。所以读写锁因此⽽产⽣.</p>
+<p>1）加读锁<br>2）加写锁<br><strong>读锁和读锁之间不会产生冲突（不会阻塞）</strong><br><strong>写锁和写锁之间会产生锁冲突（会阻塞）</strong><br><strong>读锁和写锁之间会出现锁冲突（会阻塞）</strong></p>
+<p>一个线程加读锁的时候另一个线程只能读不能写.<br>一个线程加写锁的时候另一个线程不能写也不能读.</p>
+<p><strong>synchronized不是读写锁.</strong></p>
+<h6 id="引入读写锁原因"><a href="#引入读写锁原因" class="headerlink" title="引入读写锁原因"></a>引入读写锁原因</h6><p>如果是两个线程在读那线程本身就是安全的不需要互斥.<br>如果使用synchronized这种方式加锁两个线程读会产生互斥，产生阻塞.（性能损失）<br>如果完全给读操作不加锁，一个线程读一个线程写，可能会读到写了一半的数据.<br>引入读写锁就可以解决.</p>
+<h4 id="Synchronized锁的内部优化"><a href="#Synchronized锁的内部优化" class="headerlink" title="Synchronized锁的内部优化"></a>Synchronized锁的内部优化</h4><p>上述锁策略已经可以明确synchronized内部有一套自己优化的策略，使得synchronized能够适应多种情景.</p>
+<p>当线程执行到未加锁的synchronized中的对象时会经历以下三个过程.<strong>目前来看此处的锁级别是不能降级的.</strong></p>
+<h5 id="偏向锁（假设没线程来竞争锁）"><a href="#偏向锁（假设没线程来竞争锁）" class="headerlink" title="偏向锁（假设没线程来竞争锁）"></a>偏向锁（假设没线程来竞争锁）</h5><p><strong>核心思想是懒汉模式</strong>，在需要用到的时候才加锁，能晚加锁就晚加锁.但并<strong>未真正加锁，而是在线程上加一个轻量级的标记</strong>.如果没有其他线程来竞争就省去加锁操作，否则升级未轻量级操作.</p>
+<h5 id="轻量级锁（假设竞争小）"><a href="#轻量级锁（假设竞争小）" class="headerlink" title="轻量级锁（假设竞争小）"></a>轻量级锁（假设竞争小）</h5><p>通过自旋锁实现.<br>优势：只要另外的线程释放锁就可以立马拿到锁.（坚持不懈的舔狗 bushi）<br>劣势：比较消耗CPU资源.<br>此阶段synchronized内部会统计当前这个锁对象上有多少个线程在参与竞争.如果竞争者较多就会升级到重量级锁.</p>
+<h5 id="重量级锁（假设竞争大）"><a href="#重量级锁（假设竞争大）" class="headerlink" title="重量级锁（假设竞争大）"></a>重量级锁（假设竞争大）</h5><p>此时拿不到锁的线程不再进行自旋而是阻塞等待.<br>让出CPU使用权【防止CPU占用率过高】<br>当前线程释放锁时，系统会随机分配另一个线程来获取锁.</p>
+<h6 id="Tips"><a href="#Tips" class="headerlink" title="Tips"></a>Tips</h6><p><strong>偏向锁到轻量级锁这个过程不涉及解锁，只是确保有偏向锁状态的线程先拿到锁（优先性）</strong><br><strong>偏向锁标记是每个对象头的一个属性，每个对象都有自己唯一的标记.当锁对象首次加锁时进入偏向锁状态，如果这个加锁过程没有涉及锁竞争下次加锁还是偏向锁，否则跳过偏向锁到下一级阶段（轻量级锁）.</strong></p>
+<h5 id="锁消除策略"><a href="#锁消除策略" class="headerlink" title="锁消除策略"></a>锁消除策略</h5><p>编译器的一种优化方式.比那一起编译代码的时候遇到错误代码就不会加锁，而是自动把锁取消.<br>比如加锁代码中没有涉及到成员变量的修改只有一些局部变量是不用加锁的.<br><strong>针对一眼识别的完全不涉及线程安全问题的代码能够把锁消除掉.但是只有偏向锁运行起来才知道有没有锁冲突.</strong></p>
+<h5 id="锁粗化"><a href="#锁粗化" class="headerlink" title="锁粗化"></a>锁粗化</h5><p>怎么分别此处的粗细？<br><strong>synchrionized{ }中的代码越少就认为锁的粒度越细包含的代码越多就认为锁的粒度越粗</strong><br>同样的，不同的场景需要的锁粗细粒度不同，视具体情况而定.<br><strong>锁粗化会将多个细粒度的锁,合并成一个粗粒度的锁,避免了重复加锁解锁的过程</strong></p>
+<h5 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h5><h6 id="1-怎么理解乐观锁和悲观锁的，具体怎么实现？"><a href="#1-怎么理解乐观锁和悲观锁的，具体怎么实现？" class="headerlink" title="1.怎么理解乐观锁和悲观锁的，具体怎么实现？"></a>1.怎么理解乐观锁和悲观锁的，具体怎么实现？</h6><p>悲观锁认为多个线程访问同⼀个共享变量冲突的概率较⼤, 会在每次访问共享变量之前都去真正加锁. 乐观锁认为多个线程访问同⼀个共享变量冲突的概率不⼤. 并不会真的加锁, ⽽是直接尝试访问数据. 在访问的同时识别当前的数据是否出现访问冲突. </p>
+<p>悲观锁的实现就是先加锁(⽐如借助操作系统提供的 mutex), 获取到锁再操作数据. 获取不到锁就等待. 乐观锁的实现可以引⼊⼀个版本号. 借助版本号识别出当前的数据访问是否冲突. (实现细节参考上⾯ 的图). </p>
+<h6 id="2-介绍读写锁"><a href="#2-介绍读写锁" class="headerlink" title="2.介绍读写锁"></a>2.介绍读写锁</h6><p>读写锁就是把读操作和写操作分别进⾏加锁. 读锁和读锁之间不互斥. 比特就业课 写锁和写锁之间互斥. 写锁和读锁之间互斥. 读写锁最主要⽤在 “频繁读, 不频繁写” 的场景中. </p>
+<h6 id="3-什么是⾃旋锁，为什么要使⽤⾃旋锁策略，缺点是什么？"><a href="#3-什么是⾃旋锁，为什么要使⽤⾃旋锁策略，缺点是什么？" class="headerlink" title="3.什么是⾃旋锁，为什么要使⽤⾃旋锁策略，缺点是什么？"></a>3.什么是⾃旋锁，为什么要使⽤⾃旋锁策略，缺点是什么？</h6><p>如果获取锁失败, ⽴即再尝试获取锁, ⽆限循环, 直到获取到锁为⽌. 第⼀次获取锁失败, 第⼆次的尝试 会在极短的时间内到来. ⼀旦锁被其他线程释放, 就能第⼀时间获取到锁. 相⽐于挂起等待锁, 优点: 没有放弃 CPU 资源, ⼀旦锁被释放就能第⼀时间获取到锁, 更⾼效. 在锁持有时间⽐较短的场景 下⾮常有⽤. 缺点: 如果锁的持有时间较⻓, 就会浪费 CPU 资源. </p>
+<h6 id="4-synchronized-是可重⼊锁吗？"><a href="#4-synchronized-是可重⼊锁吗？" class="headerlink" title="4.synchronized 是可重⼊锁吗？"></a>4.synchronized 是可重⼊锁吗？</h6><p>是可重⼊锁. 可重⼊锁指的就是连续两次加锁不会导致死锁. 实现的⽅式是在锁中记录该锁持有的线程⾝份, 以及⼀个计数器(记录加锁次数). 如果发现当前加锁的 线程就是持有锁的线程, 则直接计数⾃增.</p>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="https://yubut.github.io">yub</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="https://yubut.github.io/2024/09/11/%E5%A4%9A%E7%BA%BF%E7%A8%8B%E7%AF%87%E4%B9%9D/">https://yubut.github.io/2024/09/11/多线程篇九/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="https://yubut.github.io" target="_blank">幻境</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/%E7%9F%A5%E8%AF%86%E7%A2%8E%E7%89%87/">知识碎片</a><a class="post-meta__tags" href="/tags/Java/">Java</a><a class="post-meta__tags" href="/tags/%E5%A4%9A%E7%BA%BF%E7%A8%8B/">多线程</a></div><div class="post_share"><div class="social-share" data-image="/../imgs/logo/8.jpg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/2024/11/04/Docker%E9%83%A8%E7%BD%B2%E5%B0%8F%E8%AE%B0/" title="Docker部署小记"><img class="cover" src="/../imgs/logo/1.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">Docker部署小记</div></div></a></div><div class="next-post pull-right"><a href="/2024/09/10/%E5%A4%9A%E7%BA%BF%E7%A8%8B%E7%AF%87%E5%85%AB/" title="Java多线程_0x8_"><img class="cover" src="/../imgs/logo/8.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">Java多线程_0x8_</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>相关推荐</span></div><div class="relatedPosts-list"><div><a href="/2024/09/04/%E5%A4%9A%E7%BA%BF%E7%A8%8B%E7%AF%87%E4%B8%80/" title="Java多线程_0x1_"><img class="cover" src="/../imgs/logo/8.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2024-09-04</div><div class="title">Java多线程_0x1_</div></div></a></div><div><a href="/2024/09/09/%E5%A4%9A%E7%BA%BF%E7%A8%8B%E7%AF%87%E4%B8%83/" title="Java多线程_0x7_"><img class="cover" src="/../imgs/logo/8.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2024-09-09</div><div class="title">Java多线程_0x7_</div></div></a></div><div><a href="/2024/09/06/%E5%A4%9A%E7%BA%BF%E7%A8%8B%E7%AF%87%E4%B8%89/" title="Java多线程_0x3_"><img class="cover" src="/../imgs/logo/8.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2024-09-06</div><div class="title">Java多线程_0x3_</div></div></a></div><div><a href="/2024/09/08/%E5%A4%9A%E7%BA%BF%E7%A8%8B%E7%AF%87%E4%BA%94%E2%80%94%E2%80%94wait%E5%92%8Cnotify/" title="Java多线程_0x5_"><img class="cover" src="/../imgs/logo/8.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2024-09-08</div><div class="title">Java多线程_0x5_</div></div></a></div><div><a href="/2024/09/10/%E5%A4%9A%E7%BA%BF%E7%A8%8B%E7%AF%87%E5%85%AB/" title="Java多线程_0x8_"><img class="cover" src="/../imgs/logo/8.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2024-09-10</div><div class="title">Java多线程_0x8_</div></div></a></div><div><a href="/2024/09/09/%E5%A4%9A%E7%BA%BF%E7%A8%8B%E7%AF%87%E5%85%AD/" title="Java多线程_0x6_"><img class="cover" src="/../imgs/logo/8.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2024-09-09</div><div class="title">Java多线程_0x6_</div></div></a></div></div></div><hr class="custom-hr"/><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="fas fa-comments fa-fw"></i><span> 评论</span></div></div><div class="comment-wrap"><div><div class="vcomment" id="vcomment"></div></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="/imgs/avatar.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">yub</div><div class="author-info__description">路迟青</div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">40</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">17</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">6</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/xxxxxx"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons is-center"><a class="social-icon" href="https://github.com/yubut" target="_blank" title="Github"><i class="fab fa-github"></i></a><a class="social-icon" href="https://qm.qq.com/q/Le1ZeB0K40" target="_blank" title=""><i class="fab fa-qq"></i></a><a class="social-icon" href="mailto:3023536144@qq.com" target="_blank" title="Email"><i class="fas fa-envelope-open-text"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">This is my Blog</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%A4%9A%E7%BA%BF%E7%A8%8B%E7%AF%87%E4%B9%9D"><span class="toc-number">1.</span> <span class="toc-text">多线程篇九</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%B8%B8%E8%A7%81%E7%9A%84%E9%94%81%E7%AD%96%E7%95%A5"><span class="toc-number">1.1.</span> <span class="toc-text">常见的锁策略</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E4%B9%90%E8%A7%82%E9%94%81%E5%92%8C%E6%82%B2%E8%A7%82%E9%94%81"><span class="toc-number">1.1.1.</span> <span class="toc-text">乐观锁和悲观锁</span></a><ol class="toc-child"><li class="toc-item toc-level-6"><a class="toc-link" href="#%E4%B9%90%E8%A7%82%E9%94%81"><span class="toc-number">1.1.1.1.</span> <span class="toc-text">乐观锁</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#%E6%82%B2%E8%A7%82%E9%94%81"><span class="toc-number">1.1.1.2.</span> <span class="toc-text">悲观锁</span></a></li></ol></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E9%87%8D%E9%87%8F%E7%BA%A7%E9%94%81%E5%92%8C%E8%BD%BB%E9%87%8F%E7%BA%A7%E9%94%81"><span class="toc-number">1.1.2.</span> <span class="toc-text">重量级锁和轻量级锁</span></a><ol class="toc-child"><li class="toc-item toc-level-6"><a class="toc-link" href="#%E9%87%8D%E9%87%8F%E7%BA%A7%E9%94%81"><span class="toc-number">1.1.2.1.</span> <span class="toc-text">重量级锁</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#%E8%BD%BB%E9%87%8F%E7%BA%A7%E9%94%81"><span class="toc-number">1.1.2.2.</span> <span class="toc-text">轻量级锁</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#%E6%8C%82%E8%B5%B7%E7%AD%89%E5%BE%85%E9%94%81"><span class="toc-number">1.1.2.3.</span> <span class="toc-text">挂起等待锁</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#%E8%87%AA%E6%97%8B%E9%94%81"><span class="toc-number">1.1.2.4.</span> <span class="toc-text">自旋锁</span></a></li></ol></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E5%85%AC%E5%B9%B3%E9%94%81%E9%9D%9E%E5%85%AC%E5%B9%B3%E9%94%81"><span class="toc-number">1.1.3.</span> <span class="toc-text">公平锁非公平锁</span></a><ol class="toc-child"><li class="toc-item toc-level-6"><a class="toc-link" href="#%E5%85%AC%E5%B9%B3%E9%94%81"><span class="toc-number">1.1.3.1.</span> <span class="toc-text">公平锁</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#%E9%9D%9E%E5%85%AC%E5%B9%B3%E9%94%81"><span class="toc-number">1.1.3.2.</span> <span class="toc-text">非公平锁</span></a></li></ol></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E5%8F%AF%E9%87%8D%E5%85%A5%E9%94%81%E5%92%8C%E4%B8%8D%E5%8F%AF%E9%87%8D%E5%85%A5%E9%94%81"><span class="toc-number">1.1.4.</span> <span class="toc-text">可重入锁和不可重入锁</span></a><ol class="toc-child"><li class="toc-item toc-level-6"><a class="toc-link" href="#%E5%8F%AF%E9%87%8D%E5%85%A5%E9%94%81"><span class="toc-number">1.1.4.1.</span> <span class="toc-text">可重入锁</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#%E4%B8%8D%E5%8F%AF%E9%87%8D%E5%85%A5%E9%94%81"><span class="toc-number">1.1.4.2.</span> <span class="toc-text">不可重入锁</span></a></li></ol></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E6%99%AE%E9%80%9A%E4%BA%92%E6%96%A5%E9%94%81%E8%AF%BB%E5%86%99%E9%94%81"><span class="toc-number">1.1.5.</span> <span class="toc-text">普通互斥锁读写锁</span></a><ol class="toc-child"><li class="toc-item toc-level-6"><a class="toc-link" href="#%E6%99%AE%E9%80%9A%E4%BA%92%E6%96%A5%E9%94%81"><span class="toc-number">1.1.5.1.</span> <span class="toc-text">普通互斥锁</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#%E8%AF%BB%E5%86%99%E9%94%81"><span class="toc-number">1.1.5.2.</span> <span class="toc-text">读写锁</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#%E5%BC%95%E5%85%A5%E8%AF%BB%E5%86%99%E9%94%81%E5%8E%9F%E5%9B%A0"><span class="toc-number">1.1.5.3.</span> <span class="toc-text">引入读写锁原因</span></a></li></ol></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Synchronized%E9%94%81%E7%9A%84%E5%86%85%E9%83%A8%E4%BC%98%E5%8C%96"><span class="toc-number">1.2.</span> <span class="toc-text">Synchronized锁的内部优化</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E5%81%8F%E5%90%91%E9%94%81%EF%BC%88%E5%81%87%E8%AE%BE%E6%B2%A1%E7%BA%BF%E7%A8%8B%E6%9D%A5%E7%AB%9E%E4%BA%89%E9%94%81%EF%BC%89"><span class="toc-number">1.2.1.</span> <span class="toc-text">偏向锁（假设没线程来竞争锁）</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E8%BD%BB%E9%87%8F%E7%BA%A7%E9%94%81%EF%BC%88%E5%81%87%E8%AE%BE%E7%AB%9E%E4%BA%89%E5%B0%8F%EF%BC%89"><span class="toc-number">1.2.2.</span> <span class="toc-text">轻量级锁（假设竞争小）</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E9%87%8D%E9%87%8F%E7%BA%A7%E9%94%81%EF%BC%88%E5%81%87%E8%AE%BE%E7%AB%9E%E4%BA%89%E5%A4%A7%EF%BC%89"><span class="toc-number">1.2.3.</span> <span class="toc-text">重量级锁（假设竞争大）</span></a><ol class="toc-child"><li class="toc-item toc-level-6"><a class="toc-link" href="#Tips"><span class="toc-number">1.2.3.1.</span> <span class="toc-text">Tips</span></a></li></ol></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E9%94%81%E6%B6%88%E9%99%A4%E7%AD%96%E7%95%A5"><span class="toc-number">1.2.4.</span> <span class="toc-text">锁消除策略</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E9%94%81%E7%B2%97%E5%8C%96"><span class="toc-number">1.2.5.</span> <span class="toc-text">锁粗化</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E6%80%BB%E7%BB%93"><span class="toc-number">1.2.6.</span> <span class="toc-text">总结</span></a><ol class="toc-child"><li class="toc-item toc-level-6"><a class="toc-link" href="#1-%E6%80%8E%E4%B9%88%E7%90%86%E8%A7%A3%E4%B9%90%E8%A7%82%E9%94%81%E5%92%8C%E6%82%B2%E8%A7%82%E9%94%81%E7%9A%84%EF%BC%8C%E5%85%B7%E4%BD%93%E6%80%8E%E4%B9%88%E5%AE%9E%E7%8E%B0%EF%BC%9F"><span class="toc-number">1.2.6.1.</span> <span class="toc-text">1.怎么理解乐观锁和悲观锁的，具体怎么实现？</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#2-%E4%BB%8B%E7%BB%8D%E8%AF%BB%E5%86%99%E9%94%81"><span class="toc-number">1.2.6.2.</span> <span class="toc-text">2.介绍读写锁</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#3-%E4%BB%80%E4%B9%88%E6%98%AF%E2%BE%83%E6%97%8B%E9%94%81%EF%BC%8C%E4%B8%BA%E4%BB%80%E4%B9%88%E8%A6%81%E4%BD%BF%E2%BD%A4%E2%BE%83%E6%97%8B%E9%94%81%E7%AD%96%E7%95%A5%EF%BC%8C%E7%BC%BA%E7%82%B9%E6%98%AF%E4%BB%80%E4%B9%88%EF%BC%9F"><span class="toc-number">1.2.6.3.</span> <span class="toc-text">3.什么是⾃旋锁，为什么要使⽤⾃旋锁策略，缺点是什么？</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#4-synchronized-%E6%98%AF%E5%8F%AF%E9%87%8D%E2%BC%8A%E9%94%81%E5%90%97%EF%BC%9F"><span class="toc-number">1.2.6.4.</span> <span class="toc-text">4.synchronized 是可重⼊锁吗？</span></a></li></ol></li></ol></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/2024/11/08/yub%E3%81%AEAlgorithm.0x1/" title="yubのAlgorithm.0x1"><img src="/../imgs/logo/14.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="yubのAlgorithm.0x1"/></a><div class="content"><a class="title" href="/2024/11/08/yub%E3%81%AEAlgorithm.0x1/" title="yubのAlgorithm.0x1">yubのAlgorithm.0x1</a><time datetime="2024-11-08T06:28:43.000Z" title="发表于 2024-11-08 14:28:43">2024-11-08</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2024/11/08/yub%E3%81%AEAlgorithm.0x2/" title="yubのAlgorithm.0x2"><img src="/../imgs/logo/14.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="yubのAlgorithm.0x2"/></a><div class="content"><a class="title" href="/2024/11/08/yub%E3%81%AEAlgorithm.0x2/" title="yubのAlgorithm.0x2">yubのAlgorithm.0x2</a><time datetime="2024-11-08T06:28:43.000Z" title="发表于 2024-11-08 14:28:43">2024-11-08</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2024/11/08/yub%E3%81%AEAlgorithm.0x3/" title="yubのAlgorithm.0x3"><img src="/../imgs/logo/14.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="yubのAlgorithm.0x3"/></a><div class="content"><a class="title" href="/2024/11/08/yub%E3%81%AEAlgorithm.0x3/" title="yubのAlgorithm.0x3">yubのAlgorithm.0x3</a><time datetime="2024-11-08T06:28:43.000Z" title="发表于 2024-11-08 14:28:43">2024-11-08</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2024/11/08/yub%E3%81%AEAlgorithm.0x10/" title="yubのAlgorithm.0x10"><img src="/../imgs/logo/14.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="yubのAlgorithm.0x10"/></a><div class="content"><a class="title" href="/2024/11/08/yub%E3%81%AEAlgorithm.0x10/" title="yubのAlgorithm.0x10">yubのAlgorithm.0x10</a><time datetime="2024-11-08T06:28:43.000Z" title="发表于 2024-11-08 14:28:43">2024-11-08</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2024/11/08/yub%E3%81%AEAlgorithm.0x4/" title="yubのAlgorithm.0x4"><img src="/../imgs/logo/14.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="yubのAlgorithm.0x4"/></a><div class="content"><a class="title" href="/2024/11/08/yub%E3%81%AEAlgorithm.0x4/" title="yubのAlgorithm.0x4">yubのAlgorithm.0x4</a><time datetime="2024-11-08T06:28:43.000Z" title="发表于 2024-11-08 14:28:43">2024-11-08</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2022 - 2024 By yub</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><a id="to_comment" href="#post-comment" title="直达评论"><i class="fas fa-comments"></i></a><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.umd.min.js"></script><div class="js-pjax"><script>function loadValine () {
+  function initValine () {
+    const valine = new Valine(Object.assign({
+      el: '#vcomment',
+      appId: 'WwVGEcmjEUSp1C3qQTlW8CcS-gzGzoHsz',
+      appKey: 'tqbDrZC8pSB03urdpjIK5oC9',
+      avatar: 'monsterid',
+      serverURLs: 'https://avoscloud.com',
+      emojiMaps: "",
+      path: window.location.pathname,
+      visitor: true
+    }, ))
+  }
+
+  if (typeof Valine === 'function') initValine() 
+  else getScript('https://cdn.jsdelivr.net/npm/valine/dist/Valine.min.js').then(initValine)
+}
+
+if ('Valine' === 'Valine' || !false) {
+  if (false) btf.loadComment(document.getElementById('vcomment'),loadValine)
+  else setTimeout(loadValine, 0)
+} else {
+  function loadOtherComment () {
+    loadValine()
+  }
+}</script></div><script id="canvas_nest" defer="defer" color="0,0,255" opacity="0.7" zIndex="-1" count="99" mobile="false" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/dist/canvas-nest.min.js"></script><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/dist/activate-power-mode.min.js"></script><script>POWERMODE.colorful = true;
+POWERMODE.shake = true;
+POWERMODE.mobile = true;
+document.body.addEventListener('input', POWERMODE);
+</script><script id="click-show-text" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/dist/click-show-text.min.js" data-mobile="true" data-text="I,LOVE,YOU" data-fontsize="15px" data-random="true" async="async"></script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><span id="loading-status"></span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="is-center" id="loading-database"><i class="fas fa-spinner fa-pulse"></i><span>  数据库加载中</span></div><div class="search-wrap"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div><hr/><div class="no-result" id="local-search-results"></div><div id="local-search-stats-wrap"></div></div></div><div id="search-mask"></div><script src="/js/search/local-search.js"></script></div></div></body></html>

