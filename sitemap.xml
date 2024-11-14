@@ -2,7 +2,7 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
-    <loc>https://yubut.github.io/2024/11/14/yub%E3%81%AEAlgorithm.0x14/</loc>
+    <loc>https://yubut.github.io/2024/11/13/yub%E3%81%AEAlgorithm.0x13/</loc>
     
     <lastmod>2024-11-14</lastmod>
     
@@ -11,9 +11,9 @@
   </url>
   
   <url>
-    <loc>https://yubut.github.io/2024/11/13/yub%E3%81%AEAlgorithm.0x13/</loc>
+    <loc>https://yubut.github.io/2024/11/14/yub%E3%81%AEAlgorithm.0x14/</loc>
     
-    <lastmod>2024-11-13</lastmod>
+    <lastmod>2024-11-14</lastmod>
     
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
@@ -493,14 +493,14 @@
   </url>
   
   <url>
-    <loc>https://yubut.github.io/tags/C%E8%AF%AD%E8%A8%80/</loc>
+    <loc>https://yubut.github.io/tags/pwn-%E7%9F%A5%E8%AF%86%E7%A2%8E%E7%89%87/</loc>
     <lastmod>2024-11-14</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
-    <loc>https://yubut.github.io/tags/pwn-%E7%9F%A5%E8%AF%86%E7%A2%8E%E7%89%87/</loc>
+    <loc>https://yubut.github.io/tags/C%E8%AF%AD%E8%A8%80/</loc>
     <lastmod>2024-11-14</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
